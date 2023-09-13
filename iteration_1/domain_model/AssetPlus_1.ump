@@ -1,0 +1,30 @@
+class User {
+  immutable username;
+  immutable password;
+  name;
+  phoneNumber;
+}
+
+class Guest {isA User;}
+class Employee {isA User;}
+
+class Manager {isA Employee;}
+
+class Asset {}
+class Location {int floorNumber; int roomNumber;}
+association {1 Asset -- 1 Location;}
+
+class MaintenanceTicket {  
+  description;
+  ticketNumber;
+  lazy imageURL;
+  enum status {Open, Closed};
+                         
+}
+
+association {
+  1 User -- * MaintenanceTicket;
+  1 Asset -- * MaintenanceTicket;
+}//$?[End_of_model]$?
+
+namespace -;
