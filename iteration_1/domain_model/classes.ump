@@ -1,0 +1,76 @@
+//Unable to update umple code due to error at [26,0]
+class Hotel
+{
+ 1 -- * User;
+}
+
+class User
+{
+  abstract;
+  unique accountName;
+  password;
+  lazy name;
+  lazy phoneNumber;
+}
+
+class Manager
+{
+  isA User;
+}
+
+class Guest
+{
+  isA User;
+}
+
+class Employee
+{
+  isA User;
+  }
+
+class MaintenanceTicket
+{
+  enum Urgency {Urgent, Normal, Low}
+  enum TimeEstimate {less_than_day, one_to_3_days, three_to_seven_days, one_to_three_weeks, three_plus_weeks};
+  Urgency urgency;
+  Boolean hasManagerApproval;
+  Boolean requiresManagerApproval;
+  Date dateOpened;
+  lazy imageURL;
+  TimeEstimate timeEstimate;
+  }
+
+class Asset
+{
+  unique Integer assetNumber;
+  Date purchaseDate;
+  Integer expectedLifespan;
+ 
+  * -- 1 Location;
+  * -- 1..* AssetType;
+  * -- * MaintenanceTicket;
+}
+
+class AssetType
+{
+}
+
+class Location
+{
+  Integer floor;
+  Integer roomNumber;
+}
+
+class MaintenanceNote
+{
+  note;
+  Date creationDate;
+  * -- 1 MaintenanceTicket;
+}
+
+class AssetPlus
+{
+  * -- * Hotel;
+}
+
+
