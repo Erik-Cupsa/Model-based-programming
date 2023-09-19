@@ -1,0 +1,25 @@
+AssetPlus: hotel management system for: furniture, appliances, 
+maitenance tasks in rooms and hallways.
+
+manager acc: manager@ap.com  pass: manager  
+
+Features:
+- let manager edit manager acc pass 
+- add manager name and phone number (optional)
+- employee account creation: enter email(acc name), ends with @ap.com, enter pass (cannot be changed)
+- add employee name and phone number (optional)
+- guest account creation: enter email(acc name), ends with @ap.com, enter pass (cannot be changed)
+- add guest name and phone number (optional)
+- track progress of maintenance tickets               #################
+- restrict ticket progress tracking to only manager and the person that raised the ticket
+- manager assigns open tickets to maintenance staff (can be manager or employee)
+
+
+Data types:
+-manager
+-employee
+-guest
+-asset(unique asset_number, the purchase date, expected lifespan, and location(floor and room number)))
+-maintenance ticket (requires manager approval to close or not(bool)(defined by manager),state, priority level(urgent:2days, normal:1week,low:3weeks), 
+time estimate(from start of work till resolved)(can be  <1day, 1-3 days, 3-7 days, 1-3 weeks, and 3+ weeks))
+-Date
