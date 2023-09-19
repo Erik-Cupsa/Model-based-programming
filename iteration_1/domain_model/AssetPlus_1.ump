@@ -1,30 +1,67 @@
+namespace ca.mcgill.ecse.assetplus.model; 
+
+class AssetPlus {
+  1 <@>- * Manager manager; 
+  1 <@>- * HotelAsset asset; 
+  1 <@>- * MaintenanceTicket ticket; 
+  1 <@>- * MaintenanceNotes note; 
+}
+
 class User {
-  immutable username;
-  immutable password;
+  abstract; 
+  unique accountName; 
+  password; 
   name;
   phoneNumber;
 }
 
-class Guest {isA User;}
-class Employee {isA User;}
-
-class Manager {isA Employee;}
-
-class Asset {}
-class Location {int floorNumber; int roomNumber;}
-association {1 Asset -- 1 Location;}
-
-class MaintenanceTicket {  
-  description;
-  ticketNumber;
-  lazy imageURL;
-  enum status {Open, Closed};
-                         
+class Manager { 
+  isA User;
 }
 
-association {
-  1 User -- * MaintenanceTicket;
-  1 Asset -- * MaintenanceTicket;
-}//$?[End_of_model]$?
+class Employee {
+  isA User;
+  final email; 
+}
 
-namespace -;
+class Guest { 
+  isA User; 
+  final email; 
+}
+
+class HotelAsset {
+  abstract;
+  unique assetNumber; 
+  location; 
+  lifespan; 
+  purchaseDate; 
+}
+
+class Furniture{
+  isA HotelAsset; 
+}
+
+class Appliance{
+  isA HotelAsset;
+}
+
+class Lamp{
+  isA Appliance;
+}
+
+class MaintenanceTicket{
+  asset; 
+  floor; 
+  roomNumber; 
+  imageURL; 
+  unique ticketNumber; 
+  enum priority { Urgent, Normal, Low }; 
+  enum timeEstimate {  less_than_day, one_to_3_days, three_to_seven_days, one_to_three_weeks, three_plus_weeks};
+  Boolean managerApproval; 
+  status; 
+}
+
+class MaintenanceNotes {
+  date; 
+}
+  
