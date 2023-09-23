@@ -13,6 +13,7 @@ Features:
 - track progress of maintenance tickets               #################
 - restrict ticket progress tracking to only manager and the person that raised the ticket
 - manager assigns open tickets to maintenance staff (can be manager or employee)
+- Optionally, users can provide one or more image URL links to support their maintenance request
 
 
 Data types:
