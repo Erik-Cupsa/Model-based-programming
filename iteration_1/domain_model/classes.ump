@@ -33,13 +33,15 @@ class Employee
 
 class MaintenanceTicket
 {
-  enum Urgency {Urgent, Normal, Low}
-  enum TimeEstimate {less_than_day, one_to_3_days, three_to_seven_days, one_to_three_weeks, three_plus_weeks};
+ status;
+ enum Urgency {Urgent,  Normal, Low}
+ enum TimeEstimate {less_than_day, one_to_3_days, three_to_seven_days, one_to_three_weeks, three_plus_weeks};
   Urgency urgency;
   Boolean hasManagerApproval;
   Boolean requiresManagerApproval;
   Date dateOpened;
   TimeEstimate timeEstimate;
+  
    
   * issue -- 1 User ticketInitiator;
   * ticket -- 1 Manager manager;
@@ -52,7 +54,7 @@ class Asset
   Date purchaseDate;
   
   * -- 1 Location;
-  * asset -<@> 1 AssetType;
+  * asset -<@> 1 AssetType type;
    1 asset <@>- * MaintenanceTicket;
 }
 
@@ -73,7 +75,7 @@ class MaintenanceNote
 {
   note;
   Date creationDate;
-  * note -<@> 1 MaintenanceTicket;
+  * note -<@> 1 MaintenanceTicket ticket;
 }
 
 class AssetPlus
@@ -85,7 +87,7 @@ class AssetPlus
 class Floor
 {
   isA Location;
-  1 <@>- * Room;
+  1 floor <@>- * Room room;
 }
 
 class Room
