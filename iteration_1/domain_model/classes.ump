@@ -1,6 +1,6 @@
 class Hotel
 {
-  1 hotel <@>- * User person;
+  1 <@>- * User ;
 }
 
 class User
@@ -28,7 +28,7 @@ class Employee
 {
   isA User;
     * maintenanceStaff -- * MaintenanceTicket task ;
-  * staff -- 1 Manager boss;
+  *  -- 1 Manager ;
 }
 
 class MaintenanceTicket
@@ -54,8 +54,8 @@ class Asset
   Date purchaseDate;
   
   * -- 1 Location;
-  * asset -<@> 1 AssetType type;
-   1 asset <@>- * MaintenanceTicket;
+  *  -<@> 1 AssetType ;
+   1 <@>- * MaintenanceTicket;
 }
 
 class AssetType
@@ -75,7 +75,7 @@ class MaintenanceNote
 {
   note;
   Date creationDate;
-  * note -<@> 1 MaintenanceTicket ticket;
+  * -<@> 1 MaintenanceTicket;
 }
 
 class AssetPlus
@@ -87,7 +87,7 @@ class AssetPlus
 class Floor
 {
   isA Location;
-  1 floor <@>- * Room room;
+  1 <@>- * Room ;
 }
 
 class Room
@@ -98,6 +98,6 @@ class Room
 class Image
 {
  url;
-* image -<@> 1 MaintenanceTicket maintenanceRequest;
+* -<@> 1 MaintenanceTicket ;
 }
 
