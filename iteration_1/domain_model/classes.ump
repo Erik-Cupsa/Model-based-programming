@@ -48,6 +48,13 @@ class MaintenanceTicket
   
 }
 
+class MaintenanceFix {
+  Boolean hasManagerApproval; // The status of the MaintenanceTicket (open, closed) depends on if the ticket has a fix that has been approved, so no need to implement it in the ticket
+  * -- 1 MaintenanceTicket;
+  * -- 1 Employee proposedFixStaff;
+  * -- 1 Manager;
+}
+
 class Asset
 {
   unique Integer assetNumber;
