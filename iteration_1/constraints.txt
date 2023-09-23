@@ -8,4 +8,5 @@ constraints:
 - prevent same floor number Floor objects
 - prevent same room number Room objects
 - maintenance note creation date cannot be before its ticket dateOpened
+- even if user enters ticket number they cannot access its status unless its them that raised the ticket.
 
