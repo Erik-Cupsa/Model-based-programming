@@ -1,64 +1,101 @@
-class Hotel{
- 1 -- * User;
+class Hotel
+{
+  1 hotel <@>- * User person;
 }
 
-class User{
+class User
+{
   abstract;
   unique accountName;
   password;
   lazy name;
   lazy phoneNumber;
+  
 }
 
-class Manager{
+class Manager
+{
+  isA User;
+
+}
+
+class Guest
+{
   isA User;
 }
 
-class Guest{
+class Employee
+{
   isA User;
+    * maintenanceStaff -- * MaintenanceTicket task ;
+  * staff -- 1 Manager boss;
 }
 
-class Employee{
-  isA User;
- }
-
-class MaintenanceTicket{
+class MaintenanceTicket
+{
   enum Urgency {Urgent, Normal, Low}
-  Urgency urgency;
   enum TimeEstimate {less_than_day, one_to_3_days, three_to_seven_days, one_to_three_weeks, three_plus_weeks};
-  TimeEstimate timeEstimate;
+  Urgency urgency;
   Boolean hasManagerApproval;
   Boolean requiresManagerApproval;
   Date dateOpened;
-  lazy imageURL;
+  TimeEstimate timeEstimate;
+   
+  * issue -- 1 User ticketInitiator;
+  * ticket -- 1 Manager manager;
+  
 }
 
-class Asset{
+class Asset
+{
   unique Integer assetNumber;
   Date purchaseDate;
-  Integer expectedLifespan;
- 
+  
   * -- 1 Location;
-  * -- 1..* AssetType;
-  * -- * MaintenanceTicket;
+  * asset -<@> 1 AssetType;
+   1 asset <@>- * MaintenanceTicket;
 }
 
-class AssetType{
+class AssetType
+{
+  category;
+  Integer expectedLifespan;
+  
 }
 
-class Location{
-  Integer floor;
-  Integer roomNumber;
+class Location
+{
+  abstract;
+  Integer number;
 }
 
-class MaintenanceNote{
+class MaintenanceNote
+{
   note;
   Date creationDate;
-  * -- 1 MaintenanceTicket;
+  * note -<@> 1 MaintenanceTicket;
 }
 
-class AssetPlus{
-  * -- * Hotel;
+class AssetPlus
+{
+  1 AssetPlus <@>- * Hotel;
 }
 
+
+class Floor
+{
+  isA Location;
+  1 <@>- * Room;
+}
+
+class Room
+{
+  isA Location;
+}
+
+class Image
+{
+ url;
+* image -<@> 1 MaintenanceTicket maintenanceRequest;
+}
 
