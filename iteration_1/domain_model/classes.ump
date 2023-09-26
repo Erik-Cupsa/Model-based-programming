@@ -1,4 +1,4 @@
-class Hotel
+class AssetPlus
 {
   1 <@>- * User ;
 }
@@ -6,17 +6,12 @@ class Hotel
 class User
 {
   abstract;
+  // make name and password lazy immutable?
   unique accountName;
   password;
   lazy name;
   lazy phoneNumber;
   
-}
-
-class Manager
-{
-  isA User;
-
 }
 
 class Guest
@@ -27,32 +22,30 @@ class Guest
 class Employee
 {
   isA User;
-    * maintenanceStaff -- * MaintenanceTicket task ;
-  *  -- 1 Manager ;
+    * maintenanceStaff -- * MaintenanceTicket maintenanceTask ;
+  * -- 1 Manager ;
 }
+
+class Manager {
+  isA Employee;
+  1 -- * Employee;
+} 
 
 class MaintenanceTicket
 {
- status;
  enum Urgency {Urgent,  Normal, Low}
  enum TimeEstimate {less_than_day, one_to_3_days, three_to_seven_days, one_to_three_weeks, three_plus_weeks};
+  Integer ticketNumber;
   Urgency urgency;
-  Boolean hasManagerApproval;
   Boolean requiresManagerApproval;
   Date dateOpened;
   TimeEstimate timeEstimate;
   
    
-  * issue -- 1 User ticketInitiator;
-  * ticket -- 1 Manager manager;
+  * ticketsOpened -- 1 User ticketInitiator;
+  * -- * Employee maintenanceStaff;
+  * ticketsToApprove -- 1 Manager;
   
-}
-
-class MaintenanceFix {
-  Boolean hasManagerApproval; // The status of the MaintenanceTicket (open, closed) depends on if the ticket has a fix that has been approved, so no need to implement it in the ticket
-  * -- 1 MaintenanceTicket;
-  * -- 1 Employee proposedFixStaff;
-  * -- 1 Manager;
 }
 
 class Asset
@@ -80,14 +73,11 @@ class Location
 
 class MaintenanceNote
 {
-  note;
+  Boolean resolved;
+  Boolean hasManagerApproval;
+  description;
   Date creationDate;
   * -<@> 1 MaintenanceTicket;
-}
-
-class AssetPlus
-{
-  1 AssetPlus <@>- * Hotel;
 }
 
 
