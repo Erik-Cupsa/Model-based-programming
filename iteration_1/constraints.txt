@@ -1,12 +1,24 @@
 # In your project report, specify the five (5) most important (interesting) constraints of the AssetPlus application, which are not covered by your domain model using a structured natural language approach. For navigation expressions, use the appropriate role names in your domain model precisely. Do not include constraints that can be expressed with a property of an Umple attribute. 
 
 constraints:
-- set default account name and password for manager 
-- (to be discussed) avoid having additional "@ap.com" in the end of user input for account name 
-- imageURL has to be an array 
-- if you have a room in floor 6 the room has to start with 6 
 - prevent same floor number Floor objects
-- prevent same room number Room objects
-- maintenance note creation date cannot be before its ticket dateOpened
-- even if user enters ticket number they cannot access its status unless its them that raised the ticket.
+for each Floor:
+∀ f1, f2 (f1<>f2 implies f1.number<>f2.number)
 
+- prevent same room number Room objects
+for each Room:
+∀ r1, r2 (r1<>r2 implies r1.number<>r2.number)
+
+- maintenance note creation date cannot be before its ticket dateOpened
+for each MaintenanceNote:
+maintencenote.dateCreated >= maintenancenote.ticket.dateOpened
+
+- Employee and Manager have to have "@ap.com" as the last 7 characters of their username
+employee.employee_email():
+return self.accName[-7:]
+for each Employee:
+employee.employee_email() = "@ap.com"
+
+- All Users cannot have the same username
+for each User:
+∀ u1, u2 (u1<>u2 implies u1.accName<>u2.accName)
