@@ -28,7 +28,6 @@ class Employee
 
 class Manager {
   isA Employee;
-  1 -- * Employee;
 } 
 
 class MaintenanceTicket
@@ -43,7 +42,6 @@ class MaintenanceTicket
   
    
   * ticketsOpened -- 1 User ticketInitiator;
-  * -- * Employee maintenanceStaff;
   * ticketsToApprove -- 1 Manager;
   
 }
