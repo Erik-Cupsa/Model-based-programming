@@ -1,13 +1,15 @@
 class AssetPlus
 {
   1 <@>- * User ;
+  1 <@>- 1 Manager;
+  1 <@>- * Location;
+  1 <@>- * AssetType;
 }
 
 class User
 {
   abstract;
-  // make name and password lazy immutable?
-  unique accountName;
+  lazy immutable unique accountName;
   password;
   lazy name;
   lazy phoneNumber;
@@ -34,11 +36,11 @@ class MaintenanceTicket
 {
  enum Urgency {Urgent,  Normal, Low}
  enum TimeEstimate {less_than_day, one_to_3_days, three_to_seven_days, one_to_three_weeks, three_plus_weeks};
-  Integer ticketNumber;
-  Urgency urgency;
-  Boolean requiresManagerApproval;
+  unique Integer ticketNumber;
+  lazy Urgency urgency;
+  lazy Boolean requiresManagerApproval;
+  lazy TimeEstimate timeEstimate;
   Date dateOpened;
-  TimeEstimate timeEstimate;
   
    
   * ticketsOpened -- 1 User ticketInitiator;
@@ -66,13 +68,13 @@ class AssetType
 class Location
 {
   abstract;
-  Integer number;
+  unique Integer number;
 }
 
 class MaintenanceNote
 {
   Boolean resolved;
-  Boolean hasManagerApproval;
+  lazy Boolean hasManagerApproval;
   description;
   Date creationDate;
   * -<@> 1 MaintenanceTicket;
