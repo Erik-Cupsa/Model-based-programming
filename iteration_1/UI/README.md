@@ -1,7 +1,6 @@
-# All UI components
+# All UI components and assignments
 
 1. Manuel
-  - add @ap.com in UI next to account name text box
 2. Mo
 3. Ming
 4. Philippe
