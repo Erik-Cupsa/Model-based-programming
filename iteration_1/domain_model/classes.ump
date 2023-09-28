@@ -35,7 +35,7 @@ class Manager {
 class MaintenanceTicket
 {
  enum Urgency {Urgent,  Normal, Low}
- enum TimeEstimate {less_than_day, one_to_3_days, three_to_seven_days, one_to_three_weeks, three_plus_weeks};
+ enum TimeEstimate {lessThanADay, oneToThreeDays, threeToSevenDays, oneToThreeWeeks, threeOrMoreWeeks};
   unique Integer ticketNumber;
   lazy Urgency urgency;
   lazy Boolean requiresManagerApproval;
