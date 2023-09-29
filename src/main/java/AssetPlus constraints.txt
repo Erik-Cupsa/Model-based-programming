@@ -1,0 +1,93 @@
+for each User:
+   // unique email already captured by unique keyword in Umple
+
+   // email must not contain any spaces
+   not email.contains(" ")
+
+   // email must contain some characters (anything is allowed except @), a @, some characters, a dot, and some characters
+   // this is a simplified check sufficient for this application
+   email.indexOf("@") > 0 // index starts at zero
+   email.indexOf("@") = email.lastIndexOf("@")
+   email.indexOf("@") < email.lastIndexOf(".") - 1
+   email.lastIndexOf(".") < email.length() - 1
+
+   // email cannot be manager@ap.com unless it is for the manager
+   (not (self instanceof Manager)) implies (email <> "manager@ap.com")
+
+   // name must not null
+   name <> null
+
+   // password must not be empty or null
+   password <> ""
+   password <> null
+
+   // phoneNumber must not null
+   phoneNumber <> null
+
+for each Manager:
+   // email has to be manager@ap.com
+   email = "manager@ap.com"
+
+   // password must be at least four characters long
+   password.length() > 3
+   // password must contain a special character out of !#$
+   password.contains("!") or password.contains("#") or password.contains("$")
+   // password must contain an upper case character
+   there exists a character c in password such that Character.isUpperCase(c) = true
+   // password must contain a lower case character
+   there exists a character c in password such that Character.isLowerCase(c) = true
+
+for each Employee:
+   // email domain has to be @ap.com
+   email.substring(email.lenght() - 7) = "@ap.com"
+
+for each Guest:
+   // email domain cannot be @ap.com
+   email.substring(email.lenght() - 7) <> "@ap.com"
+
+for each AssetType:
+   // unique name already captured by unique keyword in Umple
+
+   // name must not be empty or null
+   name <> ""
+   name <> null
+
+   // expected life span must be greater than zero
+   expectedLifeSpan > 0
+
+for each SpecificAsset:
+   // unique asset number already captured by unique keyword in Umple
+
+   // asset number must be greater than or equal to one
+   assetNumber >= 1
+
+   // floor number must be greater than or equal to zero
+   floorNumber >= 0
+
+   // room number must be greater than or equal to minus one
+   // a room number of -1 means that the asset is not in a room, i.e., it is in the hallway
+   roomNumber >= -1
+
+for each MaintenanceTicket:
+   // unique id already captured by unique keyword in Umple
+
+   // description must not be empty or null
+   description <> ""
+   description <> null
+
+   // two imageURLs of the same ticket cannot be the same
+   forAll i1, i2 in ticketImages it is true that
+      (i1 <> i2) implies (i1.imageURL <> i2.imageURL)
+
+for each MaintenanceNote:
+   // description must not be empty or null
+   description <> ""
+   description <> null
+
+for each TicketImage:
+   // URL must not be empty or null
+   imageURL <> ""
+   imageURL <> null
+
+   // URL must start with either http:// or https://
+   email.substring(0, 6) = "http://" or email.substring(0, 7) = "https://"
