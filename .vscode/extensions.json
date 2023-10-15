@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-gradle",
+        "bilalekrem.scenebuilderextension",
+        "digized.umple",
+        "CucumberOpen.cucumber-official"
+    ]
+}

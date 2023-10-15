@@ -1,0 +1,26 @@
+namespace ca.mcgill.ecse.assetplus.controller;
+
+class TOMaintenanceTicket {
+  immutable;
+  Integer id;
+  Date raisedOnDate;
+  String description;
+  String raisedByEmail;
+
+  // the following five attributes are set to null if no asset is specified for the ticket
+  String assetName;
+  Integer expectLifeSpanInDays;
+  Date purchaseDate;
+  Integer floorNumber;
+  Integer roomNumber;
+
+  List<String> imageURLs;
+  0..1 -> * TOMaintenanceNote notes;
+}
+
+class TOMaintenanceNote {
+  immutable;
+  Date date;
+  String description;
+  String noteTakerEmail;
+}
