@@ -2,6 +2,7 @@ package ca.mcgill.ecse.assetplus.features;
 
 import java.util.*;
 import ca.mcgill.ecse.assetplus.model.Employee;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -42,9 +43,8 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   public void the_following_asset_types_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
       List<Map<String,String> rows= dataTable.asMaps(String.class,String.class);
-      List<AssetType> employees = new List<AssetType>();
       for (Map<String,String> column : rows) {
-        employees.add(new AssetType(column.get("name"), column.get("expectedLifeSpan"), assetPlus);
+        AssetType a = new AssetType(column.get("name"), column.get("expectedLifeSpan"), assetPlus);
       }
   }
 
@@ -123,14 +123,22 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   @author("Anders Woodruff")
   public void the_ticket_with_id_shall_have_the_following_notes_p15(String string,
       io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
+      List<MaintenanceTicket> ticketList = assetPlus.getMaintenanceTickets();
+      MaintenanceTicket ticketOfInterest;
+
+      for (MaintenanceTicket ticket : ticketList){
+        if (ticket.id == Integer.parseInt(string)){
+          ticketOfInterest = ticket;
+        }
+      }
+      List<MaintenanceNote> notesList = ticket.getTicketNotes();
+      List<Map<String,String,String> rows = dataTable.asMaps(String.class,String.class, String.class);
+      for (int i = 0; i > rows.length; i++) {
+        assertEquals(notesList[i].noteTaker, rows[i].get("noteTaker"));
+        assertEquals(notesList[i].date.toString(), rows[i].get("addedOnDate"));
+        assertEquals(notesList[i].description, rows[i].get("description"));
+
+      }
   }
 
   @Then("the ticket with id {string} shall have no notes \\(p15)")
