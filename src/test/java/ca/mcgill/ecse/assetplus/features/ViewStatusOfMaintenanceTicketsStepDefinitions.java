@@ -5,16 +5,21 @@ import ca.mcgill.ecse.assetplus.model.Employee;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
+import ca.mcgill.ecse.assetplus.model.AssetPlus;
 
 public class ViewStatusOfMaintenanceTicketsStepDefinitions {
+	private AssetPlus assetPlus;
+	private List<Employee>;
   @Given("the following employees exist in the system \\(p15)")
-  @author("Mohamed Abdelrahman && Anders Woodruff")
+  @author("Mohamed Abdelrahman && Anders Woodruff && Philippe Aprahamian && David Marji && Ming Yue && Manuel Hanna")
   public void the_following_employees_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
+	  assetPlus=AssetPlusApplication.getAssetPlus();
       List<Map<String,String,String,String> rows= dataTable.asMaps(String.class,String.class,String.class,String.class);
       List<Employee> employees = new List<Employee>();
       for (Map<String,String,String,String> column : rows) {
-        employees.add(new Employee(column.get("email"), column.get("name"), column.get("password"), column.get("phoneNumber"), null));
+        employees.add(new Employee(column.get("email"), column.get("name"), column.get("password"), column.get("phoneNumber"), assetPlus));
       }
     throw new io.cucumber.java.PendingException();
   }
