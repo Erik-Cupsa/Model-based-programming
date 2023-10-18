@@ -1,12 +1,11 @@
 package ca.mcgill.ecse.assetplus.features;
 
 import java.util.*;
-import ca.mcgill.ecse.assetplus.model.Employee;
+import ca.mcgill.ecse.assetplus.model.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
-import ca.mcgill.ecse.assetplus.model.AssetPlus;
 
 public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 	private AssetPlus assetPlus;
@@ -27,6 +26,10 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   @Given("the following manager exists in the system \\(p15)")
   public void the_following_manager_exists_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
+      List<Map<String,String>> rows = dataTable.asMaps(String.class, String.class);
+      for (Map<String,String>columns: rows) {
+        Manager manager = new Manager(columns.get("email"), columns.get("password"), null, null, assetPlus); 
+      }
     // Write code here that turns the phrase above into concrete actions
     // For automatic transformation, change DataTable to one of
     // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
