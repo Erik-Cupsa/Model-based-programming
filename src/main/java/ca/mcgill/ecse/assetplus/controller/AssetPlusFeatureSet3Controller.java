@@ -53,8 +53,12 @@ public class AssetPlusFeatureSet3Controller {
   }
 
   public static void deleteSpecificAsset(int assetNumber) {
-    // Remove this exception when you implement this method
-    throw new UnsupportedOperationException("Not Implemented!");
+    SpecificAsset toDelete = SpecificAsset.getWithAssetNumber(assetNumber); 
+    if(toDelete != null){ 
+      AssetType assetType = toDelete.getAssetType(); 
+      assetType.removeSpecificAsset(toDelete);
+      toDelete.delete();
+    }
   }
 
 }
