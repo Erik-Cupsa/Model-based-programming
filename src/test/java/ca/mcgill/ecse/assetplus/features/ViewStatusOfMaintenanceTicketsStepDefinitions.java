@@ -14,7 +14,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   @Given("the following employees exist in the system \\(p15)")
   @author("Mohamed Abdelrahman && Anders Woodruff && Philippe Aprahamian && David Marji && Ming Yue && Manuel Hanna")
   public void the_following_employees_exist_in_the_system_p15(
-      io.cucumber.datatable.DataTable dataTable) {
+    io.cucumber.datatable.DataTable dataTable) {
 	  assetPlus=AssetPlusApplication.getAssetPlus();
       List<Map<String,String,String,String> rows= dataTable.asMaps(String.class,String.class,String.class,String.class);
       List<Employee> employees = new List<Employee>();
@@ -38,16 +38,14 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   }
 
   @Given("the following asset types exist in the system \\(p15)")
+  @author("Anders Woodruff")
   public void the_following_asset_types_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
+      List<Map<String,String> rows= dataTable.asMaps(String.class,String.class);
+      List<AssetType> employees = new List<AssetType>();
+      for (Map<String,String> column : rows) {
+        employees.add(new AssetType(column.get("name"), column.get("expectedLifeSpan"), assetPlus);
+      }
   }
 
   @Given("the following assets exist in the system \\(p15)")
@@ -122,6 +120,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   }
 
   @Then("the ticket with id {string} shall have the following notes \\(p15)")
+  @author("Anders Woodruff")
   public void the_ticket_with_id_shall_have_the_following_notes_p15(String string,
       io.cucumber.datatable.DataTable dataTable) {
     // Write code here that turns the phrase above into concrete actions
