@@ -6,6 +6,9 @@ public class AssetPlusFeatureSet3Controller {
 
   public static String addSpecificAsset(int assetNumber, int floorNumber, int roomNumber,
       Date purchaseDate, String assetTypeName) {
+        if(!inputValidation(assetNumber, floorNumber, roomNumber, assetTypeName)){
+          return "Invalid input";
+        }
         AssetType assetType = AssetType.getWithName(assetTypeName); 
         if(assetType == null){
           return "Asset Type provided does not exist";
@@ -23,6 +26,9 @@ public class AssetPlusFeatureSet3Controller {
 
   public static String updateSpecificAsset(int assetNumber, int newFloorNumber, int newRoomNumber,
       Date newPurchaseDate, String newAssetTypeName) {
+        if(!inputValidation(assetNumber, newFloorNumber, newRoomNumber, newAssetTypeName)){
+          return "Invalid input";
+        }
         AssetType assetType = AssetType.getWithName(newAssetTypeName); 
         if (assetType == null){
           return "Asset Type provided does not exist";
@@ -53,12 +59,29 @@ public class AssetPlusFeatureSet3Controller {
   }
 
   public static void deleteSpecificAsset(int assetNumber) {
-    SpecificAsset toDelete = SpecificAsset.getWithAssetNumber(assetNumber); 
-    if(toDelete != null){ 
-      AssetType assetType = toDelete.getAssetType(); 
-      assetType.removeSpecificAsset(toDelete);
-      toDelete.delete();
+    if(assetNumber >= 1){
+      SpecificAsset toDelete = SpecificAsset.getWithAssetNumber(assetNumber); 
+      if(toDelete != null){ 
+        AssetType assetType = toDelete.getAssetType(); 
+        assetType.removeSpecificAsset(toDelete);
+        toDelete.delete();
+      }
     }
   }
 
+  private static boolean inputValidation(int assetNumber, int floorNumber, int roomNumber, String assetTypeName){
+        if(assetTypeName == "" || assetTypeName == null){
+          return false; 
+        }
+        if(assetNumber < 1){
+          return false; 
+        }
+        if(floorNumber < 0){
+          return false; 
+        }
+        if(roomNumber < -2){
+          return false;
+        }
+        return true; 
+      }
 }
