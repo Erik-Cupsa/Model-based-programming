@@ -1,20 +1,21 @@
 package ca.mcgill.ecse.assetplus.features;
 
+import java.util.*;
+import ca.mcgill.ecse.assetplus.model.Employee;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   @Given("the following employees exist in the system \\(p15)")
+  @author("Mohamed Abdelrahman && Anders Woodruff")
   public void the_following_employees_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
+      List<Map<String,String,String,String> rows= dataTable.asMaps(String.class,String.class,String.class,String.class);
+      List<Employee> employees = new List<Employee>();
+      for (Map<String,String,String,String> column : rows) {
+        employees.add(new Employee(column.get("email"), column.get("name"), column.get("password"), column.get("phoneNumber"), null));
+      }
     throw new io.cucumber.java.PendingException();
   }
 
