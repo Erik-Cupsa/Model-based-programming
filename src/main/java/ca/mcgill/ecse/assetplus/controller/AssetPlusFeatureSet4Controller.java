@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.assetplus.controller;
 
+import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,9 @@ public class AssetPlusFeatureSet4Controller{
   public static String addMaintenanceTicket(int id, Date raisedOnDate, String description,
     String email, int assetNumber) {
     AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
-    // if 
+
     User user = User.getWithEmail(email);
-    // TODO: Check feature for possible errors raised
+
     List<User> userList = new ArrayList<User>(assetplus.getEmployees());
     userList.addAll(assetplus.getGuests());
     userList.add(assetplus.getManager());
@@ -25,13 +26,31 @@ public class AssetPlusFeatureSet4Controller{
         break;
       }
     }
+
+    if (user == null){
+      return "The ticket raiser does not exist";
+    } else if (description == ""){
+      return "Ticket description cannot be empty";
+    }
+
     
     MaintenanceTicket newticket = new MaintenanceTicket(id, raisedOnDate, description, assetplus, user);
 
+
     if (assetNumber != -1){
-      SpecificAsset asset = assetplus.getSpecificAsset(assetNumber);
-      newticket.setAsset(asset);
+      boolean assetFound = false;
+      for (SpecificAsset k: assetplus.getSpecificAssets()){
+        if (k.getAssetNumber() == assetNumber){
+          newticket.setAsset(k);
+          assetFound = true;
+          break;
+        }
+      }
+      if (!assetFound){
+        return "The asset does not exist";
+      }
     }
+
 
     return "";
   }
@@ -40,6 +59,20 @@ public class AssetPlusFeatureSet4Controller{
   public static String updateMaintenanceTicket(int id, Date newRaisedOnDate, String newDescription,
       String newEmail, int newAssetNumber) {
     AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
+
+    MaintenanceTicket ticket;
+
+    boolean ticketFound = false;
+    for (MaintenanceTicket l: assetplus.getMaintenanceTickets()){
+      if (l.getId() == id){
+        ticket = l;
+        ticketFound = true;
+        break;
+      }
+    }
+    if (!ticketFound){
+      return "The ticket does not exist";
+    }
 
     MaintenanceTicket ticket = assetplus.getMaintenanceTicket(id);
 
@@ -55,18 +88,49 @@ public class AssetPlusFeatureSet4Controller{
       }
     }
 
+    if (user == null){
+      return "The ticket raiser does not exist";
+    } else if (newDescription == ""){
+      return "Ticket description cannot be empty";
+    }
+
     ticket.setRaisedOnDate(newRaisedOnDate);
     ticket.setDescription(newDescription);
     ticket.setTicketRaiser(user);
-    if(newAssetNumber != -1){
-    ticket.setAsset(assetplus.getSpecificAsset(newAssetNumber));}
+
+    if (newAssetNumber != -1){
+      boolean assetFound = false;
+      for (SpecificAsset k: assetplus.getSpecificAssets()){
+        if (k.getAssetNumber() == newAssetNumber){
+          ticket.setAsset(k);
+          assetFound = true;
+          break;
+        }
+      }
+      if (!assetFound){
+        return "The asset does not exist";
+      }
+    }
 
     return "";
   }
 
   public static void deleteMaintenanceTicket(int id) {
-    AssetPlus assetplus = new AssetPlus();
-    MaintenanceTicket ticket = assetplus.getMaintenanceTicket(id);
+    AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
+
+    MaintenanceTicket ticket;
+
+    boolean ticketFound = false;
+    for (MaintenanceTicket l: assetplus.getMaintenanceTickets()){
+      if (l.getId() == id){
+        ticket = l;
+        ticketFound = true;
+        break;
+      }
+    }
+    if (!ticketFound){
+      return "The ticket does not exist";
+    }
     ticket.delete();
   }
 
