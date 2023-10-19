@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.model.*;
+import java.sql.Array;
 
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 public class AssetPlusFeatureSet6Controller {
@@ -65,25 +66,30 @@ public class AssetPlusFeatureSet6Controller {
       List<TicketImage> ticketImages = ticket.getTicketImages();
       List<String> imageURLs = new ArrayList<String>();
       TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.getTicketImages().size()]; 
+      String assetname = ticket.getAsset().getAssetType().getName();
+      int expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
+      Date purchasedDate = ticket.getAsset().getPurchaseDate();
+      int floorNumber = ticket.getAsset().getFloorNumber();
+      int roomNumber = ticket.getAsset().getRoomNumber();
       
       // hasImages/not
       // hasAsset/not
       // hasMaintenanceNotes/not
-      if (!ticketImages.isEmpty()){
-        for (TicketImage ticketimage: ticketImages){
+      // if (!ticketImages.isEmpty()){
+      for (TicketImage ticketimage: ticketImages){
           imageURLs.add(ticketimage.getImageURL());
-        }
       }
+      // }
 
-      if (!ticket.getTicketNotes().isEmpty()){
-        int i = 0;
-        for (MaintenanceNote note : ticket.getTicketNotes()){
-          notes[i] = new TOMaintenanceNote(note.getDate(), note.getDescription(), note.getNoteTaker().getEmail());
-        }
-      } 
+      // if (!ticket.getTicketNotes().isEmpty()){
+      for (int i = 0; i <ticket.getTicketImages().size(); i++){
+          notes[i] = new TOMaintenanceNote(ticket.getTicketNote(i).getDate(), ticket.getTicketNote(i).getDescription(), ticket.getTicketNote(i).getNoteTaker().getEmail());
+      }
+      //} 
+      TOMaintenanceTicket ticket1 = new TOMaintenanceTicket(id, date, description, raisedByEmail, assetname, expectedLifeSpanInDays, purchasedDate, floorNumber, roomNumber, imageURLs, notes);
     
 
-      if (!ticket.hasAsset()){
+      /* if (!ticket.hasAsset()){
         tickets.add(new TOMaintenanceTicket(id, date, description, raisedByEmail, null,null, null, null,null, imageURLs, notes));
       }else{
         String assetname = ticket.getAsset().getAssetType().getName();
@@ -93,7 +99,7 @@ public class AssetPlusFeatureSet6Controller {
         int roomNumber = ticket.getAsset().getRoomNumber();
 
         tickets.add(new TOMaintenanceTicket(id, date, description, raisedByEmail, assetname, expectedLifeSpanInDays, purchasedDate, floorNumber, roomNumber, imageURLs, notes));
-      }
+      } */
     }
     return tickets;
   }

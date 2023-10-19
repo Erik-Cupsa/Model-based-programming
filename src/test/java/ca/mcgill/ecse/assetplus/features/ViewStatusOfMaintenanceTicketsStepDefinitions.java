@@ -37,7 +37,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   @author("Anders Woodruff")
   public void the_following_asset_types_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
-      List<Map<String,String> rows= dataTable.asMaps(String.class,String.class);
+      List<Map<String,String>> rows= dataTable.asMaps(String.class,String.class);
       for (Map<String,String> column : rows) {
         AssetType a = new AssetType(column.get("name"), column.get("expectedLifeSpan"), this.assetPlus);
         // Anders I think we have to type cast to int
@@ -48,15 +48,20 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   @author("Ming Xuan Yue")
   public void the_following_assets_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
-    AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
+    
     List<Map<String, String>> rows = dataTable.asMaps();
     for (var row : rows){
       int assetNumber = Integer.parseInt(row.get("assetNumber"));
-      AssetType type = row.get("type");
       Date purchasedDate = Date.valueOf(row.get("purchasedDate"));
       int floorNumber = Integer.parseInt(row.get("floorNumber"));
       int roomNumber = Integer.parseInt(row.get("roomNumber"));
-      assetPlus.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchasedDate, type);
+      List<AssetType> assetTypes = assetPlus.getAssetTypes();
+      for (AssetType assetType: assetTypes){
+        if (row.get("type").equals(assetType.getName())){   // if the assetType in the list has the same name as the type in the table
+          AssetType type = assetType;
+          assetPlus.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchasedDate, type);
+        }
+      }
     }
     throw new io.cucumber.java.PendingException();
   }
