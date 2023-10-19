@@ -32,7 +32,7 @@ public class AssetPlusFeatureSet3Controller {
         else{
           SpecificAsset newSpecificAsset = assetType.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType.getAssetPlus()); // 
           if(assetType.addSpecificAsset(newSpecificAsset)){ //New Specific Asset successfully added
-            return "Specific Asset added successfully!";
+            return "";
           }
           else{ // Error adding new specific asset to system
             return "Error adding Specific Asset";
@@ -77,7 +77,7 @@ public class AssetPlusFeatureSet3Controller {
               assetType.addSpecificAsset(toUpdate);
             }
             if(updateFloor && updateRoom && updateDate){ //if all attributes were successfully changed
-              return "Specific Asset successfully updated";
+              return "";
             }
             else{
               return "Error updating Specific Asset";
@@ -114,7 +114,7 @@ public class AssetPlusFeatureSet3Controller {
    * @return True if the input is valid and false otherwise
    */
   private static boolean inputValidation(int assetNumber, int floorNumber, int roomNumber, String assetTypeName){
-        if(assetTypeName == "" || assetTypeName == null){ //invalid asset type name
+        if(assetTypeName == null || assetTypeName.length() == 0){ //invalid asset type name
           return false; 
         }
         if(assetNumber < 1){ // asset number must be >= 1

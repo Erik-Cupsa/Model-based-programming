@@ -53,53 +53,38 @@ public class AssetPlusFeatureSet6Controller {
 
   // returns all tickets
   public static List<TOMaintenanceTicket> getTickets() {
+
   
-    AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
-    
     List<TOMaintenanceTicket> tickets = new ArrayList<TOMaintenanceTicket>();
     
+    AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
     for (MaintenanceTicket ticket : assetPlus.getMaintenanceTickets()){
       int id = ticket.getId();
-      Date date = ticket.getRaisedOnDate();
       String description = ticket.getDescription();
       String raisedByEmail = ticket.getTicketRaiser().getEmail();
+      String assetname = ticket.getAsset().getAssetType().getName();
+      int expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
+      int floorNumber = ticket.getAsset().getFloorNumber();
+      int roomNumber = ticket.getAsset().getRoomNumber();
       List<TicketImage> ticketImages = ticket.getTicketImages();
       List<String> imageURLs = new ArrayList<String>();
       TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.getTicketImages().size()]; 
-      String assetname = ticket.getAsset().getAssetType().getName();
-      int expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
-      Date purchasedDate = ticket.getAsset().getPurchaseDate();
-      int floorNumber = ticket.getAsset().getFloorNumber();
-      int roomNumber = ticket.getAsset().getRoomNumber();
-      
+
       // hasImages/not
       // hasAsset/not
       // hasMaintenanceNotes/not
-      // if (!ticketImages.isEmpty()){
-      for (TicketImage ticketimage: ticketImages){
+      if (!ticketImages.isEmpty()){
+        for (TicketImage ticketimage: ticketImages){
           imageURLs.add(ticketimage.getImageURL());
+        }
       }
-      // }
 
-      // if (!ticket.getTicketNotes().isEmpty()){
-      for (int i = 0; i <ticket.getTicketImages().size(); i++){
+      if (!ticket.getTicketNotes().isEmpty()){
+        for (int i = 0; i <ticket.getTicketImages().size(); i++){
           notes[i] = new TOMaintenanceNote(ticket.getTicketNote(i).getDate(), ticket.getTicketNote(i).getDescription(), ticket.getTicketNote(i).getNoteTaker().getEmail());
-      }
-      //} 
-      TOMaintenanceTicket ticket1 = new TOMaintenanceTicket(id, date, description, raisedByEmail, assetname, expectedLifeSpanInDays, purchasedDate, floorNumber, roomNumber, imageURLs, notes);
-    
-
-      /* if (!ticket.hasAsset()){
-        tickets.add(new TOMaintenanceTicket(id, date, description, raisedByEmail, null,null, null, null,null, imageURLs, notes));
-      }else{
-        String assetname = ticket.getAsset().getAssetType().getName();
-        int expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
-        Date purchasedDate = ticket.getAsset().getPurchaseDate();
-        int floorNumber = ticket.getAsset().getFloorNumber();
-        int roomNumber = ticket.getAsset().getRoomNumber();
-
-        tickets.add(new TOMaintenanceTicket(id, date, description, raisedByEmail, assetname, expectedLifeSpanInDays, purchasedDate, floorNumber, roomNumber, imageURLs, notes));
-      } */
+        }
+      } 
+      tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));
     }
     return tickets;
   }
