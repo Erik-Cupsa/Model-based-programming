@@ -147,16 +147,30 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   }
 
   @Then("the ticket with id {string} shall have the following images \\(p15)")
+  @author("Erik Cupsa")
   public void the_ticket_with_id_shall_have_the_following_images_p15(String string,
       io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
+        int ticketIdInt = Integer.parseInt(string);
+        MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketIdInt);
+    
+        assertNotNull("Ticket should not be null", ticket);
+
+        List<Map<String, String>> expectedImagesData = dataTable.asMaps(String.class, String.class);
+        List<YourTicketImageClass> imagesList = ticket.getTicketImages();
+        
+        for (Map<String, String> expectedImage : expectedImagesData) {
+          String imageUrl = expectedImage.get("ImageUrl");
+
+          boolean imageFound = false;
+          for (YourTicketImageClass image : imagesList) {
+              if (image.getImageURL().equals(imageUrl)) {
+                  imageFound = true;
+                  break;
+              }
+          }
+
+          assertTrue("Expected image URL not found: " + imageUrl, imageFound);
+      }
   }
 
   @Then("the ticket with id {string} shall have no images \\(p15)")
