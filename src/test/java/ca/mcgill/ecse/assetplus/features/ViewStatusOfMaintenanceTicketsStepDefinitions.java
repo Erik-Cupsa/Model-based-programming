@@ -6,6 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
+import AssetPlusFeatureSet6Controller;
 
 public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 	private AssetPlus assetPlus;
@@ -103,9 +104,9 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   }
   
   @When("the manager attempts to view all maintenance tickets in the system \\(p15)")
-  @author("David Marji")
+  @author("David Marji, Manuel Hanna, Mohamed Abdelrahman")
   public void the_manager_attempts_to_view_all_maintenance_tickets_in_the_system_p15() {
-    // Write code here that turns the phrase above into concrete actions
+    return AssetPlusFeatureSet6Controller.getMaintenanceTickets();
     throw new io.cucumber.java.PendingException();
   }
 
