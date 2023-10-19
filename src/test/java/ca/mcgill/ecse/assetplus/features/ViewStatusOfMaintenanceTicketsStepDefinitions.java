@@ -6,11 +6,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
-import AssetPlusFeatureSet6Controller;
 
 public class ViewStatusOfMaintenanceTicketsStepDefinitions {
-	private AssetPlus assetPlus;
-	private List<Employee>;
+  private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();	
+
   @Given("the following employees exist in the system \\(p15)")
   @author("Mohamed Abdelrahman && Anders Woodruff && Philippe Aprahamian && David Marji && Ming Yue && Manuel Hanna")
   public void the_following_employees_exist_in_the_system_p15(
@@ -21,7 +20,6 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
       for (Map<String,String,String,String> column : rows) {
         employees.add(new Employee(column.get("email"), column.get("name"), column.get("password"), column.get("phoneNumber"), assetPlus));
       }
-    throw new io.cucumber.java.PendingException();
   }
 
   @Given("the following manager exists in the system \\(p15)")
@@ -32,14 +30,6 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
       for (Map<String,String>columns: rows) {
         Manager manager = new Manager(columns.get("email"), columns.get("password"), null, null, assetPlus); 
       }
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
   }
 
   @Given("the following asset types exist in the system \\(p15)")
@@ -49,6 +39,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
       List<Map<String,String> rows= dataTable.asMaps(String.class,String.class);
       for (Map<String,String> column : rows) {
         AssetType a = new AssetType(column.get("name"), column.get("expectedLifeSpan"), this.assetPlus);
+        // Anders I think we have to type cast to int
       }
   }
 
