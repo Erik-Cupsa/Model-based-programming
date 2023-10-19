@@ -43,7 +43,7 @@ public class AssetPlusFeatureSet4Controller{
 
     MaintenanceTicket ticket = assetplus.getMaintenanceTicket(id);
 
-    User user = User.getWithEmail(email);
+    User user = User.getWithEmail(newEmail); // temp fix to avoid controller errors
     List<User> userList = new ArrayList<User>(assetplus.getEmployees());
     userList.addAll(assetplus.getGuests());
     userList.add(assetplus.getManager());
