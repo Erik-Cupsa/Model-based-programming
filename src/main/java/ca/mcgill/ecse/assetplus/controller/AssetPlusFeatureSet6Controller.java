@@ -9,7 +9,7 @@ import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 public class AssetPlusFeatureSet6Controller {
 
   public static void deleteEmployeeOrGuest(String email) {
-    // Remove this exception when you implement this method
+    
     AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
     boolean hasEmployee = false;
     boolean hasGuest = false;
