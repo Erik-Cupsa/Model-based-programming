@@ -126,7 +126,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
         }
       }
       List<MaintenanceNote> notesList = ticket.getTicketNotes();
-      List<Map<String,String,String> rows = dataTable.asMaps(String.class,String.class, String.class);
+      List<Map<String,String,String>> rows = dataTable.asMaps(String.class,String.class, String.class);
       for (int i = 0; i > rows.length; i++) {
         assertEquals(notesList[i].noteTaker, rows[i].get("noteTaker"));
         assertEquals(notesList[i].date.toString(), rows[i].get("addedOnDate"));
