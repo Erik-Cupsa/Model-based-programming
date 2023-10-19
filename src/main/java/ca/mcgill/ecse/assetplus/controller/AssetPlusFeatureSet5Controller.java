@@ -6,22 +6,27 @@ import ca.mcgill.ecse.assetplus.model.TicketImage;
 public class AssetPlusFeatureSet5Controller {
 
   public static String addImageToMaintenanceTicket(String imageURL, int ticketID) {
-    String err="Invalid imageURL";
-    if (imageURL == null 
-    || imageURL.length() < 5
-    || !imageURL.substring(0, 6).equals("http://") 
-    || !imageURL.substring(0, 7).equals("https://"))
-    {
-      return err; 
+    String err = "";
+    if (imageURL == null || imageURL.length() == 0){
+      err="Image URL cannot be empty";
     }
+    else if ((imageURL.length() < 6 
+    || !imageURL.substring(0, 6).equals("http://"))
+    || (imageURL.length() < 7 
+    || !imageURL.substring(0, 7).equals("https://"))
+    )
+    {
+      err="Image URL must start with http:// or https://";
+    }
+  
     try {
       MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
       TicketImage ticketImage= new TicketImage(imageURL, ticket);
-      if (ticket.addTicketImage(ticketImage)){
-        return ""; 
+      if (!ticket.addTicketImage(ticketImage)){
+        err ="Image already exists for the ticket"; 
       }
     } catch (Exception e) {
-      err="Invalid ticketID";
+      err="Ticket does not exist";
     }
     return err;
   }
