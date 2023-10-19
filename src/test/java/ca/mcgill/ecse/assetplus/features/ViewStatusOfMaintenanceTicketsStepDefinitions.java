@@ -125,24 +125,25 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   }
 
   @Then("the ticket with id {string} shall have the following notes \\(p15)")
+  //@author("Anders Woodruff")
   public void the_ticket_with_id_shall_have_the_following_notes_p15(String string,
 	      io.cucumber.datatable.DataTable dataTable) {
-//	      List<MaintenanceTicket> ticketList = assetPlus.getMaintenanceTickets();
-//	      MaintenanceTicket ticketOfInterest;
-//
-//	      for (MaintenanceTicket ticket : ticketList){
-//	        if (ticket.id == Integer.parseInt(string)){
-//	          ticketOfInterest = ticket;
-//	        }
-//	      }
-//	      List<MaintenanceNote> notesList = ticket.getTicketNotes();
-//	      List<Map<String,String>> rows = dataTable.asMaps(String.class,String.class);
-//	      for (int i = 0; i > rows.length(); i++) {
-//	        assertEquals(notesList[i].noteTaker, rows[i].get("noteTaker"));
-//	        assertEquals(notesList[i].date.toString(), rows[i].get("addedOnDate"));
-//	        assertEquals(notesList[i].description, rows[i].get("description"));
-//
-//	      }
+	      List<MaintenanceTicket> ticketList = assetPlus.getMaintenanceTickets();
+	      MaintenanceTicket ticketOfInterest;
+
+	      for (MaintenanceTicket ticket : ticketList){
+	        if (ticket.getId() == Integer.parseInt(string)){
+	          ticketOfInterest = ticket;
+	        }
+	      }
+	      List<MaintenanceNote> notesList = ticketOfInterest.getTicketNotes();
+	      List<Map<String,String>> rows = dataTable.asMaps(String.class,String.class);
+	      for (int i = 0; i > rows.length(); i++) {
+	        assertEquals(notesList[i].getNoteTaker().getName(), rows[i].get("noteTaker"));
+	        assertEquals(notesList[i].getDate().toString(), rows[i].get("addedOnDate"));
+	        assertEquals(notesList[i].description(), rows[i].get("description"));
+
+	      }
 	  }
 
   @Then("the ticket with id {string} shall have no notes \\(p15)")
