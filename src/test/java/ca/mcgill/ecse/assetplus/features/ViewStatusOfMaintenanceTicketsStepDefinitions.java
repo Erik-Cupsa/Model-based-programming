@@ -6,7 +6,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
-import ca.mcgill.ecse.assetplus.controller.*;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet2Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet3Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
+
 import java.sql.Date;
 
 public class ViewStatusOfMaintenanceTicketsStepDefinitions {
@@ -17,20 +24,21 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   public void the_following_employees_exist_in_the_system_p15(
     io.cucumber.datatable.DataTable dataTable) {
 	    assetPlus=AssetPlusApplication.getAssetPlus();
-      List<Map<String,String>> rows= dataTable.asMaps(String.class,String.class,String.class,String.class);
-      List<Employee> employees = new List<Employee>();
+      List<Map<String,String>> rows= dataTable.asMaps(String.class,String.class);
+      List<Employee> employees = new ArrayList<Employee>();
       for (Map<String,String> column : rows) {
-        employees.add(new Employee(column.get("email"), column.get("name"), column.get("password"), column.get("phoneNumber"), assetPlus));
+        //employees.add(new Employee(column.get("email"), column.get("name"), column.get("password"), column.get("phoneNumber"), assetPlus));
+        AssetPlusFeatureSet1Controller.addEmployeeOrGuest(column.get("email"), column.get("password"), null, null, true)
       }
   }
 
   @Given("the following manager exists in the system \\(p15)")
-  @author("Mannuel Hanna")
+  @author("Manuel Hanna")
   public void the_following_manager_exists_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
       List<Map<String,String>> rows = dataTable.asMaps(String.class, String.class);
       for (Map<String,String>columns: rows) {
-        Manager manager = new Manager(columns.get("email"), columns.get("password"), null, null, assetPlus); 
+        //Manager manager = new Manager(columns.get("email"), columns.get("password"), null, null, assetPlus); 
       }
   }
 
@@ -40,8 +48,8 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
       io.cucumber.datatable.DataTable dataTable) {
       List<Map<String,String>> rows= dataTable.asMaps(String.class,String.class);
       for (Map<String,String> column : rows) {
-        AssetType a = new AssetType(column.get("name"), column.get("expectedLifeSpan"), this.assetPlus);
-        // Anders I think we have to type cast to int
+        AssetType a = new AssetType(column.get("name"), Integer.parseInt(column.get("expectedLifeSpan")), this.assetPlus);
+        // Anders I think we have to type cast to int [DONE]
       }
   }
 
