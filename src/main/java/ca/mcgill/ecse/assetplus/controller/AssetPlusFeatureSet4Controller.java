@@ -1,7 +1,9 @@
 package ca.mcgill.ecse.assetplus.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.model.*;
 
 public class AssetPlusFeatureSet4Controller{
@@ -10,9 +12,10 @@ public class AssetPlusFeatureSet4Controller{
   public static String addMaintenanceTicket(int id, Date raisedOnDate, String description,
     String email, int assetNumber) {
     AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
-    if 
-    User user;
-    List<User> userList = assetplus.getEmployees();
+    // if 
+    User user = User.getWithEmail(email);
+    // TODO: Check feature for possible errors raised
+    List<User> userList = new ArrayList<User>(assetplus.getEmployees());
     userList.addAll(assetplus.getGuests());
     userList.add(assetplus.getManager());
 
@@ -40,8 +43,8 @@ public class AssetPlusFeatureSet4Controller{
 
     MaintenanceTicket ticket = assetplus.getMaintenanceTicket(id);
 
-    User user;
-    List<User> userList = assetplus.getEmployees();
+    User user = User.getWithEmail(email);
+    List<User> userList = new ArrayList<User>(assetplus.getEmployees());
     userList.addAll(assetplus.getGuests());
     userList.add(assetplus.getManager());
 
