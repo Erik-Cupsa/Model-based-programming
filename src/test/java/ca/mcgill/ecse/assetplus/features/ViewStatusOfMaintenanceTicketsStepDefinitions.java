@@ -7,14 +7,7 @@ import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet2Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet3Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
-
+import ca.mcgill.ecse.assetplus.controller.*;
 import java.sql.Date;
 
 public class ViewStatusOfMaintenanceTicketsStepDefinitions {
@@ -49,8 +42,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
       io.cucumber.datatable.DataTable dataTable) {
       List<Map<String,String>> rows= dataTable.asMaps(String.class,String.class);
       for (Map<String,String> column : rows) {
-        AssetType a = new AssetType(column.get("name"), Integer.parseInt(column.get("expectedLifeSpan")), this.assetPlus);
-        // Anders I think we have to type cast to int [DONE]
+        AssetType assetType = new AssetType(column.get("name"), Integer.parseInt(column.get("expectedLifeSpan")), this.assetPlus);
       }
   }
 
@@ -116,8 +108,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   @When("the manager attempts to view all maintenance tickets in the system \\(p15)")
 //@author("David Marji, Manuel Hanna, Mohamed Abdelrahman")
   public void the_manager_attempts_to_view_all_maintenance_tickets_in_the_system_p15() {
-    //AssetPlusFeatureSet6Controller.getMaintenanceTickets();
-    throw new io.cucumber.java.PendingException();
+    List<TOMaintenanceTicket> tickets = AssetPlusFeatureSet6Controller.getTickets();
   }
 
   @Then("the following maintenance tickets shall be presented \\(p15)")
