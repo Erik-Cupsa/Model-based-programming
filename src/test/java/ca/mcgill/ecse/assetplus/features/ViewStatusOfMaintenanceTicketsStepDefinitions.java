@@ -160,8 +160,13 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   }
 
   @Then("the ticket with id {string} shall have no images \\(p15)")
+  @author("Erik Cupsa")
   public void the_ticket_with_id_shall_have_no_images_p15(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int ticketIdInt = Integer.parseInt(string);
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketIdInt);
+
+    assertNotNull("Ticket should not be null", ticket);
+    List<TicketImage> imagesList = ticket.getTicketImages();
+    assertTrue("Images list should be empty", imagesList.isEmpty());
   }
 }
