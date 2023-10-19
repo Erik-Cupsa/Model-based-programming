@@ -54,8 +54,9 @@ public class AssetPlusFeatureSet2Controller {
   public static void deleteAssetType(String name) {
 	if(AssetType.hasWithName(name)) {
 		AssetPlusApplication.getAssetPlus().removeAssetType(AssetType.getWithName(name)); //removes from system
+		AssetType.getWithName(name).delete(); //deletes
 	}
-   AssetType.getWithName(name).delete(); //deletes
+   
   }
   
 
