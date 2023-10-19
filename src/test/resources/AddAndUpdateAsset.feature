@@ -53,7 +53,7 @@ As the manager, I want to add and update an asset in the system.
   Scenario Outline: Successfully update all information for an asset
     When the manager attempts to update asset number "<assetNumber>" in the system with type "<newType>", purchaseDate "<newPurchaseDate>", floorNumber "<newFloorNumber>", and roomNumber "<newRoomNumber>" (p9)
     Then the number of assets in the system shall be "2" (p9)
-    Then the asset "<type>" with asset number "<assetNumber>", purchase date "<purchaseDate>", floor number "<floorNumber>", and room number "<roomNumber>" shall exist in the system (p9)
+    Then the asset "<type>" with asset number "<assetNumber>", purchase date "<newPurchaseDate>", floor number "<newFloorNumber>", and room number "<newRoomNumber>" shall exist in the system (p9)
 
     Examples: 
       | assetNumber | newType | newPurchaseDate | newFloorNumber | newRoomNumber |
