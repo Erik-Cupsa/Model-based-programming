@@ -64,7 +64,7 @@ public class AssetPlusFeatureSet6Controller {
       String raisedByEmail = ticket.getTicketRaiser().getEmail();
       List<TicketImage> ticketImages = ticket.getTicketImages();
       List<String> imageURLs = new ArrayList<String>();
-      List<TOMaintenanceNote> notes = new ArrayList<TOMaintenanceNote>(); 
+      TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.getTicketImages().size()]; 
       
       // hasImages/not
       // hasAsset/not
@@ -76,14 +76,15 @@ public class AssetPlusFeatureSet6Controller {
       }
 
       if (!ticket.getTicketNotes().isEmpty()){
+        int i = 0;
         for (MaintenanceNote note : ticket.getTicketNotes()){
-          notes.add(new TOMaintenanceNote(note.getDate(), note.getDescription(), note.getNoteTaker().getEmail()));
+          notes[i] = new TOMaintenanceNote(note.getDate(), note.getDescription(), note.getNoteTaker().getEmail());
         }
       } 
     
 
       if (!ticket.hasAsset()){
-        tickets.add(new TOMaintenanceTicket(id, date, description, raisedByEmail, null,null, null, null,null, imageURLs, notes);
+        tickets.add(new TOMaintenanceTicket(id, date, description, raisedByEmail, null,null, null, null,null, imageURLs, notes));
       }else{
         String assetname = ticket.getAsset().getAssetType().getName();
         int expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
@@ -91,7 +92,7 @@ public class AssetPlusFeatureSet6Controller {
         int floorNumber = ticket.getAsset().getFloorNumber();
         int roomNumber = ticket.getAsset().getRoomNumber();
 
-        tickets.add(new TOMaintenanceTicket(id, date, description, raisedByEmail, assetname, expectedLifeSpanInDays, purchasedDate, floorNumber, roomNumber, imageURLs, notes.toArray(new TOMaintenanceNote[0]));
+        tickets.add(new TOMaintenanceTicket(id, date, description, raisedByEmail, assetname, expectedLifeSpanInDays, purchasedDate, floorNumber, roomNumber, imageURLs, notes));
       }
     }
     return tickets;
