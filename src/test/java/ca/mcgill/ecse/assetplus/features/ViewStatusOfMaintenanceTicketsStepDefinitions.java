@@ -1,8 +1,5 @@
 package ca.mcgill.ecse.assetplus.features;
 import static org.junit.Assert.*;
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertNotNull;
-//import static org.junit.Assert.assertTrue;
 import java.util.*;
 import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
@@ -10,14 +7,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import ca.mcgill.ecse.assetplus.controller.*;
-//import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller;
-//import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet2Controller;
-//import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet3Controller;
-//import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
-//import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller;
-//import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
-//import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
-//import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 
 import java.sql.Date;
 
