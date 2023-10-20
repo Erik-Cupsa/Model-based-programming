@@ -60,7 +60,7 @@ public class AssetPlusFeatureSet4Controller{
       String newEmail, int newAssetNumber) {
     AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
 
-    MaintenanceTicket ticket;
+    MaintenanceTicket ticket = null;
 
     boolean ticketFound = false;
     for (MaintenanceTicket l: assetplus.getMaintenanceTickets()){
