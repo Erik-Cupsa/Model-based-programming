@@ -121,12 +121,10 @@ public class AssetPlusFeatureSet4Controller{
     boolean ticketFound = false;
     for (MaintenanceTicket l: assetplus.getMaintenanceTickets()){
       if (l.getId() == id){
-        ticket = l;
-        ticketFound = true;
+        l.delete();
         break;
       }
     }
-    ticket.delete();
   }
 
 }
