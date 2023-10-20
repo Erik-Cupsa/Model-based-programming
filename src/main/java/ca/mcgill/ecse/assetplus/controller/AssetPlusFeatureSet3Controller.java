@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.assetplus.controller;
 
+import ca.mcgill.ecse.assetplus.model.*;
 import java.sql.Date;
 
 /**
@@ -10,7 +11,7 @@ public class AssetPlusFeatureSet3Controller {
   /**
    * Controller method which adds a new specific asset to the system.
    * 
-   * @author Erik Cupsa 261016180
+   * @author Erik Cupsa 
    * @param assetNumber The asset number of the specific asset.
    * @param floorNumber The floor number of the specific asset.
    * @param roomNumber The room number of the specific asset.
@@ -43,7 +44,7 @@ public class AssetPlusFeatureSet3Controller {
   /**
    * Updates an existing specific asset in the system. 
    * 
-   * @author Erik Cupsa 261016180
+   * @author Erik Cupsa 
    * @param assetNumber The asset number of the specific asset to update.
    * @param newFloorNumber The new floor number. 
    * @param newRoomNumber The new room number. 
@@ -89,7 +90,7 @@ public class AssetPlusFeatureSet3Controller {
   /**
    * Deletes a specific asset from the system.
    * 
-   * @author Erik Cupsa 261016180
+   * @author Erik Cupsa 
    * @param assetNumber The asset number of the specific asset to delete from the system.
    */
   public static void deleteSpecificAsset(int assetNumber) {
@@ -106,7 +107,7 @@ public class AssetPlusFeatureSet3Controller {
 
   /**
    * Validates all input parameters for adding or updating a specific asset.
-   * @author Erik Cupsa 261016180
+   * @author Erik Cupsa 
    * @param assetNumber The asset number.
    * @param floorNumber The floor number. 
    * @param roomNumber The room number. 
