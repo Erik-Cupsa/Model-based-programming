@@ -1,34 +1,35 @@
 package ca.mcgill.ecse.assetplus.controller;
 
+import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.model.*;
 
 public class AssetPlusFeatureSet4Controller{
-
   // assetNumber -1 means that no asset is specified
   public static String addMaintenanceTicket(int id, Date raisedOnDate, String description,
     String email, int assetNumber) {
     AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
-    if 
-    User user;
-    List<User> userList = assetplus.getEmployees();
-    userList.addAll(assetplus.getGuests());
-    userList.add(assetplus.getManager());
 
-    for (User u: userList){
-      if (u.getEmail() == email){
-        user = u;
-        break;
-      }
+    User user = User.getWithEmail(email);
+
+    if (user == null){
+      return "The ticket raiser does not exist";
+    } else if (description == "" || description == null){
+      return "Ticket description cannot be empty";
     }
     
     MaintenanceTicket newticket = new MaintenanceTicket(id, raisedOnDate, description, assetplus, user);
 
     if (assetNumber != -1){
-      SpecificAsset asset = assetplus.getSpecificAsset(assetNumber);
+      SpecificAsset asset = SpecificAsset.getWithAssetNumber(assetNumber);
+      if (asset == null){
+        return "The asset does not exist";
+      }
       newticket.setAsset(asset);
     }
+
 
     return "";
   }
@@ -36,34 +37,36 @@ public class AssetPlusFeatureSet4Controller{
   // newAssetNumber -1 means that no asset is specified
   public static String updateMaintenanceTicket(int id, Date newRaisedOnDate, String newDescription,
       String newEmail, int newAssetNumber) {
-    AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(id);
+    if (ticket == null){
+      return "The ticket does not exist";
+    }
 
-    MaintenanceTicket ticket = assetplus.getMaintenanceTicket(id);
+    User user = User.getWithEmail(newEmail); // temp fix to avoid controller errors
 
-    User user;
-    List<User> userList = assetplus.getEmployees();
-    userList.addAll(assetplus.getGuests());
-    userList.add(assetplus.getManager());
+    if (user == null){
+      return "The ticket raiser does not exist";
+    } else if (newDescription == "" || newDescription == null){
+      return "Ticket description cannot be empty";
+    }
 
-    for (User u: userList){
-      if (u.getEmail() == newEmail){
-        user = u;
-        break;
+    if (newAssetNumber != -1){
+      SpecificAsset asset = SpecificAsset.getWithAssetNumber(newAssetNumber);
+      if (asset == null){
+        return "The asset does not exist";
       }
+      ticket.setAsset(asset);
     }
 
     ticket.setRaisedOnDate(newRaisedOnDate);
     ticket.setDescription(newDescription);
     ticket.setTicketRaiser(user);
-    if(newAssetNumber != -1){
-    ticket.setAsset(assetplus.getSpecificAsset(newAssetNumber));}
 
     return "";
   }
 
   public static void deleteMaintenanceTicket(int id) {
-    AssetPlus assetplus = new AssetPlus();
-    MaintenanceTicket ticket = assetplus.getMaintenanceTicket(id);
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(id);
     ticket.delete();
   }
 

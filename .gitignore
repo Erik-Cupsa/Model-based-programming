@@ -11,3 +11,4 @@ bin
 */**/__pycache__
 
 **/*.class
+.settings/org.eclipse.jdt.core.prefs
