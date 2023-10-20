@@ -13,8 +13,13 @@ import java.sql.Date;
 public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();	
   private List<TOMaintenanceTicket> tickets;
+
+	/**
+    * Gherkin step definition method to create and add employees to the AssetPlus application.
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("Mohamed Abdelrahman && Anders Woodruff && Philippe Aprahamian && David Marji && Ming Yue && Manuel Hanna")
+    */
   @Given("the following employees exist in the system \\(p15)")
-  //@author("Mohamed Abdelrahman && Anders Woodruff && Philippe Aprahamian && David Marji && Ming Yue && Manuel Hanna")
   public void the_following_employees_exist_in_the_system_p15(
     io.cucumber.datatable.DataTable dataTable) {
 	    List<Map<String,String>> rows= dataTable.asMaps(String.class,String.class);
@@ -23,8 +28,12 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
       }
   }
 
+	/**
+    * Gherkin step definition method to create and add a manager to the AssetPlus application.
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("Mannuel Hanna && Philippe Aprahamian && Ming Xuan Yue")
+    */
   @Given("the following manager exists in the system \\(p15)")
-  //@author("Mannuel Hanna && Philippe Aprahamian && Ming Xuan Yue")
   public void the_following_manager_exists_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
       List<Map<String,String>> rows = dataTable.asMaps(String.class, String.class);
@@ -32,8 +41,12 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
       assetPlus.setManager(manager);
   }
 
+	/**
+    * Gherkin step definition method to create and add asset types to the AssetPlus application.
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("Anders Woodruff && Philippe Aprahamian && Ming Xuan Yue")
+    */
   @Given("the following asset types exist in the system \\(p15)")
-  //@author("Anders Woodruff && Philippe Aprahamian && Ming Xuan Yue")
   public void the_following_asset_types_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
       List<Map<String,String>> rows= dataTable.asMaps(String.class,String.class);
@@ -42,11 +55,14 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
       }
   }
 
+		/**
+    * Gherkin step definition method to create and add assets to the AssetPlus application.
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("Ming Xuan Yue && Philippe Aprahamian" && David Marji)
+    */
   @Given("the following assets exist in the system \\(p15)")
-  //@author("Ming Xuan Yue && Philippe Aprahamian" && David Marji)
   public void the_following_assets_exist_in_the_system_p15(
 	      io.cucumber.datatable.DataTable dataTable) {
-	    
 	    List<Map<String, String>> rows = dataTable.asMaps();
 	    for (var row : rows){
 	      int assetNumber = Integer.parseInt(row.get("assetNumber"));
@@ -55,13 +71,15 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 	      int roomNumber = Integer.parseInt(row.get("roomNumber"));
 	      AssetType type = AssetType.getWithName(row.get("type"));
 	      assetPlus.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, type);
-
 	    }
-	    
 	  }
 
+		/**
+    * Gherkin step definition method to create and add tickets to the AssetPlus application.
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("Ming Xuan Yue && Philippe Aprahamian && Mohamed Abdelrahman")
+    */
   @Given("the following tickets exist in the system \\(p15)")
-  //@author("Ming Xuan Yue && Philippe Aprahamian")
   public void the_following_tickets_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
 	  List<Map<String,String>> rows = dataTable.asMaps();
@@ -76,12 +94,15 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 			  int assetNumber = Integer.parseInt(assetNumberStr);
 			  newTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));
 		  }
-		  
 	  }
   }
 
+	/**
+    * Gherkin step definition method to create and add notes to the AssetPlus application.
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("Philippe Aprahamian" && Ming Xuan Yue")
+    */
   @Given("the following notes exist in the system \\(p15)")
-  //@author("Philippe Aprahamian" && Ming Xuan Yue)
   public void the_following_notes_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
 	  List<Map<String,String>> rows = dataTable.asMaps();
@@ -93,11 +114,14 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 		  MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
 		  ticket.addTicketNote(addedOnDate, description, (HotelStaff) HotelStaff.getWithEmail(noteTaker));
 	  } 
-	  
   }
 
+	/**
+    * Gherkin step definition method to create and add images to the AssetPlus application.
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("Philippe Aprahamian" && Mohamed Abdelrahman")
+    */
   @Given("the following ticket images exist in the system \\(p15)")
-//@author("Mohamed Abdelrahman && Philippe Aprahamian")
   public void the_following_ticket_images_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
 	  List<Map<String,String>> rows = dataTable.asMaps();
@@ -108,14 +132,23 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 		  ticket.addTicketImage(imageURL);
 		  } 
   }
+	
+	/**
+    * Gherkin step definition method to test controller 6 by getting tickets
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("David Marji, Manuel Hanna, Mohamed Abdelrahman")
+    */
   @When("the manager attempts to view all maintenance tickets in the system \\(p15)")
-//@author("David Marji, Manuel Hanna, Mohamed Abdelrahman")
   public void the_manager_attempts_to_view_all_maintenance_tickets_in_the_system_p15() {
 	 tickets=AssetPlusFeatureSet6Controller.getTickets();
   }
 
+	/**
+    * Gherkin step definition method to ensure controller 6 got the right tickets
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue")
+    */
   @Then("the following maintenance tickets shall be presented \\(p15)")
-//@author("David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue")
   public void the_following_maintenance_tickets_shall_be_presented_p15(
       io.cucumber.datatable.DataTable dataTable) {
 	  List<Map<String,String>> rows = dataTable.asMaps();
@@ -160,8 +193,12 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 		  } 
   }
 
+	/**
+    * Gherkin step definition method to ensure controller 6 got the right notes with the ticket
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * @author("Erik Cupsa, David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue")
+    */
   @Then("the ticket with id {string} shall have the following notes \\(p15)")
-//@author("Erik Cupsa, David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue")
   public void the_ticket_with_id_shall_have_the_following_notes_p15(String string,
 	      io.cucumber.datatable.DataTable dataTable) {
 	  	int ticketID=Integer.parseInt(string) ;
@@ -186,8 +223,12 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 			  } 
 	  }
 
+	/**
+    * Gherkin step definition method to ensure controller 6 got the right notes with the ticket
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * //@author("Erik Cupsa && Philippe Aprahamian")
+    */
   @Then("the ticket with id {string} shall have no notes \\(p15)")
-  //@author("Erik Cupsa && Philippe Aprahamian")
   public void the_ticket_with_id_shall_have_no_notes_p15(String string) {
 	  	int ticketID=Integer.parseInt(string) ;
 	  	TOMaintenanceTicket currTicket = null; 
@@ -199,8 +240,12 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 	  	assertEquals(currTicket.hasNotes(),false);
 	  }
 
+	/**
+    * Gherkin step definition method to ensure controller 6 got the right images with the ticket
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * //@author("Erik Cupsa && Philippe Aprahamian")
+    */
   @Then("the ticket with id {string} shall have the following images \\(p15)")
-  //@author("Erik Cupsa && Philippe Aprahamian")
   public void the_ticket_with_id_shall_have_the_following_images_p15(String string,
 	      io.cucumber.datatable.DataTable dataTable) {
 	  	int ticketID=Integer.parseInt(string) ;
@@ -219,10 +264,12 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 			  } 
 	  }
 
-	  
-
+	/**
+    * Gherkin step definition method to ensure controller 6 got the right images with the ticket
+    * @param dataTable Cucumber DataTable containing the asset type information. 
+    * //@author("Erik Cupsa && Philippe Aprahamian")
+    */
   @Then("the ticket with id {string} shall have no images \\(p15)")
-  //@author("Erik Cupsa && Philippe Aprahamian")
   public void the_ticket_with_id_shall_have_no_images_p15(String string) {
 	    int ticketID=Integer.parseInt(string) ;
 	  	TOMaintenanceTicket currTicket = null; 
