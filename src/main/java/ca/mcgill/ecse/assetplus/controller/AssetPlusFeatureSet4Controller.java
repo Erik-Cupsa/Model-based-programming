@@ -74,8 +74,6 @@ public class AssetPlusFeatureSet4Controller{
       return "The ticket does not exist";
     }
 
-    MaintenanceTicket ticket = assetplus.getMaintenanceTicket(id);
-
     User user = User.getWithEmail(newEmail); // temp fix to avoid controller errors
     List<User> userList = new ArrayList<User>(assetplus.getEmployees());
     userList.addAll(assetplus.getGuests());
@@ -127,9 +125,6 @@ public class AssetPlusFeatureSet4Controller{
         ticketFound = true;
         break;
       }
-    }
-    if (!ticketFound){
-      return "The ticket does not exist";
     }
     ticket.delete();
   }
