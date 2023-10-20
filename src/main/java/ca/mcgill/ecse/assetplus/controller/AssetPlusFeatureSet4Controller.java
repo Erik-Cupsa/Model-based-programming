@@ -70,7 +70,7 @@ public class AssetPlusFeatureSet4Controller{
         break;
       }
     }
-    if (!ticketFound){
+    if (ticket == null){
       return "The ticket does not exist";
     }
 
@@ -116,9 +116,6 @@ public class AssetPlusFeatureSet4Controller{
   public static void deleteMaintenanceTicket(int id) {
     AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
 
-    MaintenanceTicket ticket;
-
-    boolean ticketFound = false;
     for (MaintenanceTicket l: assetplus.getMaintenanceTickets()){
       if (l.getId() == id){
         l.delete();
