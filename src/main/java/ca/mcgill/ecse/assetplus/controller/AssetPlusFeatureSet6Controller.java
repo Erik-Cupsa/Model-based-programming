@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.model.*;
 
-<<<<<<< HEAD
-=======
-
-import java.sql.Array;
->>>>>>> c855296bf88e1c51fcafae25f6ca583667fd1845
 
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 public class AssetPlusFeatureSet6Controller {
@@ -59,7 +54,6 @@ public class AssetPlusFeatureSet6Controller {
   public static List<TOMaintenanceTicket> getTickets() {
 
   
-<<<<<<< HEAD
     List<TOMaintenanceTicket> tickets = new ArrayList<TOMaintenanceTicket>();
     
     AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
@@ -74,31 +68,6 @@ public class AssetPlusFeatureSet6Controller {
       int expectedLifeSpanInDays = (Integer) null;
       int floorNumber = (Integer) null;
       int roomNumber = (Integer) null;
-=======
-	  List<TOMaintenanceTicket> tickets = new ArrayList<TOMaintenanceTicket>();
-	    
-	  AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
-	  for (MaintenanceTicket ticket : assetPlus.getMaintenanceTickets()){
-		
-	    int id = ticket.getId();
-	    String description = ticket.getDescription();
-	    String raisedByEmail = ticket.getTicketRaiser().getEmail();
-	    String assetname = null;
-	    int expectedLifeSpanInDays = 0;
-	    int floorNumber = 0;
-	    int roomNumber = 0;
-	    if (ticket.hasAsset()){
-	    	//assertTrue(ticket!=null);
-	      assetname = ticket.getAsset().getAssetType().getName();
-	      expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
-	      floorNumber = ticket.getAsset().getFloorNumber();
-	      roomNumber = ticket.getAsset().getRoomNumber();
-	    }
-	  List<TicketImage> ticketImages = ticket.getTicketImages();
-	  List<String> imageURLs = new ArrayList<String>();
-	  TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.getTicketImages().size()];
-
->>>>>>> c855296bf88e1c51fcafae25f6ca583667fd1845
       // hasImages/not
       // hasAsset/not
       // hasMaintenanceNotes/not
@@ -114,7 +83,6 @@ public class AssetPlusFeatureSet6Controller {
         }
       } 
       if (ticket.hasAsset()){
-<<<<<<< HEAD
         assetname = ticket.getAsset().getAssetType().getName();
         expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
         floorNumber = ticket.getAsset().getFloorNumber();
@@ -123,11 +91,6 @@ public class AssetPlusFeatureSet6Controller {
       }else{
         TOMaintenanceTicket toTicket = new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, null, floorNumber, roomNumber, imageURLs, notes);
         tickets.add(toTicket);
-=======
-    	  tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));
-      }else {
-    	  tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, null, floorNumber, roomNumber, imageURLs, notes));
->>>>>>> c855296bf88e1c51fcafae25f6ca583667fd1845
       }
     }
     return tickets;
