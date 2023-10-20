@@ -1,10 +1,9 @@
 package ca.mcgill.ecse.assetplus.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.model.*;
-import java.sql.Array;
+
 
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 public class AssetPlusFeatureSet6Controller {
@@ -28,7 +27,7 @@ public class AssetPlusFeatureSet6Controller {
         for (Employee e : employees){
           if(e.getEmail().equals(email)){
             Employee employeeToDelete = e;
-            employeeToDelete.delete();;
+            employeeToDelete.delete();
             hasEmployee = true;
           }
         }if (!hasEmployee){
@@ -62,14 +61,13 @@ public class AssetPlusFeatureSet6Controller {
       int id = ticket.getId();
       String description = ticket.getDescription();
       String raisedByEmail = ticket.getTicketRaiser().getEmail();
-      String assetname = ticket.getAsset().getAssetType().getName();
-      int expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
-      int floorNumber = ticket.getAsset().getFloorNumber();
-      int roomNumber = ticket.getAsset().getRoomNumber();
       List<TicketImage> ticketImages = ticket.getTicketImages();
       List<String> imageURLs = new ArrayList<String>();
       TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.getTicketImages().size()]; 
-
+      String assetname = null;
+      int expectedLifeSpanInDays = -1;
+      int floorNumber = -1;
+      int roomNumber = -1;
       // hasImages/not
       // hasAsset/not
       // hasMaintenanceNotes/not
@@ -84,7 +82,16 @@ public class AssetPlusFeatureSet6Controller {
           notes[i] = new TOMaintenanceNote(ticket.getTicketNote(i).getDate(), ticket.getTicketNote(i).getDescription(), ticket.getTicketNote(i).getNoteTaker().getEmail());
         }
       } 
-      tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));
+      if (ticket.hasAsset()){
+        assetname = ticket.getAsset().getAssetType().getName();
+        expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
+        floorNumber = ticket.getAsset().getFloorNumber();
+        roomNumber = ticket.getAsset().getRoomNumber();
+        tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));
+      }else{
+        TOMaintenanceTicket toTicket = new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, null, floorNumber, roomNumber, imageURLs, notes);
+        tickets.add(toTicket);
+      }
     }
     return tickets;
   }
