@@ -30,7 +30,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
     io.cucumber.datatable.DataTable dataTable) {
 	    List<Map<String,String>> rows= dataTable.asMaps(String.class,String.class);
       for (Map<String,String> row : rows) {
-        AssetPlusFeatureSet1Controller.addEmployeeOrGuest(row.get("email"), row.get("password"), row.get("name"), row.get("phoneNumber"), true);
+    	 assetPlus.addEmployee(row.get("email"), row.get("name"), row.get("password"), row.get("phoneNumber"));
       }
   }
 
@@ -49,23 +49,24 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
       io.cucumber.datatable.DataTable dataTable) {
       List<Map<String,String>> rows= dataTable.asMaps(String.class,String.class);
       for (Map<String,String> row : rows) {
-        AssetPlusFeatureSet2Controller.addAssetType(row.get("name"), Integer.parseInt(row.get("expectedLifeSpan")));
+    	assetPlus.addAssetType(row.get("name"), Integer.parseInt(row.get("expectedLifeSpan")));
       }
   }
 
   @Given("the following assets exist in the system \\(p15)")
-  //@author("Ming Xuan Yue && Philippe Aprahamian")
+  //@author("Ming Xuan Yue && Philippe Aprahamian" && David Marji)
   public void the_following_assets_exist_in_the_system_p15(
 	      io.cucumber.datatable.DataTable dataTable) {
 	    
 	    List<Map<String, String>> rows = dataTable.asMaps();
 	    for (var row : rows){
 	      int assetNumber = Integer.parseInt(row.get("assetNumber"));
-	      Date purchasedDate = Date.valueOf(row.get("purchasedDate"));
+	      Date purchaseDate = Date.valueOf(row.get("purchaseDate"));
 	      int floorNumber = Integer.parseInt(row.get("floorNumber"));
 	      int roomNumber = Integer.parseInt(row.get("roomNumber"));
-	      String assetType = row.get("type");
-	      AssetPlusFeatureSet3Controller.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchasedDate, assetType);
+	      AssetType type = AssetType.getWithName(row.get("type"));
+	      assetPlus.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, type);
+
 	    }
 	    
 	  }
@@ -80,13 +81,18 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 		  Date raisedOnDate = Date.valueOf(row.get("raisedOnDate"));
 		  String description = row.get("description");
 		  String ticketRaiserEmail = row.get("ticketRaiser");
-		  int assetNumber = Integer.parseInt(row.get("assetNumber"));
-		  AssetPlusFeatureSet4Controller.addMaintenanceTicket(id, raisedOnDate, description, ticketRaiserEmail, assetNumber);
+		  String assetNumberStr = row.get("assetNumber");
+		  MaintenanceTicket newTicket = assetPlus.addMaintenanceTicket(id, raisedOnDate, description, User.getWithEmail(ticketRaiserEmail));
+		  if (assetNumberStr!=null) {
+			  int assetNumber = Integer.parseInt(assetNumberStr);
+			  newTicket.setAsset(assetPlus.getSpecificAsset(assetNumber));
+		  }
+		  
 	  }
   }
 
   @Given("the following notes exist in the system \\(p15)")
-  //@author("Philippe Aprahamian")
+  //@author("Philippe Aprahamian" && Ming Xuan Yue)
   public void the_following_notes_exist_in_the_system_p15(
       io.cucumber.datatable.DataTable dataTable) {
 	  List<Map<String,String>> rows = dataTable.asMaps();
@@ -95,7 +101,8 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 		  int ticketID= Integer.parseInt(row.get("ticketId"));
 		  Date addedOnDate = Date.valueOf(row.get("addedOnDate"));
 		  String description = row.get("description");
-		  AssetPlusFeatureSet7Controller.addMaintenanceNote(addedOnDate, description, ticketID, noteTaker);
+		  MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+		  ticket.addTicketNote(addedOnDate, description, (HotelStaff) HotelStaff.getWithEmail(noteTaker));
 	  } 
 	  
   }
@@ -108,7 +115,8 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 	  for (var row: rows) {
 		  String imageURL = row.get("imageUrl");
 		  int ticketID= Integer.parseInt(row.get("ticketId"));
-		  AssetPlusFeatureSet5Controller.addImageToMaintenanceTicket(imageURL, ticketID);
+		  MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+		  ticket.addTicketImage(imageURL);
 		  } 
   }
   @When("the manager attempts to view all maintenance tickets in the system \\(p15)")
@@ -148,6 +156,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   }
 
   @Then("the ticket with id {string} shall have the following notes \\(p15)")
+//@author("Erik Cupsa, David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue")
   public void the_ticket_with_id_shall_have_the_following_notes_p15(String string,
 	      io.cucumber.datatable.DataTable dataTable) {
 	  	int ticketID=Integer.parseInt(string) ;
@@ -170,70 +179,54 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 			  assertEquals(description,currNote.getDescription());
 			  i++;
 			  } 
-//	      List<MaintenanceTicket> ticketList = assetPlus.getMaintenanceTickets();
-//	      MaintenanceTicket ticketOfInterest;
-//
-//	      for (MaintenanceTicket ticket : ticketList){
-//	        if (ticket.id == Integer.parseInt(string)){
-//	          ticketOfInterest = ticket;
-//	        }
-//	      }
-//	      List<MaintenanceNote> notesList = ticket.getTicketNotes();
-//	      List<Map<String,String>> rows = dataTable.asMaps(String.class,String.class);
-//	      for (int i = 0; i > rows.length(); i++) {
-//	        assertEquals(notesList[i].noteTaker, rows[i].get("noteTaker"));
-//	        assertEquals(notesList[i].date.toString(), rows[i].get("addedOnDate"));
-//	        assertEquals(notesList[i].description, rows[i].get("description"));
-//
-//	      }
 	  }
 
   @Then("the ticket with id {string} shall have no notes \\(p15)")
-  //@author("Erik Cupsa")
+  //@author("Erik Cupsa && Philippe Aprahamian")
   public void the_ticket_with_id_shall_have_no_notes_p15(String string) {
-	    int ticketIdInt = Integer.parseInt(string);
-	    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketIdInt);
-	    assertNotNull("Ticket should not be null", ticket);
-	    List<MaintenanceNote> notesList = ticket.getTicketNotes();
-	    assertTrue("Notes list should be empty", notesList.isEmpty());
+	  	int ticketID=Integer.parseInt(string) ;
+	  	TOMaintenanceTicket currTicket = null; 
+	  	for (var ticket:tickets) {
+	  		if (ticket.getId()==ticketID) {
+	  			currTicket = ticket;
+	  		}
+	  	}
+	  	assertEquals(currTicket.hasNotes(),false);
 	  }
 
   @Then("the ticket with id {string} shall have the following images \\(p15)")
-  //@author("Erik Cupsa")
+  //@author("Erik Cupsa && Philippe Aprahamian")
   public void the_ticket_with_id_shall_have_the_following_images_p15(String string,
 	      io.cucumber.datatable.DataTable dataTable) {
-	        int ticketIdInt = Integer.parseInt(string);
-	        MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketIdInt);
-	    
-	        assertNotNull("Ticket should not be null", ticket);
-
-	        List<Map<String, String>> expectedImagesData = dataTable.asMaps(String.class, String.class);
-	        List<TicketImage> imagesList = ticket.getTicketImages();
-	        
-	        for (Map<String, String> expectedImage : expectedImagesData) {
-	          String imageUrl = expectedImage.get("ImageUrl");
-
-	          boolean imageFound = false;
-	          for (TicketImage image : imagesList) {
-	              if (image.getImageURL().equals(imageUrl)) {
-	                  imageFound = true;
-	                  break;
-	              }
-	          }
-
-	          assertTrue("Expected image URL not found: " + imageUrl, imageFound);
-	      }
+	  	int ticketID=Integer.parseInt(string) ;
+	  	TOMaintenanceTicket currTicket = null; 
+	  	for (var ticket:tickets) {
+	  		if (ticket.getId()==ticketID) {
+	  			currTicket = ticket;
+	  		}
+	  	}
+	  	List<String> currTicketImageURLs= currTicket.getImageURLs();
+	  	List<Map<String,String>> rows = dataTable.asMaps();
+	  	int i=0;
+	  	for (var row: rows) {
+	  		  assertEquals(currTicketImageURLs.get(i),row.get("imageUrl"));
+			  i++;
+			  } 
 	  }
 
-  @Then("the ticket with id {string} shall have no images \\(p15)")
-  //@author("Erik Cupsa")
-  public void the_ticket_with_id_shall_have_no_images_p15(String string) {
-	    int ticketIdInt = Integer.parseInt(string);
-	    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketIdInt);
+	  
 
-	    assertNotNull("Ticket should not be null", ticket);
-	    List<TicketImage> imagesList = ticket.getTicketImages();
-	    assertTrue("Images list should be empty", imagesList.isEmpty());
+  @Then("the ticket with id {string} shall have no images \\(p15)")
+  //@author("Erik Cupsa && Philippe Aprahamian")
+  public void the_ticket_with_id_shall_have_no_images_p15(String string) {
+	    int ticketID=Integer.parseInt(string) ;
+	  	TOMaintenanceTicket currTicket = null; 
+	  	for (var ticket:tickets) {
+	  		if (ticket.getId()==ticketID) {
+	  			currTicket = ticket;
+	  		}
+	  	}
+	  	assertEquals(currTicket.getImageURLs().size(),0);
 	  }
 	  
 }
