@@ -85,7 +85,7 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 		  MaintenanceTicket newTicket = assetPlus.addMaintenanceTicket(id, raisedOnDate, description, User.getWithEmail(ticketRaiserEmail));
 		  if (assetNumberStr!=null) {
 			  int assetNumber = Integer.parseInt(assetNumberStr);
-			  newTicket.setAsset(assetPlus.getSpecificAsset(assetNumber));
+			  newTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));
 		  }
 		  
 	  }
@@ -123,6 +123,9 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 //@author("David Marji, Manuel Hanna, Mohamed Abdelrahman")
   public void the_manager_attempts_to_view_all_maintenance_tickets_in_the_system_p15() {
 	 tickets=AssetPlusFeatureSet6Controller.getTickets();
+	 for (TOMaintenanceTicket t: tickets){
+		 System.out.println(t);
+	 }
   }
 
   @Then("the following maintenance tickets shall be presented \\(p15)")
@@ -143,13 +146,29 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
 		  assertEquals(description,currTicket.getDescription());
 		  String assetName = row.get("assetName");
 		  assertEquals(assetName,currTicket.getAssetName());
-		  int expectLifeSpan = Integer.parseInt(row.get("expectLifeSpan"));
+			String expectLifeSpanStr = row.get("expectLifeSpan");
+			int expectLifeSpan=-1;
+			if (expectLifeSpanStr !=null){
+				expectLifeSpan = Integer.parseInt(expectLifeSpanStr);
+			}
 		  assertEquals(expectLifeSpan,currTicket.getExpectLifeSpanInDays());
-		  Date purchaseDate = Date.valueOf(row.get("purchaseDate"));
+			String purchaseDateStr = row.get("purchaseDate");
+			Date purchaseDate=null;
+			if (purchaseDateStr !=null){
+				purchaseDate = Date.valueOf(purchaseDateStr);
+			}
 		  assertEquals(purchaseDate,currTicket.getPurchaseDate());
-		  int floorNumber = Integer.parseInt(row.get("floorNumber"));
+		  String floorNumberStr = row.get("floorNumber");
+			int floorNumber=-1;
+			if (floorNumberStr !=null){
+				floorNumber = Integer.parseInt(floorNumberStr);
+			}
 		  assertEquals(floorNumber,currTicket.getFloorNumber());
-		  int roomNumber = Integer.parseInt(row.get("roomNumber"));
+			String roomNumberStr = row.get("roomNumber");
+			int roomNumber=-1;
+			if (roomNumberStr !=null){
+				roomNumber = Integer.parseInt(roomNumberStr);
+			}
 		  assertEquals(roomNumber,currTicket.getRoomNumber());
 		  i++;
 		  } 

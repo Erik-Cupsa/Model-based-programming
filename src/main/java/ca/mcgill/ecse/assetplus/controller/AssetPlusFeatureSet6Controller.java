@@ -65,9 +65,9 @@ public class AssetPlusFeatureSet6Controller {
       List<String> imageURLs = new ArrayList<String>();
       TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.getTicketImages().size()]; 
       String assetname = null;
-      int expectedLifeSpanInDays = (Integer) null;
-      int floorNumber = (Integer) null;
-      int roomNumber = (Integer) null;
+      int expectedLifeSpanInDays = -1;
+      int floorNumber = -1;
+      int roomNumber = -1;
       // hasImages/not
       // hasAsset/not
       // hasMaintenanceNotes/not
