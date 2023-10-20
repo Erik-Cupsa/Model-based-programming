@@ -42,8 +42,8 @@ As hotel staff, I want to add and update a maintenance note to a ticket in the s
     Then the number of notes in the system shall be "2" (p3)
     Then the following notes shall exist in the system (p3)
       | noteTaker    | ticketId | addedOnDate | description                                |
-      | jeff@ap.com  |        2 |  2023-09-01 | This is a dummy note 1 for a ticket.       |
-      | smith@ap.com |        1 |  2023-09-10 | This is another dummy note 2 for a ticket. |
+      | jeff@ap.com  |        2 |  2023-09-01 | This is a dummy note 1 for a ticket       |
+      | smith@ap.com |        1 |  2023-09-10 | This is another dummy note 2 for a ticket |
     Then the system shall raise the error "<error>" (p3)
 
     Examples: 
@@ -68,8 +68,8 @@ As hotel staff, I want to add and update a maintenance note to a ticket in the s
     Then the number of notes in the system shall be "2" (p3)
     Then the following notes shall exist in the system (p3)
       | noteTaker    | ticketId | addedOnDate | description                                |
-      | jeff@ap.com  |        2 |  2023-09-01 | This is a dummy note 1 for a ticket.       |
-      | smith@ap.com |        1 |  2023-09-10 | This is another dummy note 2 for a ticket. |
+      | jeff@ap.com  |        2 |  2023-09-01 | This is a dummy note 1 for a ticket       |
+      | smith@ap.com |        1 |  2023-09-10 | This is another dummy note 2 for a ticket |
     Then the system shall raise the error "<error>" (p3)
 
     Examples: 
