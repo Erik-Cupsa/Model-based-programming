@@ -35,7 +35,7 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Loads the input dataTable, instantiates and adds the given employees
    *
-   * @param dataTable
+   * @param dataTable a data table with each employees information (email, password, name, phoneNumber)
    */
   @Given("the following employees exist in the system \\(p2)")
   public void the_following_employees_exist_in_the_system_p2(
@@ -61,7 +61,7 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Loads the input dataTable and updates the manager
    *
-   * @param dataTable
+   * @param dataTable a data table with each managers information (email, password)
    */
   @Given("the following manager exists in the system \\(p2)")
   public void the_following_manager_exists_in_the_system_p2(
@@ -86,7 +86,7 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Loads the input dataTable, instantiates and adds the given asset types
    *
-   * @param dataTable
+   * @param dataTable a data table with each asset type in the system (with its name and expectedLifeSpan)
    */
   @Given("the following asset types exist in the system \\(p2)")
   public void the_following_asset_types_exist_in_the_system_p2(
@@ -111,7 +111,7 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Loads the input dataTable, instantiates and adds the given assets
    *
-   * @param dataTable
+   * @param dataTable a data table with each asset (and its corresponding specific information)
    */
   @Given("the following assets exist in the system \\(p2)")
   public void the_following_assets_exist_in_the_system_p2(
@@ -141,7 +141,7 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Loads the input dataTable, instantiates and adds the given maintenance tickets
    *
-   * @param dataTable
+   * @param dataTable a data table for each ticket in the system (and its corresponding specific information)
    */
   @Given("the following tickets exist in the system \\(p2)")
   public void the_following_tickets_exist_in_the_system_p2(
@@ -175,7 +175,7 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Loads the input dataTable, instantiates and adds the given maintenance ticket notes
    *
-   * @param dataTable
+   * @param dataTable a data table for each note in the system (and its corresponding specific information)
    */
   @Given("the following notes exist in the system \\(p2)")
   public void the_following_notes_exist_in_the_system_p2(
@@ -205,8 +205,8 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Deletes the specified maintenance note
    *
-   * @param noteNumberInput
-   * @param ticketNumberInput
+   * @param noteNumberInput the note number
+   * @param ticketNumberInput the maintenance ticket
    */
   @When("the manger attempts to delete note number {string} for maintenance ticket {string} \\(p2)")
   public void the_manger_attempts_to_delete_note_number_for_maintenance_ticket_p2(
@@ -227,7 +227,7 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Checks that the number of maintenance notes in the AssetPlus application has updated
    *
-   * @param expectedNumberInput
+   * @param expectedNumberInput number of notes in the system
    */
   @Then("the number of notes in the system shall be {string} \\(p2)")
   public void the_number_of_notes_in_the_system_shall_be_p2(String expectedNumberInput) {
@@ -244,8 +244,8 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Checks that the number of maintenance notes for the specified maintenance ticket has updated
    *
-   * @param ticketNumberInput
-   * @param expectedNumberInput
+   * @param ticketNumberInput ticket number
+   * @param expectedNumberInput expected number of notes
    */
   @Then("the number of notes for ticket {string} in the system shall be {string} \\(p2)")
   public void the_number_of_notes_for_ticket_in_the_system_shall_be_p2(String ticketNumberInput,
@@ -262,8 +262,8 @@ public class DeleteMaintenanceNoteStepDefinitions {
   /**
    * Checks that the specified maintenance note has been deleted from the AssetPllus application
    *
-   * @param noteNumberInput
-   * @param ticketNumberInput
+   * @param noteNumberInput note number
+   * @param ticketNumberInput ticket number
    */
   @Then("the note number {string} for ticket {int} shall not exist in the system \\(p2)")
   public void the_note_number_for_ticket_shall_not_exist_in_the_system_p2(String noteNumberInput,
