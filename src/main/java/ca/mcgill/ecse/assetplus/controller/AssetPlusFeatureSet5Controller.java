@@ -3,6 +3,8 @@ package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 import ca.mcgill.ecse.assetplus.model.TicketImage;
 
+import java.util.List;
+
 public class AssetPlusFeatureSet5Controller {
 
   public static String addImageToMaintenanceTicket(String imageURL, int ticketID) {
@@ -42,9 +44,12 @@ public class AssetPlusFeatureSet5Controller {
   public static void deleteImageFromMaintenanceTicket(String imageURL, int ticketID) {
     try {
       MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
-      TicketImage ticketImage= new TicketImage(imageURL, ticket);
-      ticketImage.delete();
-      ticket.removeTicketImage(ticketImage);
+      List<TicketImage> images= ticket.getTicketImages();
+      for (TicketImage image: images){
+        if(image.getImageURL().equals(imageURL)){
+          image.delete();
+        }
+      }
     } catch (Exception e) {
     }
   }

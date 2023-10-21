@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb49be0b-a76b-492e-88de-c896d1b20d70" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet5Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet5Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ca/mcgill/ecse/assetplus/features/AddTicketImageStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ca/mcgill/ecse/assetplus/features/AddTicketImageStepDefinitions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,15 +62,15 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Cucumber Java.Feature: AddTicketImage">
-    <configuration name="Feature: AddTicketImage" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Cucumber Java.Scenario: Successfully delete ticket image from a ticket">
+    <configuration name="Feature: DeleteTicketImage" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/AddTicketImage.feature" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/DeleteTicketImage.feature" />
       <option name="GLUE" value="ca.mcgill.ecse.assetplus.features" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="ca.mcgill.ecse.assetplus.test" />
       <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
-      <option name="SUGGESTED_NAME" value="Feature: AddTicketImage" />
+      <option name="SUGGESTED_NAME" value="Feature: DeleteTicketImage" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -83,14 +82,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Feature: ViewStatusOfMaintenanceTickets" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+    <configuration name="Scenario: Successfully delete nonexisting ticket image from a nonexisting ticket" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/ViewStatusOfMaintenanceTickets.feature" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/DeleteTicketImage.feature" />
       <option name="GLUE" value="ca.mcgill.ecse.assetplus.features" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="ca.mcgill.ecse.assetplus.test" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
-      <option name="SUGGESTED_NAME" value="Feature: ViewStatusOfMaintenanceTickets" />
+      <option name="NAME_FILTER" value="^Successfully delete nonexisting ticket image from a nonexisting ticket$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Successfully delete nonexisting ticket image from a nonexisting ticket$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Successfully delete nonexisting ticket image from a nonexisting ticket" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -102,15 +102,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: Successfully add ticket image to a ticket" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+    <configuration name="Scenario: Successfully delete nonexisting ticket image from a ticket" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/AddTicketImage.feature" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/DeleteTicketImage.feature" />
       <option name="GLUE" value="ca.mcgill.ecse.assetplus.features" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="ca.mcgill.ecse.assetplus.test" />
-      <option name="NAME_FILTER" value="^Successfully add ticket image to a ticket$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Successfully add ticket image to a ticket$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Successfully add ticket image to a ticket" />
+      <option name="NAME_FILTER" value="^Successfully delete nonexisting ticket image from a ticket$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Successfully delete nonexisting ticket image from a ticket$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Successfully delete nonexisting ticket image from a ticket" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Successfully delete ticket image from a ticket" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/DeleteTicketImage.feature" />
+      <option name="GLUE" value="ca.mcgill.ecse.assetplus.features" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="ca.mcgill.ecse.assetplus.test" />
+      <option name="NAME_FILTER" value="^Successfully delete ticket image from a ticket$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Successfully delete ticket image from a ticket$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Successfully delete ticket image from a ticket" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -146,10 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Cucumber Java.Feature: AddTicketImage" />
-        <item itemvalue="Cucumber Java.Scenario: Successfully add ticket image to a ticket" />
+        <item itemvalue="Cucumber Java.Scenario: Successfully delete ticket image from a ticket" />
+        <item itemvalue="Cucumber Java.Scenario: Successfully delete nonexisting ticket image from a nonexisting ticket" />
+        <item itemvalue="Cucumber Java.Scenario: Successfully delete nonexisting ticket image from a ticket" />
+        <item itemvalue="Cucumber Java.Feature: DeleteTicketImage" />
         <item itemvalue="Gradle.ecse223-group-project-p15 [test]" />
-        <item itemvalue="Cucumber Java.Feature: ViewStatusOfMaintenanceTickets" />
       </list>
     </recent_temporary>
   </component>
@@ -168,6 +189,8 @@
       <workItem from="1697833515442" duration="63000" />
       <workItem from="1697834044607" duration="2979000" />
       <workItem from="1697914787041" duration="2306000" />
+      <workItem from="1697917375519" duration="2449000" />
+      <workItem from="1697929983034" duration="930000" />
     </task>
     <servers />
   </component>
@@ -180,10 +203,19 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.opentest4j.AssertionFailedError" package="org.opentest4j" />
+          <option name="timeStamp" value="4" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/ca/mcgill/ecse/assetplus/features/AddTicketImageStepDefinitions.java</url>
+          <line>237</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet5Controller.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="3" />
+          <line>45</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
