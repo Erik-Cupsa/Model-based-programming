@@ -81,7 +81,7 @@ public class TOMaintenanceTicket
   }
 
   /**
-   * the following five attributes are set to null if no asset is specified for the ticket
+   * the following five attributes are set to null (String/Date) / -1 (Integer) if no asset is specified for the ticket
    */
   public String getAssetName()
   {
