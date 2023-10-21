@@ -7,7 +7,7 @@ class TOMaintenanceTicket {
   String description;
   String raisedByEmail;
 
-  // the following five attributes are set to null if no asset is specified for the ticket
+  // the following five attributes are set to null (String/Date) / -1 (Integer) if no asset is specified for the ticket
   String assetName;
   Integer expectLifeSpanInDays;
   Date purchaseDate;

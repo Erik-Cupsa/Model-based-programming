@@ -42,8 +42,8 @@ As hotel staff, I want to add and update a maintenance note to a ticket in the s
     Then the number of notes in the system shall be "2" (p3)
     Then the following notes shall exist in the system (p3)
       | noteTaker    | ticketId | addedOnDate | description                                |
-      | jeff@ap.com  |        2 |  2023-09-01 | This is a dummy note 1 for a ticket.       |
-      | smith@ap.com |        1 |  2023-09-10 | This is another dummy note 2 for a ticket. |
+      | jeff@ap.com  |        2 |  2023-09-01 | This is a dummy note 1 for a ticket       |
+      | smith@ap.com |        1 |  2023-09-10 | This is another dummy note 2 for a ticket |
     Then the system shall raise the error "<error>" (p3)
 
     Examples: 
@@ -56,10 +56,10 @@ As hotel staff, I want to add and update a maintenance note to a ticket in the s
     When the manger attempts to update note number "<noteIndex>" for maintenance ticket "<ticketId>" with note taker "<newNoteTaker>", date "<newDate>", and description "<newDescription>" (p3)
     Then the number of notes in the system shall be "2" (p3)
     Then the number of notes for ticket "<ticketId>" in the system shall be "<numberOfNotes>" (p3)
-    Then the note number "<noteIndex>" for ticket <ticketId> with noteTaker "<noteTaker>", date "<date>", and description "<description>" shall exist in the system (p3)
+    Then the note number "<noteIndex>" for ticket <ticketId> with noteTaker "<newNoteTaker>", date "<newDate>", and description "<newDescription>" shall exist in the system (p3)
 
     Examples: 
-      | ticketId | noteTaker      | date       | description                   | noteIndex | numberOfNotes |
+      | ticketId | newNoteTaker   | newDate    | newDescription                | noteIndex | numberOfNotes |
       |        1 | jeff@ap.com    | 2023-09-23 | This is a dummy description 1 |         0 |             1 |
       |        1 | manager@ap.com | 2023-10-05 | This is a dummy description 2 |         0 |             1 |
 
@@ -68,12 +68,12 @@ As hotel staff, I want to add and update a maintenance note to a ticket in the s
     Then the number of notes in the system shall be "2" (p3)
     Then the following notes shall exist in the system (p3)
       | noteTaker    | ticketId | addedOnDate | description                                |
-      | jeff@ap.com  |        2 |  2023-09-01 | This is a dummy note 1 for a ticket.       |
-      | smith@ap.com |        1 |  2023-09-10 | This is another dummy note 2 for a ticket. |
+      | jeff@ap.com  |        2 |  2023-09-01 | This is a dummy note 1 for a ticket       |
+      | smith@ap.com |        1 |  2023-09-10 | This is another dummy note 2 for a ticket |
     Then the system shall raise the error "<error>" (p3)
 
     Examples: 
-      | ticketId | noteTaker      | date       | description                   | noteIndex | error                              |
+      | ticketId | newNoteTaker   | newDate    | newDescription                | noteIndex | error                              |
       |        1 | abdul@ap.com   | 2023-09-23 | This is a dummy description 1 |         0 | Hotel staff does not exist         |
       |        3 | manager@ap.com | 2023-10-05 | This is a dummy description 2 |         0 | Ticket does not exist              |
       |        1 | manager@ap.com | 2023-10-05 | This is a dummy description 2 |         1 | Note does not exist                |
