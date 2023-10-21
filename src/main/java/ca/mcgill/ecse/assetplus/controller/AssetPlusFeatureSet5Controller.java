@@ -43,6 +43,7 @@ public class AssetPlusFeatureSet5Controller {
     try {
       MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
       TicketImage ticketImage= new TicketImage(imageURL, ticket);
+      ticketImage.delete();
       ticket.removeTicketImage(ticketImage);
     } catch (Exception e) {
     }
