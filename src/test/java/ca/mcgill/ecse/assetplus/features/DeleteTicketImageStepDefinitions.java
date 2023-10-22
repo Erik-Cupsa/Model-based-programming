@@ -17,6 +17,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+/**
+ * Step definitions for the DeleteTicketImages feature checks that existing ticket images are no longer
+ * available in the system once deleted
+ * 
+ * @author Team P13
+ */
+
 public class DeleteTicketImageStepDefinitions {
   private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
