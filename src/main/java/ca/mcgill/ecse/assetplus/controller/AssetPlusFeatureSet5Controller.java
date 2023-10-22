@@ -12,8 +12,6 @@ public class AssetPlusFeatureSet5Controller {
     if (imageURL == null || imageURL.length() == 0){
       err="Image URL cannot be empty";
     }
-//    else if (((imageURL.length() > 6) && (!imageURL.substring(0, 7).equals("http://")))
-//            || ((imageURL.length() > 7) && (!imageURL.substring(0, 8).equals("https://"))))
     else
     {
       try {
@@ -26,17 +24,24 @@ public class AssetPlusFeatureSet5Controller {
         err="Image URL must start with http:// or https://";
     }
     }
-
-    if (err == "") {
-      try {
-        MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
-        TicketImage ticketImage = new TicketImage(imageURL, ticket);
-        if (!ticket.addTicketImage(ticketImage)) {
+    if (ticketID ==3){
+      System.out.println("here");
+    }
+    MaintenanceTicket ticket=MaintenanceTicket.getWithId(ticketID);
+    if (ticket == null){
+      err="Ticket does not exist";
+    }
+    else{
+      List<TicketImage> images= ticket.getTicketImages();
+      for (TicketImage image: images){
+        if(image.getImageURL().equals(imageURL)){
           err = "Image already exists for the ticket";
         }
-      } catch (Exception e) {
-        err = "Ticket does not exist";
       }
+    }
+    if (err == ""){
+      TicketImage ticketImage = new TicketImage(imageURL, ticket);
+      ticket.addTicketImage(ticketImage);
     }
     return err;
   }

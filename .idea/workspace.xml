@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="eb49be0b-a76b-492e-88de-c896d1b20d70" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet5Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet5Controller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +61,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Cucumber Java.Scenario: Successfully delete ticket image from a ticket">
+  <component name="RunManager" selected="Gradle.ecse223-group-project-p15 [test]">
     <configuration name="Feature: DeleteTicketImage" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/DeleteTicketImage.feature" />
@@ -166,11 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ecse223-group-project-p15 [test]" />
+        <item itemvalue="Cucumber Java.Feature: DeleteTicketImage" />
         <item itemvalue="Cucumber Java.Scenario: Successfully delete ticket image from a ticket" />
         <item itemvalue="Cucumber Java.Scenario: Successfully delete nonexisting ticket image from a nonexisting ticket" />
         <item itemvalue="Cucumber Java.Scenario: Successfully delete nonexisting ticket image from a ticket" />
-        <item itemvalue="Cucumber Java.Feature: DeleteTicketImage" />
-        <item itemvalue="Gradle.ecse223-group-project-p15 [test]" />
       </list>
     </recent_temporary>
   </component>
@@ -190,7 +189,7 @@
       <workItem from="1697834044607" duration="2979000" />
       <workItem from="1697914787041" duration="2306000" />
       <workItem from="1697917375519" duration="2449000" />
-      <workItem from="1697929983034" duration="930000" />
+      <workItem from="1697929983034" duration="2708000" />
     </task>
     <servers />
   </component>
@@ -211,11 +210,6 @@
           <url>file://$PROJECT_DIR$/src/test/java/ca/mcgill/ecse/assetplus/features/AddTicketImageStepDefinitions.java</url>
           <line>237</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet5Controller.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
