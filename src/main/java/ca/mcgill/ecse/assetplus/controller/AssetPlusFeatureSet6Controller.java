@@ -8,49 +8,33 @@ import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 public class AssetPlusFeatureSet6Controller {
 
+  /**
+   * Delete an employee or a guest with provided email
+   * 
+   * @author Ming Xuan Yue
+   * @param email
+  */
   public static void deleteEmployeeOrGuest(String email) {
-    // Remove this exception when you implement this method
-    AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
-    boolean hasEmployee = false;
-    boolean hasGuest = false;
-   
+
     try{
-      if (email == null){
-        throw new IllegalArgumentException("Email cannot be null.");
-      }else if (email == ""){
-        throw new IllegalArgumentException("Email cannot be empty.");
-      }else if (email == "manager@ap.com"){
-        throw new IllegalArgumentException("Manager cannot be deleted.");
+      if(User.getWithEmail(email) != null){                 // if the user is not found in the system, then do not delete
+        if (!"manager@ap.com".equals(User.getWithEmail(email).getEmail())){     // if the email belongs to manager, then do not delete
+          User.getWithEmail(email).delete();
+        } 
       }
-      if (email.endsWith("@ap.com")){
-        List<Employee> employees = assetPlus.getEmployees(); 
-        for (Employee e : employees){
-          if(e.getEmail().equals(email)){
-            Employee employeeToDelete = e;
-            employeeToDelete.delete();
-            hasEmployee = true;
-          }
-        }if (!hasEmployee){
-          throw new IllegalArgumentException ("Employee does not exist.");
-        }
-      }else{
-        List<Guest> guests = assetPlus.getGuests(); 
-        for (Guest g : guests){
-          if(g.getEmail().equals(email)){
-            Guest guestToDelete = g;
-            guestToDelete.delete();
-            hasGuest = true;
-          }
-        }if (!hasGuest){
-          throw new IllegalArgumentException ("Guest does not exist.");
-        }  
-      }
-    }catch (Exception e){
-      e.printStackTrace();      // trace all errors
+    } catch(Exception e){
+      e.printStackTrace(); // trace all exceptions
     }
   }
 
-  // returns all tickets
+  
+  /**
+   * Create a list of all maintenance tickets with information specified by the transfer objects of maintenance tickets
+   * 
+   * @author Ming Xuan Yue
+   * @return a list of transfer objects of MaintenanceTicket
+   */
+  
   public static List<TOMaintenanceTicket> getTickets() {
 
   
@@ -64,35 +48,35 @@ public class AssetPlusFeatureSet6Controller {
       List<TicketImage> ticketImages = ticket.getTicketImages();
       List<String> imageURLs = new ArrayList<String>();
       TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.getTicketImages().size()]; 
-      String assetname = null;
+      String assetname = null;          
       int expectedLifeSpanInDays = -1;
       int floorNumber = -1;
       int roomNumber = -1;
-      // hasImages/not
-      // hasAsset/not
-      // hasMaintenanceNotes/not
-      if (!ticketImages.isEmpty()){
+      
+      
+      
+      if (!ticketImages.isEmpty()){                       // hasImages/not
         for (TicketImage ticketimage: ticketImages){
           imageURLs.add(ticketimage.getImageURL());
         }
       }
 
-      if (!ticket.getTicketNotes().isEmpty()){
+      if (!ticket.getTicketNotes().isEmpty()){            // hasMaintenanceNotes/not
         for (int i = 0; i <ticket.getTicketImages().size(); i++){
           notes[i] = new TOMaintenanceNote(ticket.getTicketNote(i).getDate(), ticket.getTicketNote(i).getDescription(), ticket.getTicketNote(i).getNoteTaker().getEmail());
-        }
+        } // create TOMaintenanceNote then add to an array
       } 
-      if (ticket.hasAsset()){
+      if (ticket.hasAsset()){                             // hasAsset/not
         assetname = ticket.getAsset().getAssetType().getName();
         expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
         floorNumber = ticket.getAsset().getFloorNumber();
         roomNumber = ticket.getAsset().getRoomNumber();
         tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));
-      }else{
+      }else{            // if asset does not exist for a ticket, then 
         TOMaintenanceTicket toTicket = new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, null, floorNumber, roomNumber, imageURLs, notes);
         tickets.add(toTicket);
       }
     }
-    return tickets;
+    return tickets;         // returns all tickets
   }
 }
