@@ -53,8 +53,8 @@ public class DeleteMaintenanceTicketStepDefinitions {
       String aPassword = row.get("password");
       String aName = "ManagerName";
       String aPhoneNumber = "5145145145";
-      Manager newManager = new Manager(aEmail, aName, aPassword, aPhoneNumber, assetPlus);
-      assetPlus.setManager(newManager);
+      // No need of setManager since Manager constructor associates Manager to AssetPlus
+      new Manager(aEmail, aName, aPassword, aPhoneNumber, assetPlus); 
     }
   }
 

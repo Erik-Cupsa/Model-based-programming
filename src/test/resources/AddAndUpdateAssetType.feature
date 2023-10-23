@@ -39,7 +39,7 @@ As the manager, I want to add and update an asset type in the system.
   Scenario Outline: Successfully update all information for an asset type
     When the manager attempts to update an asset type in the system with name "<oldName>" to have name "<newName>" and expected life span of "<newExpectedLifeSpan>" days (p14)
     Then the number of asset types in the system shall be "3" (p14)
-    Then the asset type with name "<name>" and expected life span of "<expectedLifeSpan>" days shall exist in the system (p14)
+    Then the asset type with name "<newName>" and expected life span of "<newExpectedLifeSpan>" days shall exist in the system (p14)
     Then the asset type with name "<oldName>" and expected life span of "<oldExpectedLifeSpan>" days shall not exist in the system (p14)
 
     Examples: 
