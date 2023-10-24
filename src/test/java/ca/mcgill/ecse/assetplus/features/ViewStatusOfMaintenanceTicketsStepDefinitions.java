@@ -27,13 +27,13 @@ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
   /**
    * Gherkin step definition method to create and add employees to the AssetPlus application.
    *
-   * @param dataTable Cucumber DataTable containing the email, password, name and phoneNumber of the employees that must exist in the system. 
    * @author Mohamed Abdelrahman
    * @author Anders Woodruff
    * @author Philippe Aprahamian
    * @author David Marji
    * @author Ming Xuan Yue
    * @author Manuel Hanna
+   * @param dataTable Cucumber DataTable containing the email, password, name and phoneNumber of the employees that must exist in the system. 
    */
   @Given("the following employees exist in the system \\(p15)")
   public void the_following_employees_exist_in_the_system_p15(
