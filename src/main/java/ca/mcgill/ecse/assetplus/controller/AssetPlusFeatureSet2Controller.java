@@ -35,7 +35,7 @@ public class AssetPlusFeatureSet2Controller {
 	if (!newName.equals(oldName) && AssetPlusFeatureSet2Controller.validateInputs(newName, newExpectedLifeSpanInDays).length()!=0) { //check format and if assetType with newName already exists
 		return AssetPlusFeatureSet2Controller.validateInputs(newName, newExpectedLifeSpanInDays); //return the corresponding error
 	}
-	else if (newName != null && newName.length()!=0 && newName.equals(oldName) && newExpectedLifeSpanInDays>0){ //if only want to update expectedLifeSpan and not the name
+	else if (newName != null && newName.length()!=0 && newName.equals(oldName) && AssetType.hasWithName(oldName) && newExpectedLifeSpanInDays>0 ){ //if only want to update expectedLifeSpan and not the name
 		AssetType.getWithName(newName).setExpectedLifeSpan(newExpectedLifeSpanInDays);
 		return "";
 	}
