@@ -2,8 +2,6 @@ package ca.mcgill.ecse.assetplus.controller;
 
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 import ca.mcgill.ecse.assetplus.model.*;
 
 public class AssetPlusFeatureSet4Controller{
@@ -11,25 +9,25 @@ public class AssetPlusFeatureSet4Controller{
   public static String addMaintenanceTicket(int id, Date raisedOnDate, String description,
     String email, int assetNumber) {
     AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
-
     User user = User.getWithEmail(email);
 
     if (user == null){
       return "The ticket raiser does not exist";
     } else if (description == "" || description == null){
       return "Ticket description cannot be empty";
+    } else if (MaintenanceTicket.getWithId(id) != null){
+      return "Ticket id already exists";
     }
     
     MaintenanceTicket newticket = new MaintenanceTicket(id, raisedOnDate, description, assetplus, user);
-
     if (assetNumber != -1){
       SpecificAsset asset = SpecificAsset.getWithAssetNumber(assetNumber);
       if (asset == null){
+        newticket.delete();
         return "The asset does not exist";
       }
       newticket.setAsset(asset);
     }
-
 
     return "";
   }
@@ -56,6 +54,8 @@ public class AssetPlusFeatureSet4Controller{
         return "The asset does not exist";
       }
       ticket.setAsset(asset);
+    } else {
+      ticket.setAsset(null);
     }
 
     ticket.setRaisedOnDate(newRaisedOnDate);
@@ -67,6 +67,9 @@ public class AssetPlusFeatureSet4Controller{
 
   public static void deleteMaintenanceTicket(int id) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(id);
+    if (ticket == null){
+      return;
+    }
     ticket.delete();
   }
 
