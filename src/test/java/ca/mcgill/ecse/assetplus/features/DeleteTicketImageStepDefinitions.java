@@ -20,14 +20,17 @@ import io.cucumber.java.en.When;
 /**
  * Step definitions for the DeleteTicketImages feature checks that existing ticket images are no longer
  * available in the system once deleted
- * 
- * @author Team P13
  */
-
 public class DeleteTicketImageStepDefinitions {
   private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
-  // Step to create employees in the system
+  /**
+   * Sets up the system with the specified employees.
+   * 
+   * @author Yoonjung Choi
+   * @author Kyujin Chu
+   * @param dataTable DataTable representing the employees' details.
+   */
   @Given("the following employees exist in the system \\(p13)")
   public void the_following_employees_exist_in_the_system_p13(
       io.cucumber.datatable.DataTable dataTable) {
@@ -41,7 +44,13 @@ public class DeleteTicketImageStepDefinitions {
     }
   }
 
-  // Step to create a manager in the system
+   /**
+   * Sets up a manager in the system with the specified details.
+   * 
+   * @author Yoonjung Choi
+   * @author Kyujin Chu
+   * @param dataTable DataTable representing the manager's details.
+   */
   @Given("the following manager exists in the system \\(p13)")
   public void the_following_manager_exists_in_the_system_p13(
       io.cucumber.datatable.DataTable dataTable) {
@@ -57,7 +66,13 @@ public class DeleteTicketImageStepDefinitions {
     }
   }
 
-  // Step to create asset types in the system
+  /**
+   * Sets up the system with the specified asset types.
+   * 
+   * @author Yoonjung Choi
+   * @author Kyujin Chu
+   * @param dataTable DataTable representing the asset types' details.
+   */
   @Given("the following asset types exist in the system \\(p13)")
   public void the_following_asset_types_exist_in_the_system_p13(
       io.cucumber.datatable.DataTable dataTable) {
@@ -69,7 +84,13 @@ public class DeleteTicketImageStepDefinitions {
     }
   }
 
-  // Step to create assets in the system
+  /**
+   * Sets up the system with the specified assets.
+   * 
+   * @author Kyujin Chu
+   * @author Yoonjung Choi
+   * @param dataTable DataTable representing the assets' details.
+   */
   @Given("the following assets exist in the system \\(p13)")
   public void the_following_assets_exist_in_the_system_p13(
       io.cucumber.datatable.DataTable dataTable) {
@@ -84,7 +105,14 @@ public class DeleteTicketImageStepDefinitions {
     }
   }
 
-  // Step to create maintenance tickets in the system
+  /**
+   * Sets up the system with the specified maintenance tickets.
+   * 
+   * @author Kyujin Chu
+   * @author Yoonjung Choi
+   * @author Melissa Qian
+   * @param dataTable DataTable representing the tickets' details.
+   */
   @Given("the following tickets exist in the system \\(p13)")
   public void the_following_tickets_exist_in_the_system_p13(
       io.cucumber.datatable.DataTable dataTable) {
@@ -101,7 +129,13 @@ public class DeleteTicketImageStepDefinitions {
     }
   }
 
-  // Step to create ticket images in the system
+  /**
+   * Sets up the system with the specified ticket images.
+   * 
+   * @author Melissa Qian
+   * @author Yoonjung Choi
+   * @param dataTable DataTable representing the ticket images' details.
+   */
   @Given("the following ticket images exist in the system \\(p13)")
   public void the_following_ticket_images_exist_in_the_system_p13(
       io.cucumber.datatable.DataTable dataTable) {
@@ -113,7 +147,16 @@ public class DeleteTicketImageStepDefinitions {
     }
   }
 
-  // Step for a manager to delete a ticket image
+  /**
+   * Simulates the action where a manager deletes a specific ticket image from a maintenance ticket.
+   * 
+   * @author Minhui Roh
+   * @author Joseph Ciaravella
+   * @author Yoonjung Choi
+   * @author Melissa Qian
+   * @param imageURL The URL of the image to be deleted.
+   * @param ticketID The ID of the ticket from which the image will be deleted.
+   */
   @When("the manager deletes the ticket image {string} from the ticket with id {string} \\(p13)")
   public void the_manager_deletes_the_ticket_image_from_the_ticket_with_id_p13(String imageURL,
       String ticketID) {
@@ -121,7 +164,14 @@ public class DeleteTicketImageStepDefinitions {
     AssetPlusFeatureSet5Controller.deleteImageFromMaintenanceTicket(imageURL, ticketIdInt);
   }
 
-  // Step to check the number of images in the system is correct
+  /**
+   * Verifies that the total number of images in the system matches the expected count.
+   * 
+   * @author Joseph Ciaravella
+   * @author Minhui Roh
+   * @author Jione Ban
+   * @param numberOfTicketImages Expected number of ticket images in the system.
+   */
   @Then("the number of images in the system shall be {string} \\(p13)")
   public void the_number_of_images_in_the_system_shall_be_p13(String numberOfTicketImages) {
     List<MaintenanceTicket> maintenanceTicketList = assetPlus.getMaintenanceTickets();
@@ -132,7 +182,15 @@ public class DeleteTicketImageStepDefinitions {
     assertEquals(Integer.parseInt(numberOfTicketImages), count);
   }
 
-  // Step to check the number of images for the ticket with deleted image is correct
+  /**
+   * Verifies that the number of images for a given ticket matches the expected count.
+   * 
+   * @author Joseph Ciaravella
+   * @author Minhui Roh
+   * @author Jione Ban
+   * @param ticketId ID of the ticket in question.
+   * @param numberOfImagesOfTicket Expected number of images for the ticket.
+   */
   @Then("the number of images for the ticket with id {string} in the system shall be {string} \\(p13)")
   public void the_number_of_images_for_the_ticket_with_id_in_the_system_shall_be_p13(
       String ticketId, String numberOfImagesOfTicket) {
@@ -141,7 +199,15 @@ public class DeleteTicketImageStepDefinitions {
         maintenanceTicket.numberOfTicketImages());
   }
 
-  // Step to check that a specific ticket does not have a deleted image
+  /**
+   * Verifies that a specific ticket does not have a given image.
+   * 
+   * @author Joseph Ciaravella
+   * @author Minhui Roh
+   * @author Jione Ban
+   * @param ticketId ID of the ticket in question.
+   * @param imageUrl URL of the image which the ticket should not have.
+   */
   @Then("the ticket with id {string} shall not have an image with url {string} \\(p13)")
   public void the_ticket_with_id_shall_not_have_an_image_with_url_p13(String ticketId,
       String imageUrl) {
