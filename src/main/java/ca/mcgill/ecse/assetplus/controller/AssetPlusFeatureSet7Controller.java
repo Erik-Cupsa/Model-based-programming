@@ -10,41 +10,59 @@ public class AssetPlusFeatureSet7Controller {
 
 	public static String addMaintenanceNote(Date date, String description, int ticketID,
 			String email) {
-		String msg = "";
-		try {
-			MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
-			HotelStaff noteTaker = (HotelStaff) HotelStaff.getWithEmail(email);
-			MaintenanceNote newNote = new MaintenanceNote(date, description, ticket, noteTaker);
-			ticket.addTicketNote(newNote);
-			msg="Successful";
-		}catch(Exception e){
-			msg="Invalid ticket or Hotel Staff";
+		if(description==null || description.equals("")){
+			return "Ticket description cannot be empty";
 		}
-		return msg;
+		MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
+		if (ticket==null){
+			return "Ticket does not exist";
+		}
+		HotelStaff noteTaker = (HotelStaff) HotelStaff.getWithEmail(email);
+		if (noteTaker==null){
+			return "Hotel staff does not exist";
+		}
+		MaintenanceNote newNote = new MaintenanceNote(date, description, ticket, noteTaker);
+		ticket.addTicketNote(newNote);
+		return "";
 	}
 
 	// index starts at 0
 	public static String updateMaintenanceNote(int ticketID, int index, Date newDate,
 			String newDescription, String newEmail) {
-		String msg = "";
-		try {
-			MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
-			MaintenanceNote targetNote = ticket.getTicketNote(index);
-			HotelStaff newNoteTaker = (HotelStaff) HotelStaff.getWithEmail(newEmail);
-			targetNote.setDate(newDate);
-			targetNote.setDescription(newDescription);
-			targetNote.setNoteTaker(newNoteTaker);
-			msg="Successful";
+		if(newDescription==null || newDescription.equals("")){
+			return "Ticket description cannot be empty";
+		}
+		MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
+		if (ticket==null){
+			return "Ticket does not exist";
+		}
+		MaintenanceNote targetNote;
+		try{
+			targetNote= ticket.getTicketNote(index);
 		}catch(Exception e){
-			msg="Invalid ticket or Hotel Staff";
-		} 
-		return msg;
+			return "Note does not exist";
+		}
+		if (targetNote==null){
+			return "Note does not exist";
+		}
+		HotelStaff newNoteTaker = (HotelStaff) HotelStaff.getWithEmail(newEmail);
+		if (newNoteTaker==null){
+			return "Hotel staff does not exist";
+		}
+		targetNote.setDate(newDate);
+		targetNote.setDescription(newDescription);
+		targetNote.setNoteTaker(newNoteTaker);
+		return "";
 	}
 
 	// index starts at 0
 	public static void deleteMaintenanceNote(int ticketID, int index) {
-		MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
-		MaintenanceNote targetNote = ticket.getTicketNote(index);
-		targetNote.delete();
+		try{
+			MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
+			MaintenanceNote targetNote = ticket.getTicketNote(index);
+			targetNote.delete();
+		}catch(Exception e){
+
+		}
 	}
 }
