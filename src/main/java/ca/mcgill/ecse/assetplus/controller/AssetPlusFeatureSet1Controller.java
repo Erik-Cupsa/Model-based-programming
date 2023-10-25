@@ -6,9 +6,14 @@ import ca.mcgill.ecse.assetplus.application.*;
 /* 
  * Provides controller methods for updating the manager password, and adding and updating guests and employees
  */
+
 public class AssetPlusFeatureSet1Controller {
   private static AssetPlus app = AssetPlusApplication.getAssetPlus();
 
+  /**
+   * @param email
+   * @return
+   */
   private static String checkValidEmail(String email) {
    // email must not null
       if (email == null || email.length()==0) {return "Email cannot be empty";}
@@ -24,6 +29,11 @@ public class AssetPlusFeatureSet1Controller {
       else {return "";}
   }
 
+  /**
+   * @param password
+   * @param isManager
+   * @return
+   */
   private static String checkValidPassword(String password, boolean isManager) {
     boolean containsUpperCase = false;
     boolean containsLowerCase = false;
@@ -57,10 +67,20 @@ public class AssetPlusFeatureSet1Controller {
       return "";
   }
 
+  /**
+   * @param email
+   * @return
+   */
   private static boolean isValidEmployeeEmail(String email) {
     return email.substring(email.length() - 7).equals("@ap.com"); 
   }
 
+
+  /**
+   * @param name
+   * @param phoneNumber
+   * @return
+   */
   private static String checkValidIdentification(String name, String phoneNumber) {
     if (name == null) {
       return "Name must not null";
@@ -153,11 +173,13 @@ public class AssetPlusFeatureSet1Controller {
       return "User does not exist";
     }
 
-    // general constraints...
+    // check password
     String passCheck = checkValidPassword(newPassword, false);
     if (!(passCheck.equals(""))) {
       return passCheck;
     }
+
+    // check name and email
     String idCheck = checkValidIdentification(newName, newPhoneNumber);
     if (!(idCheck.equals(""))) {
       return idCheck;
