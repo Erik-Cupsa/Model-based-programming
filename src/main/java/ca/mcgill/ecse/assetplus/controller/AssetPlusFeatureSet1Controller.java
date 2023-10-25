@@ -24,7 +24,7 @@ public class AssetPlusFeatureSet1Controller {
       else {return "";}
   }
 
-  private static String checkValidPassword(String password) {
+  private static String checkValidPassword(String password, boolean isManager) {
     boolean containsUpperCase = false;
     boolean containsLowerCase = false;
     for (int i=0; i<password.length();i++) {
@@ -40,18 +40,21 @@ public class AssetPlusFeatureSet1Controller {
       if ((password == null) || (password.length() == 0)) {return "Password cannot be empty";}
    // password must be at least four characters long
       else if (!(password.length() >= 4)) {return "Password must be at least four characters long";}
-   // password must contain a special character out of !#$
-      else if (!(
-        password.contains("!")
-        || password.contains("#")
-        || password.contains("$")
-      )) {return "Password must contain one character out of !#$";}
-   
-   // password must contain an upper case character
-      if (!containsUpperCase) {return "Password must contain one upper-case character";}
-   // password must contain a lower case character
-      if (!containsLowerCase) {return "Password must contain one lower-case character";}
-      else {return "";}
+   // for each Manager:
+      else if (isManager) {
+        // password must contain a special character out of !#$
+        if (!(
+          password.contains("!")
+          || password.contains("#")
+          || password.contains("$")
+        )) {return "Password must contain one character out of !#$";}
+        // password must contain an upper case character
+        if (!containsUpperCase) {return "Password must contain one upper-case character";}
+        // password must contain a lower case character
+        if (!containsLowerCase) {return "Password must contain one lower-case character";}
+      }
+
+      return "";
   }
 
   private static boolean isValidEmployeeEmail(String email) {
@@ -76,7 +79,7 @@ public class AssetPlusFeatureSet1Controller {
   public static String updateManager(String password) {
    // for each Manager: email has to be manager@ap.com
     Manager manager = app.getManager();
-    String passCheck = checkValidPassword(password);
+    String passCheck = checkValidPassword(password, true);
     if (!(passCheck.equals(""))) {
       return passCheck;
     }
@@ -98,7 +101,7 @@ public class AssetPlusFeatureSet1Controller {
 
     // check email, password, name, phone
     String emailCheck = checkValidEmail(email);
-    String passCheck = checkValidPassword(password);
+    String passCheck = checkValidPassword(password, false);
     String idCheck = checkValidIdentification(name, phoneNumber);
     if (!(emailCheck.equals(""))) {
       return emailCheck;
@@ -151,7 +154,7 @@ public class AssetPlusFeatureSet1Controller {
     }
 
     // general constraints...
-    String passCheck = checkValidPassword(newPassword);
+    String passCheck = checkValidPassword(newPassword, false);
     if (!(passCheck.equals(""))) {
       return passCheck;
     }
