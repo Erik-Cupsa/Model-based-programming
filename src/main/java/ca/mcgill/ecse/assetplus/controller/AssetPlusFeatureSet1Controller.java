@@ -10,6 +10,12 @@ import ca.mcgill.ecse.assetplus.model.*;
 public class AssetPlusFeatureSet1Controller {
     private static AssetPlus app = AssetPlusApplication.getAssetPlus();
 
+    /**
+     * Validates a given email address.
+     * @author Manuel Hanna
+     * @param email Email to validate
+     * @return String value, if non-empty then indicates an error in validation
+     */
     private static String checkValidEmail(String email) {
         // email must not null
         if (email == null || email.length() == 0) {
@@ -34,6 +40,14 @@ public class AssetPlusFeatureSet1Controller {
         }
     }
 
+    /**
+     * Validates a given password.
+     * @author Manuel Hanna
+     * @param password password to validate
+     * @param isManager boolean indicating whether password should be validated
+     *  according to manager's password constraints
+     * @return String value, if non-empty then indicates an error in validation
+     */
     private static String checkValidPassword(String password, boolean isManager) {
         boolean containsUpperCase = false;
         boolean containsLowerCase = false;
@@ -76,10 +90,23 @@ public class AssetPlusFeatureSet1Controller {
         return "";
     }
 
+    /**
+     * Checks whether an email is a valid employee email.
+     * @author Manuel Hanna
+     * @param email Email to be validated as employee email
+     * @return Boolean, true if email is valid employee email
+     */
     private static boolean isValidEmployeeEmail(String email) {
         return email.substring(email.length() - 7).equals("@ap.com");
     }
 
+    /**
+     * Validates a given name and phone number.
+     * @author Manuel Hanna
+     * @param name name to validate
+     * @param phoneNumber phone number to validate
+     * @return String value, if non-empty then indicates an error in validation
+     */
     private static String checkValidIdentification(String name, String phoneNumber) {
         if (name == null) {
             return "Name must not null";
