@@ -158,7 +158,7 @@ public class AssetPlusFeatureSet1Controller {
         }
         // Check if a guest already has this email
         if (User.getWithEmail(email) instanceof Guest) {
-            return "Email already linked to an guest account";
+            return "Email already linked to a guest account";
         }
         // check if an employee already has this email
         else if (User.getWithEmail(email) instanceof Employee) {
