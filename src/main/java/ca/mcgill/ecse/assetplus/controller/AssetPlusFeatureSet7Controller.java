@@ -8,6 +8,16 @@ import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 
 public class AssetPlusFeatureSet7Controller {
 
+	/**
+	 * adds a maintenance note to a specified maintenance ticket
+	 *
+	 * @param date the maintenance note's date
+	 * @param description the maintenance note's description   
+	 * @param ticketID the id of the ticket to add the note to
+	 * @param email the email of the note taker   
+	 * @return returns a string explaining the errors if encountered, empty string if successful
+	 * @author Philippe Aprahamian
+	 */
 	public static String addMaintenanceNote(Date date, String description, int ticketID,
 			String email) {
 		if(description==null || description.equals("")){
@@ -25,7 +35,17 @@ public class AssetPlusFeatureSet7Controller {
 		ticket.addTicketNote(newNote);
 		return "";
 	}
-
+	/**
+	 * updates a specified maintenance note 
+	 *
+	 * @param ticketID the id of the ticket that the target note is attached to
+	 * @param index the index of the maintenance note inside the ticket's notes list
+	 * @param newDate the new date of the maintenance note
+	 * @param newDescription the new description of the maintenance note
+	 * @param newEmail the email of the new note taker
+	 * @return returns a string explaining the errors if encountered, empty string if successful
+	 * @author Philippe Aprahamian
+	 */
 	// index starts at 0
 	public static String updateMaintenanceNote(int ticketID, int index, Date newDate,
 			String newDescription, String newEmail) {
@@ -54,7 +74,13 @@ public class AssetPlusFeatureSet7Controller {
 		targetNote.setNoteTaker(newNoteTaker);
 		return "";
 	}
-
+	/**
+	 * deletes a specified maintenance note 
+	 *
+	 * @param ticketID the id of the ticket that the note to be deleted is attached to
+	 * @param index the index of the maintenance note to be deleted inside the corresponding ticket's notes list
+	 * @author Philippe Aprahamian
+	 */
 	// index starts at 0
 	public static void deleteMaintenanceNote(int ticketID, int index) {
 		try{
