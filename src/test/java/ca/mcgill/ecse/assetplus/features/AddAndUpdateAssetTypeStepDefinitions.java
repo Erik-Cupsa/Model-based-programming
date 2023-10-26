@@ -100,7 +100,8 @@ public class AddAndUpdateAssetTypeStepDefinitions {
   public void the_asset_type_with_name_and_expected_life_span_of_days_shall_exist_in_the_system_p14(
       String name, String expectedLifeSpan) {
     AssetType e = AssetType.getWithName(name); // Get the new element to test
-    assertNotNull(e);
+    assertNotNull(e); 
+    assertEquals(parseInt(expectedLifeSpan), e.getExpectedLifeSpan()); // Then the new expected lifespan should be equal to the expected one
   }
 
   /**
@@ -113,8 +114,10 @@ public class AddAndUpdateAssetTypeStepDefinitions {
   public void the_asset_type_with_name_and_expected_life_span_of_days_shall_not_exist_in_the_system_p14(
       String name, String expectedLifeSpan) {
     AssetType e = AssetType.getWithName(name); // Get the old or new element to test
-    assertNull(e);
-  }
+    if (e != null) { // if not null, old and new name are the same 
+      assertNotEquals(parseInt(expectedLifeSpan), e.getExpectedLifeSpan()); // Then the new expected lifespan should not be equal to the old one.
+    }
+  }  
 
   /**
    * @param string : The error message that should be raised
