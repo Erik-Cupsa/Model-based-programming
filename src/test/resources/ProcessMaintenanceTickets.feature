@@ -32,7 +32,7 @@ As manager, I want to process maintenance tickets to keep their status up-to-dat
     Examples: 
       | ticketId | employeeEmail | timeEstimate     | priority | requiresApproval |
       |        1 | smith@ap.com  | ThreeToSevenDays | Low      | false            |
-      |        2 | jeff@ap.com   | OneToThreeDays   | High     | true             |
+      |        2 | jeff@ap.com   | OneToThreeDays   | Urgent   | true             |
 
   Scenario Outline: Unsuccesfully assign a maintenance ticket due to non-existing employee
     When the manager attempts to assign the ticket "<ticketId>" to "<employeeEmail>" with estimated time "<timeEstimate>", priority "<priority>", and requires approval "<requiresApproval>"
