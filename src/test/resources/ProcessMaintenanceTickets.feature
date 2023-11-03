@@ -31,8 +31,8 @@ As manager, I want to process maintenance tickets to keep their status up-to-dat
 
     Examples: 
       | ticketId | employeeEmail | timeEstimate     | priority | requiresApproval |
-      |        1 | smith@ap.com  | threeToSevenDays | Low      | false            |
-      |        2 | jeff@ap.com   | oneToThreeDays   | High     | true             |
+      |        1 | smith@ap.com  | ThreeToSevenDays | Low      | false            |
+      |        2 | jeff@ap.com   | OneToThreeDays   | High     | true             |
 
   Scenario Outline: Unsuccesfully assign a maintenance ticket due to non-existing employee
     When the manager attempts to assign the ticket "<ticketId>" to "<employeeEmail>" with estimated time "<timeEstimate>", priority "<priority>", and requires approval "<requiresApproval>"
@@ -41,10 +41,10 @@ As manager, I want to process maintenance tickets to keep their status up-to-dat
 
     Examples: 
       | ticketId | employeeEmail    | timeEstimate     | priority | requiresApproval | error                           |
-      |        1 | not_exist@ap.com | threeToSevenDays | Low      | false            | Staff to assign does not exist. |
+      |        1 | not_exist@ap.com | ThreeToSevenDays | Low      | false            | Staff to assign does not exist. |
 
   Scenario Outline: Unsuccesfully assign a maintenance ticket due to wrong input
-    When the manager attempts to assign the ticket "<ticketId>" to "smith@ap.com" with estimated time "threeToSevenDays", priority "Low", and requires approval "false"
+    When the manager attempts to assign the ticket "<ticketId>" to "smith@ap.com" with estimated time "ThreeToSevenDays", priority "Low", and requires approval "false"
     Then the ticket "<ticketId>" shall not exist in the system
     Then the number of tickets in the system shall be "2"
     Then the system shall raise the error "<error>"
@@ -56,7 +56,7 @@ As manager, I want to process maintenance tickets to keep their status up-to-dat
 
   Scenario Outline: Unsuccesfully assign a maintenance ticket due to wrong state
     Given ticket "1" is marked as "<state>"
-    When the manager attempts to assign the ticket "1" to "smith@ap.com" with estimated time "threeToSevenDays", priority "Low", and requires approval "false"
+    When the manager attempts to assign the ticket "1" to "smith@ap.com" with estimated time "ThreeToSevenDays", priority "Low", and requires approval "false"
     Then the ticket "1" shall be marked as "<state>"
     Then the system shall raise the error "<error>"
 
