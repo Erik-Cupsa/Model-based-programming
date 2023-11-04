@@ -18,6 +18,11 @@ public class TOMaintenanceTicket
   private Date raisedOnDate;
   private String description;
   private String raisedByEmail;
+  private String status;
+  private String fixedByEmail;
+  private String timeToResolve;
+  private String priority;
+  private boolean approvalRequired;
   private String assetName;
   private int expectLifeSpanInDays;
   private Date purchaseDate;
@@ -35,12 +40,17 @@ public class TOMaintenanceTicket
   // CONSTRUCTOR
   //------------------------
 
-  public TOMaintenanceTicket(int aId, Date aRaisedOnDate, String aDescription, String aRaisedByEmail, String aAssetName, int aExpectLifeSpanInDays, Date aPurchaseDate, int aFloorNumber, int aRoomNumber, List<String> aImageURLs, TOMaintenanceNote... allNotes)
+  public TOMaintenanceTicket(int aId, Date aRaisedOnDate, String aDescription, String aRaisedByEmail, String aStatus, String aFixedByEmail, String aTimeToResolve, String aPriority, boolean aApprovalRequired, String aAssetName, int aExpectLifeSpanInDays, Date aPurchaseDate, int aFloorNumber, int aRoomNumber, List<String> aImageURLs, TOMaintenanceNote... allNotes)
   {
     id = aId;
     raisedOnDate = aRaisedOnDate;
     description = aDescription;
     raisedByEmail = aRaisedByEmail;
+    status = aStatus;
+    fixedByEmail = aFixedByEmail;
+    timeToResolve = aTimeToResolve;
+    priority = aPriority;
+    approvalRequired = aApprovalRequired;
     assetName = aAssetName;
     expectLifeSpanInDays = aExpectLifeSpanInDays;
     purchaseDate = aPurchaseDate;
@@ -80,6 +90,34 @@ public class TOMaintenanceTicket
     return raisedByEmail;
   }
 
+  public String getStatus()
+  {
+    return status;
+  }
+
+  /**
+   * the following three attributes are set to null if no one has been assigned yet to fix the ticket
+   */
+  public String getFixedByEmail()
+  {
+    return fixedByEmail;
+  }
+
+  public String getTimeToResolve()
+  {
+    return timeToResolve;
+  }
+
+  public String getPriority()
+  {
+    return priority;
+  }
+
+  public boolean getApprovalRequired()
+  {
+    return approvalRequired;
+  }
+
   /**
    * the following five attributes are set to null (String/Date) / -1 (Integer) if no asset is specified for the ticket
    */
@@ -111,6 +149,11 @@ public class TOMaintenanceTicket
   public List<String> getImageURLs()
   {
     return imageURLs;
+  }
+  /* Code from template attribute_IsBoolean */
+  public boolean isApprovalRequired()
+  {
+    return approvalRequired;
   }
   /* Code from template association_GetMany */
   public TOMaintenanceNote getNote(int index)
@@ -184,6 +227,11 @@ public class TOMaintenanceTicket
             "id" + ":" + getId()+ "," +
             "description" + ":" + getDescription()+ "," +
             "raisedByEmail" + ":" + getRaisedByEmail()+ "," +
+            "status" + ":" + getStatus()+ "," +
+            "fixedByEmail" + ":" + getFixedByEmail()+ "," +
+            "timeToResolve" + ":" + getTimeToResolve()+ "," +
+            "priority" + ":" + getPriority()+ "," +
+            "approvalRequired" + ":" + getApprovalRequired()+ "," +
             "assetName" + ":" + getAssetName()+ "," +
             "expectLifeSpanInDays" + ":" + getExpectLifeSpanInDays()+ "," +
             "floorNumber" + ":" + getFloorNumber()+ "," +
