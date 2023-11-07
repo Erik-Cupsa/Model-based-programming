@@ -12,9 +12,9 @@ public class AssetPlusFeatureSet7Controller {
 	 * adds a maintenance note to a specified maintenance ticket
 	 *
 	 * @param date the maintenance note's date
-	 * @param description the maintenance note's description
+	 * @param description the maintenance note's description   
 	 * @param ticketID the id of the ticket to add the note to
-	 * @param email the email of the note taker
+	 * @param email the email of the note taker   
 	 * @return returns a string explaining the errors if encountered, empty string if successful
 	 * @author Philippe Aprahamian
 	 */
@@ -36,7 +36,7 @@ public class AssetPlusFeatureSet7Controller {
 		return "";
 	}
 	/**
-	 * updates a specified maintenance note
+	 * updates a specified maintenance note 
 	 *
 	 * @param ticketID the id of the ticket that the target note is attached to
 	 * @param index the index of the maintenance note inside the ticket's notes list
@@ -75,7 +75,7 @@ public class AssetPlusFeatureSet7Controller {
 		return "";
 	}
 	/**
-	 * deletes a specified maintenance note
+	 * deletes a specified maintenance note 
 	 *
 	 * @param ticketID the id of the ticket that the note to be deleted is attached to
 	 * @param index the index of the maintenance note to be deleted inside the corresponding ticket's notes list

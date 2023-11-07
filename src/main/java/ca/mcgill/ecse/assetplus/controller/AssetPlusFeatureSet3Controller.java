@@ -106,28 +106,28 @@ public class AssetPlusFeatureSet3Controller {
         }
     }
 
-    /**
-     * Validates all input parameters for adding or updating a specific asset.
-     * @author Erik Cupsa (@Erik-Cupsa)
-     * @param assetNumber The asset number.
-     * @param floorNumber The floor number.
-     * @param roomNumber The room number.
-     * @param assetTypeName The name of the asset type
-     * @return True if the input is valid and false otherwise
-     */
-    private static String inputValidation(int assetNumber, int floorNumber, int roomNumber, String assetTypeName){
+  /**
+   * Validates all input parameters for adding or updating a specific asset.
+   * @author Erik Cupsa (@Erik-Cupsa)
+   * @param assetNumber The asset number.
+   * @param floorNumber The floor number. 
+   * @param roomNumber The room number. 
+   * @param assetTypeName The name of the asset type
+   * @return True if the input is valid and false otherwise
+   */
+  private static String inputValidation(int assetNumber, int floorNumber, int roomNumber, String assetTypeName){
         if(assetTypeName == null || assetTypeName.length() == 0){ //invalid asset type name
-            return "The asset type does not exist";
+          return "The asset type does not exist";
         }
         if(assetNumber < 1){ // asset number must be >= 1
-            return "The asset number shall not be less than 1";
+          return "The asset number shall not be less than 1";
         }
         if(floorNumber < 0){ // floor number must be >= 0
-            return "The floor number shall not be less than 0";
+          return "The floor number shall not be less than 0";
         }
         if(roomNumber < -1){ // room number must be >= -1
-            return "The room number shall not be less than -1";
+          return "The room number shall not be less than -1";
         }
         return "Correct";
-    }
+      }
 }

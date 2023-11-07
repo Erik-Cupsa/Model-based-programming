@@ -5,7 +5,7 @@ package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 22 "../../../../../AssetPlus.ump"
+// line 23 "../../../../../AssetPlus.ump"
 public abstract class HotelStaff extends User
 {
 

@@ -5,7 +5,7 @@ package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 13 "../../../../../AssetPlus.ump"
+// line 14 "../../../../../AssetPlus.ump"
 public abstract class User
 {
 

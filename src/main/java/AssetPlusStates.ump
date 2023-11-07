@@ -1,0 +1,35 @@
+class MaintenanceTicket {
+   private void doAssign(HotelStaff staff, PriorityLevel aPriority,TimeEstimate aTimeToResolve, Boolean requiresApproval) {
+     AssetPlus ap= this.getAssetPlus();
+     this.setTicketFixer(staff);
+     this.setTimeToResolve(aTimeToResolve);
+     this.setPriority(aPriority);
+     if (requiresApproval){
+       this.setFixApprover(ap.getManager());
+     }
+    }
+    private void doRejectFix(Date aDate, String aDescription) {
+      this.addTicketNote(aDate, aDescription, this.getFixApprover());
+    }
+  status {
+    Open {
+      assign(HotelStaff staff,PriorityLevel aPriority,TimeEstimate aTimeToResolve, Boolean requiresApproval) / {
+        doAssign(staff,aPriority, aTimeToResolve,requiresApproval);
+      } -> Assigned;
+    }
+    Assigned {
+      startWork -> InProgress;
+    }
+    InProgress {
+      completeFix -> Resolved;
+    }
+    Resolved {
+      entry [!this.hasFixApprover()] -> Closed;
+      acceptFix -> Closed;
+      rejectFix(Date aDate, String aDescription) / {doRejectFix(aDate,aDescription);} -> InProgress;
+    }
+    Closed {}
+  }
+
+}
+

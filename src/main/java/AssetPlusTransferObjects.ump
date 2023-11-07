@@ -7,6 +7,14 @@ class TOMaintenanceTicket {
   String description;
   String raisedByEmail;
 
+  String status;
+
+  // the following three attributes are set to null if no one has been assigned yet to fix the ticket
+  String fixedByEmail;
+  String timeToResolve;
+  String priority;
+  Boolean approvalRequired;
+
   // the following five attributes are set to null (String/Date) / -1 (Integer) if no asset is specified for the ticket
   String assetName;
   Integer expectLifeSpanInDays;
