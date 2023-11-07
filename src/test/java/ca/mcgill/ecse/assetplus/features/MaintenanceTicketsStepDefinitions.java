@@ -240,10 +240,14 @@ public class MaintenanceTicketsStepDefinitions {
     throw new io.cucumber.java.PendingException();
   }
 
+  /**
+   * Verifying that the number of tickets in the system is correct
+   * @param numTickets The number of tickets
+   * @author Erik Cupsa (@Erik-Cupsa)
+   */
   @Then("the number of tickets in the system shall be {string}")
-  public void the_number_of_tickets_in_the_system_shall_be(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+  public void the_number_of_tickets_in_the_system_shall_be(String numTickets) {
+    assertEquals(Integer.parseInt(numTickets), assetPlus.getMaintenanceTickets().size());
   }
 
   @Then("the following maintenance tickets shall be presented")
