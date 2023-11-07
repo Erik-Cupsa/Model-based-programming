@@ -40,18 +40,18 @@ public class TOMaintenanceTicket
   // CONSTRUCTOR
   //------------------------
 
-  public TOMaintenanceTicket(int aId, Date aRaisedOnDate, String aDescription, String aRaisedByEmail, String aStatus, String aFixedByEmail, String aTimeToResolve, String aPriority, boolean aApprovalRequired, String aAssetName, int aExpectLifeSpanInDays, Date aPurchaseDate, int aFloorNumber, int aRoomNumber, List<String> aImageURLs, TOMaintenanceNote... allNotes)
+  public TOMaintenanceTicket(int aId, Date aRaisedOnDate, String aDescription, String aRaisedByEmail, String aStatus, int aExpectLifeSpanInDays, Date aPurchaseDate, int aFloorNumber, int aRoomNumber, List<String> aImageURLs, TOMaintenanceNote... allNotes)
   {
     id = aId;
     raisedOnDate = aRaisedOnDate;
     description = aDescription;
     raisedByEmail = aRaisedByEmail;
     status = aStatus;
-    fixedByEmail = aFixedByEmail;
-    timeToResolve = aTimeToResolve;
-    priority = aPriority;
-    approvalRequired = aApprovalRequired;
-    assetName = aAssetName;
+//    fixedByEmail = aFixedByEmail;
+//    timeToResolve = aTimeToResolve;
+//    priority = aPriority;
+//    approvalRequired = aApprovalRequired;
+//    assetName = aAssetName;
     expectLifeSpanInDays = aExpectLifeSpanInDays;
     purchaseDate = aPurchaseDate;
     floorNumber = aFloorNumber;

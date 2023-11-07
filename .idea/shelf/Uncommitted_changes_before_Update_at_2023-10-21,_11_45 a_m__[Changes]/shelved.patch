@@ -1,0 +1,638 @@
+Index: src/test/java/ca/mcgill/ecse/assetplus/features/ViewStatusOfMaintenanceTicketsStepDefinitions.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ca.mcgill.ecse.assetplus.features;\n\nimport static org.junit.Assert.*;\n\nimport ca.mcgill.ecse.assetplus.application.AssetPlusApplication;\nimport ca.mcgill.ecse.assetplus.controller.*;\nimport ca.mcgill.ecse.assetplus.model.*;\nimport io.cucumber.java.en.Given;\nimport io.cucumber.java.en.Then;\nimport io.cucumber.java.en.When;\nimport java.sql.Date;\nimport java.util.*;\n\npublic class ViewStatusOfMaintenanceTicketsStepDefinitions {\n  private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();\n  private List<TOMaintenanceTicket> tickets;\n\n  /**\n   * Gherkin step definition method to create and add employees to the AssetPlus application.\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"Mohamed Abdelrahman && Anders Woodruff && Philippe Aprahamian && David Marji && Ming\n   *     Yue && Manuel Hanna\")\n   */\n  @Given(\"the following employees exist in the system \\\\(p15)\")\n  public void the_following_employees_exist_in_the_system_p15(\n      io.cucumber.datatable.DataTable dataTable) {\n    List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);\n    for (Map<String, String> row : rows) {\n      assetPlus.addEmployee(\n          row.get(\"email\"), row.get(\"name\"), row.get(\"password\"), row.get(\"phoneNumber\"));\n    }\n  }\n\n  /**\n   * Gherkin step definition method to create and add a manager to the AssetPlus application.\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"Mannuel Hanna && Philippe Aprahamian && Ming Xuan Yue\")\n   */\n  @Given(\"the following manager exists in the system \\\\(p15)\")\n  public void the_following_manager_exists_in_the_system_p15(\n      io.cucumber.datatable.DataTable dataTable) {\n    List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);\n    Manager manager =\n        new Manager(rows.get(0).get(\"email\"), null, rows.get(0).get(\"password\"), null, assetPlus);\n    assetPlus.setManager(manager);\n  }\n\n  /**\n   * Gherkin step definition method to create and add asset types to the AssetPlus application.\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"Anders Woodruff && Philippe Aprahamian && Ming Xuan Yue\")\n   */\n  @Given(\"the following asset types exist in the system \\\\(p15)\")\n  public void the_following_asset_types_exist_in_the_system_p15(\n      io.cucumber.datatable.DataTable dataTable) {\n    List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);\n    for (Map<String, String> row : rows) {\n      assetPlus.addAssetType(row.get(\"name\"), Integer.parseInt(row.get(\"expectedLifeSpan\")));\n    }\n  }\n\n  /**\n   * Gherkin step definition method to create and add assets to the AssetPlus application.\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"Ming Xuan Yue && Philippe Aprahamian\" && David Marji)\n   */\n  @Given(\"the following assets exist in the system \\\\(p15)\")\n  public void the_following_assets_exist_in_the_system_p15(\n      io.cucumber.datatable.DataTable dataTable) {\n    List<Map<String, String>> rows = dataTable.asMaps();\n    for (var row : rows) {\n      int assetNumber = Integer.parseInt(row.get(\"assetNumber\"));\n      Date purchaseDate = Date.valueOf(row.get(\"purchaseDate\"));\n      int floorNumber = Integer.parseInt(row.get(\"floorNumber\"));\n      int roomNumber = Integer.parseInt(row.get(\"roomNumber\"));\n      AssetType type = AssetType.getWithName(row.get(\"type\"));\n      assetPlus.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, type);\n    }\n  }\n\n  /**\n   * Gherkin step definition method to create and add tickets to the AssetPlus application.\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"Ming Xuan Yue && Philippe Aprahamian && Mohamed Abdelrahman\")\n   */\n  @Given(\"the following tickets exist in the system \\\\(p15)\")\n  public void the_following_tickets_exist_in_the_system_p15(\n      io.cucumber.datatable.DataTable dataTable) {\n    List<Map<String, String>> rows = dataTable.asMaps();\n    for (var row : rows) {\n      int id = Integer.parseInt(row.get(\"id\"));\n      Date raisedOnDate = Date.valueOf(row.get(\"raisedOnDate\"));\n      String description = row.get(\"description\");\n      String ticketRaiserEmail = row.get(\"ticketRaiser\");\n      String assetNumberStr = row.get(\"assetNumber\");\n      MaintenanceTicket newTicket =\n          assetPlus.addMaintenanceTicket(\n              id, raisedOnDate, description, User.getWithEmail(ticketRaiserEmail));\n      if (assetNumberStr != null) {\n        int assetNumber = Integer.parseInt(assetNumberStr);\n        newTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));\n      }\n    }\n  }\n\n  /**\n   * Gherkin step definition method to create and add notes to the AssetPlus application.\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"Philippe Aprahamian\" && Ming Xuan Yue\")\n   */\n  @Given(\"the following notes exist in the system \\\\(p15)\")\n  public void the_following_notes_exist_in_the_system_p15(\n      io.cucumber.datatable.DataTable dataTable) {\n    List<Map<String, String>> rows = dataTable.asMaps();\n    for (var row : rows) {\n      String noteTaker = row.get(\"noteTaker\");\n      int ticketID = Integer.parseInt(row.get(\"ticketId\"));\n      Date addedOnDate = Date.valueOf(row.get(\"addedOnDate\"));\n      String description = row.get(\"description\");\n      MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);\n      ticket.addTicketNote(\n          addedOnDate, description, (HotelStaff) HotelStaff.getWithEmail(noteTaker));\n    }\n  }\n\n  /**\n   * Gherkin step definition method to create and add images to the AssetPlus application.\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"Philippe Aprahamian\" && Mohamed Abdelrahman\")\n   */\n  @Given(\"the following ticket images exist in the system \\\\(p15)\")\n  public void the_following_ticket_images_exist_in_the_system_p15(\n      io.cucumber.datatable.DataTable dataTable) {\n    List<Map<String, String>> rows = dataTable.asMaps();\n    for (var row : rows) {\n      String imageURL = row.get(\"imageUrl\");\n      int ticketID = Integer.parseInt(row.get(\"ticketId\"));\n      MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);\n      ticket.addTicketImage(imageURL);\n    }\n  }\n\n  /**\n   * Gherkin step definition method to test controller 6 by getting tickets\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"David Marji, Manuel Hanna, Mohamed Abdelrahman\")\n   */\n  @When(\"the manager attempts to view all maintenance tickets in the system \\\\(p15)\")\n  public void the_manager_attempts_to_view_all_maintenance_tickets_in_the_system_p15() {\n    tickets = AssetPlusFeatureSet6Controller.getTickets();\n  }\n\n  /**\n   * Gherkin step definition method to ensure controller 6 got the right tickets\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue\")\n   */\n  @Then(\"the following maintenance tickets shall be presented \\\\(p15)\")\n  public void the_following_maintenance_tickets_shall_be_presented_p15(\n      io.cucumber.datatable.DataTable dataTable) {\n    List<Map<String, String>> rows = dataTable.asMaps();\n    int i = 0;\n    for (var row : rows) {\n      TOMaintenanceTicket currTicket = tickets.get(i);\n      int id = Integer.parseInt(row.get(\"id\"));\n      assertEquals(id, currTicket.getId());\n      String ticketRaiserEmail = row.get(\"ticketRaiser\");\n      assertEquals(ticketRaiserEmail, currTicket.getRaisedByEmail());\n      Date raisedOnDate = Date.valueOf(row.get(\"raisedOnDate\"));\n      assertEquals(raisedOnDate, currTicket.getRaisedOnDate());\n      String description = row.get(\"description\");\n      assertEquals(description, currTicket.getDescription());\n      String assetName = row.get(\"assetName\");\n      assertEquals(assetName, currTicket.getAssetName());\n      String expectLifeSpanStr = row.get(\"expectLifeSpan\");\n      int expectLifeSpan = -1;\n      if (expectLifeSpanStr != null) {\n        expectLifeSpan = Integer.parseInt(expectLifeSpanStr);\n      }\n      assertEquals(expectLifeSpan, currTicket.getExpectLifeSpanInDays());\n      String purchaseDateStr = row.get(\"purchaseDate\");\n      Date purchaseDate = null;\n      if (purchaseDateStr != null) {\n        purchaseDate = Date.valueOf(purchaseDateStr);\n      }\n      assertEquals(purchaseDate, currTicket.getPurchaseDate());\n      String floorNumberStr = row.get(\"floorNumber\");\n      int floorNumber = -1;\n      if (floorNumberStr != null) {\n        floorNumber = Integer.parseInt(floorNumberStr);\n      }\n      assertEquals(floorNumber, currTicket.getFloorNumber());\n      String roomNumberStr = row.get(\"roomNumber\");\n      int roomNumber = -1;\n      if (roomNumberStr != null) {\n        roomNumber = Integer.parseInt(roomNumberStr);\n      }\n      assertEquals(roomNumber, currTicket.getRoomNumber());\n      i++;\n    }\n  }\n\n  /**\n   * Gherkin step definition method to ensure controller 6 got the right notes with the ticket\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information.\n   * @author(\"Erik Cupsa, David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue\")\n   */\n  @Then(\"the ticket with id {string} shall have the following notes \\\\(p15)\")\n  public void the_ticket_with_id_shall_have_the_following_notes_p15(\n      String string, io.cucumber.datatable.DataTable dataTable) {\n    int ticketID = Integer.parseInt(string);\n    TOMaintenanceTicket currTicket = null;\n    for (var ticket : tickets) {\n      if (ticket.getId() == ticketID) {\n        currTicket = ticket;\n      }\n    }\n    List<TOMaintenanceNote> currTicketNotes = currTicket.getNotes();\n    List<Map<String, String>> rows = dataTable.asMaps();\n    int i = 0;\n    for (var row : rows) {\n      TOMaintenanceNote currNote = currTicketNotes.get(i);\n      String noteTaker = row.get(\"noteTaker\");\n      assertEquals(noteTaker, currNote.getNoteTakerEmail());\n      Date addedOnDate = Date.valueOf(row.get(\"addedOnDate\"));\n      assertEquals(addedOnDate, currNote.getDate());\n      String description = row.get(\"description\");\n      assertEquals(description, currNote.getDescription());\n      i++;\n    }\n  }\n\n  /**\n   * Gherkin step definition method to ensure controller 6 got the right notes with the ticket\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information. //@author(\"Erik\n   *     Cupsa && Philippe Aprahamian\")\n   */\n  @Then(\"the ticket with id {string} shall have no notes \\\\(p15)\")\n  public void the_ticket_with_id_shall_have_no_notes_p15(String string) {\n    int ticketID = Integer.parseInt(string);\n    TOMaintenanceTicket currTicket = null;\n    for (var ticket : tickets) {\n      if (ticket.getId() == ticketID) {\n        currTicket = ticket;\n      }\n    }\n    assertEquals(currTicket.hasNotes(), false);\n  }\n\n  /**\n   * Gherkin step definition method to ensure controller 6 got the right images with the ticket\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information. //@author(\"Erik\n   *     Cupsa && Philippe Aprahamian\")\n   */\n  @Then(\"the ticket with id {string} shall have the following images \\\\(p15)\")\n  public void the_ticket_with_id_shall_have_the_following_images_p15(\n      String string, io.cucumber.datatable.DataTable dataTable) {\n    int ticketID = Integer.parseInt(string);\n    TOMaintenanceTicket currTicket = null;\n    for (var ticket : tickets) {\n      if (ticket.getId() == ticketID) {\n        currTicket = ticket;\n      }\n    }\n    List<String> currTicketImageURLs = currTicket.getImageURLs();\n    List<Map<String, String>> rows = dataTable.asMaps();\n    int i = 0;\n    for (var row : rows) {\n      assertEquals(currTicketImageURLs.get(i), row.get(\"imageUrl\"));\n      i++;\n    }\n  }\n\n  /**\n   * Gherkin step definition method to ensure controller 6 got the right images with the ticket\n   *\n   * @param dataTable Cucumber DataTable containing the asset type information. //@author(\"Erik\n   *     Cupsa && Philippe Aprahamian\")\n   */\n  @Then(\"the ticket with id {string} shall have no images \\\\(p15)\")\n  public void the_ticket_with_id_shall_have_no_images_p15(String string) {\n    int ticketID = Integer.parseInt(string);\n    TOMaintenanceTicket currTicket = null;\n    for (var ticket : tickets) {\n      if (ticket.getId() == ticketID) {\n        currTicket = ticket;\n      }\n    }\n    assertEquals(currTicket.getImageURLs().size(), 0);\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/ca/mcgill/ecse/assetplus/features/ViewStatusOfMaintenanceTicketsStepDefinitions.java b/src/test/java/ca/mcgill/ecse/assetplus/features/ViewStatusOfMaintenanceTicketsStepDefinitions.java
+--- a/src/test/java/ca/mcgill/ecse/assetplus/features/ViewStatusOfMaintenanceTicketsStepDefinitions.java	(revision 9773b5a9ba2a5be8dfd007ec7fd778ef5abb8998)
++++ b/src/test/java/ca/mcgill/ecse/assetplus/features/ViewStatusOfMaintenanceTicketsStepDefinitions.java	(date 1697833574976)
+@@ -1,303 +1,307 @@
+ package ca.mcgill.ecse.assetplus.features;
+ 
+-import static org.junit.Assert.*;
+-
+ import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
+-import ca.mcgill.ecse.assetplus.controller.*;
++import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
++import ca.mcgill.ecse.assetplus.controller.TOMaintenanceNote;
++import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
+ import ca.mcgill.ecse.assetplus.model.*;
+ import io.cucumber.java.en.Given;
+ import io.cucumber.java.en.Then;
+ import io.cucumber.java.en.When;
++
+ import java.sql.Date;
+-import java.util.*;
++import java.util.List;
++import java.util.Map;
++
++import static org.junit.Assert.assertEquals;
+ 
+ public class ViewStatusOfMaintenanceTicketsStepDefinitions {
+-  private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
+-  private List<TOMaintenanceTicket> tickets;
++    private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
++    private List<TOMaintenanceTicket> tickets;
+ 
+-  /**
+-   * Gherkin step definition method to create and add employees to the AssetPlus application.
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("Mohamed Abdelrahman && Anders Woodruff && Philippe Aprahamian && David Marji && Ming
+-   *     Yue && Manuel Hanna")
+-   */
+-  @Given("the following employees exist in the system \\(p15)")
+-  public void the_following_employees_exist_in_the_system_p15(
+-      io.cucumber.datatable.DataTable dataTable) {
+-    List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
+-    for (Map<String, String> row : rows) {
+-      assetPlus.addEmployee(
+-          row.get("email"), row.get("name"), row.get("password"), row.get("phoneNumber"));
+-    }
+-  }
++    /**
++     * Gherkin step definition method to create and add employees to the AssetPlus application.
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("Mohamed Abdelrahman && Anders Woodruff && Philippe Aprahamian && David Marji && Ming
++     * Yue && Manuel Hanna")
++     */
++    @Given("the following employees exist in the system \\(p15)")
++    public void the_following_employees_exist_in_the_system_p15(
++            io.cucumber.datatable.DataTable dataTable) {
++        List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
++        for (Map<String, String> row : rows) {
++            assetPlus.addEmployee(
++                    row.get("email"), row.get("name"), row.get("password"), row.get("phoneNumber"));
++        }
++    }
+ 
+-  /**
+-   * Gherkin step definition method to create and add a manager to the AssetPlus application.
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("Mannuel Hanna && Philippe Aprahamian && Ming Xuan Yue")
+-   */
+-  @Given("the following manager exists in the system \\(p15)")
+-  public void the_following_manager_exists_in_the_system_p15(
+-      io.cucumber.datatable.DataTable dataTable) {
+-    List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
+-    Manager manager =
+-        new Manager(rows.get(0).get("email"), null, rows.get(0).get("password"), null, assetPlus);
+-    assetPlus.setManager(manager);
+-  }
++    /**
++     * Gherkin step definition method to create and add a manager to the AssetPlus application.
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("Mannuel Hanna && Philippe Aprahamian && Ming Xuan Yue")
++     */
++    @Given("the following manager exists in the system \\(p15)")
++    public void the_following_manager_exists_in_the_system_p15(
++            io.cucumber.datatable.DataTable dataTable) {
++        List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
++        Manager manager =
++                new Manager(rows.get(0).get("email"), null, rows.get(0).get("password"), null, assetPlus);
++        assetPlus.setManager(manager);
++    }
+ 
+-  /**
+-   * Gherkin step definition method to create and add asset types to the AssetPlus application.
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("Anders Woodruff && Philippe Aprahamian && Ming Xuan Yue")
+-   */
+-  @Given("the following asset types exist in the system \\(p15)")
+-  public void the_following_asset_types_exist_in_the_system_p15(
+-      io.cucumber.datatable.DataTable dataTable) {
+-    List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
+-    for (Map<String, String> row : rows) {
+-      assetPlus.addAssetType(row.get("name"), Integer.parseInt(row.get("expectedLifeSpan")));
+-    }
+-  }
++    /**
++     * Gherkin step definition method to create and add asset types to the AssetPlus application.
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("Anders Woodruff && Philippe Aprahamian && Ming Xuan Yue")
++     */
++    @Given("the following asset types exist in the system \\(p15)")
++    public void the_following_asset_types_exist_in_the_system_p15(
++            io.cucumber.datatable.DataTable dataTable) {
++        List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
++        for (Map<String, String> row : rows) {
++            assetPlus.addAssetType(row.get("name"), Integer.parseInt(row.get("expectedLifeSpan")));
++        }
++    }
+ 
+-  /**
+-   * Gherkin step definition method to create and add assets to the AssetPlus application.
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("Ming Xuan Yue && Philippe Aprahamian" && David Marji)
+-   */
+-  @Given("the following assets exist in the system \\(p15)")
+-  public void the_following_assets_exist_in_the_system_p15(
+-      io.cucumber.datatable.DataTable dataTable) {
+-    List<Map<String, String>> rows = dataTable.asMaps();
+-    for (var row : rows) {
+-      int assetNumber = Integer.parseInt(row.get("assetNumber"));
+-      Date purchaseDate = Date.valueOf(row.get("purchaseDate"));
+-      int floorNumber = Integer.parseInt(row.get("floorNumber"));
+-      int roomNumber = Integer.parseInt(row.get("roomNumber"));
+-      AssetType type = AssetType.getWithName(row.get("type"));
+-      assetPlus.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, type);
+-    }
+-  }
++    /**
++     * Gherkin step definition method to create and add assets to the AssetPlus application.
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("Ming Xuan Yue && Philippe Aprahamian" && David Marji)
++     */
++    @Given("the following assets exist in the system \\(p15)")
++    public void the_following_assets_exist_in_the_system_p15(
++            io.cucumber.datatable.DataTable dataTable) {
++        List<Map<String, String>> rows = dataTable.asMaps();
++        for (var row : rows) {
++            int assetNumber = Integer.parseInt(row.get("assetNumber"));
++            Date purchaseDate = Date.valueOf(row.get("purchaseDate"));
++            int floorNumber = Integer.parseInt(row.get("floorNumber"));
++            int roomNumber = Integer.parseInt(row.get("roomNumber"));
++            AssetType type = AssetType.getWithName(row.get("type"));
++            assetPlus.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, type);
++        }
++    }
+ 
+-  /**
+-   * Gherkin step definition method to create and add tickets to the AssetPlus application.
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("Ming Xuan Yue && Philippe Aprahamian && Mohamed Abdelrahman")
+-   */
+-  @Given("the following tickets exist in the system \\(p15)")
+-  public void the_following_tickets_exist_in_the_system_p15(
+-      io.cucumber.datatable.DataTable dataTable) {
+-    List<Map<String, String>> rows = dataTable.asMaps();
+-    for (var row : rows) {
+-      int id = Integer.parseInt(row.get("id"));
+-      Date raisedOnDate = Date.valueOf(row.get("raisedOnDate"));
+-      String description = row.get("description");
+-      String ticketRaiserEmail = row.get("ticketRaiser");
+-      String assetNumberStr = row.get("assetNumber");
+-      MaintenanceTicket newTicket =
+-          assetPlus.addMaintenanceTicket(
+-              id, raisedOnDate, description, User.getWithEmail(ticketRaiserEmail));
+-      if (assetNumberStr != null) {
+-        int assetNumber = Integer.parseInt(assetNumberStr);
+-        newTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));
+-      }
+-    }
+-  }
++    /**
++     * Gherkin step definition method to create and add tickets to the AssetPlus application.
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("Ming Xuan Yue && Philippe Aprahamian && Mohamed Abdelrahman")
++     */
++    @Given("the following tickets exist in the system \\(p15)")
++    public void the_following_tickets_exist_in_the_system_p15(
++            io.cucumber.datatable.DataTable dataTable) {
++        List<Map<String, String>> rows = dataTable.asMaps();
++        for (var row : rows) {
++            int id = Integer.parseInt(row.get("id"));
++            Date raisedOnDate = Date.valueOf(row.get("raisedOnDate"));
++            String description = row.get("description");
++            String ticketRaiserEmail = row.get("ticketRaiser");
++            String assetNumberStr = row.get("assetNumber");
++            MaintenanceTicket newTicket =
++                    assetPlus.addMaintenanceTicket(
++                            id, raisedOnDate, description, User.getWithEmail(ticketRaiserEmail));
++            if (assetNumberStr != null) {
++                int assetNumber = Integer.parseInt(assetNumberStr);
++                newTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));
++            }
++        }
++    }
+ 
+-  /**
+-   * Gherkin step definition method to create and add notes to the AssetPlus application.
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("Philippe Aprahamian" && Ming Xuan Yue")
+-   */
+-  @Given("the following notes exist in the system \\(p15)")
+-  public void the_following_notes_exist_in_the_system_p15(
+-      io.cucumber.datatable.DataTable dataTable) {
+-    List<Map<String, String>> rows = dataTable.asMaps();
+-    for (var row : rows) {
+-      String noteTaker = row.get("noteTaker");
+-      int ticketID = Integer.parseInt(row.get("ticketId"));
+-      Date addedOnDate = Date.valueOf(row.get("addedOnDate"));
+-      String description = row.get("description");
+-      MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+-      ticket.addTicketNote(
+-          addedOnDate, description, (HotelStaff) HotelStaff.getWithEmail(noteTaker));
+-    }
+-  }
++    /**
++     * Gherkin step definition method to create and add notes to the AssetPlus application.
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("Philippe Aprahamian" && Ming Xuan Yue")
++     */
++    @Given("the following notes exist in the system \\(p15)")
++    public void the_following_notes_exist_in_the_system_p15(
++            io.cucumber.datatable.DataTable dataTable) {
++        List<Map<String, String>> rows = dataTable.asMaps();
++        for (var row : rows) {
++            String noteTaker = row.get("noteTaker");
++            int ticketID = Integer.parseInt(row.get("ticketId"));
++            Date addedOnDate = Date.valueOf(row.get("addedOnDate"));
++            String description = row.get("description");
++            MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
++            ticket.addTicketNote(
++                    addedOnDate, description, (HotelStaff) HotelStaff.getWithEmail(noteTaker));
++        }
++    }
+ 
+-  /**
+-   * Gherkin step definition method to create and add images to the AssetPlus application.
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("Philippe Aprahamian" && Mohamed Abdelrahman")
+-   */
+-  @Given("the following ticket images exist in the system \\(p15)")
+-  public void the_following_ticket_images_exist_in_the_system_p15(
+-      io.cucumber.datatable.DataTable dataTable) {
+-    List<Map<String, String>> rows = dataTable.asMaps();
+-    for (var row : rows) {
+-      String imageURL = row.get("imageUrl");
+-      int ticketID = Integer.parseInt(row.get("ticketId"));
+-      MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+-      ticket.addTicketImage(imageURL);
+-    }
+-  }
++    /**
++     * Gherkin step definition method to create and add images to the AssetPlus application.
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("Philippe Aprahamian" && Mohamed Abdelrahman")
++     */
++    @Given("the following ticket images exist in the system \\(p15)")
++    public void the_following_ticket_images_exist_in_the_system_p15(
++            io.cucumber.datatable.DataTable dataTable) {
++        List<Map<String, String>> rows = dataTable.asMaps();
++        for (var row : rows) {
++            String imageURL = row.get("imageUrl");
++            int ticketID = Integer.parseInt(row.get("ticketId"));
++            MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
++            ticket.addTicketImage(imageURL);
++        }
++    }
+ 
+-  /**
+-   * Gherkin step definition method to test controller 6 by getting tickets
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("David Marji, Manuel Hanna, Mohamed Abdelrahman")
+-   */
+-  @When("the manager attempts to view all maintenance tickets in the system \\(p15)")
+-  public void the_manager_attempts_to_view_all_maintenance_tickets_in_the_system_p15() {
+-    tickets = AssetPlusFeatureSet6Controller.getTickets();
+-  }
++    /**
++     * Gherkin step definition method to test controller 6 by getting tickets
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("David Marji, Manuel Hanna, Mohamed Abdelrahman")
++     */
++    @When("the manager attempts to view all maintenance tickets in the system \\(p15)")
++    public void the_manager_attempts_to_view_all_maintenance_tickets_in_the_system_p15() {
++        tickets = AssetPlusFeatureSet6Controller.getTickets();
++    }
+ 
+-  /**
+-   * Gherkin step definition method to ensure controller 6 got the right tickets
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue")
+-   */
+-  @Then("the following maintenance tickets shall be presented \\(p15)")
+-  public void the_following_maintenance_tickets_shall_be_presented_p15(
+-      io.cucumber.datatable.DataTable dataTable) {
+-    List<Map<String, String>> rows = dataTable.asMaps();
+-    int i = 0;
+-    for (var row : rows) {
+-      TOMaintenanceTicket currTicket = tickets.get(i);
+-      int id = Integer.parseInt(row.get("id"));
+-      assertEquals(id, currTicket.getId());
+-      String ticketRaiserEmail = row.get("ticketRaiser");
+-      assertEquals(ticketRaiserEmail, currTicket.getRaisedByEmail());
+-      Date raisedOnDate = Date.valueOf(row.get("raisedOnDate"));
+-      assertEquals(raisedOnDate, currTicket.getRaisedOnDate());
+-      String description = row.get("description");
+-      assertEquals(description, currTicket.getDescription());
+-      String assetName = row.get("assetName");
+-      assertEquals(assetName, currTicket.getAssetName());
+-      String expectLifeSpanStr = row.get("expectLifeSpan");
+-      int expectLifeSpan = -1;
+-      if (expectLifeSpanStr != null) {
+-        expectLifeSpan = Integer.parseInt(expectLifeSpanStr);
+-      }
+-      assertEquals(expectLifeSpan, currTicket.getExpectLifeSpanInDays());
+-      String purchaseDateStr = row.get("purchaseDate");
+-      Date purchaseDate = null;
+-      if (purchaseDateStr != null) {
+-        purchaseDate = Date.valueOf(purchaseDateStr);
+-      }
+-      assertEquals(purchaseDate, currTicket.getPurchaseDate());
+-      String floorNumberStr = row.get("floorNumber");
+-      int floorNumber = -1;
+-      if (floorNumberStr != null) {
+-        floorNumber = Integer.parseInt(floorNumberStr);
+-      }
+-      assertEquals(floorNumber, currTicket.getFloorNumber());
+-      String roomNumberStr = row.get("roomNumber");
+-      int roomNumber = -1;
+-      if (roomNumberStr != null) {
+-        roomNumber = Integer.parseInt(roomNumberStr);
+-      }
+-      assertEquals(roomNumber, currTicket.getRoomNumber());
+-      i++;
+-    }
+-  }
++    /**
++     * Gherkin step definition method to ensure controller 6 got the right tickets
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue")
++     */
++    @Then("the following maintenance tickets shall be presented \\(p15)")
++    public void the_following_maintenance_tickets_shall_be_presented_p15(
++            io.cucumber.datatable.DataTable dataTable) {
++        List<Map<String, String>> rows = dataTable.asMaps();
++        int i = 0;
++        for (var row : rows) {
++            TOMaintenanceTicket currTicket = tickets.get(i);
++            int id = Integer.parseInt(row.get("id"));
++            assertEquals(id, currTicket.getId());
++            String ticketRaiserEmail = row.get("ticketRaiser");
++            assertEquals(ticketRaiserEmail, currTicket.getRaisedByEmail());
++            Date raisedOnDate = Date.valueOf(row.get("raisedOnDate"));
++            assertEquals(raisedOnDate, currTicket.getRaisedOnDate());
++            String description = row.get("description");
++            assertEquals(description, currTicket.getDescription());
++            String assetName = row.get("assetName");
++            assertEquals(assetName, currTicket.getAssetName());
++            String expectLifeSpanStr = row.get("expectLifeSpan");
++            int expectLifeSpan = -1;
++            if (expectLifeSpanStr != null) {
++                expectLifeSpan = Integer.parseInt(expectLifeSpanStr);
++            }
++            assertEquals(expectLifeSpan, currTicket.getExpectLifeSpanInDays());
++            String purchaseDateStr = row.get("purchaseDate");
++            Date purchaseDate = null;
++            if (purchaseDateStr != null) {
++                purchaseDate = Date.valueOf(purchaseDateStr);
++            }
++            assertEquals(purchaseDate, currTicket.getPurchaseDate());
++            String floorNumberStr = row.get("floorNumber");
++            int floorNumber = -1;
++            if (floorNumberStr != null) {
++                floorNumber = Integer.parseInt(floorNumberStr);
++            }
++            assertEquals(floorNumber, currTicket.getFloorNumber());
++            String roomNumberStr = row.get("roomNumber");
++            int roomNumber = -1;
++            if (roomNumberStr != null) {
++                roomNumber = Integer.parseInt(roomNumberStr);
++            }
++            assertEquals(roomNumber, currTicket.getRoomNumber());
++            i++;
++        }
++    }
+ 
+-  /**
+-   * Gherkin step definition method to ensure controller 6 got the right notes with the ticket
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information.
+-   * @author("Erik Cupsa, David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue")
+-   */
+-  @Then("the ticket with id {string} shall have the following notes \\(p15)")
+-  public void the_ticket_with_id_shall_have_the_following_notes_p15(
+-      String string, io.cucumber.datatable.DataTable dataTable) {
+-    int ticketID = Integer.parseInt(string);
+-    TOMaintenanceTicket currTicket = null;
+-    for (var ticket : tickets) {
+-      if (ticket.getId() == ticketID) {
+-        currTicket = ticket;
+-      }
+-    }
+-    List<TOMaintenanceNote> currTicketNotes = currTicket.getNotes();
+-    List<Map<String, String>> rows = dataTable.asMaps();
+-    int i = 0;
+-    for (var row : rows) {
+-      TOMaintenanceNote currNote = currTicketNotes.get(i);
+-      String noteTaker = row.get("noteTaker");
+-      assertEquals(noteTaker, currNote.getNoteTakerEmail());
+-      Date addedOnDate = Date.valueOf(row.get("addedOnDate"));
+-      assertEquals(addedOnDate, currNote.getDate());
+-      String description = row.get("description");
+-      assertEquals(description, currNote.getDescription());
+-      i++;
+-    }
+-  }
++    /**
++     * Gherkin step definition method to ensure controller 6 got the right notes with the ticket
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information.
++     * @author("Erik Cupsa, David Marji, Philippe Aprahamian, Mohamed Abdelrahman,Ming Xuan Yue")
++     */
++    @Then("the ticket with id {string} shall have the following notes \\(p15)")
++    public void the_ticket_with_id_shall_have_the_following_notes_p15(
++            String string, io.cucumber.datatable.DataTable dataTable) {
++        int ticketID = Integer.parseInt(string);
++        TOMaintenanceTicket currTicket = null;
++        for (var ticket : tickets) {
++            if (ticket.getId() == ticketID) {
++                currTicket = ticket;
++            }
++        }
++        List<TOMaintenanceNote> currTicketNotes = currTicket.getNotes();
++        List<Map<String, String>> rows = dataTable.asMaps();
++        int i = 0;
++        for (var row : rows) {
++            TOMaintenanceNote currNote = currTicketNotes.get(i);
++            String noteTaker = row.get("noteTaker");
++            assertEquals(noteTaker, currNote.getNoteTakerEmail());
++            Date addedOnDate = Date.valueOf(row.get("addedOnDate"));
++            assertEquals(addedOnDate, currNote.getDate());
++            String description = row.get("description");
++            assertEquals(description, currNote.getDescription());
++            i++;
++        }
++    }
+ 
+-  /**
+-   * Gherkin step definition method to ensure controller 6 got the right notes with the ticket
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information. //@author("Erik
+-   *     Cupsa && Philippe Aprahamian")
+-   */
+-  @Then("the ticket with id {string} shall have no notes \\(p15)")
+-  public void the_ticket_with_id_shall_have_no_notes_p15(String string) {
+-    int ticketID = Integer.parseInt(string);
+-    TOMaintenanceTicket currTicket = null;
+-    for (var ticket : tickets) {
+-      if (ticket.getId() == ticketID) {
+-        currTicket = ticket;
+-      }
+-    }
+-    assertEquals(currTicket.hasNotes(), false);
+-  }
++    /**
++     * Gherkin step definition method to ensure controller 6 got the right notes with the ticket
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information. //@author("Erik
++     *                  Cupsa && Philippe Aprahamian")
++     */
++    @Then("the ticket with id {string} shall have no notes \\(p15)")
++    public void the_ticket_with_id_shall_have_no_notes_p15(String string) {
++        int ticketID = Integer.parseInt(string);
++        TOMaintenanceTicket currTicket = null;
++        for (var ticket : tickets) {
++            if (ticket.getId() == ticketID) {
++                currTicket = ticket;
++            }
++        }
++        assertEquals(currTicket.hasNotes(), false);
++    }
+ 
+-  /**
+-   * Gherkin step definition method to ensure controller 6 got the right images with the ticket
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information. //@author("Erik
+-   *     Cupsa && Philippe Aprahamian")
+-   */
+-  @Then("the ticket with id {string} shall have the following images \\(p15)")
+-  public void the_ticket_with_id_shall_have_the_following_images_p15(
+-      String string, io.cucumber.datatable.DataTable dataTable) {
+-    int ticketID = Integer.parseInt(string);
+-    TOMaintenanceTicket currTicket = null;
+-    for (var ticket : tickets) {
+-      if (ticket.getId() == ticketID) {
+-        currTicket = ticket;
+-      }
+-    }
+-    List<String> currTicketImageURLs = currTicket.getImageURLs();
+-    List<Map<String, String>> rows = dataTable.asMaps();
+-    int i = 0;
+-    for (var row : rows) {
+-      assertEquals(currTicketImageURLs.get(i), row.get("imageUrl"));
+-      i++;
+-    }
+-  }
++    /**
++     * Gherkin step definition method to ensure controller 6 got the right images with the ticket
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information. //@author("Erik
++     *                  Cupsa && Philippe Aprahamian")
++     */
++    @Then("the ticket with id {string} shall have the following images \\(p15)")
++    public void the_ticket_with_id_shall_have_the_following_images_p15(
++            String string, io.cucumber.datatable.DataTable dataTable) {
++        int ticketID = Integer.parseInt(string);
++        TOMaintenanceTicket currTicket = null;
++        for (var ticket : tickets) {
++            if (ticket.getId() == ticketID) {
++                currTicket = ticket;
++            }
++        }
++        List<String> currTicketImageURLs = currTicket.getImageURLs();
++        List<Map<String, String>> rows = dataTable.asMaps();
++        int i = 0;
++        for (var row : rows) {
++            assertEquals(currTicketImageURLs.get(i), row.get("imageUrl"));
++            i++;
++        }
++    }
+ 
+-  /**
+-   * Gherkin step definition method to ensure controller 6 got the right images with the ticket
+-   *
+-   * @param dataTable Cucumber DataTable containing the asset type information. //@author("Erik
+-   *     Cupsa && Philippe Aprahamian")
+-   */
+-  @Then("the ticket with id {string} shall have no images \\(p15)")
+-  public void the_ticket_with_id_shall_have_no_images_p15(String string) {
+-    int ticketID = Integer.parseInt(string);
+-    TOMaintenanceTicket currTicket = null;
+-    for (var ticket : tickets) {
+-      if (ticket.getId() == ticketID) {
+-        currTicket = ticket;
+-      }
+-    }
+-    assertEquals(currTicket.getImageURLs().size(), 0);
+-  }
++    /**
++     * Gherkin step definition method to ensure controller 6 got the right images with the ticket
++     *
++     * @param dataTable Cucumber DataTable containing the asset type information. //@author("Erik
++     *                  Cupsa && Philippe Aprahamian")
++     */
++    @Then("the ticket with id {string} shall have no images \\(p15)")
++    public void the_ticket_with_id_shall_have_no_images_p15(String string) {
++        int ticketID = Integer.parseInt(string);
++        TOMaintenanceTicket currTicket = null;
++        for (var ticket : tickets) {
++            if (ticket.getId() == ticketID) {
++                currTicket = ticket;
++            }
++        }
++        assertEquals(currTicket.getImageURLs().size(), 0);
++    }
+ }
+Index: .project
+===================================================================
+diff --git a/.project b/.project
+deleted file mode 100644
+--- a/.project	(revision 9773b5a9ba2a5be8dfd007ec7fd778ef5abb8998)
++++ /dev/null	(revision 9773b5a9ba2a5be8dfd007ec7fd778ef5abb8998)
+@@ -1,34 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<projectDescription>
+-	<name>ca.mcgill.ecse.assetplus</name>
+-	<comment>Project ecse223-group-project-testing created by Buildship.</comment>
+-	<projects>
+-	</projects>
+-	<buildSpec>
+-		<buildCommand>
+-			<name>org.eclipse.jdt.core.javabuilder</name>
+-			<arguments>
+-			</arguments>
+-		</buildCommand>
+-		<buildCommand>
+-			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
+-			<arguments>
+-			</arguments>
+-		</buildCommand>
+-	</buildSpec>
+-	<natures>
+-		<nature>org.eclipse.jdt.core.javanature</nature>
+-		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
+-	</natures>
+-	<filteredResources>
+-		<filter>
+-			<id>1695178338261</id>
+-			<name></name>
+-			<type>30</type>
+-			<matcher>
+-				<id>org.eclipse.core.resources.regexFilterMatcher</id>
+-				<arguments>node_modules|\.git|__CREATED_BY_JAVA_LANGUAGE_SERVER__</arguments>
+-			</matcher>
+-		</filter>
+-	</filteredResources>
+-</projectDescription>
