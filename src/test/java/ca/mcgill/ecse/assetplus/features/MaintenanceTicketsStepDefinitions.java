@@ -242,7 +242,7 @@ public class MaintenanceTicketsStepDefinitions {
 
   /**
    * Verifying that the number of tickets in the system is correct
-   * @param numTickets The number of tickets
+   * @param string The number of tickets
    * @author Erik Cupsa (@Erik-Cupsa)
    */
   @Then("the number of tickets in the system shall be {string}")
