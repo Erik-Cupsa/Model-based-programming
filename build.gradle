@@ -15,7 +15,7 @@ plugins {
 
 repositories {
     // Use mavenCentral for resolving dependencies.
-     mavenCentral() 
+    mavenCentral()
 }
 
 javafx {
@@ -40,7 +40,7 @@ dependencies {
     implementation 'com.thoughtworks.xstream:xstream:1.4.19'
     implementation 'org.codehaus.jettison:jettison:1.4.1'
 
-	// cucumber.io dependencies
+    // cucumber.io dependencies
     testImplementation "io.cucumber:cucumber-java:6.6.0"
     testImplementation "io.cucumber:cucumber-junit:6.6.0"
 

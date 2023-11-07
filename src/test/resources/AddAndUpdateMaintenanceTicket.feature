@@ -94,7 +94,7 @@ As a ticket raiser, I want to add and update a maintenance ticket in the system.
     Then the system shall raise the error "<error>" (p16)
 
     Examples: 
-      | id | ticketRaiser   | raisedOnDate | description                   | assetNumber | error                              |
-      |  3 | manager@ap.com |   2023-09-23 | This is a dummy description 1 |           3 | The asset does not exist           |
-      |  3 | none@ap.com    |   2023-09-23 | This is a dummy description 1 |           1 | The ticket raiser does not exist   |
-      |  3 | smith@ap.com   |   2023-09-23 |                               |           1 | Ticket description cannot be empty |
+      | id | newTicketRaiser | newRaisedOnDate | newDescription                | newAssetNumber | error                              |
+      |  3 | manager@ap.com  |      2023-09-23 | This is a dummy description 1 |              3 | The asset does not exist           |
+      |  3 | none@ap.com     |      2023-09-23 | This is a dummy description 1 |              1 | The ticket raiser does not exist   |
+      |  3 | smith@ap.com    |      2023-09-23 |                               |              1 | Ticket description cannot be empty |

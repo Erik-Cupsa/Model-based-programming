@@ -8,43 +8,87 @@ import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 
 public class AssetPlusFeatureSet7Controller {
 
+	/**
+	 * adds a maintenance note to a specified maintenance ticket
+	 *
+	 * @param date the maintenance note's date
+	 * @param description the maintenance note's description
+	 * @param ticketID the id of the ticket to add the note to
+	 * @param email the email of the note taker
+	 * @return returns a string explaining the errors if encountered, empty string if successful
+	 * @author Philippe Aprahamian
+	 */
 	public static String addMaintenanceNote(Date date, String description, int ticketID,
 			String email) {
-		String msg = "";
-		try {
-			MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
-			HotelStaff noteTaker = (HotelStaff) HotelStaff.getWithEmail(email);
-			MaintenanceNote newNote = new MaintenanceNote(date, description, ticket, noteTaker);
-			ticket.addTicketNote(newNote);
-			msg="Successful";
-		}catch(Exception e){
-			msg="Invalid ticket or Hotel Staff";
+		if(description==null || description.equals("")){
+			return "Ticket description cannot be empty";
 		}
-		return msg;
+		MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
+		if (ticket==null){
+			return "Ticket does not exist";
+		}
+		HotelStaff noteTaker = (HotelStaff) HotelStaff.getWithEmail(email);
+		if (noteTaker==null){
+			return "Hotel staff does not exist";
+		}
+		MaintenanceNote newNote = new MaintenanceNote(date, description, ticket, noteTaker);
+		ticket.addTicketNote(newNote);
+		return "";
 	}
-
+	/**
+	 * updates a specified maintenance note
+	 *
+	 * @param ticketID the id of the ticket that the target note is attached to
+	 * @param index the index of the maintenance note inside the ticket's notes list
+	 * @param newDate the new date of the maintenance note
+	 * @param newDescription the new description of the maintenance note
+	 * @param newEmail the email of the new note taker
+	 * @return returns a string explaining the errors if encountered, empty string if successful
+	 * @author Philippe Aprahamian
+	 */
 	// index starts at 0
 	public static String updateMaintenanceNote(int ticketID, int index, Date newDate,
 			String newDescription, String newEmail) {
-		String msg = "";
-		try {
-			MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
-			MaintenanceNote targetNote = ticket.getTicketNote(index);
-			HotelStaff newNoteTaker = (HotelStaff) HotelStaff.getWithEmail(newEmail);
-			targetNote.setDate(newDate);
-			targetNote.setDescription(newDescription);
-			targetNote.setNoteTaker(newNoteTaker);
-			msg="Successful";
+		if(newDescription==null || newDescription.equals("")){
+			return "Ticket description cannot be empty";
+		}
+		MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
+		if (ticket==null){
+			return "Ticket does not exist";
+		}
+		MaintenanceNote targetNote;
+		try{
+			targetNote= ticket.getTicketNote(index);
 		}catch(Exception e){
-			msg="Invalid ticket or Hotel Staff";
-		} 
-		return msg;
+			return "Note does not exist";
+		}
+		if (targetNote==null){
+			return "Note does not exist";
+		}
+		HotelStaff newNoteTaker = (HotelStaff) HotelStaff.getWithEmail(newEmail);
+		if (newNoteTaker==null){
+			return "Hotel staff does not exist";
+		}
+		targetNote.setDate(newDate);
+		targetNote.setDescription(newDescription);
+		targetNote.setNoteTaker(newNoteTaker);
+		return "";
 	}
-
+	/**
+	 * deletes a specified maintenance note
+	 *
+	 * @param ticketID the id of the ticket that the note to be deleted is attached to
+	 * @param index the index of the maintenance note to be deleted inside the corresponding ticket's notes list
+	 * @author Philippe Aprahamian
+	 */
 	// index starts at 0
 	public static void deleteMaintenanceNote(int ticketID, int index) {
-		MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
-		MaintenanceNote targetNote = ticket.getTicketNote(index);
-		targetNote.delete();
+		try{
+			MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
+			MaintenanceNote targetNote = ticket.getTicketNote(index);
+			targetNote.delete();
+		}catch(Exception e){
+
+		}
 	}
 }
