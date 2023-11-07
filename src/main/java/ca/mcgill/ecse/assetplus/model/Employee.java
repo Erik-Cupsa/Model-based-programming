@@ -4,7 +4,7 @@
 package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 
-// line 33 "../../../../../AssetPlus.ump"
+// line 34 "../../../../../AssetPlus.ump"
 public class Employee extends HotelStaff
 {
 

@@ -5,7 +5,8 @@ package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 43 "../../../../../AssetPlus.ump"
+// line 1 "../../../../../AssetPlusStates.ump"
+// line 44 "../../../../../AssetPlus.ump"
 public class MaintenanceTicket
 {
 
@@ -32,6 +33,10 @@ public class MaintenanceTicket
   private String description;
   private TimeEstimate timeToResolve;
   private PriorityLevel priority;
+
+  //MaintenanceTicket State Machines
+  public enum Status { Open, Assigned, InProgress, Resolved, Closed }
+  private Status status;
 
   //MaintenanceTicket Associations
   private List<MaintenanceNote> ticketNotes;
@@ -66,6 +71,7 @@ public class MaintenanceTicket
     {
       throw new RuntimeException("Unable to create raisedTicket due to ticketRaiser. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
+    setStatus(Status.Open);
   }
 
   //------------------------
@@ -156,6 +162,138 @@ public class MaintenanceTicket
   public PriorityLevel getPriority()
   {
     return priority;
+  }
+
+  public String getStatusFullName()
+  {
+    String answer = status.toString();
+    return answer;
+  }
+
+  public Status getStatus()
+  {
+    return status;
+  }
+
+  public boolean assign(HotelStaff staff,PriorityLevel aPriority,TimeEstimate aTimeToResolve,Boolean requiresApproval)
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case Open:
+        // line 16 "../../../../../AssetPlusStates.ump"
+        doAssign(staff,aPriority, aTimeToResolve,requiresApproval);
+        setStatus(Status.Assigned);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean startWork()
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case Assigned:
+        setStatus(Status.InProgress);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean completeFix()
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case InProgress:
+        setStatus(Status.Resolved);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean entry()
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case Resolved:
+        if (!(this.hasFixApprover()))
+        {
+          setStatus(Status.Closed);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean acceptFix()
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case Resolved:
+        setStatus(Status.Closed);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean rejectFix(Date aDate,String aDescription)
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case Resolved:
+        // line 29 "../../../../../AssetPlusStates.ump"
+        doRejectFix(aDate,aDescription);
+        setStatus(Status.InProgress);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  private void setStatus(Status aStatus)
+  {
+    status = aStatus;
   }
   /* Code from template association_GetMany */
   public MaintenanceNote getTicketNote(int index)
@@ -541,6 +679,22 @@ public class MaintenanceTicket
       this.fixApprover = null;
       placeholderFixApprover.removeTicketsForApproval(this);
     }
+  }
+
+  // line 3 "../../../../../AssetPlusStates.ump"
+   private void doAssign(HotelStaff staff, PriorityLevel aPriority, TimeEstimate aTimeToResolve, Boolean requiresApproval){
+    AssetPlus ap= this.getAssetPlus();
+     this.setTicketFixer(staff);
+     this.setTimeToResolve(aTimeToResolve);
+     this.setPriority(aPriority);
+     if (requiresApproval){
+       this.setFixApprover(ap.getManager());
+     }
+  }
+
+  // line 12 "../../../../../AssetPlusStates.ump"
+   private void doRejectFix(Date aDate, String aDescription){
+    this.addTicketNote(aDate, aDescription, this.getFixApprover());
   }
 
 

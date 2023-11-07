@@ -26,7 +26,7 @@ class MaintenanceTicket {
     Resolved {
       entry [!this.hasFixApprover()] -> Closed;
       acceptFix -> Closed;
-      rejectFix(aDate,aDescription) / {doRejectFix(aDate,aDescription);} -> InProgress;
+      rejectFix(Date aDate, String aDescription) / {doRejectFix(aDate,aDescription);} -> InProgress;
     }
     Closed {}
   }
