@@ -47,11 +47,11 @@ public class TOMaintenanceTicket
     description = aDescription;
     raisedByEmail = aRaisedByEmail;
     status = aStatus;
-    fixedByEmail = aFixedByEmail;
-    timeToResolve = aTimeToResolve;
-    priority = aPriority;
-    approvalRequired = aApprovalRequired;
-    assetName = aAssetName;
+//    fixedByEmail = aFixedByEmail;
+//    timeToResolve = aTimeToResolve;
+//    priority = aPriority;
+//    approvalRequired = aApprovalRequired;
+//    assetName = aAssetName;
     expectLifeSpanInDays = aExpectLifeSpanInDays;
     purchaseDate = aPurchaseDate;
     floorNumber = aFloorNumber;
