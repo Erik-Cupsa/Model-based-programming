@@ -241,10 +241,9 @@ public class MaintenanceTicketsStepDefinitions {
   }
 
   /**
-   * Gherkin step definition method to ensure that the actual number of tickets in the system matches the expected number of tickets.
-   * 
-   * @author Ming Xuan Yue
-   * @param string the expected number of tickets in the system.
+   * Verifying that the number of tickets in the system is correct
+   * @param numTickets The number of tickets
+   * @author Erik Cupsa (@Erik-Cupsa)
    */
   @Then("the number of tickets in the system shall be {string}")
   public void the_number_of_tickets_in_the_system_shall_be(String string) {
