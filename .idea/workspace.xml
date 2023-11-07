@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet6Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet6Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/TOMaintenanceTicket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/TOMaintenanceTicket.java" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/model/AssetPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/model/AssetPlus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/model/AssetType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/model/AssetType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/model/Employee.java" afterDir="false" />
@@ -49,6 +50,7 @@
                 <item name="ca.mcgill.ecse.assetplus" type="f1a62948:ProjectNode" />
                 <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
+            
             </expand>
             <select />
           </tree_state>
@@ -64,6 +66,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -79,6 +82,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+
     "git-widget-placeholder": "local",
     "last_opened_file_path": "/Users/erikcupsa/Desktop/Coding/ECSE 223/ecse223-group-project-p15",
     "node.js.detected.package.eslint": "true",
@@ -192,6 +196,7 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
+
     <configuration default="true" type="JetRunConfigurationType">
       <module name="ca.mcgill.ecse.assetplus" />
       <method v="2">
@@ -233,6 +238,7 @@
       <workItem from="1697917375519" duration="2449000" />
       <workItem from="1697929983034" duration="2708000" />
       <workItem from="1698259683378" duration="2288000" />
+
     </task>
     <servers />
   </component>
@@ -240,6 +246,7 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">

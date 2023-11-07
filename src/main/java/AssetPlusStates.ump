@@ -30,4 +30,6 @@ class MaintenanceTicket {
     }
     Closed {}
   }
+
 }
+
