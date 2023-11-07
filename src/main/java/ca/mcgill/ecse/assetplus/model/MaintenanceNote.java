@@ -4,7 +4,7 @@
 package ca.mcgill.ecse.assetplus.model;
 import java.sql.Date;
 
-// line 59 "../../../../../AssetPlus.ump"
+// line 60 "../../../../../AssetPlus.ump"
 public class MaintenanceNote
 {
 
