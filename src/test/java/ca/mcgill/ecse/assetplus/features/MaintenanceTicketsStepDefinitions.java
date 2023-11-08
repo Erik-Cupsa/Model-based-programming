@@ -14,6 +14,7 @@ import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 import ca.mcgill.ecse.assetplus.model.Manager;
 import ca.mcgill.ecse.assetplus.model.SpecificAsset;
 import ca.mcgill.ecse.assetplus.model.User;
+import io.cucumber.gherkin.Main;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -286,10 +287,16 @@ public class MaintenanceTicketsStepDefinitions {
     throw new io.cucumber.java.PendingException();
   }
 
+  /**
+   * Verifies that for a specified ticket, the ticket shall not exist in the system
+   * @param string The ticket ID of the ticket to check in the system
+   * @author Erik Cupsa (@Erik-Cupsa)
+   */
   @Then("the ticket {string} shall not exist in the system")
   public void the_ticket_shall_not_exist_in_the_system(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int ticketID = Integer.parseInt(string);
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+    assertNull(ticket);
   }
   /**
    * Gherkin step definition method checks that, for a specified ticket, estimated time, priority, requires approval are set to the corresponding input strings' values.
