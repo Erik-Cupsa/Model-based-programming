@@ -21,10 +21,11 @@ class MaintenanceTicket {
       startWork -> InProgress;
     }
     InProgress {
+      completeFix [!this.hasFixApprover()] -> Closed;
       completeFix -> Resolved;
     }
     Resolved {
-      entry [!this.hasFixApprover()] -> Closed;
+      //entry [!this.hasFixApprover()] -> Closed;
       acceptFix -> Closed;
       rejectFix(Date aDate, String aDescription) / {doRejectFix(aDate,aDescription);} -> InProgress;
     }
