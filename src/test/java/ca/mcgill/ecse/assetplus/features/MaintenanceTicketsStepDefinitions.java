@@ -153,18 +153,46 @@ public class MaintenanceTicketsStepDefinitions {
       ticket.addTicketImage(imageURL);
     }
   }
-
+  /**
+   * Gherkin step definition method to create ticket, mark its state to a specified state and set the requiresApproval value.
+   *
+   * @author Philippe Aprahamian
+   * @param string represents the ticket ID
+   * @param string2 represents the state the ticket should be marked to
+   * @param string3 represents the boolean value of requiresApproval
+   */
   @Given("ticket {string} is marked as {string} with requires approval {string}")
   public void ticket_is_marked_as_with_requires_approval(String string, String string2,
-      String string3) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+                                                         String string3) {
+    int ticketID = Integer.parseInt(string);
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+    if (string3.equals("true")){
+      ticket.assign(null, null,null,true);
+    }else {
+      ticket.assign(null, null,null,false);
+    }
+    ticket.startWork();
   }
 
   @Given("ticket {string} is marked as {string}")
   public void ticket_is_marked_as(String string, String string2) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int ticketID = Integer.parseInt(string);
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+    String status = ticket.getStatusFullName();
+    if (string2.equals("Open")){
+      return;
+    }else if (string2.equals("Assigned")||string2.equals("InProgress")||string2.equals("Resolved")||string2.equals("Closed")){
+      ticket.assign(null, null,null,false);
+    }
+    if (string2.equals("InProgress")||string2.equals("Resolved")||string2.equals("Closed")) {
+      ticket.startWork();
+    }
+    if (string2.equals("Resolved")||string2.equals("Closed")){
+      ticket.completeFix();
+    }
+    if (string2.equals("Closed")){
+      ticket.acceptFix();
+    }
   }
 
    /**
