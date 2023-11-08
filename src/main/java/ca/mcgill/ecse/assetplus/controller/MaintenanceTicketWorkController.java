@@ -82,7 +82,6 @@ public class MaintenanceTicketWorkController {
     if (status.equals(Status.Resolved)) {
       return "The maintenance ticket is already resolved.";
     }
-
     ticket.completeFix();
     if (!ticket.hasFixApprover()){
       ticket.entry();
@@ -108,6 +107,9 @@ public class MaintenanceTicketWorkController {
     }
     if (status.equals(Status.Assigned)) {
       return "Cannot approve a maintenance ticket which is assigned.";
+    }
+    if (status.equals(Status.InProgress)) {
+      return "Cannot approve a maintenance ticket which is in progress.";
     }
 
     ticket.acceptFix();
