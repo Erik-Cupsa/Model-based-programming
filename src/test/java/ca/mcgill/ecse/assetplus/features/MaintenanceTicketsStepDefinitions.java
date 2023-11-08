@@ -209,38 +209,71 @@ public class MaintenanceTicketsStepDefinitions {
     tickets = AssetPlusFeatureSet6Controller.getTickets();
   }
 
+  /**
+   * Gherkin step definition method to test state machine.
+   *
+   * @author Anders Woodruff
+   */
   @When("the manager attempts to assign the ticket {string} to {string} with estimated time {string}, priority {string}, and requires approval {string}")
   public void the_manager_attempts_to_assign_the_ticket_to_with_estimated_time_priority_and_requires_approval(
       String string, String string2, String string3, String string4, String string5) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int id = Integer.parseInt(string);
+    String employeeEmail = string2;
+    MaintenanceTicket.TimeEstimate timeEstimate = MaintenanceTicket.TimeEstimate.valueOf(string3);
+    MaintenanceTicket.PriorityLevel priority = MaintenanceTicket.PriorityLevel.valueOf(string4);
+    boolean requiresApproval = Boolean.parseBoolean(string5);
+    Date raisedOnDate = new Date( 123, 10, 5);
+    AssetPlusFeatureSet4Controller.updateMaintenanceTicket(id, raisedOnDate, "xyz", employeeEmail, -1);
+    MaintenanceTicket.getWithId(id).setPriority(priority);
+    MaintenanceTicket.getWithId(id).setTimeToResolve(timeEstimate);
+    MaintenanceTicket.getWithId(id).setRequiresMangerApproval(requiresApproval);
   }
 
+  /**
+   * Gherkin step definition method to test state machine.
+   *
+   * @author Anders Woodruff
+   */
   @When("the hotel staff attempts to start the ticket {string}")
   public void the_hotel_staff_attempts_to_start_the_ticket(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int id = Integer.parseInt(string);
+    MaintenanceTicket.getWithId(id).startWork();
   }
 
+  /**
+   * Gherkin step definition method to test state machine.
+   *
+   * @author Anders Woodruff
+   */
   @When("the manager attempts to approve the ticket {string}")
   public void the_manager_attempts_to_approve_the_ticket(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int id = Integer.parseInt(string);
+    MaintenanceTicket.getWithId(id).setManagerApproval(true);
   }
 
+  /**
+   * Gherkin step definition method to test state machine.
+   *
+   * @author Anders Woodruff
+   */
   @When("the hotel staff attempts to complete the ticket {string}")
   public void the_hotel_staff_attempts_to_complete_the_ticket(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int id = Integer.parseInt(string);
+    MaintenanceTicket.getWithId(id).proposeFix();
   }
 
+  /**
+   * Gherkin step definition method to test state machine.
+   *
+   * @author Anders Woodruff
+   */
   @When("the manager attempts to disapprove the ticket {string} on date {string} and with reason {string}")
   public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String string,
       String string2, String string3) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int id = Integer.parseInt(string);
+    MaintenanceTicket.getWithId(id).rejectFix();
   }
-
+  
   @Then("the ticket {string} shall be marked as {string}")
   public void the_ticket_shall_be_marked_as(String string, String string2) {
     // Write code here that turns the phrase above into concrete actions
