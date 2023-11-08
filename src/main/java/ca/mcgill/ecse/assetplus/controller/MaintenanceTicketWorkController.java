@@ -95,7 +95,7 @@ public class MaintenanceTicketWorkController {
 
     Status status = ticket.getStatus();
     if (status.equals(Status.Open)) {
-      return "Cannot  a maintenance ticket which is open. ";
+      return "Cannot approve a maintenance ticket which is open.";
     }
     if (status.equals(Status.Resolved)) {
       return "Cannot disapprove a maintenance ticket which is resolved.";
@@ -104,7 +104,7 @@ public class MaintenanceTicketWorkController {
       return "Cannot disapprove a maintenance ticket which is closed.";
     }
     if (status.equals(Status.Assigned)) {
-      return "Cannot disapprove a maintenance ticket which is in progress.";
+      return "Cannot disapprove a maintenance ticket which is assigned.";
     }
 
     ticket.acceptFix();
