@@ -288,8 +288,14 @@ public class MaintenanceTicketsStepDefinitions {
     assertEquals(string2, ticket.getStatus());
   }
 
+  /**
+   * Verifying that the error being thrown by the system is correct
+   * @param string The error in question to check
+   * @author Erik Cupsa (@Erik-Cupsa)
+   */
   @Then("the system shall raise the error {string}")
   public void the_system_shall_raise_the_error(String string) {
+//    assertEquals(, string)
   }
 
   /**
