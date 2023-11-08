@@ -286,6 +286,9 @@ public class MaintenanceTicketsStepDefinitions {
   public void the_ticket_shall_be_marked_as(String string, String string2) {
     int ticketID = Integer.parseInt(string);
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+    if (!string2.equals(ticket.getStatus().name())){
+      int z=0;
+    }
     assertEquals(string2, ticket.getStatus().name());
   }
 

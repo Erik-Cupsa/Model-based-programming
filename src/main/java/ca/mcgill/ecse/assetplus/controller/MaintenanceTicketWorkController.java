@@ -84,6 +84,9 @@ public class MaintenanceTicketWorkController {
     }
 
     ticket.completeFix();
+    if (!ticket.hasFixApprover()){
+      ticket.entry();
+    }
     return "TODO";
   }
 
