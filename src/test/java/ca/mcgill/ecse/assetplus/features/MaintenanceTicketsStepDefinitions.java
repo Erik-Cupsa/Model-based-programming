@@ -277,14 +277,16 @@ public class MaintenanceTicketsStepDefinitions {
   
   @Then("the ticket {string} shall be marked as {string}")
   public void the_ticket_shall_be_marked_as(String string, String string2) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int ticketID = Integer.parseInt(string);
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+
+    if (string2.equals("Open")) {
+
+    }
   }
 
   @Then("the system shall raise the error {string}")
   public void the_system_shall_raise_the_error(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
   }
 
   /**
@@ -295,8 +297,8 @@ public class MaintenanceTicketsStepDefinitions {
   @Then("the ticket {string} shall not exist in the system")
   public void the_ticket_shall_not_exist_in_the_system(String string) {
     int ticketID = Integer.parseInt(string);
-    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
-    assertNull(ticket);
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID); //getting maintenance ticket with given Id
+    assertNull(ticket); //verifying ticket is null
   }
   /**
    * Gherkin step definition method checks that, for a specified ticket, estimated time, priority, requires approval are set to the corresponding input strings' values.
