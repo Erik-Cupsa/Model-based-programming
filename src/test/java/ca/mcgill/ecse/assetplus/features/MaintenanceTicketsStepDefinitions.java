@@ -1,7 +1,5 @@
 package ca.mcgill.ecse.assetplus.features;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +18,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -184,7 +183,6 @@ public class MaintenanceTicketsStepDefinitions {
   public void ticket_is_marked_as(String string, String string2) {
     int ticketID = Integer.parseInt(string);
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
-    String status = ticket.getStatusFullName();
     if (string2.equals("Open")){
       return;
     }else if (string2.equals("Assigned")||string2.equals("InProgress")||string2.equals("Resolved")||string2.equals("Closed")){
@@ -260,18 +258,40 @@ public class MaintenanceTicketsStepDefinitions {
     // Write code here that turns the phrase above into concrete actions
     throw new io.cucumber.java.PendingException();
   }
-
+  /**
+   * Gherkin step definition method checks that, for a specified ticket, estimated time, priority, requires approval are set to the corresponding input strings' values.
+   *
+   * @author Philippe Aprahamian
+   * @param string represents the ticket ID.
+   * @param string2 represents the estimated time the ticket should be set to.
+   * @param string3 represents the priority level the ticket should be set to.
+   * @param string4 represents the boolean value of requiresApproval the ticket should be set to.
+   */
   @Then("the ticket {string} shall have estimated time {string}, priority {string}, and requires approval {string}")
   public void the_ticket_shall_have_estimated_time_priority_and_requires_approval(String string,
       String string2, String string3, String string4) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int ticketID = Integer.parseInt(string);
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+    assertEquals(ticket.getTimeToResolve().name(),string2);
+    assertEquals(ticket.getPriority().name(),string3);
+    if (string4.equals("true")){
+      assertTrue(ticket.hasFixApprover());
+    }else{
+      assertFalse(ticket.hasFixApprover());
+    }
   }
-
+  /**
+   * Gherkin step definition method checks that, for a specified ticket, it is assigned to the correct ticketFixer.
+   *
+   * @author Philippe Aprahamian
+   * @param string represents the ticket ID.
+   * @param string2 represents the email of the expected ticket fixer.
+   */
   @Then("the ticket {string} shall be assigned to {string}")
   public void the_ticket_shall_be_assigned_to(String string, String string2) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    int ticketID = Integer.parseInt(string);
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+    assertEquals(ticket.getTicketFixer().getEmail(),string2);
   }
 
   /**
