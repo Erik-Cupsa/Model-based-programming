@@ -226,7 +226,7 @@ public class MaintenanceTicketsStepDefinitions {
     MaintenanceTicket.TimeEstimate timeEstimate = MaintenanceTicket.TimeEstimate.valueOf(string3);
     MaintenanceTicket.PriorityLevel priority = MaintenanceTicket.PriorityLevel.valueOf(string4);
     boolean requiresApproval = Boolean.parseBoolean(string5);
-    MaintenanceTicketWorkController.assignStaffToTicket(id, employeeEmail, timeEstimate, priority,
+    error=MaintenanceTicketWorkController.assignStaffToTicket(id, employeeEmail, timeEstimate, priority,
             requiresApproval);
   }
 
@@ -238,7 +238,7 @@ public class MaintenanceTicketsStepDefinitions {
   @When("the hotel staff attempts to start the ticket {string}")
   public void the_hotel_staff_attempts_to_start_the_ticket(String string) {
     int id = Integer.parseInt(string);
-    MaintenanceTicketWorkController.startWorkOnTicket(id);
+    error=MaintenanceTicketWorkController.startWorkOnTicket(id);
   }
 
   /**
@@ -249,7 +249,7 @@ public class MaintenanceTicketsStepDefinitions {
   @When("the manager attempts to approve the ticket {string}")
   public void the_manager_attempts_to_approve_the_ticket(String string) {
     int id = Integer.parseInt(string);
-    MaintenanceTicketWorkController.approveWorkOnTicket(id);
+    error=MaintenanceTicketWorkController.approveWorkOnTicket(id);
   }
 
   /**
@@ -260,7 +260,7 @@ public class MaintenanceTicketsStepDefinitions {
   @When("the hotel staff attempts to complete the ticket {string}")
   public void the_hotel_staff_attempts_to_complete_the_ticket(String string) {
     int id = Integer.parseInt(string);
-    MaintenanceTicketWorkController.completeWorkOnTicket(id);
+    error=MaintenanceTicketWorkController.completeWorkOnTicket(id);
   }
 
   /**
@@ -273,7 +273,7 @@ public class MaintenanceTicketsStepDefinitions {
       String string2, String string3) {
     int id = Integer.parseInt(string);
     Date date = Date.valueOf(string2);
-    MaintenanceTicketWorkController.disapproveWorkOnTicket(id, date, string3);
+    error=MaintenanceTicketWorkController.disapproveWorkOnTicket(id, date, string3);
   }
 
   /**
