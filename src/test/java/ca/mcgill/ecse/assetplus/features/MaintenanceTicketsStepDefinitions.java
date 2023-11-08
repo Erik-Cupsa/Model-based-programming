@@ -266,13 +266,14 @@ public class MaintenanceTicketsStepDefinitions {
   /**
    * Gherkin step definition method to test state machine.
    *
-   * @author Anders Woodruff
+   * @author Anders Woodruff, Erik Cupsa (@Erik-Cupsa)
    */
   @When("the manager attempts to disapprove the ticket {string} on date {string} and with reason {string}")
   public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String string,
       String string2, String string3) {
     int id = Integer.parseInt(string);
-    MaintenanceTicket.getWithId(id).rejectFix();
+    Date date = Date.valueOf(string2);
+    MaintenanceTicket.getWithId(id).rejectFix(date, string3);
   }
 
   /**
