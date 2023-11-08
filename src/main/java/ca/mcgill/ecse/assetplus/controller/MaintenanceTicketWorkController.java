@@ -84,7 +84,7 @@ public class MaintenanceTicketWorkController {
     }
 
     ticket.completeFix();
-    return "TODO";
+    return "";
   }
 
   public static String approveWorkOnTicket(int ticketId) {
