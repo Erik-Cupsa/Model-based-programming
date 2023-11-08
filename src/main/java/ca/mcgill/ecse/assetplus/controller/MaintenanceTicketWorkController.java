@@ -104,7 +104,7 @@ public class MaintenanceTicketWorkController {
       return "The maintenance ticket is already closed.";
     }
     if (status.equals(Status.Assigned)) {
-      return "Cannot disapprove a maintenance ticket which is assigned.";
+      return "Cannot approve a maintenance ticket which is assigned.";
     }
 
     ticket.acceptFix();
