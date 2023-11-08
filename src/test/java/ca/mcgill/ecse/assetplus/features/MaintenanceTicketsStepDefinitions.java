@@ -223,11 +223,8 @@ public class MaintenanceTicketsStepDefinitions {
     MaintenanceTicket.TimeEstimate timeEstimate = MaintenanceTicket.TimeEstimate.valueOf(string3);
     MaintenanceTicket.PriorityLevel priority = MaintenanceTicket.PriorityLevel.valueOf(string4);
     boolean requiresApproval = Boolean.parseBoolean(string5);
-    Date raisedOnDate = new Date( 123, 10, 5);
-    AssetPlusFeatureSet4Controller.updateMaintenanceTicket(id, raisedOnDate, "xyz", employeeEmail, -1);
-    MaintenanceTicket.getWithId(id).setPriority(priority);
-    MaintenanceTicket.getWithId(id).setTimeToResolve(timeEstimate);
-    MaintenanceTicket.getWithId(id).setRequiresMangerApproval(requiresApproval);
+    MaintenanceTicketsStepDefinitions.assignStaffToTicket(id, employeeEmail, timeEstimate, priority,
+            requiresApproval);
   }
 
   /**
@@ -238,7 +235,7 @@ public class MaintenanceTicketsStepDefinitions {
   @When("the hotel staff attempts to start the ticket {string}")
   public void the_hotel_staff_attempts_to_start_the_ticket(String string) {
     int id = Integer.parseInt(string);
-    MaintenanceTicket.getWithId(id).startWork();
+    MaintenanceTicketWorkController.startWorkOnTicket(id);
   }
 
   /**
@@ -249,7 +246,7 @@ public class MaintenanceTicketsStepDefinitions {
   @When("the manager attempts to approve the ticket {string}")
   public void the_manager_attempts_to_approve_the_ticket(String string) {
     int id = Integer.parseInt(string);
-    MaintenanceTicket.getWithId(id).setManagerApproval(true);
+    MaintenanceTicketWorkController.approveWorkOnTicket(id);
   }
 
   /**
@@ -260,20 +257,20 @@ public class MaintenanceTicketsStepDefinitions {
   @When("the hotel staff attempts to complete the ticket {string}")
   public void the_hotel_staff_attempts_to_complete_the_ticket(String string) {
     int id = Integer.parseInt(string);
-    MaintenanceTicket.getWithId(id).proposeFix();
+    MaintenanceTicketWorkController.completeWorkOnTicket(id);
   }
 
   /**
    * Gherkin step definition method to test state machine.
    *
-   * @author Anders Woodruff, Erik Cupsa (@Erik-Cupsa)
+   * @author Anders Woodruff
    */
   @When("the manager attempts to disapprove the ticket {string} on date {string} and with reason {string}")
   public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String string,
       String string2, String string3) {
     int id = Integer.parseInt(string);
     Date date = Date.valueOf(string2);
-    MaintenanceTicket.getWithId(id).rejectFix(date, string3);
+    MaintenanceTicketWorkController.disapproveWorkOnTicket(id, date, string3);
   }
 
   /**
