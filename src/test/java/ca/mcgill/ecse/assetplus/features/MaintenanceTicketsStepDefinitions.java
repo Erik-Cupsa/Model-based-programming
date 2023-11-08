@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
+import ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceNote;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.model.AssetPlus;
@@ -214,7 +215,7 @@ public class MaintenanceTicketsStepDefinitions {
 
   /**
    * Gherkin step definition method to test state machine.
-   *
+   * @author David Marji
    * @author Anders Woodruff
    */
   @When("the manager attempts to assign the ticket {string} to {string} with estimated time {string}, priority {string}, and requires approval {string}")
@@ -225,7 +226,7 @@ public class MaintenanceTicketsStepDefinitions {
     MaintenanceTicket.TimeEstimate timeEstimate = MaintenanceTicket.TimeEstimate.valueOf(string3);
     MaintenanceTicket.PriorityLevel priority = MaintenanceTicket.PriorityLevel.valueOf(string4);
     boolean requiresApproval = Boolean.parseBoolean(string5);
-    MaintenanceTicketsStepDefinitions.assignStaffToTicket(id, employeeEmail, timeEstimate, priority,
+    MaintenanceTicketWorkController.assignStaffToTicket(id, employeeEmail, timeEstimate, priority,
             requiresApproval);
   }
 
