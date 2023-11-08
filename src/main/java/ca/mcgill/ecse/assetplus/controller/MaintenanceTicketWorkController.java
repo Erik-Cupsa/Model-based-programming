@@ -83,9 +83,6 @@ public class MaintenanceTicketWorkController {
       return "The maintenance ticket is already resolved.";
     }
     ticket.completeFix();
-    if (!ticket.hasFixApprover()){
-      ticket.entry();
-    }
     return "TODO";
   }
 
