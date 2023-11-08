@@ -41,12 +41,12 @@ As manager, I want to review all maintenance tickets in the system with their st
   Scenario: Successfully view status of all maintenance tickets
     When the manager attempts to view all maintenance tickets in the system
     Then the following maintenance tickets shall be presented
-      | id | ticketRaiser   | raisedOnDate | description                   | assetName | expectLifeSpan | purchaseDate | floorNumber | roomNumber | status     | fixedByEmail | timeToResolve    | priority | approvalRequired |
-      |  1 | manager@ap.com |   2023-07-20 | This is a dummy description 1 | bed       |           5000 |   2010-01-30 |          10 |         35 | Assigned   | smith@ap.com | LessThanADay     | Low      | true             |
-      |  2 | smith@ap.com   |   2023-07-10 | This is a dummy description 2 | lamp      |           1800 |   2022-03-20 |           9 |         23 | InProgress | smith@ap.com | OneToThreeDays   | Low      | true             |
-      |  3 | manager@ap.com |   2023-07-20 | It is noisy                   |           |                |              |             |            | Open       |              |                  |          |                  |
-      |  4 | smith@ap.com   |   2023-10-15 | The lamp is broken            | lamp      |           1800 |   2022-03-20 |           9 |         23 | Resolved   | jeff@ap.com  | OneToThreeWeeks  | Normal   | false            |
-      |  5 | smith@ap.com   |   2023-10-16 | The bed needs repair          | bed       |           5000 |   2010-01-30 |           1 |         35 | Closed     | jeff@ap.com  | ThreeOrMoreWeeks | Urgent   | true             |
+      | id | ticketRaiser   | raisedOnDate | description                      | assetName | expectLifeSpan | purchaseDate | floorNumber | roomNumber | status     | fixedByEmail | timeToResolve    | priority | approvalRequired |
+      |  1 | manager@ap.com |   2023-07-20 | The bed needs replacement        | bed       |           5000 |   2010-01-30 |          10 |         35 | Assigned   | smith@ap.com | LessThanADay     | Low      | true             |
+      |  2 | smith@ap.com   |   2023-07-10 | The lamp is sometimes flickering | lamp      |           1800 |   2022-03-20 |           9 |         23 | InProgress | smith@ap.com | OneToThreeDays   | Low      | true             |
+      |  3 | manager@ap.com |   2023-07-20 | It is noisy                      |           |                |              |             |            | Open       |              |                  |          |                  |
+      |  4 | smith@ap.com   |   2023-10-15 | The lamp is broken               | lamp      |           1800 |   2022-03-20 |           9 |         23 | Resolved   | jeff@ap.com  | OneToThreeWeeks  | Normal   | false            |
+      |  5 | smith@ap.com   |   2023-10-16 | The bed needs repair             | bed       |           5000 |   2010-01-30 |           1 |         35 | Closed     | jeff@ap.com  | ThreeOrMoreWeeks | Urgent   | true             |
     Then the ticket with id "1" shall have the following notes
       | noteTaker      | addedOnDate | description                       |
       | smith@ap.com   |  2023-09-10 | Bed can still be used for a while |
