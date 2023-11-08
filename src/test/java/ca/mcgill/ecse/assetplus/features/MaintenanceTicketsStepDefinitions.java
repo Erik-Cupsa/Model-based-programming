@@ -240,23 +240,84 @@ public class MaintenanceTicketsStepDefinitions {
     throw new io.cucumber.java.PendingException();
   }
 
+  /**
+   * Verifying that the number of tickets in the system is correct
+   * @param string The number of tickets
+   * @author Erik Cupsa (@Erik-Cupsa)
+   */
   @Then("the number of tickets in the system shall be {string}")
   public void the_number_of_tickets_in_the_system_shall_be(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    assertEquals(Integer.parseInt(string), assetPlus.getMaintenanceTickets().size());
   }
 
+   /**
+   * Gherkin step definition method to ensure the information of the tickets obtained by the controller method 6 is the same as the information in the datatable.
+   * @author Ming Xuan Yue
+   * @param dataTable Cucumber DataTable containing the id, ticketRaiser, raisedOnDate, description, assetName, expectedLifeSpan, purchaseDate, floorNumber and roomNumber, status, fixedByEmail, timeToResolve, priority and approvalRequired of the tickets shown.
+   * 
+   */
   @Then("the following maintenance tickets shall be presented")
   public void the_following_maintenance_tickets_shall_be_presented(
       io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
+    List<Map<String, String>> rows = dataTable.asMaps();
+    int i = 0;
+    for (var row : rows) {
+      TOMaintenanceTicket currTicket = tickets.get(i);
+      int id = Integer.parseInt(row.get("id"));
+      assertEquals(id, currTicket.getId());
+      String ticketRaiserEmail = row.get("ticketRaiser");
+      assertEquals(ticketRaiserEmail, currTicket.getRaisedByEmail());
+      Date raisedOnDate = Date.valueOf(row.get("raisedOnDate"));
+      assertEquals(raisedOnDate, currTicket.getRaisedOnDate());
+      String description = row.get("description");
+      assertEquals(description, currTicket.getDescription());
+      String assetName = row.get("assetName");
+      assertEquals(assetName, currTicket.getAssetName());
+      String expectLifeSpanStr = row.get("expectLifeSpan");
+      int expectLifeSpan = -1;
+      if (expectLifeSpanStr != null) {
+        expectLifeSpan = Integer.parseInt(expectLifeSpanStr);
+      }
+      assertEquals(expectLifeSpan, currTicket.getExpectLifeSpanInDays());
+      String purchaseDateStr = row.get("purchaseDate");
+      Date purchaseDate = null;
+      if (purchaseDateStr != null) {
+          purchaseDate = Date.valueOf(purchaseDateStr);
+      }
+      assertEquals(purchaseDate, currTicket.getPurchaseDate());
+      String floorNumberStr = row.get("floorNumber");
+      int floorNumber = -1;
+      if (floorNumberStr != null) {
+        floorNumber = Integer.parseInt(floorNumberStr);
+      }
+      assertEquals(floorNumber, currTicket.getFloorNumber());
+      String roomNumberStr = row.get("roomNumber");
+      int roomNumber = -1;
+      if (roomNumberStr != null) {
+        roomNumber = Integer.parseInt(roomNumberStr);
+      }
+      assertEquals(roomNumber, currTicket.getRoomNumber());
+      
+      String aStatus = row.get("status");
+      assertEquals(aStatus, currTicket.getStatus());
+
+      String fixedByEmail = row.get("fixedByEmail");
+      assertEquals(fixedByEmail, currTicket.getFixedByEmail());
+
+      String aTimeToResolve = row.get("timeToResolve");
+      assertEquals(aTimeToResolve, currTicket.getTimeToResolve());
+
+      String priority = row.get("priority");
+      assertEquals(priority, currTicket.getPriority());
+
+      String approvalRequiredStr = row.get("approvalRequired");
+      Boolean approvalRequired = null;
+      if (approvalRequiredStr != null){
+        approvalRequired = Boolean.valueOf(approvalRequiredStr);
+      }
+      assertEquals(approvalRequired, currTicket.getApprovalRequired());
+      i++;
+    }        
   }
 
   /**
