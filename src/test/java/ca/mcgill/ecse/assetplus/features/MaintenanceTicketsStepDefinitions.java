@@ -311,10 +311,7 @@ public class MaintenanceTicketsStepDefinitions {
       assertEquals(priority, currTicket.getPriority());
 
       String approvalRequiredStr = row.get("approvalRequired");
-      Boolean approvalRequired = null;
-      if (approvalRequiredStr != null){
-        approvalRequired = Boolean.valueOf(approvalRequiredStr);
-      }
+      boolean approvalRequired = Boolean.valueOf(approvalRequiredStr);
       assertEquals(approvalRequired, currTicket.getApprovalRequired());
       i++;
     }        

@@ -52,7 +52,12 @@ public class AssetPlusFeatureSet6Controller {
             int expectedLifeSpanInDays = -1;
             int floorNumber = -1;
             int roomNumber = -1;
-
+            String aStatus = ticket.getStatusFullName();
+            String aFixedbyEmail = null;
+            String aTimeToResolve = null;
+            String aPriority = null;
+            boolean aApprovalRequired = false;
+            
 
 
             if (!ticketImages.isEmpty()){                       // hasImages/not
@@ -66,15 +71,30 @@ public class AssetPlusFeatureSet6Controller {
                     notes[i] = new TOMaintenanceNote(ticket.getTicketNote(i).getDate(), ticket.getTicketNote(i).getDescription(), ticket.getTicketNote(i).getNoteTaker().getEmail());
                 } // create TOMaintenanceNote then add to an array
             }
-            if (ticket.hasAsset()){                             // hasAsset/not
+            if (ticket.hasAsset()){
                 assetname = ticket.getAsset().getAssetType().getName();
                 expectedLifeSpanInDays = ticket.getAsset().getAssetType().getExpectedLifeSpan();
                 floorNumber = ticket.getAsset().getFloorNumber();
-                roomNumber = ticket.getAsset().getRoomNumber();
-                tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));
-            }else{            // if asset does not exist for a ticket, then
-                TOMaintenanceTicket toTicket = new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, assetname, expectedLifeSpanInDays, null, floorNumber, roomNumber, imageURLs, notes);
-                tickets.add(toTicket);
+                roomNumber = ticket.getAsset().getRoomNumber();                             // hasAsset/not
+                if (ticket.hasTicketFixer()){       // if TicketFixer exists
+                    aFixedbyEmail = ticket.getTicketFixer().getEmail();
+                    aTimeToResolve = ticket.getTimeToResolve().toString();
+                    aPriority = ticket.getPriority().toString();
+                    aApprovalRequired = ticket.hasFixApprover();
+                    tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, aStatus, aFixedbyEmail, aTimeToResolve, aPriority, aApprovalRequired, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));        
+                }else{
+                    tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, aStatus, aFixedbyEmail, aTimeToResolve, aPriority, aApprovalRequired, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));   
+                }
+            }else{      // if asset does not exist for a ticket, then
+                if (ticket.hasTicketFixer()){
+                    aFixedbyEmail = ticket.getTicketFixer().getEmail();
+                    aTimeToResolve = ticket.getTimeToResolve().toString();
+                    aPriority = ticket.getPriority().toString();
+                    aApprovalRequired = ticket.hasFixApprover();
+                    tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, aStatus, aFixedbyEmail, aTimeToResolve, aPriority, aApprovalRequired, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));        
+                }else{
+                    tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, aStatus, aFixedbyEmail, aTimeToResolve, aPriority, aApprovalRequired, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));   
+                }
             }
         }
         return tickets;         // returns all tickets
