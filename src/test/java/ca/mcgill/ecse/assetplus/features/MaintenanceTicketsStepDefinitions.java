@@ -154,7 +154,7 @@ public class MaintenanceTicketsStepDefinitions {
     }
   }
   /**
-   * Gherkin step definition method to create ticket, mark its state to a specified state and set the requiresApproval value.
+   * Gherkin step definition method mark a specified ticket to a specified state and set its requiresApproval value.
    *
    * @author Philippe Aprahamian
    * @param string represents the ticket ID
@@ -173,7 +173,13 @@ public class MaintenanceTicketsStepDefinitions {
     }
     ticket.startWork();
   }
-
+  /**
+   * Gherkin step definition method mark a specified ticket to a specified state.
+   *
+   * @author Philippe Aprahamian
+   * @param string represents the ticket ID
+   * @param string2 represents the state the ticket should be marked to
+   */
   @Given("ticket {string} is marked as {string}")
   public void ticket_is_marked_as(String string, String string2) {
     int ticketID = Integer.parseInt(string);
