@@ -74,7 +74,7 @@ public class MaintenanceTicketWorkController {
       return "Cannot complete a maintenance ticket which is open.";
     }
     if (status.equals(Status.Assigned)) {
-      return "Cannot complete a maintenance ticket which is resolved.";
+      return "Cannot complete a maintenance ticket which is assigned.";
     }
     if (status.equals(Status.Closed)) {
       return "The maintenance ticket is already closed.";
