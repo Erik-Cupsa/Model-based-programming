@@ -32,6 +32,8 @@ public class MaintenanceTicketsStepDefinitions {
   private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
   private List<TOMaintenanceTicket> tickets;
 
+  private String error;
+
   @Given("the following employees exist in the system")
   public void the_following_employees_exist_in_the_system(
       io.cucumber.datatable.DataTable dataTable) {
@@ -293,7 +295,7 @@ public class MaintenanceTicketsStepDefinitions {
    */
   @Then("the system shall raise the error {string}")
   public void the_system_shall_raise_the_error(String string) {
-//    assertEquals(, string)
+    assertEquals(error, string);
   }
 
   /**
