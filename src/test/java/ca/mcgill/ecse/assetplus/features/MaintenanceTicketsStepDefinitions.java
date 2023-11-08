@@ -274,15 +274,18 @@ public class MaintenanceTicketsStepDefinitions {
     int id = Integer.parseInt(string);
     MaintenanceTicket.getWithId(id).rejectFix();
   }
-  
+
+  /**
+   * Verifying that a given ticket is marked with the correct status
+   * @param string The id of the ticket to be checked
+   * @param string2 The status of the ticket to be checked
+   * @author Erik Cupsa (@Erik-Cupsa)
+   */
   @Then("the ticket {string} shall be marked as {string}")
   public void the_ticket_shall_be_marked_as(String string, String string2) {
     int ticketID = Integer.parseInt(string);
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
-
-    if (string2.equals("Open")) {
-
-    }
+    assertEquals(string2, ticket.getStatus());
   }
 
   @Then("the system shall raise the error {string}")
