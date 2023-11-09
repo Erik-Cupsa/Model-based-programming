@@ -13,17 +13,14 @@ public class AssetPlusFeatureSet2Controller {
    */
 
   public static String addAssetType(String name, int expectedLifeSpanInDays) {
-  try{
-		AssetPlusPersistence.save();
-  }catch(RuntimeException e){
-  	return e.getMessage();
-  }  
+
 	if(AssetPlusFeatureSet2Controller.validateInputs(name, expectedLifeSpanInDays).length()!=0) { //check if assetType already is in the system / wrong input formats
 		return AssetPlusFeatureSet2Controller.validateInputs(name, expectedLifeSpanInDays); //if format is wrong/type already exists returns the corresponding error
 	}
     AssetType assetType = new AssetType(name, expectedLifeSpanInDays, AssetPlusApplication.getAssetPlus());//instantiating the asset type
     
     //adding it the list of AssetTypes in the AssetPlus object
+	  AssetPlusPersistence.save();
     return "";
   }
 
@@ -60,7 +57,7 @@ public class AssetPlusFeatureSet2Controller {
 	
 	(AssetType.getWithName(oldName)).setName(newName);
 	(AssetType.getWithName(newName)).setExpectedLifeSpan(newExpectedLifeSpanInDays);
-
+	  AssetPlusPersistence.save();
   return "";
   }
 
@@ -71,16 +68,12 @@ public class AssetPlusFeatureSet2Controller {
 	 * @param name name of the asset type to delete
    */
   public static void deleteAssetType(String name) {
-	try{
-		AssetPlusPersistence.save();
-  }catch(RuntimeException e){
-  	e.printStackTrace();
-  }
+
 	if(AssetType.hasWithName(name)) {
 		AssetPlusApplication.getAssetPlus().removeAssetType(AssetType.getWithName(name)); //removes from system
 		AssetType.getWithName(name).delete(); //deletes
 	}
-   
+	  AssetPlusPersistence.save();
   }
   
 
@@ -101,6 +94,7 @@ public class AssetPlusFeatureSet2Controller {
 	    else if(AssetType.hasWithName(name)){ //check if an AssetType with this name already exists
 	      return "The asset type already exists";
 	    }
+	  AssetPlusPersistence.save();
 	  return "";
   }
 }

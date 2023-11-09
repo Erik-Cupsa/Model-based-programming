@@ -123,11 +123,7 @@ public class MaintenanceTicketWorkController {
 
   public static String approveWorkOnTicket(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
-    try{
-			AssetPlusPersistence.save();
-		}catch(RuntimeException e){
-			return e.getMessage();
-		}
+
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }
@@ -146,17 +142,17 @@ public class MaintenanceTicketWorkController {
       return "Cannot approve a maintenance ticket which is in progress.";
     }
     ticket.acceptFix();
-
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      return e.getMessage();
+    }
     return "";
   }
 
   public static String disapproveWorkOnTicket(int ticketId, Date date, String description) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
-    try{
-			AssetPlusPersistence.save();
-		}catch(RuntimeException e){
-			return e.getMessage();
-		}
+
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }
@@ -177,6 +173,11 @@ public class MaintenanceTicketWorkController {
     }
 
     ticket.rejectFix(date, description);
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      return e.getMessage();
+    }
     return "";
   }
 }

@@ -37,6 +37,7 @@ public class AssetPlusFeatureSet1Controller {
         else if (email.equals("manager@ap.com")) {
             return "Email cannot be manager@ap.com";
         } else {
+            AssetPlusPersistence.save();
             return "";
         }
     }
@@ -87,7 +88,6 @@ public class AssetPlusFeatureSet1Controller {
                 return "Password must contain one lower-case character";
             }
         }
-
         return "";
     }
 
@@ -136,6 +136,7 @@ public class AssetPlusFeatureSet1Controller {
             return passCheck;
         }
         manager.setPassword(password);
+        AssetPlusPersistence.save();
         return "";
     }
 
@@ -155,11 +156,7 @@ public class AssetPlusFeatureSet1Controller {
         String emailCheck = checkValidEmail(email);
         String passCheck = checkValidPassword(password, false);
         String idCheck = checkValidIdentification(name, phoneNumber);
-        try{
-            AssetPlusPersistence.save();
-        }catch(RuntimeException e){
-            return e.getMessage();
-        }
+
         if (!(emailCheck.equals(""))) {
             return emailCheck;
         } else if (!(passCheck.equals(""))) {
@@ -188,6 +185,11 @@ public class AssetPlusFeatureSet1Controller {
                 return "Email domain cannot be @ap.com";
             }
             app.addGuest(email, name, password, phoneNumber);
+        }
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+            return e.getMessage();
         }
         return "";
     }
@@ -223,7 +225,7 @@ public class AssetPlusFeatureSet1Controller {
         user.setPassword(newPassword);
         user.setName(newName);
         user.setPhoneNumber(newPhoneNumber);
-
+        AssetPlusPersistence.save();
         return "";
     }
 
