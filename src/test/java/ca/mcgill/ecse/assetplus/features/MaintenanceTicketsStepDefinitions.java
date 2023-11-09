@@ -8,13 +8,7 @@ import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 import ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceNote;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
-import ca.mcgill.ecse.assetplus.model.AssetPlus;
-import ca.mcgill.ecse.assetplus.model.AssetType;
-import ca.mcgill.ecse.assetplus.model.HotelStaff;
-import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
-import ca.mcgill.ecse.assetplus.model.Manager;
-import ca.mcgill.ecse.assetplus.model.SpecificAsset;
-import ca.mcgill.ecse.assetplus.model.User;
+import ca.mcgill.ecse.assetplus.model.*;
 import io.cucumber.gherkin.Main;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -469,22 +463,25 @@ public class MaintenanceTicketsStepDefinitions {
   public void the_ticket_with_id_shall_have_the_following_notes(String string,
       io.cucumber.datatable.DataTable dataTable) {
     int ticketID = Integer.parseInt(string);
-    TOMaintenanceTicket currTicket = null;
+
+    MaintenanceTicket currTicket = MaintenanceTicket.getWithId(ticketID);
+    /*
     for (var ticket : tickets) {
       if (ticket.getId() == ticketID) {
         currTicket = ticket;
       }
     }
-    
+     */
+
     assertNotNull(currTicket);
 
-    List<TOMaintenanceNote> currTicketNotes = currTicket.getNotes();
+    List<MaintenanceNote> currTicketNotes = currTicket.getTicketNotes();
     List<Map<String, String>> rows = dataTable.asMaps();
     int i = 0;
     for (var row : rows) {
-      TOMaintenanceNote currNote = currTicketNotes.get(i);
+      MaintenanceNote currNote = currTicketNotes.get(i);
       String noteTaker = row.get("noteTaker");
-      assertEquals(noteTaker, currNote.getNoteTakerEmail());
+      assertEquals(noteTaker, currNote.getNoteTaker().getEmail());
       Date addedOnDate = Date.valueOf(row.get("addedOnDate"));
       assertEquals(addedOnDate, currNote.getDate());
       String description = row.get("description");
