@@ -83,7 +83,7 @@ public class MaintenanceTicketWorkController {
       return "The maintenance ticket is already resolved.";
     }
     ticket.completeFix();
-    return "TODO";
+    return "";
   }
 
   public static String approveWorkOnTicket(int ticketId) {
