@@ -5,6 +5,7 @@ import java.sql.Date;
 import ca.mcgill.ecse.assetplus.model.HotelStaff;
 import ca.mcgill.ecse.assetplus.model.MaintenanceNote;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 public class AssetPlusFeatureSet7Controller {
 
@@ -20,6 +21,11 @@ public class AssetPlusFeatureSet7Controller {
 	 */
 	public static String addMaintenanceNote(Date date, String description, int ticketID,
 			String email) {
+		try{
+		  AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+  	  return e.getMessage();
+    }
 		if(description==null || description.equals("")){
 			return "Ticket description cannot be empty";
 		}
@@ -49,6 +55,11 @@ public class AssetPlusFeatureSet7Controller {
 	// index starts at 0
 	public static String updateMaintenanceNote(int ticketID, int index, Date newDate,
 			String newDescription, String newEmail) {
+		try{
+			AssetPlusPersistence.save();
+		}catch(RuntimeException e){
+			return e.getMessage();
+		}
 		if(newDescription==null || newDescription.equals("")){
 			return "Ticket description cannot be empty";
 		}
@@ -84,6 +95,7 @@ public class AssetPlusFeatureSet7Controller {
 	// index starts at 0
 	public static void deleteMaintenanceNote(int ticketID, int index) {
 		try{
+			AssetPlusPersistence.save();
 			MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
 			MaintenanceNote targetNote = ticket.getTicketNote(index);
 			targetNote.delete();

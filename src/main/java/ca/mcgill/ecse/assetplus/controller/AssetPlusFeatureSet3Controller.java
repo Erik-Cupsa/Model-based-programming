@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.assetplus.controller;
 
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import java.sql.Date;
 
 /**
@@ -22,6 +23,11 @@ public class AssetPlusFeatureSet3Controller {
     public static String addSpecificAsset(int assetNumber, int floorNumber, int roomNumber,
                                           Date purchaseDate, String assetTypeName) {
         //calling private helper method to validate inputs based on constraints
+        try{
+		    AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+  	        return e.getMessage();
+        }
         String testing = inputValidation(assetNumber, floorNumber, roomNumber, assetTypeName);
         if(testing != "Correct") { //if error found
             return testing; // return error
@@ -55,7 +61,11 @@ public class AssetPlusFeatureSet3Controller {
     public static String updateSpecificAsset(int assetNumber, int newFloorNumber, int newRoomNumber,
                                              Date newPurchaseDate, String newAssetTypeName) {
         String testing = inputValidation(assetNumber, newFloorNumber, newRoomNumber, newAssetTypeName); //calling private helper method to validate inputs based on constraints
-
+        try{
+		    AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+  	        return e.getMessage();
+        }
         if(testing != "Correct") { // if error found
             return testing; //return String error
         }
@@ -95,6 +105,11 @@ public class AssetPlusFeatureSet3Controller {
      * @author Erik Cupsa (@Erik-Cupsa)
      */
     public static void deleteSpecificAsset(int assetNumber) {
+        try{
+		    AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+  	        e.printStackTrace();
+        }
         if (assetNumber >= 1) { //if valid asset number
             SpecificAsset toDelete = SpecificAsset.getWithAssetNumber(assetNumber); //getting the specific asset we want to delete
             if (toDelete != null) { //if the specific asset exists in the system

@@ -6,7 +6,8 @@ import java.util.*;
 import java.sql.Date;
 
 // line 1 "../../../../../AssetPlusStates.ump"
-// line 45 "../../../../../AssetPlus.ump"
+// line 23 "../../../../../AssetPlusPersistence.ump"
+// line 46 "../../../../../AssetPlus.ump"
 public class MaintenanceTicket
 {
 
@@ -683,6 +684,14 @@ public class MaintenanceTicket
   // line 12 "../../../../../AssetPlusStates.ump"
    private void doRejectFix(Date aDate, String aDescription){
     this.addTicketNote(aDate, aDescription, this.getFixApprover());
+  }
+
+  // line 25 "../../../../../AssetPlusPersistence.ump"
+   public static  void reinitializeUniqueId(List<MaintenanceTicket> tickets){
+    maintenanceticketsById.clear();
+        for (var t : tickets){
+            maintenanceticketsById.put(t.getId(), t);
+        }
   }
 
 

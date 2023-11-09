@@ -1,5 +1,6 @@
 namespace ca.mcgill.ecse.assetplus.model;
 use AssetPlusStates.ump
+use AssetPlusPersistence.ump;
 
 use AssetPlusStates.ump
 class AssetPlus

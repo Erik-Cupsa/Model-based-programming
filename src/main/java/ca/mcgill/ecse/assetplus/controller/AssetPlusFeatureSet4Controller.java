@@ -3,6 +3,7 @@ package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import java.sql.Date;
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 public class AssetPlusFeatureSet4Controller {
 
@@ -19,9 +20,15 @@ public class AssetPlusFeatureSet4Controller {
    */
   public static String addMaintenanceTicket(
       int id, Date raisedOnDate, String description, String email, int assetNumber) {
+    
+    try{
+		  AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+  	  return e.getMessage();
+    }
     AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
     User user = User.getWithEmail(email);
-
+        
     if (user == null) {
       return "The ticket raiser does not exist";
     } else if (description == null || description.isEmpty()) {
@@ -62,7 +69,11 @@ public class AssetPlusFeatureSet4Controller {
     if (ticket == null) {
       return "The ticket does not exist";
     }
-
+    try{
+		  AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+  	  return e.getMessage();
+    }
     User user = User.getWithEmail(newEmail); // temp fix to avoid controller errors
 
     if (user == null) {
@@ -95,6 +106,11 @@ public class AssetPlusFeatureSet4Controller {
    * @author Anders Cairns Woodruff
    */
   public static void deleteMaintenanceTicket(int id) {
+    try{
+		  AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+  	  e.printStackTrace();
+    }
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(id);
     if (ticket == null) {
       return;

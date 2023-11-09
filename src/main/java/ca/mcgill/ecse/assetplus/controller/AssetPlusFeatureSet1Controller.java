@@ -2,6 +2,7 @@ package ca.mcgill.ecse.assetplus.controller;
 
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 /*
  * Provides controller methods for updating the manager password, and adding and updating guests and employees
@@ -126,6 +127,11 @@ public class AssetPlusFeatureSet1Controller {
         // for each Manager: email has to be manager@ap.com
         Manager manager = app.getManager();
         String passCheck = checkValidPassword(password, true);
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+            return e.getMessage();
+        }
         if (!(passCheck.equals(""))) {
             return passCheck;
         }
@@ -149,6 +155,11 @@ public class AssetPlusFeatureSet1Controller {
         String emailCheck = checkValidEmail(email);
         String passCheck = checkValidPassword(password, false);
         String idCheck = checkValidIdentification(name, phoneNumber);
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+            return e.getMessage();
+        }
         if (!(emailCheck.equals(""))) {
             return emailCheck;
         } else if (!(passCheck.equals(""))) {
@@ -195,7 +206,11 @@ public class AssetPlusFeatureSet1Controller {
         if (user == null) {
             return "User does not exist";
         }
-
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+            return e.getMessage();
+        }
         // general constraints...
         String passCheck = checkValidPassword(newPassword, false);
         if (!(passCheck.equals(""))) {

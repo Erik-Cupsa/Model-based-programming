@@ -6,11 +6,17 @@ import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.Status;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 public class MaintenanceTicketWorkController {
   public static String assignStaffToTicket(int ticketId, String employeeEmail, TimeEstimate aTimeToResolve, PriorityLevel aPriority, Boolean requiresApproval) {
     // constraints (look at feature file)
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
+    try{
+			AssetPlusPersistence.save();
+		}catch(RuntimeException e){
+			return e.getMessage();
+		}
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }
@@ -41,6 +47,11 @@ public class MaintenanceTicketWorkController {
 
   public static String startWorkOnTicket(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
+    try{
+			AssetPlusPersistence.save();
+		}catch(RuntimeException e){
+			return e.getMessage();
+		}
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }
@@ -65,6 +76,11 @@ public class MaintenanceTicketWorkController {
 
   public static String completeWorkOnTicket(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
+    try{
+			AssetPlusPersistence.save();
+		}catch(RuntimeException e){
+			return e.getMessage();
+		}
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }
@@ -88,6 +104,11 @@ public class MaintenanceTicketWorkController {
 
   public static String approveWorkOnTicket(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
+    try{
+			AssetPlusPersistence.save();
+		}catch(RuntimeException e){
+			return e.getMessage();
+		}
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }
@@ -112,6 +133,11 @@ public class MaintenanceTicketWorkController {
 
   public static String disapproveWorkOnTicket(int ticketId, Date date, String description) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
+    try{
+			AssetPlusPersistence.save();
+		}catch(RuntimeException e){
+			return e.getMessage();
+		}
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }

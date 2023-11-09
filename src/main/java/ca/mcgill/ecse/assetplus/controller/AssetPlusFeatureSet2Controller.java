@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import ca.mcgill.ecse.assetplus.application.*;
 
 public class AssetPlusFeatureSet2Controller {
@@ -12,7 +13,11 @@ public class AssetPlusFeatureSet2Controller {
    */
 
   public static String addAssetType(String name, int expectedLifeSpanInDays) {
-    
+  try{
+		AssetPlusPersistence.save();
+  }catch(RuntimeException e){
+  	return e.getMessage();
+  }  
 	if(AssetPlusFeatureSet2Controller.validateInputs(name, expectedLifeSpanInDays).length()!=0) { //check if assetType already is in the system / wrong input formats
 		return AssetPlusFeatureSet2Controller.validateInputs(name, expectedLifeSpanInDays); //if format is wrong/type already exists returns the corresponding error
 	}
@@ -31,7 +36,12 @@ public class AssetPlusFeatureSet2Controller {
    */
 
   public static String updateAssetType(String oldName, String newName, int newExpectedLifeSpanInDays) {
-
+	
+	try{
+		AssetPlusPersistence.save();
+  }catch(RuntimeException e){
+  	return e.getMessage();
+  }
 	if (!newName.equals(oldName) && AssetPlusFeatureSet2Controller.validateInputs(newName, newExpectedLifeSpanInDays).length()!=0) { //check format and if assetType with newName already exists
 		return AssetPlusFeatureSet2Controller.validateInputs(newName, newExpectedLifeSpanInDays); //return the corresponding error
 	}
@@ -61,6 +71,11 @@ public class AssetPlusFeatureSet2Controller {
 	 * @param name name of the asset type to delete
    */
   public static void deleteAssetType(String name) {
+	try{
+		AssetPlusPersistence.save();
+  }catch(RuntimeException e){
+  	e.printStackTrace();
+  }
 	if(AssetType.hasWithName(name)) {
 		AssetPlusApplication.getAssetPlus().removeAssetType(AssetType.getWithName(name)); //removes from system
 		AssetType.getWithName(name).delete(); //deletes

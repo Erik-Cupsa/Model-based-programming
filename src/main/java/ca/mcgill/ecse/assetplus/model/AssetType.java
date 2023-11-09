@@ -5,7 +5,8 @@ package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 80 "../../../../../AssetPlus.ump"
+// line 41 "../../../../../AssetPlusPersistence.ump"
+// line 81 "../../../../../AssetPlus.ump"
 public class AssetType
 {
 
@@ -237,6 +238,14 @@ public class AssetType
       SpecificAsset aSpecificAsset = specificAssets.get(i - 1);
       aSpecificAsset.delete();
     }
+  }
+
+  // line 43 "../../../../../AssetPlusPersistence.ump"
+   public static  void reinitializeUniqueName(List<AssetType> types){
+    assettypesByName.clear();
+        for (var t : types){
+            assettypesByName.put(t.getName(), t);
+        }
   }
 
 

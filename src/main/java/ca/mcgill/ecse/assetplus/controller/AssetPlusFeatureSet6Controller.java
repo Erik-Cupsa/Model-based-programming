@@ -3,8 +3,7 @@ package ca.mcgill.ecse.assetplus.controller;
 import java.util.ArrayList;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.model.*;
-
-
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 public class AssetPlusFeatureSet6Controller {
 
@@ -17,6 +16,7 @@ public class AssetPlusFeatureSet6Controller {
     public static void deleteEmployeeOrGuest(String email) {
 
         try{
+            AssetPlusPersistence.save();
             if(User.getWithEmail(email) != null){                 // if the user is not found in the system, then do not delete
                 if (!"manager@ap.com".equals(User.getWithEmail(email).getEmail())){     // if the email belongs to manager, then do not delete
                     User.getWithEmail(email).delete();
