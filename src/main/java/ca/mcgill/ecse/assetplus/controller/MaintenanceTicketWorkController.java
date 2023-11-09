@@ -7,7 +7,19 @@ import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.Status;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
 
+
 public class MaintenanceTicketWorkController {
+  /**
+   *
+   * @param ticketId
+   * @param employeeEmail
+   * @param aTimeToResolve
+   * @param aPriority
+   * @param requiresApproval
+   * @return
+   * @author
+   * @author Erik Cupsa (@Erik-Cupsa)
+   */
   public static String assignStaffToTicket(int ticketId, String employeeEmail, TimeEstimate aTimeToResolve, PriorityLevel aPriority, Boolean requiresApproval) {
     // constraints (look at feature file)
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
@@ -39,6 +51,13 @@ public class MaintenanceTicketWorkController {
     return "";
   }
 
+  /**
+   *
+   * @param ticketId
+   * @return
+   * @author
+   * @author Erik Cupsa (@Erik-Cupsa)
+   */
   public static String startWorkOnTicket(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
     if (ticket == null) {
