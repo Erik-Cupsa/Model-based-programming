@@ -286,15 +286,20 @@ public class MaintenanceTicketsStepDefinitions {
   }
 
   /**
-   * Gherkin step definition method to test state machine.
-   *
+   * Gherkin step definition when manager attempts to disapprove a ticket
+   * @param string The ticket id
+   * @param string2 The date
+   * @param string3 The reason of disapproving
    * @author Anders Woodruff
+   * @author Erik Cupsa (@Erik-Cupsa)
    */
   @When("the manager attempts to disapprove the ticket {string} on date {string} and with reason {string}")
   public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String string,
       String string2, String string3) {
+    //instantiating id and date from inputted values
     int id = Integer.parseInt(string);
     Date date = Date.valueOf(string2);
+    //updating error accordingly by calling controller
     error=MaintenanceTicketWorkController.disapproveWorkOnTicket(id, date, string3);
   }
 
@@ -307,10 +312,9 @@ public class MaintenanceTicketsStepDefinitions {
   @Then("the ticket {string} shall be marked as {string}")
   public void the_ticket_shall_be_marked_as(String string, String string2) {
     int ticketID = Integer.parseInt(string);
+    //getting maintenance ticket from given ticket id
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
-    if (!string2.equals(ticket.getStatus().name())){
-      int z=0;
-    }
+    //checking if ticket status is as desired
     assertEquals(string2, ticket.getStatus().name());
   }
 
@@ -321,6 +325,7 @@ public class MaintenanceTicketsStepDefinitions {
    */
   @Then("the system shall raise the error {string}")
   public void the_system_shall_raise_the_error(String string) {
+    //compare private variable error to desired error
     assertEquals(error, string);
   }
 
@@ -465,13 +470,6 @@ public class MaintenanceTicketsStepDefinitions {
     int ticketID = Integer.parseInt(string);
 
     MaintenanceTicket currTicket = MaintenanceTicket.getWithId(ticketID);
-    /*
-    for (var ticket : tickets) {
-      if (ticket.getId() == ticketID) {
-        currTicket = ticket;
-      }
-    }
-     */
 
     assertNotNull(currTicket);
 
