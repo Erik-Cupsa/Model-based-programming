@@ -6,7 +6,7 @@ import java.util.*;
 import java.sql.Date;
 
 // line 1 "../../../../../AssetPlusStates.ump"
-// line 44 "../../../../../AssetPlus.ump"
+// line 45 "../../../../../AssetPlus.ump"
 public class MaintenanceTicket
 {
 
@@ -221,27 +221,15 @@ public class MaintenanceTicket
     switch (aStatus)
     {
       case InProgress:
-        setStatus(Status.Resolved);
-        wasEventProcessed = true;
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  public boolean entry()
-  {
-    boolean wasEventProcessed = false;
-    
-    Status aStatus = status;
-    switch (aStatus)
-    {
-      case Resolved:
         if (!(this.hasFixApprover()))
         {
           setStatus(Status.Closed);
+          wasEventProcessed = true;
+          break;
+        }
+        if (this.hasFixApprover())
+        {
+          setStatus(Status.Resolved);
           wasEventProcessed = true;
           break;
         }

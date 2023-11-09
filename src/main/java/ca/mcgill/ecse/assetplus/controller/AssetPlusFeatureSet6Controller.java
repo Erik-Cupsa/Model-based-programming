@@ -91,9 +91,9 @@ public class AssetPlusFeatureSet6Controller {
                     aTimeToResolve = ticket.getTimeToResolve().toString();
                     aPriority = ticket.getPriority().toString();
                     aApprovalRequired = ticket.hasFixApprover();
-                    tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, aStatus, aFixedbyEmail, aTimeToResolve, aPriority, aApprovalRequired, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));        
+                    tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, aStatus, aFixedbyEmail, aTimeToResolve, aPriority, aApprovalRequired, assetname, expectedLifeSpanInDays, null, floorNumber, roomNumber, imageURLs, notes));
                 }else{
-                    tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, aStatus, aFixedbyEmail, aTimeToResolve, aPriority, aApprovalRequired, assetname, expectedLifeSpanInDays, ticket.getAsset().getPurchaseDate(), floorNumber, roomNumber, imageURLs, notes));   
+                    tickets.add(new TOMaintenanceTicket(id, ticket.getRaisedOnDate(), description, raisedByEmail, aStatus, aFixedbyEmail, aTimeToResolve, aPriority, aApprovalRequired, assetname, expectedLifeSpanInDays, null, floorNumber, roomNumber, imageURLs, notes));
                 }
             }
         }

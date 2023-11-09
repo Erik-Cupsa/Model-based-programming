@@ -105,22 +105,50 @@ public class MaintenanceTicketsStepDefinitions {
     List<Map<String, String>> rows = dataTable.asMaps();
     for (var row : rows) {
       int id = Integer.parseInt(row.get("id"));
+      String ticketRaiserEmail = row.get("ticketRaiser");
       Date raisedOnDate = Date.valueOf(row.get("raisedOnDate"));
       String description = row.get("description");
-      String ticketRaiserEmail = row.get("ticketRaiser");
       String assetNumberStr = row.get("assetNumber");
+      String statusName = row.get("status");
+      //MaintenanceTicket.Status status= MaintenanceTicket.Status.valueOf(statusName);
+      String ticketFixerEmail = row.get("fixedByEmail");
+      HotelStaff ticketFixer = (HotelStaff) User.getWithEmail(ticketFixerEmail);
+      String timeToResolveStr = row.get("timeToResolve");
+      String priorityStr = row.get("priority");
+      String approvalRequiredStr = row.get("approvalRequired");
       MaintenanceTicket newTicket = assetPlus.addMaintenanceTicket(id, raisedOnDate, description,
           User.getWithEmail(ticketRaiserEmail));
       if (assetNumberStr != null) {
         int assetNumber = Integer.parseInt(assetNumberStr);
         newTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));
       }
+      Boolean approvalRequired=true;
+      if (approvalRequiredStr!=null){
+        MaintenanceTicket.TimeEstimate timeToResolve= MaintenanceTicket.TimeEstimate.valueOf(timeToResolveStr);
+        MaintenanceTicket.PriorityLevel priority= MaintenanceTicket.PriorityLevel.valueOf(priorityStr);
+        if (approvalRequiredStr.equals("false")) {
+          approvalRequired=false;
+        }
+        if (statusName.equals("Assigned")||statusName.equals("InProgress")||statusName.equals("Resolved")||statusName.equals("Closed")){
+          newTicket.assign(ticketFixer, priority,timeToResolve,approvalRequired);
+        }
+        if (statusName.equals("InProgress")||statusName.equals("Resolved")||statusName.equals("Closed")) {
+          newTicket.startWork();
+        }
+        if (statusName.equals("Resolved")||statusName.equals("Closed")){
+          newTicket.completeFix();
+        }
+        if (statusName.equals("Closed")){
+          newTicket.acceptFix();
+        }
+      }
+
     }
   }
 
   /**
    * Gherkin step definition method to create and add ticket notes to the AssetPlus application.
-   * 
+   *
    * @author Ming Xuan Yue
    * @param dataTable Cucumber DataTable containing the noteTaker, ticketId, addedOnDate and description of the notes that must exist in the system.
    */
@@ -139,7 +167,7 @@ public class MaintenanceTicketsStepDefinitions {
   }
   /**
    * Gherkin step definition method to create and add ticket images to the AssetPlus application.
-   * 
+   *
    * @author Philippe Aprahamian
    * @author Mohamed Abdelrahman
    * @author Ming Xuan Yue
@@ -170,9 +198,9 @@ public class MaintenanceTicketsStepDefinitions {
     int ticketID = Integer.parseInt(string);
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
     if (string3.equals("true")){
-      ticket.assign(null, null,null,true);
+      ticket.assign(ticket.getTicketFixer(), ticket.getPriority(),ticket.getTimeToResolve(),true);
     }else {
-      ticket.assign(null, null,null,false);
+      ticket.assign(ticket.getTicketFixer(), ticket.getPriority(),ticket.getTimeToResolve(),false);
     }
     ticket.startWork();
   }
@@ -190,7 +218,7 @@ public class MaintenanceTicketsStepDefinitions {
     if (string2.equals("Open")){
       return;
     }else if (string2.equals("Assigned")||string2.equals("InProgress")||string2.equals("Resolved")||string2.equals("Closed")){
-      ticket.assign(null, null,null,false);
+      ticket.assign(ticket.getTicketFixer(), ticket.getPriority(),ticket.getTimeToResolve(),true);
     }
     if (string2.equals("InProgress")||string2.equals("Resolved")||string2.equals("Closed")) {
       ticket.startWork();
@@ -286,6 +314,9 @@ public class MaintenanceTicketsStepDefinitions {
   public void the_ticket_shall_be_marked_as(String string, String string2) {
     int ticketID = Integer.parseInt(string);
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
+    if (!string2.equals(ticket.getStatus().name())){
+      int z=0;
+    }
     assertEquals(string2, ticket.getStatus().name());
   }
 
