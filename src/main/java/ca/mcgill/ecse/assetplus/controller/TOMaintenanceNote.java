@@ -54,8 +54,7 @@ public class TOMaintenanceNote
     return noteTakerEmail;
   }
 
-  public void delete()
-  {}
+  public void delete() {}
 
 
   public String toString()

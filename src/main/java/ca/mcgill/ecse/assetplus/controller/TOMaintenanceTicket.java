@@ -66,7 +66,11 @@ public class TOMaintenanceTicket
     {
       throw new RuntimeException("Unable to create TOMaintenanceTicket, must not have duplicate notes. See http://manual.umple.org?RE001ViolationofImmutability.html");
     }
-    AssetPlusPersistence.save();
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+       e.printStackTrace();
+    }
 
   }
 
@@ -218,7 +222,11 @@ public class TOMaintenanceTicket
     notes.clear();
     notes.addAll(verifiedNotes);
     wasSet = true;
-    AssetPlusPersistence.save();
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      e.printStackTrace();
+    }
 
     return wasSet;
   }

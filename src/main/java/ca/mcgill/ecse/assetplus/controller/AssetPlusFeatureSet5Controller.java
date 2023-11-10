@@ -75,7 +75,11 @@ public class AssetPlusFeatureSet5Controller {
 
         } catch (Exception e) {
         }
-        AssetPlusPersistence.save();
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+             e.printStackTrace();
+        }
 
     }
 }

@@ -24,11 +24,6 @@ public class MaintenanceTicketWorkController {
   public static String assignStaffToTicket(int ticketId, String employeeEmail, TimeEstimate aTimeToResolve, PriorityLevel aPriority, Boolean requiresApproval) {
     // constraints (look at feature file)
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
-    try{
-			AssetPlusPersistence.save();
-		}catch(RuntimeException e){
-			return e.getMessage();
-		}
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }
@@ -54,6 +49,11 @@ public class MaintenanceTicketWorkController {
     }
 
     ticket.assign(staff, aPriority, aTimeToResolve, requiresApproval);
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      return e.getMessage();
+    }
     return "";
   }
 
@@ -66,11 +66,7 @@ public class MaintenanceTicketWorkController {
    */
   public static String startWorkOnTicket(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
-    try{
-			AssetPlusPersistence.save();
-		}catch(RuntimeException e){
-			return e.getMessage();
-		}
+
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }
@@ -90,16 +86,17 @@ public class MaintenanceTicketWorkController {
     }
 
     ticket.startWork();
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      return e.getMessage();
+    }
     return "";
   }
 
   public static String completeWorkOnTicket(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
-    try{
-			AssetPlusPersistence.save();
-		}catch(RuntimeException e){
-			return e.getMessage();
-		}
+
     if (ticket == null) {
       return "Maintenance ticket does not exist.";
     }
@@ -118,6 +115,11 @@ public class MaintenanceTicketWorkController {
       return "The maintenance ticket is already resolved.";
     }
     ticket.completeFix();
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      return e.getMessage();
+    }
     return "";
   }
 

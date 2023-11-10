@@ -21,11 +21,7 @@ public class AssetPlusFeatureSet4Controller {
   public static String addMaintenanceTicket(
       int id, Date raisedOnDate, String description, String email, int assetNumber) {
     
-    try{
-		  AssetPlusPersistence.save();
-    }catch(RuntimeException e){
-  	  return e.getMessage();
-    }
+
     AssetPlus assetplus = AssetPlusApplication.getAssetPlus();
     User user = User.getWithEmail(email);
         
@@ -47,7 +43,11 @@ public class AssetPlusFeatureSet4Controller {
       }
       newticket.setAsset(asset);
     }
-
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      return e.getMessage();
+    }
     return "";
   }
 
@@ -95,7 +95,11 @@ public class AssetPlusFeatureSet4Controller {
     ticket.setRaisedOnDate(newRaisedOnDate);
     ticket.setDescription(newDescription);
     ticket.setTicketRaiser(user);
-
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      return e.getMessage();
+    }
     return "";
   }
 
@@ -106,15 +110,17 @@ public class AssetPlusFeatureSet4Controller {
    * @author Anders Cairns Woodruff
    */
   public static void deleteMaintenanceTicket(int id) {
-    try{
-		  AssetPlusPersistence.save();
-    }catch(RuntimeException e){
-  	  e.printStackTrace();
-    }
+
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(id);
     if (ticket == null) {
       return;
     }
     ticket.delete();
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      e.printStackTrace();
+    }
+
   }
 }

@@ -35,7 +35,11 @@ public class AssetPlusFeatureSet3Controller {
         } else {
             SpecificAsset newSpecificAsset = assetType.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType.getAssetPlus()); //
             if (assetType.addSpecificAsset(newSpecificAsset)) { //New Specific Asset successfully added
-                AssetPlusPersistence.save();
+                try{
+                    AssetPlusPersistence.save();
+                }catch(RuntimeException e){
+                    return e.getMessage();
+                }
                 return "";
             } else { // Error adding new specific asset to system
                 return "Error adding Specific Asset";
@@ -142,6 +146,7 @@ public class AssetPlusFeatureSet3Controller {
         if(roomNumber < -1){ // room number must be >= -1
           return "The room number shall not be less than -1";
         }
+
         return "Correct";
       }
 }
