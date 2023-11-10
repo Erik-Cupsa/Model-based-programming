@@ -21,7 +21,6 @@ public class AssetPlusFeatureSet5Controller {
             err = "Image URL cannot be empty";
         } else {
             try {
-		        AssetPlusPersistence.save();
                 if ((!imageURL.substring(0, 7).equals("http://"))
                         && (!imageURL.substring(0, 8).equals("https://"))) {
                     err = "Image URL must start with http:// or https://";
@@ -44,9 +43,14 @@ public class AssetPlusFeatureSet5Controller {
                 }
             }
         }
-        if (err == "") {
+        if (err.equals("")) {
             TicketImage ticketImage = new TicketImage(imageURL, ticket);
             ticket.addTicketImage(ticketImage);
+            try{
+                AssetPlusPersistence.save();
+            }catch(RuntimeException e){
+                return e.getMessage();
+            }
         }
         return err;
     }
@@ -60,7 +64,7 @@ public class AssetPlusFeatureSet5Controller {
      */
     public static void deleteImageFromMaintenanceTicket(String imageURL, int ticketID) {
         try {
-            AssetPlusPersistence.save();
+
             MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
             List<TicketImage> images = ticket.getTicketImages();
             for (TicketImage image : images) {
@@ -68,7 +72,14 @@ public class AssetPlusFeatureSet5Controller {
                     image.delete();
                 }
             }
+
         } catch (Exception e) {
         }
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+             e.printStackTrace();
+        }
+
     }
 }

@@ -2,6 +2,8 @@
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.assetplus.controller;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
+
 import java.sql.Date;
 import java.util.*;
 
@@ -64,6 +66,12 @@ public class TOMaintenanceTicket
     {
       throw new RuntimeException("Unable to create TOMaintenanceTicket, must not have duplicate notes. See http://manual.umple.org?RE001ViolationofImmutability.html");
     }
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+       e.printStackTrace();
+    }
+
   }
 
   //------------------------
@@ -214,11 +222,19 @@ public class TOMaintenanceTicket
     notes.clear();
     notes.addAll(verifiedNotes);
     wasSet = true;
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      e.printStackTrace();
+    }
+
     return wasSet;
   }
 
   public void delete()
-  {}
+  {
+    
+  }
 
 
   public String toString()

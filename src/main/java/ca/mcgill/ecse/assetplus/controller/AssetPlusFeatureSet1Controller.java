@@ -37,6 +37,7 @@ public class AssetPlusFeatureSet1Controller {
         else if (email.equals("manager@ap.com")) {
             return "Email cannot be manager@ap.com";
         } else {
+            AssetPlusPersistence.save();
             return "";
         }
     }
@@ -87,7 +88,6 @@ public class AssetPlusFeatureSet1Controller {
                 return "Password must contain one lower-case character";
             }
         }
-
         return "";
     }
 
@@ -127,15 +127,16 @@ public class AssetPlusFeatureSet1Controller {
         // for each Manager: email has to be manager@ap.com
         Manager manager = app.getManager();
         String passCheck = checkValidPassword(password, true);
+
+        if (!(passCheck.equals(""))) {
+            return passCheck;
+        }
+        manager.setPassword(password);
         try{
             AssetPlusPersistence.save();
         }catch(RuntimeException e){
             return e.getMessage();
         }
-        if (!(passCheck.equals(""))) {
-            return passCheck;
-        }
-        manager.setPassword(password);
         return "";
     }
 
@@ -155,11 +156,7 @@ public class AssetPlusFeatureSet1Controller {
         String emailCheck = checkValidEmail(email);
         String passCheck = checkValidPassword(password, false);
         String idCheck = checkValidIdentification(name, phoneNumber);
-        try{
-            AssetPlusPersistence.save();
-        }catch(RuntimeException e){
-            return e.getMessage();
-        }
+
         if (!(emailCheck.equals(""))) {
             return emailCheck;
         } else if (!(passCheck.equals(""))) {
@@ -189,6 +186,11 @@ public class AssetPlusFeatureSet1Controller {
             }
             app.addGuest(email, name, password, phoneNumber);
         }
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+            return e.getMessage();
+        }
         return "";
     }
 
@@ -206,11 +208,6 @@ public class AssetPlusFeatureSet1Controller {
         if (user == null) {
             return "User does not exist";
         }
-        try{
-            AssetPlusPersistence.save();
-        }catch(RuntimeException e){
-            return e.getMessage();
-        }
         // general constraints...
         String passCheck = checkValidPassword(newPassword, false);
         if (!(passCheck.equals(""))) {
@@ -223,7 +220,11 @@ public class AssetPlusFeatureSet1Controller {
         user.setPassword(newPassword);
         user.setName(newName);
         user.setPhoneNumber(newPhoneNumber);
-
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+            return e.getMessage();
+        }
         return "";
     }
 

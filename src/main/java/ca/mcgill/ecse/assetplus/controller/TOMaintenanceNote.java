@@ -2,6 +2,8 @@
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.assetplus.controller;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
+
 import java.sql.Date;
 
 // line 29 "../../../../../AssetPlusTransferObjects.ump"
@@ -26,6 +28,11 @@ public class TOMaintenanceNote
     date = aDate;
     description = aDescription;
     noteTakerEmail = aNoteTakerEmail;
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+       e.printStackTrace();
+    }
   }
 
   //------------------------
@@ -47,8 +54,7 @@ public class TOMaintenanceNote
     return noteTakerEmail;
   }
 
-  public void delete()
-  {}
+  public void delete() {}
 
 
   public String toString()

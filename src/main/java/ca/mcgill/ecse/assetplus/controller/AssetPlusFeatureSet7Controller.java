@@ -21,11 +21,7 @@ public class AssetPlusFeatureSet7Controller {
 	 */
 	public static String addMaintenanceNote(Date date, String description, int ticketID,
 			String email) {
-		try{
-		  AssetPlusPersistence.save();
-    }catch(RuntimeException e){
-  	  return e.getMessage();
-    }
+
 		if(description==null || description.equals("")){
 			return "Ticket description cannot be empty";
 		}
@@ -39,6 +35,11 @@ public class AssetPlusFeatureSet7Controller {
 		}
 		MaintenanceNote newNote = new MaintenanceNote(date, description, ticket, noteTaker);
 		ticket.addTicketNote(newNote);
+		try{
+			AssetPlusPersistence.save();
+		}catch(RuntimeException e){
+			return e.getMessage();
+		}
 		return "";
 	}
 	/**
@@ -83,6 +84,11 @@ public class AssetPlusFeatureSet7Controller {
 		targetNote.setDate(newDate);
 		targetNote.setDescription(newDescription);
 		targetNote.setNoteTaker(newNoteTaker);
+		try{
+			AssetPlusPersistence.save();
+		}catch(RuntimeException e){
+			return e.getMessage();
+		}
 		return "";
 	}
 	/**
@@ -95,12 +101,18 @@ public class AssetPlusFeatureSet7Controller {
 	// index starts at 0
 	public static void deleteMaintenanceNote(int ticketID, int index) {
 		try{
-			AssetPlusPersistence.save();
 			MaintenanceTicket ticket= MaintenanceTicket.getWithId(ticketID);
 			MaintenanceNote targetNote = ticket.getTicketNote(index);
 			targetNote.delete();
+			AssetPlusPersistence.save();
 		}catch(Exception e){
 
 		}
+		try{
+			AssetPlusPersistence.save();
+		}catch(RuntimeException e){
+			 e.printStackTrace();
+		}
+
 	}
 }

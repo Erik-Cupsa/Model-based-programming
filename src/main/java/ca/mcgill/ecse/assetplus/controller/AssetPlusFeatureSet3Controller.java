@@ -23,11 +23,6 @@ public class AssetPlusFeatureSet3Controller {
     public static String addSpecificAsset(int assetNumber, int floorNumber, int roomNumber,
                                           Date purchaseDate, String assetTypeName) {
         //calling private helper method to validate inputs based on constraints
-        try{
-		    AssetPlusPersistence.save();
-        }catch(RuntimeException e){
-  	        return e.getMessage();
-        }
         String testing = inputValidation(assetNumber, floorNumber, roomNumber, assetTypeName);
         if(testing != "Correct") { //if error found
             return testing; // return error
@@ -40,11 +35,17 @@ public class AssetPlusFeatureSet3Controller {
         } else {
             SpecificAsset newSpecificAsset = assetType.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType.getAssetPlus()); //
             if (assetType.addSpecificAsset(newSpecificAsset)) { //New Specific Asset successfully added
+                try{
+                    AssetPlusPersistence.save();
+                }catch(RuntimeException e){
+                    return e.getMessage();
+                }
                 return "";
             } else { // Error adding new specific asset to system
                 return "Error adding Specific Asset";
             }
         }
+
     }
 
     /**
@@ -61,11 +62,7 @@ public class AssetPlusFeatureSet3Controller {
     public static String updateSpecificAsset(int assetNumber, int newFloorNumber, int newRoomNumber,
                                              Date newPurchaseDate, String newAssetTypeName) {
         String testing = inputValidation(assetNumber, newFloorNumber, newRoomNumber, newAssetTypeName); //calling private helper method to validate inputs based on constraints
-        try{
-		    AssetPlusPersistence.save();
-        }catch(RuntimeException e){
-  	        return e.getMessage();
-        }
+
         if(testing != "Correct") { // if error found
             return testing; //return String error
         }
@@ -90,6 +87,11 @@ public class AssetPlusFeatureSet3Controller {
                     assetType.addSpecificAsset(toUpdate);
                 }
                 if (updateFloor && updateRoom && updateDate) { //if all attributes were successfully changed
+                    try{
+                        AssetPlusPersistence.save();
+                    }catch(RuntimeException e){
+                        return e.getMessage();
+                    }
                     return "";
                 } else {
                     return "Error updating Specific Asset";
@@ -105,11 +107,7 @@ public class AssetPlusFeatureSet3Controller {
      * @author Erik Cupsa (@Erik-Cupsa)
      */
     public static void deleteSpecificAsset(int assetNumber) {
-        try{
-		    AssetPlusPersistence.save();
-        }catch(RuntimeException e){
-  	        e.printStackTrace();
-        }
+
         if (assetNumber >= 1) { //if valid asset number
             SpecificAsset toDelete = SpecificAsset.getWithAssetNumber(assetNumber); //getting the specific asset we want to delete
             if (toDelete != null) { //if the specific asset exists in the system
@@ -118,6 +116,11 @@ public class AssetPlusFeatureSet3Controller {
                 assetType.removeSpecificAsset(toDelete);
                 toDelete.delete();
             }
+        }
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+            e.printStackTrace();
         }
     }
 
@@ -143,6 +146,7 @@ public class AssetPlusFeatureSet3Controller {
         if(roomNumber < -1){ // room number must be >= -1
           return "The room number shall not be less than -1";
         }
+
         return "Correct";
       }
 }

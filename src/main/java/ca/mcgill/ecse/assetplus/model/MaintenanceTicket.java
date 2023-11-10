@@ -671,6 +671,15 @@ public class MaintenanceTicket
   }
 
   // line 3 "../../../../../AssetPlusStates.ump"
+  /**
+   * Rejects fix in state machine
+   *
+   * @param staff staff to assign
+   * @param aPriority priority of fix
+   * @param aTimeToResolve time till resolved
+   * @param requiresApproval requires managers approval
+   * @author Mohamed Abdelrahman
+   */
    private void doAssign(HotelStaff staff, PriorityLevel aPriority, TimeEstimate aTimeToResolve, Boolean requiresApproval){
     AssetPlus ap= this.getAssetPlus();
      this.setTicketFixer(staff);
@@ -682,6 +691,13 @@ public class MaintenanceTicket
   }
 
   // line 12 "../../../../../AssetPlusStates.ump"
+  /**
+   * Rejects fix in state machine
+   *
+   * @param aDate the date of note
+   * @param aDescription the rejection note
+   * @author Mohamed Abdelrahman
+   */
    private void doRejectFix(Date aDate, String aDescription){
     this.addTicketNote(aDate, aDescription, this.getFixApprover());
   }

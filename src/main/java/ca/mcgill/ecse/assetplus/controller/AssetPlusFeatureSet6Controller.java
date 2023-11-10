@@ -16,7 +16,7 @@ public class AssetPlusFeatureSet6Controller {
     public static void deleteEmployeeOrGuest(String email) {
 
         try{
-            AssetPlusPersistence.save();
+
             if(User.getWithEmail(email) != null){                 // if the user is not found in the system, then do not delete
                 if (!"manager@ap.com".equals(User.getWithEmail(email).getEmail())){     // if the email belongs to manager, then do not delete
                     User.getWithEmail(email).delete();
@@ -24,6 +24,11 @@ public class AssetPlusFeatureSet6Controller {
             }
         } catch(Exception e){
             e.printStackTrace(); // trace all exceptions
+        }
+        try{
+            AssetPlusPersistence.save();
+        }catch(RuntimeException e){
+             e.printStackTrace();
         }
     }
 
