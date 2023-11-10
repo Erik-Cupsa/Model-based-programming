@@ -22,11 +22,6 @@ public class AssetPlusApplication {
 
   public static void main(String[] args) {
     // TODO Start the application user interface here
-    assetPlus=getAssetPlus();
-    //updateManager("newPass$");
-    //addEmployeeOrGuest("xyz@ap.com","philippe","zzz","123",false);
-    //Guest newGuest = new Guest(,assetPlus);
-
   }
 
   public static AssetPlus getAssetPlus() {
