@@ -3,7 +3,7 @@ package ca.mcgill.ecse.assetplus.application;
 import ca.mcgill.ecse.assetplus.model.AssetPlus;
 import ca.mcgill.ecse.assetplus.model.Guest;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
-
+import javafx.application.Application;
 import static ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller.*;
 import static ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet2Controller.*;
 import static ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet3Controller.*;
@@ -13,7 +13,7 @@ import static ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller
 import static ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller.*;
 import static ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller.*;
 import static ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController.*;
-
+import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 
 
 public class AssetPlusApplication {
@@ -22,6 +22,7 @@ public class AssetPlusApplication {
 
   public static void main(String[] args) {
     // TODO Start the application user interface here
+    Application.launch(AssetPlusFxmlView.class, args);
   }
 
   public static AssetPlus getAssetPlus() {
