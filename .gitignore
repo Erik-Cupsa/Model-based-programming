@@ -15,3 +15,4 @@ bin
 .settings/org.eclipse.jdt.core.prefs
 .classpath
 .project
+src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/AssetPlusFxmlView.java

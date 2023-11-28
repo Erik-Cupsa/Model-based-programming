@@ -6,4 +6,18 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.VBox?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TabPane prefHeight="109.0" prefWidth="851.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Start/Complete work">
+                    <content>
+                        <fx:include source="pages/StartCompleteWorkOnMaintenanceTicket.fxml" />
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+        <Separator prefWidth="200.0" />
+        <fx:include  source="pages/StartCompleteWorkOnMaintenanceTicket.fxml" />
+    </children>
 </VBox>

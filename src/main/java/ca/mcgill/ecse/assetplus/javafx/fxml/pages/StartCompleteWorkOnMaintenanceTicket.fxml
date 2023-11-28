@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.StartCompleteWorkOnMaintenanceTicketPageController">
+    <Label layoutX="50.0" layoutY="50.0" text="Maintenance Ticket Management" />
+
+    <Label layoutX="50.0" layoutY="100.0" text="Select Ticket:" />
+    <ComboBox fx:id="comboTicket" layoutX="200.0" layoutY="100.0" prefWidth="200.0" />
+
+    <Button fx:id="btnStartWork" layoutX="50.0" layoutY="150.0" text="Start Work" onAction="#handleStartWork" />
+    <Button fx:id="btnCompleteWork" layoutX="200.0" layoutY="150.0" text="Complete Work" onAction="#handleCompleteWork" />
+
+    <Label layoutX="50.0" layoutY="200.0" text="Work Status:" />
+    <Label fx:id="labelWorkStatus" layoutX="200.0" layoutY="200.0" text="Not Started" />
+
+    <TextArea fx:id="textAreaFeedback" layoutX="50.0" layoutY="250.0" prefHeight="100.0" prefWidth="500.0" />
+</AnchorPane>
