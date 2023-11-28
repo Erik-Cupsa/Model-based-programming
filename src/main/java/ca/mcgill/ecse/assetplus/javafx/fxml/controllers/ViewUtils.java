@@ -3,7 +3,6 @@ package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.controller.*;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
-import ca.mcgill.ecse.assetplus.controller.TOMaintenanceNote;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

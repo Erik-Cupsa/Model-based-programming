@@ -1,14 +1,4 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
-import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller.*;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet2Controller.*;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet3Controller.*;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller.*;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller.*;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller.*;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller.*;
-
 import ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import javafx.collections.FXCollections;
@@ -39,12 +29,13 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
     @FXML
     private TextArea textAreaFeedback;
 
-    // Sample list of tickets for demonstration. Replace with actual data retrieval method.
-    //private final ObservableList<String> ticketList = FXCollections.observableArrayList("Ticket 1", "Ticket 2", "Ticket 3");
-    //private ObservableList<String> ticketList = FXCollections.observableArrayList("Ticket 1", "Ticket 2", "Ticket 3");
     private List<TOMaintenanceTicket> ticketList;
 
-
+    /**
+     * initializes UI components
+     *
+     * @author Philippe Aprahamian
+     */
     @FXML
     public void initialize() {
         ticketList = ViewUtils.getTickets();
@@ -56,6 +47,11 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
         });
     }
 
+    /**
+     * Populates the ticket combo box
+     *
+     * @author Philippe Aprahamian
+     */
     private void populateTickets() {
         ArrayList<String> ticketIds= new ArrayList<>();
         for (TOMaintenanceTicket ticket:ticketList ) {
@@ -65,6 +61,12 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
         comboTicket.setItems(observableList);
     }
 
+    /**
+     * updates the ticket selection
+     *
+     * @param selectedTicket the String containing the id of the selected ticket
+     * @author Philippe Aprahamian
+     */
     private void updateTicketSelection(String selectedTicket) {
         // Update UI based on the selected ticket
         int selectedTicketId = Integer.parseInt(selectedTicket);
@@ -83,6 +85,11 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
         // Additional logic to display the current status of the selected ticket can be added here
     }
 
+    /**
+     * Starts the work on the selected ticket
+     *
+     * @author Philippe Aprahamian
+     */
     @FXML
     private void handleStartWork() {
         String selectedTicket = comboTicket.getValue();
@@ -96,12 +103,13 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
             }else{
                 ViewUtils.makePopupWindow("Start Work on ticket #"+selectedTicket,msg);
             }
-
-
-            // More logic can be added to reflect this change in the model
         }
     }
-
+    /**
+     * Completes the work on the selected ticket
+     *
+     * @author Philippe Aprahamian
+     */
     @FXML
     private void handleCompleteWork() {
         String selectedTicket = comboTicket.getValue();
@@ -114,9 +122,6 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
             }else{
                 ViewUtils.makePopupWindow("Complete Work on ticket #"+selectedTicket,msg);
             }
-            // Logic to complete work on the selected ticket
-
-            // More logic can be added to reflect this change in the model
         }
 
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ApproveDisapproveWorkOnMaintenanceTicketController" spacing="50">
+    <Label text="Maintenance Ticket Management" />
+
+    <HBox spacing="10">
+        <Label text="Select Ticket:" />
+        <ComboBox fx:id="comboTicket" prefWidth="200.0" />
+    </HBox>
+
+<!--    <HBox spacing="10">-->
+<!--        <Button fx:id="btnStartWork" text="Approve Work" onAction="#handleStartWork" />-->
+<!--        <Button fx:id="btnCompleteWork" text="Disapprove Work" onAction="#handleCompleteWork" />-->
+<!--    </HBox>-->
+
+    <HBox spacing="10">
+        <Label text="Work Status:" />
+        <Label fx:id="labelWorkStatus" />
+    </HBox>
+
+    <TextArea fx:id="textAreaFeedback" prefHeight="100.0" prefWidth="500.0" />
+</VBox>
