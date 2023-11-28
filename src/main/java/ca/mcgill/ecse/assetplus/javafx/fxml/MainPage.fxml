@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <TabPane prefHeight="109.0" prefWidth="851.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="524.0" prefWidth="851.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Start/Complete work">
-                    <content>
+               <content>
+                  <AnchorPane prefHeight="430.0" prefWidth="851.0">
+                     <children>
                         <fx:include source="pages/StartCompleteWorkOnMaintenanceTicket.fxml" />
-                    </content>
+                     </children>
+                  </AnchorPane>
+               </content>
                 </Tab>
+            <Tab text="View Tickets Status">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <fx:include source="pages/ViewStatusPage.fxml" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
 
             </tabs>
         </TabPane>
-        <Separator prefWidth="200.0" />
-        <fx:include  source="pages/StartCompleteWorkOnMaintenanceTicket.fxml" />
     </children>
 </VBox>
