@@ -26,7 +26,7 @@ public class AssetPlusApplication {
     // TODO Start the application user interface here
     assetPlus=getAssetPlus();
 
-    MaintenanceTicketWorkController.assignStaffToTicket(2,"jeff@ap.com", MaintenanceTicket.TimeEstimate.LessThanADay, MaintenanceTicket.PriorityLevel.Normal,false);
+    //MaintenanceTicketWorkController.assignStaffToTicket(2,"jeff@ap.com", MaintenanceTicket.TimeEstimate.LessThanADay, MaintenanceTicket.PriorityLevel.Normal,false);
     Application.launch(AssetPlusFxmlView.class, args);
   }
 
