@@ -20,7 +20,9 @@
                     "id": 2,
                     "raisedOnDate": "2023-07-10",
                     "description": "This is a dummy description 2",
-                    "status": "Open",
+                    "timeToResolve": "LessThanADay",
+                    "priority": "Normal",
+                    "status": "Assigned",
                     "ticketNotes": [
                       {
                         "MaintenanceNote": {
@@ -216,6 +218,10 @@
                         "@reference": "../../../../../../.."
                       }
                     },
+                    "ticketFixer": {
+                      "@class": "Employee",
+                      "@reference": "../../../.."
+                    },
                     "asset": {
                       "assetNumber": 1,
                       "floorNumber": 9,
@@ -255,7 +261,11 @@
               }
             ],
             "maintenanceTasks": [
-              ""
+              {
+                "MaintenanceTicket": {
+                  "@reference": "../../maintenanceNotes/MaintenanceNote/ticket"
+                }
+              }
             ],
             "assetPlus": {
               "@reference": "../../.."
