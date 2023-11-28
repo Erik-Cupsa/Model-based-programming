@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,12 @@ public class AssetPlusFxmlView extends Application {
   public void start(Stage primaryStage) {
     instance = this;
     try {
-      var root = (Pane) FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+      //var root = (Pane) FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+      // TODO: idk wtf is going on, just edit the aboslute path so it works on your pc
+      String absolutePath = "C:\\Users\\Lenovo-PC\\Documents\\ECSE223\\ecse223-group-project-p15\\src\\main\\java\\ca\\mcgill\\ecse\\assetplus\\javafx\\fxml\\MainPage.fxml";
+      var root = (Pane) FXMLLoader.load(new File(absolutePath).toURI().toURL());
       //root.setStyle("-fx-base: rgba(20, 20, 20, 255);"); // Dark mode
+      System.out.println("here");
       var scene = new Scene(root);
       primaryStage.setScene(scene);
       primaryStage.setMinWidth(800);
