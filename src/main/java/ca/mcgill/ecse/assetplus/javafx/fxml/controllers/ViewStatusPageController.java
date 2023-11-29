@@ -1,17 +1,16 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.layout.StackPane;
+
+import java.io.IOException;
 
 public class ViewStatusPageController{
     @FXML
@@ -34,7 +33,20 @@ public class ViewStatusPageController{
 
     @FXML
     public void addTicketClicked(ActionEvent event) {
-        System.out.println("add ticket button clicked");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../pages/AddMaintenanceTicket.fxml"));
+            System.out.println("add");
+            Parent newRoot = fxmlLoader.load();
+
+            // Access the current stage
+            Stage currentStage = (Stage) addTicketButton.getScene().getWindow();
+
+            // Replace the content in the current scene with content loaded from the new FXML
+            currentStage.getScene().setRoot(newRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
 
     }
 
