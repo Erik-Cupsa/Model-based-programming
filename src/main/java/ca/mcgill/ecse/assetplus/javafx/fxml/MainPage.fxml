@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.Separator?>
+
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" prefHeight="518.0" prefWidth="851.0">
-    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+<VBox prefHeight="518.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.MainPageController">
+    <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <tabs>
             <Tab text="Start/Complete work">
                 <content>
@@ -17,7 +17,7 @@
                     <fx:include source="pages/ApproveDisapproveOnMaintenanceTicket.fxml" />
                 </content>
             </Tab>
-            <Tab text="View Tickets">
+            <Tab fx:id="viewTicketsTab" text="View Tickets">
                 <content>
                     <fx:include source="pages/ViewStatusPage.fxml" />
                 </content>
