@@ -52,9 +52,9 @@
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="273.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="43.0" text="Add" />
-                  <Button mnemonicParsing="false" text="Update" />
-                  <Button mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="addAssetTypeButton" mnemonicParsing="false" onAction="#addAssetTypeClicked" prefHeight="25.0" prefWidth="43.0" text="Add" />
+                  <Button fx:id="updateAssetTypeButton" mnemonicParsing="false" onAction="#updateAssetTypeClicked" text="Update" />
+                  <Button fx:id="deleteAssetTypeButton" mnemonicParsing="false" onAction="#deleteAssetTypeClicked" text="Delete" />
                </children>
                <GridPane.margin>
                   <Insets />
@@ -63,13 +63,13 @@
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="417.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="107.0" text="Asset Type Name:" />
-                  <TextField HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="assetTypeNameTextField" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
                   <Label prefHeight="17.0" prefWidth="104.0" text="Expected Life Span:" />
-                  <TextField HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="assetTypeExpectedLifeSpanTextField" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>
