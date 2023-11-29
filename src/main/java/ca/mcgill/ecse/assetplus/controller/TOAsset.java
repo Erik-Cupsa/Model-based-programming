@@ -1,8 +1,6 @@
 package ca.mcgill.ecse.assetplus.controller;
 import java.sql.Date;
 
-import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
-
 // line 43 "../../../../../../model.ump"
 // line 71 "../../../../../../model.ump"
 public class TOAsset
@@ -17,24 +15,19 @@ public class TOAsset
   private int floorNumber;
   private int roomNumber;
   private Date purchaseDate;
-  private TOAssetType assetType;
+  private String typeName;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public TOAsset(int aAssetNumber, int aFloorNumber, int aRoomNumber, Date aPurchaseDate, TOAssetType aAssetType)
+  public TOAsset(int aAssetNumber, int aFloorNumber, int aRoomNumber, Date aPurchaseDate, String aTypeName)
   {
     assetNumber = aAssetNumber;
     floorNumber = aFloorNumber;
     roomNumber = aRoomNumber;
     purchaseDate = aPurchaseDate;
-    assetType = aAssetType;
-    try{
-      AssetPlusPersistence.save();
-    }catch(RuntimeException e){
-       e.printStackTrace();
-    }
+    typeName = aTypeName;
   }
 
   //------------------------
@@ -61,9 +54,9 @@ public class TOAsset
     return purchaseDate;
   }
 
-  public TOAssetType getAssetType()
+  public String getTypeName()
   {
-    return assetType;
+    return typeName;
   }
 
   public void delete()
@@ -75,9 +68,9 @@ public class TOAsset
     return super.toString() + "["+
             "assetNumber" + ":" + getAssetNumber()+ "," +
             "floorNumber" + ":" + getFloorNumber()+ "," +
-            "roomNumber" + ":" + getRoomNumber()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "purchaseDate" + "=" + (getPurchaseDate() != null ? !getPurchaseDate().equals(this)  ? getPurchaseDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "assetType" + "=" + (getAssetType() != null ? !getAssetType().equals(this)  ? getAssetType().toString().replaceAll("  ","    ") : "this" : "null");
+            "roomNumber" + ":" + getRoomNumber()+ "," +
+            "typeName" + ":" + getTypeName()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "purchaseDate" + "=" + (getPurchaseDate() != null ? !getPurchaseDate().equals(this)  ? getPurchaseDate().toString().replaceAll("  ","    ") : "this" : "null");
   }
 }
 
