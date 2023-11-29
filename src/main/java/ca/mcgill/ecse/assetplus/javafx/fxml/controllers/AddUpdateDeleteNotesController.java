@@ -95,7 +95,7 @@ public class AddUpdateDeleteNotesController {
         Date openDate = Date.valueOf(noteDatePicker.getValue());
         String email = noteEmailText.getText();
         int index = ticket.getNotes().indexOf(noteTable.getSelectionModel().getSelectedItem());
-        String error = AssetPlusFeatureSet7Controller.updateMaintenanceNote(ticket.getId(), index, new Date(System.currentTimeMillis()), description,
+        String error = AssetPlusFeatureSet7Controller.updateMaintenanceNote(ticket.getId(), index, openDate, description,
                 email);
         if (!error.isEmpty()) {
             ViewUtils.makePopupWindow("Error", error);
