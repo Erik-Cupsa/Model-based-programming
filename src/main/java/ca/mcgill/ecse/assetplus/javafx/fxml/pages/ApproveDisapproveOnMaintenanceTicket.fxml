@@ -3,23 +3,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ApproveDisapproveWorkOnMaintenanceTicketController" spacing="50">
-    <Label text="Maintenance Ticket Management" />
+<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ApproveDisapproveWorkOnMaintenanceTicketController">
+    <Label layoutX="50.0" layoutY="50.0" text="Maintenance Ticket Management" />
 
-    <HBox spacing="10">
-        <Label text="Select Ticket:" />
-        <ComboBox fx:id="comboTicket" prefWidth="200.0" />
-    </HBox>
+    <Label layoutX="50.0" layoutY="100.0" text="Select Ticket:" />
+    <ComboBox fx:id="comboTicket" layoutX="200.0" layoutY="100.0" prefWidth="200.0" />
 
-<!--    <HBox spacing="10">-->
-<!--        <Button fx:id="btnStartWork" text="Approve Work" onAction="#handleStartWork" />-->
-<!--        <Button fx:id="btnCompleteWork" text="Disapprove Work" onAction="#handleCompleteWork" />-->
-<!--    </HBox>-->
+    <Button fx:id="btnApproveWork" layoutX="50.0" layoutY="400.0" text="Approve Work" onAction="#handleApproveWork" />
+    <Button fx:id="btnDisapproveWork" layoutX="200.0" layoutY="400.0" text="Disapprove Work" onAction="#handleDisapproveWork" />
 
-    <HBox spacing="10">
-        <Label text="Work Status:" />
-        <Label fx:id="labelWorkStatus" />
-    </HBox>
+    <Label layoutX="50.0" layoutY="150.0" text="Work Status:" />
+    <Label fx:id="labelWorkStatus" layoutX="200.0" layoutY="150.0"  />
 
-    <TextArea fx:id="textAreaFeedback" prefHeight="100.0" prefWidth="500.0" />
-</VBox>
+    <Label layoutX="50.0" layoutY="200.0" text="Disapproval Reason:" />
+    <TextArea fx:id="textAreaFeedback" layoutX="200.0" layoutY="200.0" prefHeight="100.0" prefWidth="350.0" />
+
+    <Label layoutX="50.0" layoutY="350.0" text="Disapproval Date:" />
+    <DatePicker fx:id="disapprovalDatePicker" layoutX="200.0" layoutY="350.0" />
+
+</AnchorPane>

@@ -70,10 +70,9 @@ public class ViewUtils {
     }
 
     public static ObservableList<TOMaintenanceTicket> getTickets() {
-        List<TOMaintenanceTicket> drivers = AssetPlusFeatureSet6Controller.getTickets();
-        // as javafx works with observable list, we need to convert the java.util.List to
-        // javafx.collections.observableList
-        return FXCollections.observableList(drivers);
+        List<TOMaintenanceTicket> tickets = AssetPlusFeatureSet6Controller.getTickets();
+
+        return FXCollections.observableList(tickets);
     }
 
     public static void loadTickets(ListView<TOMaintenanceTicket> ticketsListView) {
@@ -106,12 +105,11 @@ public class ViewUtils {
         ticketsListView.setItems(observableTickets);
 
         // Set the TicketGridCell as the cell factory for the ListView
-        ticketsListView.setCellFactory(param -> new TicketGridCell());
+        //ticketsListView.setCellFactory(param -> new TicketGridCell());
     }
     // Method to handle the "Edit" button action
     public static void editSelectedTicket(ListView<TOMaintenanceTicket> ticketsListView) {
         TOMaintenanceTicket selectedTicket = ticketsListView.getSelectionModel().getSelectedItem();
-
         if (selectedTicket != null) {
             openEditPage(selectedTicket);
         } else {

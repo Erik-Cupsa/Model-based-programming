@@ -38,7 +38,6 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
      */
     @FXML
     public void initialize() {
-        ticketList = ViewUtils.getTickets();
         populateTickets();
         comboTicket.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -53,6 +52,7 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
      * @author Philippe Aprahamian
      */
     private void populateTickets() {
+        ticketList = ViewUtils.getTickets();
         ArrayList<String> ticketIds= new ArrayList<>();
         for (TOMaintenanceTicket ticket:ticketList ) {
             ticketIds.add(String.valueOf(ticket.getId()));
@@ -68,21 +68,14 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
      * @author Philippe Aprahamian
      */
     private void updateTicketSelection(String selectedTicket) {
-        // Update UI based on the selected ticket
-        int selectedTicketId = Integer.parseInt(selectedTicket);
-        String selectedTicketStatusName ;
+        populateTickets();
         textAreaFeedback.setText("Selected: " + selectedTicket);
         for (TOMaintenanceTicket ticket:ticketList) {
-            if(ticket.getId()==selectedTicketId){
-                selectedTicketStatusName=ticket.getStatus();
-                labelWorkStatus.setText(selectedTicketStatusName);
+            if(ticket.getId()==Integer.parseInt(selectedTicket)){
+                labelWorkStatus.setText(ticket.getStatus());
                 break;
             }
         }
-
-
-
-        // Additional logic to display the current status of the selected ticket can be added here
     }
 
     /**
@@ -101,9 +94,12 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
                 labelWorkStatus.setText("InProgress");
                 textAreaFeedback.setText("Work on ticket " + selectedTicket + " has started.");
             }else{
-                ViewUtils.makePopupWindow("Start Work on ticket #"+selectedTicket,msg);
+                ViewUtils.showError(msg);
             }
+        }else {
+            ViewUtils.showError("Please choose a ticket first");
         }
+
     }
     /**
      * Completes the work on the selected ticket
@@ -120,11 +116,11 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
                 labelWorkStatus.setText("Resolved");
                 textAreaFeedback.setText("Work on ticket " + selectedTicket + " has been completed.");
             }else{
-                ViewUtils.makePopupWindow("Complete Work on ticket #"+selectedTicket,msg);
+                ViewUtils.showError(msg);
             }
+        }else {
+            ViewUtils.showError("Please choose a ticket first");
         }
 
     }
-
-    // Additional methods can be added as needed
 }
