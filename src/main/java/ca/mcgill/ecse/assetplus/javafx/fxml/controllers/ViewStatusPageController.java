@@ -31,6 +31,11 @@ public class ViewStatusPageController{
         ViewUtils.loadTickets(ticketsListView);
     }
 
+    public void setTicketsListView(ListView<TOMaintenanceTicket> tickets){
+        this.ticketsListView = tickets;
+        initialize();
+    }
+
     @FXML
     public void addTicketClicked(ActionEvent event) {
         try {
@@ -38,6 +43,8 @@ public class ViewStatusPageController{
             System.out.println("add");
             Parent newRoot = fxmlLoader.load();
 
+            AddMaintenanceTicketController addMaintenanceTicketController = fxmlLoader.getController();
+            addMaintenanceTicketController.initialize();
             // Access the current stage
             Stage currentStage = (Stage) addTicketButton.getScene().getWindow();
 

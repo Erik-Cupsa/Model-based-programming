@@ -107,6 +107,9 @@ public class ViewUtils {
         // Set the TicketGridCell as the cell factory for the ListView
         //ticketsListView.setCellFactory(param -> new TicketGridCell());
     }
+
+
+
     // Method to handle the "Edit" button action
     public static void editSelectedTicket(ListView<TOMaintenanceTicket> ticketsListView) {
         TOMaintenanceTicket selectedTicket = ticketsListView.getSelectionModel().getSelectedItem();
