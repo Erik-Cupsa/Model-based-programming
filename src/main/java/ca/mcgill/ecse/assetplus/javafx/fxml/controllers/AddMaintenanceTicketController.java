@@ -1,15 +1,15 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,11 +21,19 @@ import java.util.List;
 
 public class AddMaintenanceTicketController {
     @FXML
-    private ListView<TOMaintenanceTicket> ticketsListView;
+    private TableView<TOMaintenanceTicket> addTicketsTableView;
     @FXML
-    private Button addTicketButton;
+    private TableColumn<TOMaintenanceTicket, Integer> numberColumn;
     @FXML
-    private Button doneTicketButton;
+    private TableColumn<TOMaintenanceTicket, String> issuerColumn;
+    @FXML
+    private TableColumn<TOMaintenanceTicket, String> statusColumn;
+    @FXML
+    private TableColumn<TOMaintenanceTicket, String> dateRaisedColumn;
+    @FXML
+    private Button cancelAddButton;
+    @FXML
+    private Button doneAddButton;
     @FXML
     private TextField ticketId;
     @FXML
@@ -38,21 +46,24 @@ public class AddMaintenanceTicketController {
     private DatePicker datePicker;
     @FXML
     public void initialize() {
-        ViewUtils.loadTickets(ticketsListView);
+        ViewUtils.loadTicketsIntoTableView(addTicketsTableView, numberColumn, issuerColumn, statusColumn, dateRaisedColumn);
     }
 
     @FXML
-    public void doneTicketClicked(ActionEvent event) {
+    private void returnToTicketStatusPage() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../pages/ViewStatusPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
             Parent newRoot = fxmlLoader.load();
 
-            ViewStatusPageController viewStatusPageController = fxmlLoader.getController();
+            //ViewStatusPageController viewStatusPageController = fxmlLoader.getController();
+            //viewStatusPageController.initialize();
 
-            viewStatusPageController.initialize();
-            viewStatusPageController.setTicketsListView(this.ticketsListView);
+            MainPageController mainPageController = fxmlLoader.getController();
+            mainPageController.setSelectedTabIndex(2);
+            mainPageController.initialize();
+
             // Access the current stage
-            Stage currentStage = (Stage) doneTicketButton.getScene().getWindow();
+            Stage currentStage = (Stage) doneAddButton.getScene().getWindow();
             // Replace the content in the current scene with content loaded from the new FXML
             currentStage.getScene().setRoot(newRoot);
         } catch (IOException e) {
@@ -61,34 +72,31 @@ public class AddMaintenanceTicketController {
 
     }
 
-    public void addTicketClicked(ActionEvent actionEvent) {
+    public void doneAddClicked(ActionEvent actionEvent) {
+        // TODO: CHECK IF USER ACTUALLY FILLED IN THE FIELDS
         int id = Integer.parseInt(ticketId.getText());
         String descriptionText = description.getText();
         String userEmail = email.getText();
         String assetNum = assetNumber.getText();
         LocalDate localDate = datePicker.getValue();
-        Date date = Date.valueOf(localDate);
 
         // Create a new TOMaintenanceTicket object using the read values
-        //fix later to be maintenace ticket instead of TO
-        TOMaintenanceTicket newTicket = new TOMaintenanceTicket(
+        String result = AssetPlusFeatureSet4Controller.addMaintenanceTicket(
                 id,
-                date,
+                Date.valueOf(localDate),
                 descriptionText,
                 userEmail,
-                "Open",
-                "",
-                "2 days",
-                "High",
-                false,
-                "Kitchen Sink",
-                365,
-                new Date(2000, 11, 11),
-                1,
-                101,
-                Arrays.asList("url1", "url2")
+                Integer.parseInt(assetNum)
         );
-        // Add the new ticket to the ticket list
-        ticketsListView.getItems().add(newTicket);
+        if (ViewUtils.successful(result)) {
+            returnToTicketStatusPage();
+        }
+        else {
+            ViewUtils.showError(result);
+        }
+    }
+
+    public void cancelAddClicked(ActionEvent event) {
+        returnToTicketStatusPage();
     }
 }
