@@ -2,58 +2,44 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="302.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewStatusPageController">
-   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints maxHeight="174.4" minHeight="10.0" prefHeight="36.59999580383301" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="318.3999961853027" minHeight="10.0" prefHeight="234.99996032714841" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="318.3999961853027" minHeight="10.0" prefHeight="39.00003967285153" vgrow="SOMETIMES" />
-   </rowConstraints>
-   <children>
-      <GridPane GridPane.rowIndex="2">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewStatusPageController">
+   <top>
+      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addTicketButton" mnemonicParsing="false" onAction="#addTicketClicked" text="Add" GridPane.columnIndex="1" />
-            <Button fx:id="editTicketButton" mnemonicParsing="false" onAction="#editTicketClicked" text="Edit" GridPane.columnIndex="2" />
-            <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="3" />
-            <Button mnemonicParsing="false" text="Propose Solution" GridPane.columnIndex="4" />
-            <Button mnemonicParsing="false" text="Assign Staff" GridPane.columnIndex="5" />
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="131.0" text="Tickets">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
-      </GridPane>
-      <ListView fx:id="ticketsListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-      <GridPane>
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      </HBox>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Ticket ID" />
-            <Label text="Ticket Issuer" GridPane.columnIndex="1" />
-            <Label text="Status" GridPane.columnIndex="2" />
-            <Label text="Date Issued" GridPane.columnIndex="3" />
+            <TableView fx:id="ticketsTableView" prefHeight="250.0" prefWidth="600.0">
+               <columns>
+                  <TableColumn fx:id="numberColumn" prefWidth="138.4000244140625" text="Ticket ID" />
+                  <TableColumn fx:id="issuerColumn" prefWidth="148.0" text="Ticket Raiser" />
+                  <TableColumn fx:id="statusColumn" prefWidth="154.4000244140625" text="Status" />
+                  <TableColumn fx:id="dateRaisedColumn" prefWidth="159.20001220703125" text="Date Raised On" />
+               </columns>
+            </TableView>
+            <HBox layoutX="8.0" layoutY="250.0" prefHeight="40.0" prefWidth="266.0">
+               <children>
+                  <Button fx:id="addTicketButton" mnemonicParsing="false" onAction="#addTicketClicked" prefHeight="26.0" prefWidth="81.0" text="Add" />
+                  <Button fx:id="editTicketButton" mnemonicParsing="false" onAction="#editTicketClicked" prefHeight="26.0" prefWidth="82.0" text="Edit" />
+                  <Button fx:id="deleteTicketButton" mnemonicParsing="false" onAction="#deleteTicketClicked" prefHeight="26.0" prefWidth="81.0" text="Delete" />
+               </children>
+            </HBox>
          </children>
-      </GridPane>
-   </children>
-</GridPane>
+      </AnchorPane>
+   </center>
+</BorderPane>
