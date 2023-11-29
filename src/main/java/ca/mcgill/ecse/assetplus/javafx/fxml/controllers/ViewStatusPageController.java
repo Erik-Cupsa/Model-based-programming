@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import javafx.application.Application;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -73,42 +74,34 @@ public class ViewStatusPageController{
 
     @FXML
     public void editTicketClicked(ActionEvent event) {
-        TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../pages/EditMaintenanceTicket.fxml"));
+            Parent newRoot = fxmlLoader.load();
 
-        if (selectedTicket != null) {
-            openEditTicketPage(selectedTicket);
-        } else {
-            System.out.println("No ticket selected.");
+            EditMaintenanceTicketController editMaintenanceTicketController = fxmlLoader.getController();
+            // Access the current stage
+            Stage currentStage = (Stage) editTicketButton.getScene().getWindow();
+
+            // Replace the content in the current scene with content loaded from the new FXML
+            currentStage.getScene().setRoot(newRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
         }
     }
 
     @FXML
     public void deleteTicketClicked(ActionEvent event) {
-        return;
-    }
+        TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
 
-    /**
-     * Opens editTicketPage and passes selected ticket to the page.
-     * @param selectedTicket Ticket selected in the ListView.
-     * @author Manuel Hanna
-     */
-    // Method to open the edit page and pass the selected ticket
-    public void openEditTicketPage(TOMaintenanceTicket selectedTicket) {
-        System.out.println("edit button clicked");
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("EditTicketPage.fxml"));
-            Parent root = loader.load();
-
-            EditTicketPageController editTicketPageController = loader.getController();
-            editTicketPageController.initialize(selectedTicket);
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Edit Ticket");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (selectedTicket == null) {
+            System.out.println("No ticket selected.");
+            return;
         }
+
+        int id = selectedTicket.getId();
+        AssetPlusFeatureSet4Controller.deleteMaintenanceTicket(id);
+        ticketsTableView.getItems().remove(selectedTicket);
     }
 
 
