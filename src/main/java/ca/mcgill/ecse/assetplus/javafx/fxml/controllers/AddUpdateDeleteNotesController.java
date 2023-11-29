@@ -18,6 +18,7 @@ import javafx.scene.control.SelectionMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
 public class AddUpdateDeleteNotesController {
 	private String email;
 	private int ticket;
@@ -26,13 +27,13 @@ public class AddUpdateDeleteNotesController {
 	@FXML
 	private TextField addNoteText;
 	@FXML
-	private TableView<ToMaintenanceNote> noteTable;
+	private TableView<TOMaintenanceNote> noteTable;
 	@FXML
-	private TableColumn<ToMaintenanceNote, String> noteWriter;
+	private TableColumn<TOMaintenanceNote, String> noteWriter;
 	@FXML
-	private TableColumn<ToMaintenanceNote, Date> noteDate;
+	private TableColumn<TOMaintenanceNote, Date> noteDate;
 	@FXML
-	private TableColumn<ToMaintenanceNote, String> noteText;
+	private TableColumn<TOMaintenanceNote, String> noteText;
 	@FXML
 	private Button noteAdd;
 	@FXML
@@ -43,7 +44,7 @@ public class AddUpdateDeleteNotesController {
 	private Label noteName;
 
 	
-	public AddUpdateDeleteNotesController(ToMaintenanceTicket ticket, String email) {
+	public AddUpdateDeleteNotesController(TOMaintenanceTicket ticket, String email) {
 		this.ticket = ticket;
 		this.email = email;
 	}
@@ -51,9 +52,9 @@ public class AddUpdateDeleteNotesController {
     @FXML
     public void initialize() {
     	noteTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-    	noteWriter.setCellValueFactory(new PropertyValueFactory<ToMaintenanceNote, String>("noteTakerEmail"));
-    	noteDate.setCellValueFactory(new PropertyValueFactory<ToMaintenanceNote, Date>("date"));
-    	noteText.setCellValueFactory(new PropertyValueFactory<ToMaintenanceNote, Date>("description"));
+    	noteWriter.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, String>("noteTakerEmail"));
+    	noteDate.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, Date>("date"));
+    	noteText.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, Date>("description"));
     	noteTable.setItems(FXCollections.observableList(ticket.notes));
     }
     
@@ -109,3 +110,4 @@ public class AddUpdateDeleteNotesController {
 		}
 	  }
 	}
+	*/
