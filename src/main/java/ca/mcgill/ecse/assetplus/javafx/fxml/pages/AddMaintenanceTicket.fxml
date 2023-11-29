@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="50.0" prefWidth="602.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="100.0" prefWidth="602.0" text="Maintenance Tickets">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <AnchorPane prefHeight="210.0" prefWidth="602.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="employeeTable" prefHeight="208.0" prefWidth="600.0">
+               <columns>
+                  <TableColumn fx:id="email" prefWidth="153.0" text="Ticket ID" />
+                  <TableColumn fx:id="name" prefWidth="119.0" text="Ticket Issuer" />
+                  <TableColumn fx:id="phone" prefWidth="149.5" text="Status" />
+                  <TableColumn prefWidth="177.5" text="Date Issued" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </center>
+   <bottom>
+      <GridPane hgap="10.0" prefHeight="142.0" prefWidth="602.0" vgap="5.0" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="88.9999755859375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="233.199951171875" minWidth="10.0" prefWidth="186.4000244140625" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.39996337890625" minWidth="10.0" prefWidth="91.20002441406251" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.79998779296875" minWidth="10.0" prefWidth="199.99997558593753" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="46.4" minHeight="10.0" prefHeight="36.8000244140625" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="25.60001220703125" minHeight="10.0" prefHeight="23.9999755859375" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="25.60001220703125" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="91.0" text="ID:" />
+            <Label alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="102.0" text="Email:" textAlignment="RIGHT" GridPane.columnIndex="2" />
+            <Label alignment="CENTER_RIGHT" text="Description:" GridPane.rowIndex="1" />
+            <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="105.0" text="Asset Number:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="employeeNameTextField" prefHeight="26.0" prefWidth="117.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+            <TextField fx:id="EmployeePhoneTextField" prefHeight="1.0" prefWidth="186.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+            <TextField fx:id="employeeEmailTextField" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </TextField>
+            <TextField fx:id="EmployeePasswordTextField" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="201.0" text="Add" />
+               </children>
+            </HBox>
+            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Date:" GridPane.rowIndex="2" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </GridPane>
+   </bottom>
+</BorderPane>
