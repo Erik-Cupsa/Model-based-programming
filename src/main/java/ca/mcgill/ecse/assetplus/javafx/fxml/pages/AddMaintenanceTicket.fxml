@@ -4,7 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.AddMaintenanceTicketController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.AddMaintenanceTicketController">
    <top>
       <HBox prefHeight="50.0" prefWidth="602.0" BorderPane.alignment="CENTER">
          <children>
@@ -29,9 +30,14 @@
    <center>
       <AnchorPane prefHeight="210.0" prefWidth="602.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="ticketsListView" prefHeight="208.0" prefWidth="600.0">
-               <!-- List items will be populated dynamically -->
-            </ListView>
+            <TableView fx:id="addTicketsTableView" layoutY="13.0" prefHeight="211.0" prefWidth="600.0">
+               <columns>
+                  <TableColumn fx:id="numberColumn" prefWidth="138.4000244140625" text="Ticket ID" />
+                  <TableColumn fx:id="issuerColumn" prefWidth="148.0" text="Ticket Raiser" />
+                  <TableColumn fx:id="statusColumn" prefWidth="154.4000244140625" text="Status" />
+                  <TableColumn fx:id="dateRaisedColumn" prefWidth="159.20001220703125" text="Date Raised On" />
+               </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </center>
@@ -49,7 +55,7 @@
             <RowConstraints maxHeight="25.60001220703125" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="91.0" text="ID:" />
+            <Label prefHeight="22.0" prefWidth="91.0" text="Ticket ID:" />
             <Label alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="102.0" text="Email:" textAlignment="RIGHT" GridPane.columnIndex="2" />
             <Label alignment="CENTER_RIGHT" text="Description:" GridPane.rowIndex="1" />
             <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="105.0" text="Asset Number:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -63,8 +69,8 @@
             <TextField fx:id="assetNumber" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="addTicketButton" mnemonicParsing="false" onAction="#addTicketClicked" prefHeight="26.0" prefWidth="107.0" text="Add" />
-                  <Button fx:id="doneTicketButton" mnemonicParsing="false" onAction="#doneTicketClicked" prefHeight="25.0" prefWidth="109.0" text="Done" />
+                  <Button fx:id="cancelAddButton" mnemonicParsing="false" onAction="#cancelAddClicked" prefHeight="26.0" prefWidth="107.0" text="Cancel" />
+                  <Button fx:id="doneAddButton" mnemonicParsing="false" onAction="#doneAddClicked" prefHeight="25.0" prefWidth="109.0" text="Done" />
                </children>
             </HBox>
             <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
