@@ -7,32 +7,32 @@
 <VBox prefHeight="518.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.MainPageController">
     <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <tabs>
-<!--             <Tab text="Start/Complete work">
+            <Tab text="Start/Complete work">
                 <content>
                     <fx:include source="pages/StartCompleteWorkOnMaintenanceTicket.fxml" />
                 </content>
-            </Tab> -->
-<!--             <Tab text="Approve/disapprove work">
+            </Tab>
+            <Tab text="Approve/disapprove work">
                 <content>
                     <fx:include source="pages/ApproveDisapproveOnMaintenanceTicket.fxml" />
                 </content>
-            </Tab> -->
-<!--             <Tab fx:id="viewTicketsTab" text="View Tickets">
+            </Tab>
+            <Tab fx:id="viewTicketsTab" text="View Tickets">
                 <content>
                     <fx:include source="pages/ViewStatusPage.fxml" />
                 </content>
-            </Tab> -->
+            </Tab>
             <Tab text="Manage Employees">
                 <content>
                     <fx:include source="pages/AddUpdateDeleteEmployee.fxml"/>
                 </content>
             </Tab>
-<!--             <Tab text="View Asset Types">
+            <Tab text="View Asset Types">
                 <content>
                     <fx:include source="pages/AddUpdateDeleteAssetType.fxml" />
                 </content>
             </Tab>
-            <Tab text="View Assets">
+            <!-- <Tab text="View Assets">
                 <content>
                     <fx:include source="pages/AddUpdateDeleteAsset.fxml" />
                 </content>
