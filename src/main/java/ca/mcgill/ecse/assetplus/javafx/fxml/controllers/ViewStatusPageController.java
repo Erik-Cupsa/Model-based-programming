@@ -1,9 +1,6 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
-import ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController;
-import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
-import ca.mcgill.ecse.assetplus.controller.TOUser;
+import ca.mcgill.ecse.assetplus.controller.*;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 import javafx.application.Application;
@@ -64,6 +61,10 @@ public class ViewStatusPageController{
     private Button startWorkButton;
     @FXML
     private Button completeWorkButton;
+    @FXML
+    private Button addImageButton;
+    @FXML
+    private Button deleteImageButton;
 
     @FXML
     private TextField idTextField;
@@ -75,6 +76,8 @@ public class ViewStatusPageController{
     private DatePicker dateRaisedOnPicker;
     @FXML
     private TextField descriptionTextField;
+    @FXML
+    private TextField image;
 
     @FXML
     private Label assetName;
@@ -118,6 +121,34 @@ public class ViewStatusPageController{
         refresh();
 
     }
+
+    @FXML
+    public void addImageClicked(ActionEvent event) {
+        TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
+        if (selectedTicket == null) {
+            ViewUtils.showError("Please choose a ticket first");
+            return;
+        }
+        String text = AssetPlusFeatureSet5Controller.addImageToMaintenanceTicket(image.getText(), selectedTicket.getId());
+        if(text.equals("")){
+            text = "Image successfully added";
+        }
+        ViewUtils.showError(text);
+        refresh();
+    }
+    @FXML
+    public void deleteImageClicked(ActionEvent event) {
+        TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
+        if (selectedTicket == null) {
+            ViewUtils.showError("Please choose a ticket first");
+            return;
+        }
+
+        AssetPlusFeatureSet5Controller.deleteImageFromMaintenanceTicket(image.getText(), selectedTicket.getId());
+        ViewUtils.showError("Image deleted successfully");
+        refresh();
+    }
+
 
     @FXML
     public void editTicketClicked(ActionEvent event) {
