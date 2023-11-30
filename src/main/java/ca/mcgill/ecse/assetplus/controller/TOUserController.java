@@ -25,6 +25,9 @@ public class TOUserController {
       String password = guest.getPassword();
       users.add(new TOUser(email, name, phoneNumber, password));
     }
+    Manager manager = assetPlus.getManager();
+    users.add(new TOUser(manager.getEmail(), manager.getName(), manager.getPhoneNumber(), manager.getPassword()));
+
     return users;
   }
 }

@@ -22,9 +22,14 @@
                     <fx:include source="pages/ViewStatusPage.fxml" />
                 </content>
             </Tab> -->
-            <Tab text="Manage Employees">
+            <Tab text="Manage Users">
                 <content>
                     <fx:include source="pages/AddUpdateDeleteEmployee.fxml"/>
+                </content>
+            </Tab>
+            <Tab text="Manager Profile">
+                <content>
+                    <fx:include source="pages/UpdateManagerPassword.fxml"/>
                 </content>
             </Tab>
 <!--             <Tab text="View Asset Types">
