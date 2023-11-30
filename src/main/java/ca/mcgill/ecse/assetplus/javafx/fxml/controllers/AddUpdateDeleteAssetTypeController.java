@@ -68,12 +68,6 @@ public class AddUpdateDeleteAssetTypeController {
         assetTypeNameTextField.clear();
     }
 
-     @FXML
-     void updateView(MouseEvent event) {
-         TOAssetType selected = assetTypeTable.getSelectionModel().getSelectedItem();
-         assetTypeExpectedLifeSpanTextField.setText(String.format("%d", selected.getExpectedLifeSpan()));
-         assetTypeNameTextField.setText(selected.getName());
-     }
 
     @FXML
     void addAssetTypeClicked(ActionEvent event) {
@@ -82,22 +76,11 @@ public class AddUpdateDeleteAssetTypeController {
         
         String err = AssetPlusFeatureSet2Controller.addAssetType(name, Integer.parseInt(expectedLifeSpan));
         if(err.isEmpty()){
-            showMessage("Asset Type with name " + name + " added successfully.", true);
             clearData();
             showAllAssetTypes();
         }
         else{
             ViewUtils.showError(err);
-        }
-    }
-
-    private void showMessage(String msg, boolean success){
-        statusLabel.setText(msg);
-        if(success){
-            statusLabel.setTextFill(Color.GREEN);
-        }
-        else{
-            statusLabel.setTextFill(Color.RED);
         }
     }
 
@@ -122,16 +105,19 @@ public class AddUpdateDeleteAssetTypeController {
 
     @FXML
     void updateAssetTypeClicked(ActionEvent event) {
-        Integer newExpectedLifeSpan = Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText());
+        int newExpectedLifeSpan = Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText());
         String newName = assetTypeNameTextField.getText();
-        try{
-            AssetPlusFeatureSet2Controller.addAssetType(newName, newExpectedLifeSpan);
-            TOAssetTypeController.setName(assetTypeTable.getSelectionModel().getSelectedItem(), assetTypeNameTextField.getText());
-            TOAssetTypeController.setExpectedLifeSpan(assetTypeTable.getSelectionModel().getSelectedItem(), Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText()));
-        }catch(Error e){
-            showMessage(e.getMessage(), false);
+
+        String oldName = assetTypeTable.getSelectionModel().getSelectedItem().getName();
+
+        String err = AssetPlusFeatureSet2Controller.updateAssetType(assetTypeTable.getSelectionModel().getSelectedItem().getName(), newName, newExpectedLifeSpan);
+
+        if(!err.isEmpty()){
+            ViewUtils.makePopupWindow("Update An Asset Type" , "AssetType with name " + oldName + " updated unsuccessfully");
         }
+
         showAllAssetTypes();
+        AssetPlusFxmlView.getInstance().refresh();
     }
 
     @FXML

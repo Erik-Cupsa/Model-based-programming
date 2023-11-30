@@ -192,7 +192,7 @@
                       ],
                       "assetType": {
                         "name": "lamp",
-                        "expectedLifeSpan": 1800,
+                        "expectedLifeSpan": 10,
                         "assetPlus": {
                           "@reference": "../../../../../../../.."
                         },
@@ -253,9 +253,31 @@
     ],
     "assetTypes": [
       {
-        "AssetType": {
-          "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType"
-        }
+        "AssetType": [
+          {
+            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType"
+          },
+          {
+            "name": "g",
+            "expectedLifeSpan": 12,
+            "assetPlus": {
+              "@reference": "../../.."
+            },
+            "specificAssets": [
+              ""
+            ]
+          },
+          {
+            "name": "ga",
+            "expectedLifeSpan": 10000000,
+            "assetPlus": {
+              "@reference": "../../.."
+            },
+            "specificAssets": [
+              ""
+            ]
+          }
+        ]
       }
     ],
     "specificAssets": [
