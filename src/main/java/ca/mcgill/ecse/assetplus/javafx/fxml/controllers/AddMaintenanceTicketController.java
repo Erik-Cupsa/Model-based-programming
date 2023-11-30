@@ -44,10 +44,6 @@ public class AddMaintenanceTicketController {
     private TextField assetNumber;
     @FXML
     private DatePicker datePicker;
-    @FXML
-    public void initialize() {
-        ViewUtils.loadTicketsIntoTableView(addTicketsTableView, numberColumn, issuerColumn, statusColumn, dateRaisedColumn);
-    }
 
     @FXML
     private void returnToTicketStatusPage() {
@@ -72,7 +68,7 @@ public class AddMaintenanceTicketController {
 
     }
 
-    public void doneAddClicked(ActionEvent actionEvent) {
+    public static void doneAddClicked(TextField ticketId, TextField description, TextField email, TextField assetNumber, DatePicker datePicker) {
         // TODO: CHECK IF USER ACTUALLY FILLED IN THE FIELDS
         if (ticketId.getText().equals("")) {
             ViewUtils.showError("Please fill in the id field.");
@@ -84,14 +80,11 @@ public class AddMaintenanceTicketController {
         LocalDate localDate = datePicker.getValue();
         if (descriptionText.equals("")) {
             ViewUtils.showError("Please fill in the description field.");
-        }
-        else if (userEmail.equals("")) {
+        } else if (userEmail.equals("")) {
             ViewUtils.showError("Please fill in the email field.");
-        }
-        else if (assetNum.equals("")) {
+        } else if (assetNum.equals("")) {
             ViewUtils.showError("Please fill in the asset number field.");
-        }
-        else if (localDate == null) {
+        } else if (localDate == null) {
             ViewUtils.showError("Please fill in the date field.");
         }
 
@@ -103,15 +96,8 @@ public class AddMaintenanceTicketController {
                 userEmail,
                 Integer.parseInt(assetNum)
         );
-        if (ViewUtils.successful(result)) {
-            returnToTicketStatusPage();
-        }
-        else {
+        if (!ViewUtils.successful(result)) {
             ViewUtils.showError(result);
         }
-    }
-
-    public void cancelAddClicked(ActionEvent event) {
-        returnToTicketStatusPage();
     }
 }

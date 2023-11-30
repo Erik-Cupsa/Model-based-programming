@@ -115,7 +115,7 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
 
     @FXML
     private void handleCancel() {
-        return;
+        ViewUtils.returnToTicketStatusPage(getClass(), (Stage) btnApproveWork.getScene().getWindow());
     }
 }
 

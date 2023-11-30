@@ -47,12 +47,6 @@ public class EditMaintenanceTicketController {
     private DatePicker datePicker;
     private TOMaintenanceTicket selectedTicket;
 
-    @FXML
-    public void initialize() {
-        ViewUtils.loadTicketsIntoTableView(editTicketsTableView, numberColumn, issuerColumn, statusColumn, dateRaisedColumn);
-        // TODO: auto select the ticket that was already selected
-    }
-
     public void setSelectedTicket(TOMaintenanceTicket ticket) {
         this.selectedTicket = ticket;
         ObservableList<TOMaintenanceTicket> tickets = editTicketsTableView.getItems();
@@ -67,12 +61,7 @@ public class EditMaintenanceTicketController {
     }
 
     @FXML
-
-    public void doneEditClicked(ActionEvent actionEvent) {
-        if (selectedTicket == null) {
-            System.out.println("No ticket selected.");
-            return;
-        }
+    public static void doneEditClicked(TextField ticketId, TextField description, TextField email, TextField assetNumber, DatePicker datePicker) {
 
         int id = Integer.parseInt(ticketId.getText());
         String descriptionText = description.getText();
@@ -88,10 +77,7 @@ public class EditMaintenanceTicketController {
                 userEmail,
                 Integer.parseInt(assetNum)
         );
-        if (ViewUtils.successful(result)) {
-            ViewUtils.returnToTicketStatusPage(getClass(), (Stage) doneEditButton.getScene().getWindow());
-        }
-        else {
+        if (!ViewUtils.successful(result)) {
             ViewUtils.showError(result);
         }
     }
