@@ -64,12 +64,17 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </TextField>
-            <TextField fx:id="employeePasswordTextField" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+            <TextField fx:id="employeePasswordTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="AddEmployeeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#AddEmployeeClicked" prefHeight="26.0" prefWidth="81.0" text="Add" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="UpdateEmployeeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#UpdateEmployeeClicked" prefHeight="26.0" prefWidth="82.0" text="Update " HBox.hgrow="ALWAYS" />
-                  <Button fx:id="DeleteEmployeeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#DeleteEmployeeClicked" prefHeight="26.0" prefWidth="81.0" text="Delete" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="UpdateEmployeeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#UpdateEmployeeClicked" prefHeight="26.0" prefWidth="82.0" text="Update " />
+                  <Button fx:id="DeleteEmployeeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#DeleteEmployeeClicked" prefHeight="26.0" prefWidth="81.0" text="Delete" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="AddEmployeeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#AddEmployeeClicked" prefHeight="26.0" prefWidth="93.0" text="Add Employee" />
+                  <Button fx:id="AddGuestButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addGuestClicked" prefHeight="26.0" prefWidth="92.0" text="Add Guest" />
                </children>
             </HBox>
          </children>

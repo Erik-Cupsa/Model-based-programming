@@ -25,6 +25,9 @@ public class AddUpdateDeleteEmployeePageController {
     private Button DeleteEmployeeButton;
 
     @FXML
+    private Button AddGuestButton;
+
+    @FXML
     private TextField employeePasswordTextField;
 
     @FXML
@@ -53,7 +56,6 @@ public class AddUpdateDeleteEmployeePageController {
 
     @FXML
     public void initialize(){
-        //ObservableList<TOUser> observableUsers = FXCollections.observableArrayList();
         email.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getEmail()));
         name.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getName()));
         phone.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getPhoneNumber()));
@@ -64,6 +66,28 @@ public class AddUpdateDeleteEmployeePageController {
         ObservableList<TOUser> userList = FXCollections.observableArrayList(TOUserController.getUsers());
         employeeTable.setItems(userList);
         employeeTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> employeeTable.setItems(userList));
+    }
+
+    @FXML
+    void addGuestClicked(ActionEvent event) {
+        String name = employeeNameTextField.getText();
+        String email = employeeEmailTextField.getText();
+        String phone = employeePhoneTextField.getText();
+        String password = employeePasswordTextField.getText();
+
+        String err = AssetPlusFeatureSet1Controller.addEmployeeOrGuest(email, password, name, phone, false);
+
+        if (err.isEmpty()){
+            ViewUtils.makePopupWindow("Add New Guest" , "Guest with " + email + " added successfully");
+            employeeNameTextField.setText("");
+            employeeEmailTextField.setText("");
+            employeePhoneTextField.setText("");
+            employeePasswordTextField.setText("");
+            showAllEmployees();
+            AssetPlusFxmlView.getInstance().refresh();
+        }else{
+            ViewUtils.showError(err);
+        }
     }
 
     @FXML
@@ -90,36 +114,38 @@ public class AddUpdateDeleteEmployeePageController {
 
     @FXML
     public void DeleteEmployeeClicked(ActionEvent event) {
-        String email = employeeTable.getSelectionModel().getSelectedItem().getEmail();
-        AssetPlusFeatureSet6Controller.deleteEmployeeOrGuest(email);
-        ViewUtils.makePopupWindow("Delete An Employee" , "Employee with " + email + " deleted successfully");
-        showAllEmployees();
-        AssetPlusFxmlView.getInstance().refresh();
+        String email = employeeEmailTextField.getText();
+        ObservableList<TOUser> userList = FXCollections.observableArrayList(TOUserController.getUsers());
+        for (TOUser user : userList){
+            if (user.getEmail() == email){
+                AssetPlusFeatureSet6Controller.deleteEmployeeOrGuest(email);
+                ViewUtils.makePopupWindow("Delete An Employee" , "Employee with " + email + " deleted successfully");
+                showAllEmployees();
+                AssetPlusFxmlView.getInstance().refresh();
+            }else{
+                ViewUtils.showError("user does not exist");
+            }
+        }    
     }
 
     @FXML
     public void UpdateEmployeeClicked(ActionEvent event) {
-        String name = "";
-        String email = "";
-        String phone = "";
-        String password = "";
-        TOUser employee = null;
-        try{
-            name = employeeNameTextField.getText();
-            email = employeeEmailTextField.getText();
-            phone = employeePhoneTextField.getText();
-            password = employeePasswordTextField.getText();
-            employee = new TOUser(email, name, phone, password);
-        }catch(Exception e){
-            ViewUtils.showError("Nothing Selected");
-        }
-        if (employee != null){
-            AssetPlusFeatureSet1Controller.updateEmployeeOrGuest(email, password, name, phone);
-            ViewUtils.makePopupWindow("Update An Employee" , "Employee with " + email + " updated successfully");
+        
+        String name = employeeNameTextField.getText();
+        String email = employeeEmailTextField.getText();
+        String phone = employeePhoneTextField.getText();
+        String password = employeePasswordTextField.getText();
+        
+        String err = AssetPlusFeatureSet1Controller.updateEmployeeOrGuest(email, password, name, phone);
+
+        if (!err.isEmpty()){
+            ViewUtils.showError(err);
             showAllEmployees();
             AssetPlusFxmlView.getInstance().refresh();
         }else{
-            ViewUtils.makePopupWindow("Update An Employee" , "Employee does not exist");
+            ViewUtils.makePopupWindow("Update An Employee" , "Employee with " + email + " updated successfully");
+            showAllEmployees();
+            AssetPlusFxmlView.getInstance().refresh();
         }
     }
 
