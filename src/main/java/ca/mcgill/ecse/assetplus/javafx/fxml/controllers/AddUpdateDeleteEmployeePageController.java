@@ -56,7 +56,6 @@ public class AddUpdateDeleteEmployeePageController {
 
     @FXML
     public void initialize(){
-        //ObservableList<TOUser> observableUsers = FXCollections.observableArrayList();
         email.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getEmail()));
         name.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getName()));
         phone.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getPhoneNumber()));
@@ -90,7 +89,7 @@ public class AddUpdateDeleteEmployeePageController {
             ViewUtils.showError(err);
         }
     }
-    
+
     @FXML
     public void AddEmployeeClicked(ActionEvent event) {
         String name = employeeNameTextField.getText();
@@ -115,11 +114,18 @@ public class AddUpdateDeleteEmployeePageController {
 
     @FXML
     public void DeleteEmployeeClicked(ActionEvent event) {
-        String email = employeeTable.getSelectionModel().getSelectedItem().getEmail();
-        AssetPlusFeatureSet6Controller.deleteEmployeeOrGuest(email);
-        ViewUtils.makePopupWindow("Delete An Employee" , "Employee with " + email + " deleted successfully");
-        showAllEmployees();
-        AssetPlusFxmlView.getInstance().refresh();
+        String email = employeeEmailTextField.getText();
+        ObservableList<TOUser> userList = FXCollections.observableArrayList(TOUserController.getUsers());
+        for (TOUser user : userList){
+            if (user.getEmail() == email){
+                AssetPlusFeatureSet6Controller.deleteEmployeeOrGuest(email);
+                ViewUtils.makePopupWindow("Delete An Employee" , "Employee with " + email + " deleted successfully");
+                showAllEmployees();
+                AssetPlusFxmlView.getInstance().refresh();
+            }else{
+                ViewUtils.showError("user does not exist");
+            }
+        }    
     }
 
     @FXML
