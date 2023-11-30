@@ -23,8 +23,8 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
     @FXML
     private Button btnCompleteWork;
 
-    @FXML
-    private Label labelWorkStatus;
+//    @FXML
+//    private Label labelWorkStatus;
 
     @FXML
     private TextArea textAreaFeedback;
@@ -72,7 +72,7 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
         textAreaFeedback.setText("Selected: " + selectedTicket);
         for (TOMaintenanceTicket ticket:ticketList) {
             if(ticket.getId()==Integer.parseInt(selectedTicket)){
-                labelWorkStatus.setText(ticket.getStatus());
+                //labelWorkStatus.setText(ticket.getStatus());
                 break;
             }
         }
@@ -91,7 +91,7 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
             String msg = MaintenanceTicketWorkController.startWorkOnTicket(Integer.parseInt(selectedTicket));
             if (msg.equals("")){
                 ViewUtils.makePopupWindow("Start Work on ticket #"+ selectedTicket,"Work started successfully");
-                labelWorkStatus.setText("InProgress");
+                //labelWorkStatus.setText("InProgress");
                 textAreaFeedback.setText("Work on ticket " + selectedTicket + " has started.");
             }else{
                 ViewUtils.showError(msg);
@@ -113,7 +113,7 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
             String msg = MaintenanceTicketWorkController.completeWorkOnTicket(Integer.parseInt(selectedTicket));
             if (msg.equals("")){
                 ViewUtils.makePopupWindow("Complete Work on ticket #"+ selectedTicket,"Work completed successfully");
-                labelWorkStatus.setText("Resolved");
+                //labelWorkStatus.setText("Resolved");
                 textAreaFeedback.setText("Work on ticket " + selectedTicket + " has been completed.");
             }else{
                 ViewUtils.showError(msg);

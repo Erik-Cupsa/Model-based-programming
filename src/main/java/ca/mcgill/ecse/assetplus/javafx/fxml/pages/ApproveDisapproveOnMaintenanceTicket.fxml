@@ -13,8 +13,8 @@
     <Button fx:id="btnApproveWork" layoutX="50.0" layoutY="400.0" text="Approve Work" onAction="#handleApproveWork" />
     <Button fx:id="btnDisapproveWork" layoutX="200.0" layoutY="400.0" text="Disapprove Work" onAction="#handleDisapproveWork" />
 
-    <Label layoutX="50.0" layoutY="150.0" text="Work Status:" />
-    <Label fx:id="labelWorkStatus" layoutX="200.0" layoutY="150.0"  />
+<!--    <Label layoutX="50.0" layoutY="150.0" text="Work Status:" />-->
+<!--    <Label fx:id="labelWorkStatus" layoutX="200.0" layoutY="150.0"  />-->
 
     <Label layoutX="50.0" layoutY="200.0" text="Disapproval Reason:" />
     <TextArea fx:id="textAreaFeedback" layoutX="200.0" layoutY="200.0" prefHeight="100.0" prefWidth="350.0" />

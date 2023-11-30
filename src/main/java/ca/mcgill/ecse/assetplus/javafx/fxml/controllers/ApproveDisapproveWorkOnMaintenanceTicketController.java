@@ -25,8 +25,8 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
     @FXML
     private Button btnDisapproveWork;
 
-    @FXML
-    private Label labelWorkStatus;
+//    @FXML
+//    private Label labelWorkStatus;
 
     @FXML
     private TextArea textAreaFeedback;
@@ -81,7 +81,7 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
         for (TOMaintenanceTicket ticket:ticketList) {
             if(ticket.getId()==selectedTicketId){
                 selectedTicketStatusName=ticket.getStatus();
-                labelWorkStatus.setText(selectedTicketStatusName);
+                //labelWorkStatus.setText(selectedTicketStatusName);
                 break;
             }
         }
@@ -99,8 +99,8 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
             String msg = MaintenanceTicketWorkController.approveWorkOnTicket(Integer.parseInt(selectedTicket));
             if (msg.equals("")){
                 ViewUtils.makePopupWindow("Approve Work on ticket #"+ selectedTicket,"Work approved successfully, ticket is now closed");
-                labelWorkStatus.setText("Closed");
-                textAreaFeedback.setText("Work on ticket#" + selectedTicket + " has been approved.");
+                //labelWorkStatus.setText("Closed");
+                //textAreaFeedback.setText("Work on ticket#" + selectedTicket + " has been approved.");
             }else{
                 ViewUtils.showError(msg);
             }
@@ -124,12 +124,12 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
             String msg = MaintenanceTicketWorkController.disapproveWorkOnTicket(Integer.parseInt(selectedTicket), date,textAreaFeedback.getText());
             if (msg.equals("")){
                 ViewUtils.makePopupWindow("Disapprove Work on ticket #"+ selectedTicket,"Work disapproved successfully");
-                labelWorkStatus.setText("InProgress");
-                String reason = textAreaFeedback.getText();
-                if (reason.equals("")){
-                    reason="no reason";
-                }
-                textAreaFeedback.setText("Work on ticket " + selectedTicket + " has been disapproved on " + date + "for "+reason);
+                //labelWorkStatus.setText("InProgress");
+//                String reason = textAreaFeedback.getText();
+//                if (reason.equals("")){
+//                    reason="no reason";
+//                }
+                //textAreaFeedback.setText("Work on ticket " + selectedTicket + " has been disapproved on " + date + "for "+reason);
             }else{
                 ViewUtils.showError(msg);
             }

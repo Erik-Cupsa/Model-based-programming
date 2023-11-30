@@ -12,8 +12,8 @@
     <Button fx:id="btnStartWork" layoutX="50.0" layoutY="150.0" text="Start Work" onAction="#handleStartWork" />
     <Button fx:id="btnCompleteWork" layoutX="200.0" layoutY="150.0" text="Complete Work" onAction="#handleCompleteWork" />
 
-    <Label layoutX="50.0" layoutY="200.0" text="Work Status:" />
-    <Label fx:id="labelWorkStatus" layoutX="200.0" layoutY="200.0"  />
+<!--    <Label layoutX="50.0" layoutY="200.0" text="Work Status:" />-->
+<!--    <Label fx:id="labelWorkStatus" layoutX="200.0" layoutY="200.0"  />-->
 
     <TextArea fx:id="textAreaFeedback" layoutX="50.0" layoutY="250.0" prefHeight="100.0" prefWidth="500.0" />
 </AnchorPane>
