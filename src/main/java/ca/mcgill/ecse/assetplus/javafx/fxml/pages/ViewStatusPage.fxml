@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewStatusPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewStatusPageController">
    <top>
       <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -85,12 +85,16 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <children>
-                              <Button fx:id="addTicketButton" mnemonicParsing="false" onAction="#addTicketClicked" prefHeight="26.0" prefWidth="81.0" text="Add" />
+                              <Button fx:id="addTicketButton" mnemonicParsing="false" onAction="#addTicketClicked" prefHeight="26.0" prefWidth="67.0" text="Add" />
+                              <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#addImageClicked" prefHeight="26.0" prefWidth="108.0" text="Add Image" />
+                              <Button fx:id="deleteImage" mnemonicParsing="false" onAction="#deleteImageClicked" prefHeight="26.0" prefWidth="82.0" text="Delete Image" />
                            </children>
                         </HBox>
                         <Label alignment="CENTER_RIGHT" text="Description:" GridPane.rowIndex="2" />
                         <DatePicker fx:id="dateRaisedOnPicker" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <TextField fx:id="descriptionTextField" prefHeight="50.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="image" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="102.0" text="Image URL:" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
