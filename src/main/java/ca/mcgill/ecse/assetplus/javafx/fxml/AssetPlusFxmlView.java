@@ -24,7 +24,7 @@ public class AssetPlusFxmlView extends Application {
     try {
       //var root = (Pane) FXMLLoader.load(getClass().getResource("MainPage.fxml"));
       // TODO: idk wtf is going on, just edit the aboslute path so it works on your pc
-      String absolutePath = "C:\\Users\\david\\Desktop\\Uni\\2023\\Fall 2023\\ecse 223\\iteration4\\ecse223-group-project-p15\\src\\main\\java\\ca\\mcgill\\ecse\\assetplus\\javafx\\fxml\\MainPage.fxml";
+      String absolutePath = "D:\\McGillU2\\ECSE 223\\ecse223-group-project-p15\\src\\main\\java\\ca\\mcgill\\ecse\\assetplus\\javafx\\fxml\\MainPage.fxml";
       var root = (Pane) FXMLLoader.load(new File(absolutePath).toURI().toURL());
       //root.setStyle("-fx-base: rgba(20, 20, 20, 255);"); // Dark mode
       System.out.println("here");

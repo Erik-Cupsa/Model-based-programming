@@ -47,8 +47,8 @@
                       "@class": "Employee",
                       "email": "smith@ap.com",
                       "name": "Smith",
-                      "password": "pass2",
-                      "phoneNumber": "(555)555-5555",
+                      "password": "pass23",
+                      "phoneNumber": "(555)555-55552",
                       "raisedTickets": [
                         {
                           "MaintenanceTicket": {
@@ -278,7 +278,20 @@
       }
     ],
     "guests": [
-      ""
+      {
+        "Guest": {
+          "email": "smith1@google.com",
+          "name": "Smith",
+          "password": "pass23",
+          "phoneNumber": "(555)555-55552",
+          "raisedTickets": [
+            ""
+          ],
+          "assetPlus": {
+            "@reference": "../../.."
+          }
+        }
+      }
     ],
     "manager": {
       "@reference": "../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketRaiser/maintenanceNotes/MaintenanceNote/ticket/ticketNotes/MaintenanceNote[2]/noteTaker"

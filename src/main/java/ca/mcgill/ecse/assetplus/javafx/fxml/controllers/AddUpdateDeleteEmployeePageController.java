@@ -25,6 +25,9 @@ public class AddUpdateDeleteEmployeePageController {
     private Button DeleteEmployeeButton;
 
     @FXML
+    private Button AddGuestButton;
+
+    @FXML
     private TextField employeePasswordTextField;
 
     @FXML
@@ -66,6 +69,28 @@ public class AddUpdateDeleteEmployeePageController {
         employeeTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> employeeTable.setItems(userList));
     }
 
+    @FXML
+    void addGuestClicked(ActionEvent event) {
+        String name = employeeNameTextField.getText();
+        String email = employeeEmailTextField.getText();
+        String phone = employeePhoneTextField.getText();
+        String password = employeePasswordTextField.getText();
+
+        String err = AssetPlusFeatureSet1Controller.addEmployeeOrGuest(email, password, name, phone, false);
+
+        if (err.isEmpty()){
+            ViewUtils.makePopupWindow("Add New Guest" , "Guest with " + email + " added successfully");
+            employeeNameTextField.setText("");
+            employeeEmailTextField.setText("");
+            employeePhoneTextField.setText("");
+            employeePasswordTextField.setText("");
+            showAllEmployees();
+            AssetPlusFxmlView.getInstance().refresh();
+        }else{
+            ViewUtils.showError(err);
+        }
+    }
+    
     @FXML
     public void AddEmployeeClicked(ActionEvent event) {
         String name = employeeNameTextField.getText();

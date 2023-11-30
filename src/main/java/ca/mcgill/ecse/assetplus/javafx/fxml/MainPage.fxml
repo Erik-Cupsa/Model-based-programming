@@ -27,7 +27,7 @@
                     <fx:include source="pages/AddUpdateDeleteEmployee.fxml"/>
                 </content>
             </Tab>
-            <Tab text="View Asset Types">
+<!--             <Tab text="View Asset Types">
                 <content>
                     <fx:include source="pages/AddUpdateDeleteAssetType.fxml" />
                 </content>
@@ -36,7 +36,7 @@
                 <content>
                     <fx:include source="pages/AddUpdateDeleteAsset.fxml" />
                 </content>
-            </Tab>
+            </Tab> -->
         </tabs>
     </TabPane>
 </VBox>

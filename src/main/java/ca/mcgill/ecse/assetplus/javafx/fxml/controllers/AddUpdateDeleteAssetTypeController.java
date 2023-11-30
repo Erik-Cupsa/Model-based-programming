@@ -66,12 +66,12 @@ public class AddUpdateDeleteAssetTypeController {
         assetTypeNameTextField.clear();
     }
 
-    @FXML
+/*     @FXML
     void updateView(MouseEvent event) {
         TOAssetType selected = assetTypeTable.getSelectionModel().getSelectedItem();
         assetTypeExpectedLifeSpanTextField.setText(String.format("%d", selected.getExpectedLifeSpan()));
         assetTypeNameTextField.setText(selected.getName());
-    }
+    } */
 
     @FXML
     void addAssetTypeClicked(ActionEvent event) {
@@ -111,7 +111,6 @@ public class AddUpdateDeleteAssetTypeController {
     void deleteAssetTypeClicked(ActionEvent event) {
         TOAssetType selected = assetTypeTable.getSelectionModel().getSelectedItem();
         AssetPlusFeatureSet2Controller.deleteAssetType(selected.getName());
-        selected.delete();
         showAllAssetTypes();
     }
 
