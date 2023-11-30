@@ -2,6 +2,7 @@ package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet2Controller;
 import ca.mcgill.ecse.assetplus.controller.TOAssetTypeController;
+import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import ca.mcgill.ecse.assetplus.controller.TOAssetType;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -59,6 +60,7 @@ public class AddUpdateDeleteAssetTypeController {
     private void showAllAssetTypes(){
         ObservableList<TOAssetType> assetTypeList = FXCollections.observableArrayList(TOAssetTypeController.getAssetTypes());
         assetTypeTable.setItems(assetTypeList);
+        assetTypeTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> assetTypeTable.setItems(assetTypeList));
     }
 
     private void clearData(){
@@ -66,22 +68,26 @@ public class AddUpdateDeleteAssetTypeController {
         assetTypeNameTextField.clear();
     }
 
-/*     @FXML
-    void updateView(MouseEvent event) {
-        TOAssetType selected = assetTypeTable.getSelectionModel().getSelectedItem();
-        assetTypeExpectedLifeSpanTextField.setText(String.format("%d", selected.getExpectedLifeSpan()));
-        assetTypeNameTextField.setText(selected.getName());
-    } */
+     @FXML
+     void updateView(MouseEvent event) {
+         TOAssetType selected = assetTypeTable.getSelectionModel().getSelectedItem();
+         assetTypeExpectedLifeSpanTextField.setText(String.format("%d", selected.getExpectedLifeSpan()));
+         assetTypeNameTextField.setText(selected.getName());
+     }
 
     @FXML
     void addAssetTypeClicked(ActionEvent event) {
-        TOAssetType assetType = getAssetType();
-        if(assetType != null){
-            AssetPlusFeatureSet2Controller.addAssetType(assetType.getName(), assetType.getExpectedLifeSpan());
-            assetTypeTable.getItems().add(assetType);
-        } 
-        else { 
-            showMessage("Error in adding new Asset Type.", false);
+        String name = assetTypeNameTextField.getText();
+        String expectedLifeSpan = assetTypeExpectedLifeSpanTextField.getText();
+        
+        String err = AssetPlusFeatureSet2Controller.addAssetType(name, Integer.parseInt(expectedLifeSpan));
+        if(err.isEmpty()){
+            showMessage("Asset Type with name " + name + " added successfully.", true);
+            clearData();
+            showAllAssetTypes();
+        }
+        else{
+            ViewUtils.showError(err);
         }
     }
 
@@ -120,6 +126,8 @@ public class AddUpdateDeleteAssetTypeController {
         String newName = assetTypeNameTextField.getText();
         try{
             AssetPlusFeatureSet2Controller.addAssetType(newName, newExpectedLifeSpan);
+            TOAssetTypeController.setName(assetTypeTable.getSelectionModel().getSelectedItem(), assetTypeNameTextField.getText());
+            TOAssetTypeController.setExpectedLifeSpan(assetTypeTable.getSelectionModel().getSelectedItem(), Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText()));
         }catch(Error e){
             showMessage(e.getMessage(), false);
         }

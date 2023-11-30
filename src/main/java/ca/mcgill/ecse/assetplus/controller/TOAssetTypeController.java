@@ -19,4 +19,12 @@ public class TOAssetTypeController{
         return assetTypes;
     }
 
+    public static void setName(TOAssetType assetType, String name){
+        assetType = new TOAssetType(assetType.getExpectedLifeSpan(), name);
+    }
+
+    public static void setExpectedLifeSpan(TOAssetType assetType, Integer expectedLifeSpan){
+        assetType = new TOAssetType(expectedLifeSpan, assetType.getName());
+    }
+
 }
