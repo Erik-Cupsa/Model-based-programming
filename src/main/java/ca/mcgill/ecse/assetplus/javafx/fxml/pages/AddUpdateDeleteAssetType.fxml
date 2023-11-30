@@ -18,21 +18,22 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="63.0" prefWidth="135.0" text="Asset Type Information">
+            <Label prefHeight="63.0" prefWidth="267.0" text="Asset Type Information">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+            <Label fx:id="statusLabel" prefHeight="17.0" prefWidth="36.0" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </top>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView prefHeight="200.0" prefWidth="600.0">
+            <TableView fx:id="assetTypeTable" onMouseClicked="#updateView" prefHeight="200.0" prefWidth="600.0">
               <columns>
-                  <TableColumn prefWidth="300.0" text="Asset Type Name" />
-                  <TableColumn prefWidth="300.0" text="Expected Life Span" />
+                  <TableColumn fx:id="assetTypeNameColumn" prefWidth="300.0" text="Asset Type Name" />
+                  <TableColumn fx:id="expectedLifeSpanColumn" prefWidth="300.0" text="Expected Life Span" />
               </columns>
             </TableView>
          </children>
@@ -72,6 +73,7 @@
                   <TextField fx:id="assetTypeExpectedLifeSpanTextField" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearClicked" text="Clear" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </bottom>

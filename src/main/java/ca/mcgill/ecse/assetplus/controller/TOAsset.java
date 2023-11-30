@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.assetplus.controller;
 import java.sql.Date;
 
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 // line 43 "../../../../../../model.ump"
 // line 71 "../../../../../../model.ump"
 public class TOAsset
@@ -28,6 +29,11 @@ public class TOAsset
     roomNumber = aRoomNumber;
     purchaseDate = aPurchaseDate;
     typeName = aTypeName;
+    try{
+      AssetPlusPersistence.save();
+    }catch(RuntimeException e){
+      e.printStackTrace();
+    }
   }
 
   //------------------------
