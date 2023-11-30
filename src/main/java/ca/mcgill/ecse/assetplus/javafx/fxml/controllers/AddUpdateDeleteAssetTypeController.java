@@ -68,7 +68,6 @@ public class AddUpdateDeleteAssetTypeController {
         assetTypeNameTextField.clear();
     }
 
-
      @FXML
      void updateView(MouseEvent event) {
          TOAssetType selected = assetTypeTable.getSelectionModel().getSelectedItem();
@@ -118,7 +117,6 @@ public class AddUpdateDeleteAssetTypeController {
     void deleteAssetTypeClicked(ActionEvent event) {
         TOAssetType selected = assetTypeTable.getSelectionModel().getSelectedItem();
         AssetPlusFeatureSet2Controller.deleteAssetType(selected.getName());
-        selected.delete();
         showAllAssetTypes();
     }
 
