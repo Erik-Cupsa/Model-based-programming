@@ -128,7 +128,8 @@ public class AddUpdateDeleteAssetTypeController {
         String newName = assetTypeNameTextField.getText();
         try{
             AssetPlusFeatureSet2Controller.addAssetType(newName, newExpectedLifeSpan);
-            assetTypeTable.getSelectionModel().getSelectedItem();
+            TOAssetTypeController.setName(assetTypeTable.getSelectionModel().getSelectedItem(), assetTypeNameTextField.getText());
+            TOAssetTypeController.setExpectedLifeSpan(assetTypeTable.getSelectionModel().getSelectedItem(), Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText()));
         }catch(Error e){
             showMessage(e.getMessage(), false);
         }
