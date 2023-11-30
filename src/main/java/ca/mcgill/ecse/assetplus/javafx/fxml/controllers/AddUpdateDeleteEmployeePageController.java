@@ -99,27 +99,22 @@ public class AddUpdateDeleteEmployeePageController {
 
     @FXML
     public void UpdateEmployeeClicked(ActionEvent event) {
-        String name = "";
-        String email = "";
-        String phone = "";
-        String password = "";
-        TOUser employee = null;
-        try{
-            name = employeeNameTextField.getText();
-            email = employeeEmailTextField.getText();
-            phone = employeePhoneTextField.getText();
-            password = employeePasswordTextField.getText();
-            employee = new TOUser(email, name, phone, password);
-        }catch(Exception e){
-            ViewUtils.showError("Nothing Selected");
-        }
-        if (employee != null){
-            AssetPlusFeatureSet1Controller.updateEmployeeOrGuest(email, password, name, phone);
-            ViewUtils.makePopupWindow("Update An Employee" , "Employee with " + email + " updated successfully");
+        
+        String name = employeeNameTextField.getText();
+        String email = employeeEmailTextField.getText();
+        String phone = employeePhoneTextField.getText();
+        String password = employeePasswordTextField.getText();
+        
+        String err = AssetPlusFeatureSet1Controller.updateEmployeeOrGuest(email, password, name, phone);
+
+        if (!err.isEmpty()){
+            ViewUtils.showError(err);
             showAllEmployees();
             AssetPlusFxmlView.getInstance().refresh();
         }else{
-            ViewUtils.makePopupWindow("Update An Employee" , "Employee does not exist");
+            ViewUtils.makePopupWindow("Update An Employee" , "Employee with " + email + " updated successfully");
+            showAllEmployees();
+            AssetPlusFxmlView.getInstance().refresh();
         }
     }
 
