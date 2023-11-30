@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb49be0b-a76b-492e-88de-c896d1b20d70" name="Changes" comment="update assettype controller">
+    <list default="true" id="eb49be0b-a76b-492e-88de-c896d1b20d70" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap.data" beforeDir="false" afterPath="$PROJECT_DIR$/ap.data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet3Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet3Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/TOAssetTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/TOAssetTypeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/MainPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetTypeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet2Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/AddUpdateDeleteAsset.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/AddUpdateDeleteAsset.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -256,7 +254,8 @@
       <workItem from="1701350298039" duration="10000" />
       <workItem from="1701354441426" duration="367000" />
       <workItem from="1701355553077" duration="793000" />
-      <workItem from="1701361913533" duration="3495000" />
+      <workItem from="1701361913533" duration="3899000" />
+      <workItem from="1701366007815" duration="1082000" />
     </task>
     <task id="LOCAL-00001" summary="update assettype controller">
       <option name="closed" value="true" />
@@ -282,7 +281,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701312610722</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update assettype controller">
+      <option name="closed" value="true" />
+      <created>1701365652245</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701365652245</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,12 +315,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/StartCompleteWorkOnMaintenanceTicketPageController.java</url>
-          <line>118</line>
+          <line>111</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/StartCompleteWorkOnMaintenanceTicketPageController.java</url>
-          <line>100</line>
+          <line>94</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>

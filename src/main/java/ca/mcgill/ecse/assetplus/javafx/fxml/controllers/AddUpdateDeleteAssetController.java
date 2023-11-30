@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
 import java.sql.Date;
 
 public class AddUpdateDeleteAssetController {
@@ -51,7 +52,7 @@ public class AddUpdateDeleteAssetController {
     private TableColumn<TOAsset, String> purchaseDateColumn;
 
     @FXML
-    private TextField purchaseDateTextField;
+    private DatePicker purchaseDateField;
 
     @FXML
     private TableColumn<TOAsset, String> roomNumberColumn;
@@ -86,15 +87,7 @@ public class AddUpdateDeleteAssetController {
         int floorNumber = Integer.parseInt(floorNumberTextField.getText());
         int assetNumber = Integer.parseInt(assetNumberTextField.getText());
 
-        int year = Integer.parseInt(purchaseDateTextField.getText().substring(0,4));
-        int month = Integer.parseInt(purchaseDateTextField.getText().substring(5, 7));
-        int day = Integer.parseInt(purchaseDateTextField.getText().substring(8, 10));
-
-        System.out.println(year + " " + month + " " + day);
-
-        Date purchaseDate = new java.sql.Date(year, month, day);
-
-        System.out.println(purchaseDate.toString());
+        Date purchaseDate = java.sql.Date.valueOf(purchaseDateField.getValue());
         
         String err = AssetPlusFeatureSet3Controller.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, typeName);
         if(err.isEmpty()){
@@ -116,7 +109,6 @@ public class AddUpdateDeleteAssetController {
         assetNumberTextField.clear();
         floorNumberTextField.clear();
         roomNumberTextField.clear();
-        purchaseDateTextField.clear();
     }
 
     @FXML
@@ -133,11 +125,7 @@ public class AddUpdateDeleteAssetController {
         int newAssetRoomNumber = Integer.parseInt(roomNumberTextField.getText());
         int newAssetFloorNumber = Integer.parseInt(floorNumberTextField.getText());
 
-        int year = Integer.parseInt(purchaseDateTextField.getText().substring(0,4));
-        int month = Integer.parseInt(purchaseDateTextField.getText().substring(5, 7));
-        int day = Integer.parseInt(purchaseDateTextField.getText().substring(8, 10));
-
-        Date newPurchaseDate = new java.sql.Date(year, month, day);
+        Date newPurchaseDate = java.sql.Date.valueOf(purchaseDateField.getValue());
 
         int oldAssetNumber = assetTable.getSelectionModel().getSelectedItem().getAssetNumber();
 

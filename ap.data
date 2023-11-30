@@ -20,7 +20,9 @@
                     "id": 2,
                     "raisedOnDate": "2023-07-10",
                     "description": "This is a dummy description 2",
-                    "status": "Open",
+                    "timeToResolve": "LessThanADay",
+                    "priority": "Normal",
+                    "status": "Assigned",
                     "ticketNotes": [
                       {
                         "MaintenanceNote": {
@@ -122,7 +124,11 @@
                                           "@reference": "../../../../../../../../../../../../.."
                                         },
                                         "ticketsForApproval": [
-                                          ""
+                                          {
+                                            "MaintenanceTicket": {
+                                              "@reference": "../../../../../../../../.."
+                                            }
+                                          }
                                         ]
                                       }
                                     }
@@ -169,6 +175,10 @@
                         "@reference": "../../../../../../.."
                       }
                     },
+                    "ticketFixer": {
+                      "@class": "Employee",
+                      "@reference": "../../../.."
+                    },
                     "asset": {
                       "assetNumber": 1,
                       "floorNumber": 9,
@@ -192,12 +202,47 @@
                         },
                         "specificAssets": [
                           {
-                            "SpecificAsset": {
-                              "@reference": "../../.."
-                            }
+                            "SpecificAsset": [
+                              {
+                                "@reference": "../../.."
+                              },
+                              {
+                                "assetNumber": 3,
+                                "floorNumber": 2,
+                                "roomNumber": 10,
+                                "purchaseDate": "2023-11-15",
+                                "assetPlus": {
+                                  "@reference": "../../../../../../../../../.."
+                                },
+                                "maintenanceTickets": [
+                                  ""
+                                ],
+                                "assetType": {
+                                  "@reference": "../../.."
+                                }
+                              },
+                              {
+                                "assetNumber": 2,
+                                "floorNumber": 1,
+                                "roomNumber": 1,
+                                "purchaseDate": "2023-11-01",
+                                "assetPlus": {
+                                  "@reference": "../../../../../../../../../.."
+                                },
+                                "maintenanceTickets": [
+                                  ""
+                                ],
+                                "assetType": {
+                                  "@reference": "../../.."
+                                }
+                              }
+                            ]
                           }
                         ]
                       }
+                    },
+                    "fixApprover": {
+                      "@reference": "../ticketRaiser/maintenanceNotes/MaintenanceNote/ticket/ticketNotes/MaintenanceNote[2]/noteTaker"
                     }
                   },
                   "noteTaker": {
@@ -208,7 +253,11 @@
               }
             ],
             "maintenanceTasks": [
-              ""
+              {
+                "MaintenanceTicket": {
+                  "@reference": "../../maintenanceNotes/MaintenanceNote/ticket"
+                }
+              }
             ],
             "assetPlus": {
               "@reference": "../../.."
@@ -249,28 +298,12 @@
           },
           {
             "name": "bed",
-            "expectedLifeSpan": 5000,
+            "expectedLifeSpan": 1200,
             "assetPlus": {
               "@reference": "../../.."
             },
             "specificAssets": [
-              {
-                "SpecificAsset": {
-                  "assetNumber": 3,
-                  "floorNumber": 1,
-                  "roomNumber": 35,
-                  "purchaseDate": "2010-01-30",
-                  "assetPlus": {
-                    "@reference": "../../../../.."
-                  },
-                  "maintenanceTickets": [
-                    ""
-                  ],
-                  "assetType": {
-                    "@reference": "../../.."
-                  }
-                }
-              }
+              ""
             ]
           }
         ]
@@ -283,7 +316,10 @@
             "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset"
           },
           {
-            "@reference": "../../assetTypes/AssetType[2]/specificAssets/SpecificAsset"
+            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType/specificAssets/SpecificAsset[2]"
+          },
+          {
+            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType/specificAssets/SpecificAsset[3]"
           }
         ]
       }
