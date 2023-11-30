@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -33,9 +34,10 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
 
     @FXML
     private DatePicker disapprovalDatePicker;
+    @FXML
+    private Label selectedTicketLabel;
 
-
-    private List<TOMaintenanceTicket> ticketList;
+    private TOMaintenanceTicket selectedTicket;
 
     /**
      * initializes UI components
@@ -44,27 +46,7 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
      */
     @FXML
     public void initialize() {
-        populateTickets();
-        comboTicket.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                updateTicketSelection(newSelection);
-            }
-        });
-    }
-
-    /**
-     * Populates the ticket combo box
-     *
-     * @author Philippe Aprahamian
-     */
-    private void populateTickets() {
-        ticketList = ViewUtils.getTickets();
-        ArrayList<String> ticketIds= new ArrayList<>();
-        for (TOMaintenanceTicket ticket:ticketList ) {
-            ticketIds.add(String.valueOf(ticket.getId()));
-        }
-        ObservableList<String> observableList = FXCollections.observableArrayList(ticketIds);
-        comboTicket.setItems(observableList);
+        System.out.println("initialize");
     }
 
     /**
@@ -73,18 +55,9 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
      * @param selectedTicket the String containing the id of the selected ticket
      * @author Philippe Aprahamian
      */
-    private void updateTicketSelection(String selectedTicket) {
-        populateTickets();
-        int selectedTicketId = Integer.parseInt(selectedTicket);
-        String selectedTicketStatusName ;
-        //textAreaFeedback.setText("Selected: " + selectedTicket);
-        for (TOMaintenanceTicket ticket:ticketList) {
-            if(ticket.getId()==selectedTicketId){
-                selectedTicketStatusName=ticket.getStatus();
-                //labelWorkStatus.setText(selectedTicketStatusName);
-                break;
-            }
-        }
+    public void updateTicketSelection(TOMaintenanceTicket selectedTicket) {
+        this.selectedTicket = selectedTicket;
+        selectedTicketLabel.setText(String.valueOf(selectedTicket.getId()));
     }
 
     /**
@@ -94,11 +67,13 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
      */
     @FXML
     private void handleApproveWork() {
-        String selectedTicket = comboTicket.getValue();
+        System.out.println(selectedTicket.getId());
+        Integer selectedTicketId = selectedTicket.getId();
         if (selectedTicket != null) {
-            String msg = MaintenanceTicketWorkController.approveWorkOnTicket(Integer.parseInt(selectedTicket));
+            String msg = MaintenanceTicketWorkController.approveWorkOnTicket(selectedTicketId);
             if (msg.equals("")){
-                ViewUtils.makePopupWindow("Approve Work on ticket #"+ selectedTicket,"Work approved successfully, ticket is now closed");
+                ViewUtils.makePopupWindow("Approve Work on ticket #"+ selectedTicketId,"Work approved successfully, ticket is now closed");
+                ViewUtils.returnToTicketStatusPage(getClass(), (Stage) btnApproveWork.getScene().getWindow());
                 //labelWorkStatus.setText("Closed");
                 //textAreaFeedback.setText("Work on ticket#" + selectedTicket + " has been approved.");
             }else{
@@ -116,14 +91,14 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
      */
     @FXML
     private void handleDisapproveWork() {
-        ticketList = ViewUtils.getTickets();
-        String selectedTicket = comboTicket.getValue();
+        Integer selectedTicketId = selectedTicket.getId();
         if (selectedTicket != null && disapprovalDatePicker.getValue() != null) {
             LocalDate disapprovalLocalDate = disapprovalDatePicker.getValue();
             Date date = Date.valueOf(disapprovalLocalDate);
-            String msg = MaintenanceTicketWorkController.disapproveWorkOnTicket(Integer.parseInt(selectedTicket), date,textAreaFeedback.getText());
+            String msg = MaintenanceTicketWorkController.disapproveWorkOnTicket(selectedTicketId, date,textAreaFeedback.getText());
             if (msg.equals("")){
-                ViewUtils.makePopupWindow("Disapprove Work on ticket #"+ selectedTicket,"Work disapproved successfully");
+                ViewUtils.makePopupWindow("Disapprove Work on ticket #"+ selectedTicketId,"Work disapproved successfully");
+                ViewUtils.returnToTicketStatusPage(getClass(), (Stage) btnApproveWork.getScene().getWindow());
                 //labelWorkStatus.setText("InProgress");
 //                String reason = textAreaFeedback.getText();
 //                if (reason.equals("")){
@@ -136,10 +111,11 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
         }else {
             ViewUtils.showError("Please choose a ticket and a feedback date first.");
         }
-
     }
 
-
-    // Additional methods can be added as needed
+    @FXML
+    private void handleCancel() {
+        return;
+    }
 }
 

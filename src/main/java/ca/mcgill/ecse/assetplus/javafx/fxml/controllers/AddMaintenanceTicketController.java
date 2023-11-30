@@ -59,7 +59,7 @@ public class AddMaintenanceTicketController {
             //viewStatusPageController.initialize();
 
             MainPageController mainPageController = fxmlLoader.getController();
-            mainPageController.setSelectedTabIndex(2);
+            mainPageController.setSelectedTabIndex(1);
             mainPageController.initialize();
 
             // Access the current stage
@@ -74,11 +74,26 @@ public class AddMaintenanceTicketController {
 
     public void doneAddClicked(ActionEvent actionEvent) {
         // TODO: CHECK IF USER ACTUALLY FILLED IN THE FIELDS
-        int id = Integer.parseInt(ticketId.getText());
+        if (ticketId.getText().equals("")) {
+            ViewUtils.showError("Please fill in the id field.");
+        }
+        Integer id = Integer.parseInt(ticketId.getText());
         String descriptionText = description.getText();
         String userEmail = email.getText();
         String assetNum = assetNumber.getText();
         LocalDate localDate = datePicker.getValue();
+        if (descriptionText.equals("")) {
+            ViewUtils.showError("Please fill in the description field.");
+        }
+        else if (userEmail.equals("")) {
+            ViewUtils.showError("Please fill in the email field.");
+        }
+        else if (assetNum.equals("")) {
+            ViewUtils.showError("Please fill in the asset number field.");
+        }
+        else if (localDate == null) {
+            ViewUtils.showError("Please fill in the date field.");
+        }
 
         // Create a new TOMaintenanceTicket object using the read values
         String result = AssetPlusFeatureSet4Controller.addMaintenanceTicket(

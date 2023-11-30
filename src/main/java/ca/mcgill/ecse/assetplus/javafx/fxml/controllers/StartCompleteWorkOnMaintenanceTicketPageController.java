@@ -84,20 +84,14 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
      * @author Philippe Aprahamian
      */
     @FXML
-    private void handleStartWork() {
-        String selectedTicket = comboTicket.getValue();
-        if (selectedTicket != null) {
-            // Logic to start work on the selected ticket
-            String msg = MaintenanceTicketWorkController.startWorkOnTicket(Integer.parseInt(selectedTicket));
-            if (msg.equals("")){
-                ViewUtils.makePopupWindow("Start Work on ticket #"+ selectedTicket,"Work started successfully");
-                //labelWorkStatus.setText("InProgress");
-                textAreaFeedback.setText("Work on ticket " + selectedTicket + " has started.");
-            }else{
-                ViewUtils.showError(msg);
-            }
-        }else {
-            ViewUtils.showError("Please choose a ticket first");
+    public static void handleStartWork(TOMaintenanceTicket ticket) {
+        Integer selectedTicket = ticket.getId();
+        // Logic to start work on the selected ticket
+        String msg = MaintenanceTicketWorkController.startWorkOnTicket(selectedTicket);
+        if (msg.equals("")){
+            ViewUtils.makePopupWindow("Start Work on ticket #"+ selectedTicket,"Work started successfully");
+        }else{
+            ViewUtils.showError(msg);
         }
 
     }
@@ -107,19 +101,14 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
      * @author Philippe Aprahamian
      */
     @FXML
-    private void handleCompleteWork() {
-        String selectedTicket = comboTicket.getValue();
-        if (selectedTicket != null) {
-            String msg = MaintenanceTicketWorkController.completeWorkOnTicket(Integer.parseInt(selectedTicket));
-            if (msg.equals("")){
-                ViewUtils.makePopupWindow("Complete Work on ticket #"+ selectedTicket,"Work completed successfully");
-                //labelWorkStatus.setText("Resolved");
-                textAreaFeedback.setText("Work on ticket " + selectedTicket + " has been completed.");
-            }else{
-                ViewUtils.showError(msg);
-            }
-        }else {
-            ViewUtils.showError("Please choose a ticket first");
+    public static void handleCompleteWork(TOMaintenanceTicket ticket) {
+        Integer selectedTicket = ticket.getId();
+        String msg = MaintenanceTicketWorkController.completeWorkOnTicket(selectedTicket);
+        if (msg.equals("")){
+            ViewUtils.makePopupWindow("Complete Work on ticket #"+ selectedTicket,"Work completed successfully");
+        }
+        else{
+            ViewUtils.showError(msg);
         }
 
     }

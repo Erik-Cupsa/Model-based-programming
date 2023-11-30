@@ -7,16 +7,6 @@
 <VBox prefHeight="518.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.MainPageController">
     <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <tabs>
-            <Tab text="Start/Complete work">
-                <content>
-                    <fx:include source="pages/StartCompleteWorkOnMaintenanceTicket.fxml" />
-                </content>
-            </Tab>
-            <Tab text="Approve/disapprove work">
-                <content>
-                    <fx:include source="pages/ApproveDisapproveOnMaintenanceTicket.fxml" />
-                </content>
-            </Tab>
             <Tab fx:id="viewTicketsTab" text="View Tickets">
                 <content>
                     <fx:include source="pages/ViewStatusPage.fxml" />

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ApproveDisapproveWorkOnMaintenanceTicketController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ApproveDisapproveWorkOnMaintenanceTicketController">
     <Label layoutX="50.0" layoutY="50.0" text="Maintenance Ticket Management" />
 
-    <Label layoutX="50.0" layoutY="100.0" text="Select Ticket:" />
-    <ComboBox fx:id="comboTicket" layoutX="200.0" layoutY="100.0" prefWidth="200.0" />
+    <Label layoutX="50.0" layoutY="100.0" text="Selected Ticket:" />
 
-    <Button fx:id="btnApproveWork" layoutX="50.0" layoutY="400.0" text="Approve Work" onAction="#handleApproveWork" />
-    <Button fx:id="btnDisapproveWork" layoutX="200.0" layoutY="400.0" text="Disapprove Work" onAction="#handleDisapproveWork" />
+    <Button fx:id="btnApproveWork" layoutX="50.0" layoutY="400.0" onAction="#handleApproveWork" text="Approve Work" />
+    <Button fx:id="btnDisapproveWork" layoutX="200.0" layoutY="400.0" onAction="#handleDisapproveWork" text="Disapprove Work" />
 
 <!--    <Label layoutX="50.0" layoutY="150.0" text="Work Status:" />-->
 <!--    <Label fx:id="labelWorkStatus" layoutX="200.0" layoutY="150.0"  />-->
@@ -21,5 +22,7 @@
 
     <Label layoutX="50.0" layoutY="350.0" text="Disapproval Date:" />
     <DatePicker fx:id="disapprovalDatePicker" layoutX="200.0" layoutY="350.0" />
+   <Label fx:id="selectedTicketLabel" layoutX="200.0" layoutY="100.0" text="Label" />
+   <Button fx:id="cancelButton" layoutX="375.0" layoutY="399.0" onAction="#handleCancel" prefHeight="26.0" prefWidth="94.0" text="Cancel" />
 
 </AnchorPane>

@@ -5,6 +5,7 @@ import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,37 +45,30 @@ public class EditMaintenanceTicketController {
     private TextField assetNumber;
     @FXML
     private DatePicker datePicker;
+    private TOMaintenanceTicket selectedTicket;
+
     @FXML
     public void initialize() {
         ViewUtils.loadTicketsIntoTableView(editTicketsTableView, numberColumn, issuerColumn, statusColumn, dateRaisedColumn);
+        // TODO: auto select the ticket that was already selected
+    }
+
+    public void setSelectedTicket(TOMaintenanceTicket ticket) {
+        this.selectedTicket = ticket;
+        ObservableList<TOMaintenanceTicket> tickets = editTicketsTableView.getItems();
+
+        // Find the index of the selected ticket
+        int selectedIndex = tickets.indexOf(selectedTicket);
+
+        // Set the selected ticket in the second TableView
+        if (selectedIndex >= 0) {
+            editTicketsTableView.getSelectionModel().select(selectedIndex);
+        }
     }
 
     @FXML
-    private void returnToTicketStatusPage() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
-            Parent newRoot = fxmlLoader.load();
-
-            //ViewStatusPageController viewStatusPageController = fxmlLoader.getController();
-            //viewStatusPageController.initialize();
-
-            MainPageController mainPageController = fxmlLoader.getController();
-            mainPageController.setSelectedTabIndex(2);
-            mainPageController.initialize();
-
-            // Access the current stage
-            Stage currentStage = (Stage) doneEditButton.getScene().getWindow();
-            // Replace the content in the current scene with content loaded from the new FXML
-            currentStage.getScene().setRoot(newRoot);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void doneEditClicked(ActionEvent actionEvent) {
-        TOMaintenanceTicket selectedTicket = editTicketsTableView.getSelectionModel().getSelectedItem();
-
         if (selectedTicket == null) {
             System.out.println("No ticket selected.");
             return;
@@ -95,7 +89,7 @@ public class EditMaintenanceTicketController {
                 Integer.parseInt(assetNum)
         );
         if (ViewUtils.successful(result)) {
-            returnToTicketStatusPage();
+            ViewUtils.returnToTicketStatusPage(getClass(), (Stage) doneEditButton.getScene().getWindow());
         }
         else {
             ViewUtils.showError(result);
@@ -103,6 +97,6 @@ public class EditMaintenanceTicketController {
     }
 
     public void cancelEditClicked(ActionEvent event) {
-        returnToTicketStatusPage();
+        ViewUtils.returnToTicketStatusPage(getClass(), (Stage) cancelEditButton.getScene().getWindow());
     }
 }
