@@ -14,8 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 
 public class AddUpdateDeleteAssetTypeController {
@@ -82,18 +80,6 @@ public class AddUpdateDeleteAssetTypeController {
         else{
             ViewUtils.showError(err);
         }
-    }
-
-    private TOAssetType getAssetType(){
-        TOAssetType a = null;
-        try{
-            int expectedLifeSpan = Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText());
-            String name = assetTypeNameTextField.getText();
-            a = new TOAssetType(expectedLifeSpan, name);
-        }catch(NumberFormatException e) {
-            System.out.println(e.getMessage());
-        }
-        return a;
     }
 
     @FXML

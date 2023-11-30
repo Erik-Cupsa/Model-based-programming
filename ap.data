@@ -20,9 +20,7 @@
                     "id": 2,
                     "raisedOnDate": "2023-07-10",
                     "description": "This is a dummy description 2",
-                    "timeToResolve": "LessThanADay",
-                    "priority": "Normal",
-                    "status": "Assigned",
+                    "status": "Open",
                     "ticketNotes": [
                       {
                         "MaintenanceNote": {
@@ -171,10 +169,6 @@
                         "@reference": "../../../../../../.."
                       }
                     },
-                    "ticketFixer": {
-                      "@class": "Employee",
-                      "@reference": "../../../.."
-                    },
                     "asset": {
                       "assetNumber": 1,
                       "floorNumber": 9,
@@ -192,7 +186,7 @@
                       ],
                       "assetType": {
                         "name": "lamp",
-                        "expectedLifeSpan": 10,
+                        "expectedLifeSpan": 1800,
                         "assetPlus": {
                           "@reference": "../../../../../../../.."
                         },
@@ -214,11 +208,7 @@
               }
             ],
             "maintenanceTasks": [
-              {
-                "MaintenanceTicket": {
-                  "@reference": "../../maintenanceNotes/MaintenanceNote/ticket"
-                }
-              }
+              ""
             ],
             "assetPlus": {
               "@reference": "../../.."
@@ -258,23 +248,29 @@
             "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType"
           },
           {
-            "name": "g",
-            "expectedLifeSpan": 12,
+            "name": "bed",
+            "expectedLifeSpan": 5000,
             "assetPlus": {
               "@reference": "../../.."
             },
             "specificAssets": [
-              ""
-            ]
-          },
-          {
-            "name": "ga",
-            "expectedLifeSpan": 10000000,
-            "assetPlus": {
-              "@reference": "../../.."
-            },
-            "specificAssets": [
-              ""
+              {
+                "SpecificAsset": {
+                  "assetNumber": 3,
+                  "floorNumber": 1,
+                  "roomNumber": 35,
+                  "purchaseDate": "2010-01-30",
+                  "assetPlus": {
+                    "@reference": "../../../../.."
+                  },
+                  "maintenanceTickets": [
+                    ""
+                  ],
+                  "assetType": {
+                    "@reference": "../../.."
+                  }
+                }
+              }
             ]
           }
         ]
@@ -282,9 +278,14 @@
     ],
     "specificAssets": [
       {
-        "SpecificAsset": {
-          "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset"
-        }
+        "SpecificAsset": [
+          {
+            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset"
+          },
+          {
+            "@reference": "../../assetTypes/AssetType[2]/specificAssets/SpecificAsset"
+          }
+        ]
       }
     ]
   }

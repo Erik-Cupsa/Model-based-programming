@@ -24,7 +24,7 @@ public class AssetPlusFeatureSet3Controller {
                                           Date purchaseDate, String assetTypeName) {
         //calling private helper method to validate inputs based on constraints
         String testing = inputValidation(assetNumber, floorNumber, roomNumber, assetTypeName);
-        if(testing != "Correct") { //if error found
+        if(!testing.equals("Correct")) { //if error found
             return testing; // return error
         }
 
@@ -34,7 +34,7 @@ public class AssetPlusFeatureSet3Controller {
             return "The asset type does not exist";
         } else {
             SpecificAsset newSpecificAsset = assetType.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType.getAssetPlus()); //
-            if (assetType.addSpecificAsset(newSpecificAsset)) { //New Specific Asset successfully added
+            if (newSpecificAsset!=null) { //New Specific Asset successfully added
                 try{
                     AssetPlusPersistence.save();
                 }catch(RuntimeException e){
@@ -63,7 +63,7 @@ public class AssetPlusFeatureSet3Controller {
                                              Date newPurchaseDate, String newAssetTypeName) {
         String testing = inputValidation(assetNumber, newFloorNumber, newRoomNumber, newAssetTypeName); //calling private helper method to validate inputs based on constraints
 
-        if(testing != "Correct") { // if error found
+        if(!testing.equals("Correct")) { // if error found
             return testing; //return String error
         }
 
@@ -82,11 +82,13 @@ public class AssetPlusFeatureSet3Controller {
                 boolean updateDate = toUpdate.setPurchaseDate(newPurchaseDate);
                 AssetType oldAssetType = toUpdate.getAssetType();
 
-                if (!assetType.equals(oldAssetType)) { //if asset type was changed
-                    oldAssetType.removeSpecificAsset(toUpdate);
-                    assetType.addSpecificAsset(toUpdate);
-                }
                 if (updateFloor && updateRoom && updateDate) { //if all attributes were successfully changed
+
+                    if (!assetType.equals(oldAssetType)) { //if asset type was changed
+                        oldAssetType.removeSpecificAsset(toUpdate);
+                        assetType.addSpecificAsset(toUpdate);
+                    }
+
                     try{
                         AssetPlusPersistence.save();
                     }catch(RuntimeException e){
@@ -96,6 +98,7 @@ public class AssetPlusFeatureSet3Controller {
                 } else {
                     return "Error updating Specific Asset";
                 }
+
             }
         }
     }

@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb49be0b-a76b-492e-88de-c896d1b20d70" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="eb49be0b-a76b-492e-88de-c896d1b20d70" name="Changes" comment="update assettype controller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap.data" beforeDir="false" afterPath="$PROJECT_DIR$/ap.data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet3Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/AssetPlusFeatureSet3Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/TOAssetTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/controller/TOAssetTypeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/MainPage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetTypeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/AddUpdateDeleteAsset.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/AddUpdateDeleteAsset.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,12 +54,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "DavidMarji"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;DavidMarji&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -65,6 +67,9 @@
         <option name="url" value="https://github.com/F2023-ECSE223/ecse223-group-project-p15.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetController.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -246,7 +251,12 @@
       <workItem from="1699481403295" duration="12475000" />
       <workItem from="1699508429461" duration="846000" />
       <workItem from="1699549502068" duration="11380000" />
-      <workItem from="1701308574090" duration="2631000" />
+      <workItem from="1701308574090" duration="3946000" />
+      <workItem from="1701312542085" duration="77000" />
+      <workItem from="1701350298039" duration="10000" />
+      <workItem from="1701354441426" duration="367000" />
+      <workItem from="1701355553077" duration="793000" />
+      <workItem from="1701361913533" duration="3495000" />
     </task>
     <task id="LOCAL-00001" summary="update assettype controller">
       <option name="closed" value="true" />
@@ -256,7 +266,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701310959047</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update assettype controller">
+      <option name="closed" value="true" />
+      <created>1701311242608</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701311242608</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update assettype controller">
+      <option name="closed" value="true" />
+      <created>1701312610722</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701312610722</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

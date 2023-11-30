@@ -22,16 +22,16 @@
                     <fx:include source="pages/UpdateManagerPassword.fxml"/>
                 </content>
             </Tab>
-<!--             <Tab text="View Asset Types">-->
-<!--                <content>-->
-<!--                    <fx:include source="pages/AddUpdateDeleteAssetType.fxml" />-->
-<!--                </content>-->
-<!--            </Tab>-->
-<!--            <Tab text="View Assets">-->
-<!--                <content>-->
-<!--                    <fx:include source="pages/AddUpdateDeleteAsset.fxml" />-->
-<!--                </content>-->
-<!--            </Tab> -->
+            <Tab text="View Asset Types">
+                <content>
+                    <fx:include source="pages/AddUpdateDeleteAssetType.fxml" />
+                </content>
+            </Tab>
+            <Tab text="View Assets">
+                <content>
+                    <fx:include source="pages/AddUpdateDeleteAsset.fxml" />
+                </content>
+            </Tab>
         </tabs>
     </TabPane>
 </VBox>
