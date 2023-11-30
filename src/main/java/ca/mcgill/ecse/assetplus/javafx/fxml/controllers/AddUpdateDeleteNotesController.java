@@ -4,8 +4,8 @@ import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceNote;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,14 +14,13 @@ import java.sql.Date;
 
 public class AddUpdateDeleteNotesController {
     private TOMaintenanceTicket ticket;
-    private ObservableList<TOMaintenanceTicket> tickets;
 
     @FXML
     private TextField addNoteText;
     @FXML
     private DatePicker noteDatePicker;
     @FXML
-    private TextField noteEmailText;
+    private TextField userEmailText;
     @FXML
     private TableView<TOMaintenanceNote> noteTable;
     @FXML
@@ -40,27 +39,37 @@ public class AddUpdateDeleteNotesController {
     private Label noteName;
 
 
-    public AddUpdateDeleteNotesController(TOMaintenanceTicket ticket) {
+    public void setTicket(TOMaintenanceTicket ticket) {
         this.ticket = ticket;
-    }
-
-    @FXML
-    public void initialize() {
-        noteTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         int id = ticket.getId();
         noteName.setText(String.valueOf(id));
         filltable();
     }
 
+    @FXML
+    public void initialize() {
+        noteTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
+
     private void filltable() {
+        ticket = findTicket(ticket.getId());
         noteWriter.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, String>("noteTakerEmail"));
         noteDate.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, Date>("date"));
         noteText.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, String>("description"));
         noteTable.setItems(FXCollections.observableList(ticket.getNotes()));
     }
 
+    private TOMaintenanceTicket findTicket(int id) {
+        for (TOMaintenanceTicket t : ViewUtils.getTickets()) {
+            if (t.getId() == id) {
+                return t;
+            }
+        }
+        return ticket;
+    }
+
     @FXML
-    public void tableClicked() {
+    public void tableClicked(Event event) {
         TOMaintenanceNote note = noteTable.getSelectionModel().getSelectedItem();
         if (note == null) {
             noteUpdate.setStyle("-fx-background-color: #A9A9A9;");
@@ -76,7 +85,7 @@ public class AddUpdateDeleteNotesController {
     public void noteAddClicked(ActionEvent event) {
         String description = addNoteText.getText();
         Date openDate = Date.valueOf(noteDatePicker.getValue());
-        String email = noteEmailText.getText();
+        String email = userEmailText.getText();
         String error = AssetPlusFeatureSet7Controller.addMaintenanceNote(openDate, description, ticket.getId(),
                 email);
         if (!error.isEmpty()) {
@@ -91,9 +100,13 @@ public class AddUpdateDeleteNotesController {
         if (noteTable.getSelectionModel().getSelectedItem() == null) {
             return;
         }
+        if (noteDatePicker.getValue() == null) {
+            ViewUtils.makePopupWindow("Error", "Enter a Date");
+            return;
+        }
         String description = addNoteText.getText();
         Date openDate = Date.valueOf(noteDatePicker.getValue());
-        String email = noteEmailText.getText();
+        String email = userEmailText.getText();
         int index = ticket.getNotes().indexOf(noteTable.getSelectionModel().getSelectedItem());
         String error = AssetPlusFeatureSet7Controller.updateMaintenanceNote(ticket.getId(), index, openDate, description,
                 email);
