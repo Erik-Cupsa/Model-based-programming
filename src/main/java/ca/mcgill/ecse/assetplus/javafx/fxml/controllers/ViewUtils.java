@@ -19,10 +19,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -121,12 +118,37 @@ public class ViewUtils {
             TableColumn<TOMaintenanceTicket, Integer> numberColumn,
             TableColumn<TOMaintenanceTicket, String> issuerColumn,
             TableColumn<TOMaintenanceTicket, String> statusColumn,
-            TableColumn<TOMaintenanceTicket, String> dateRaisedColumn
+            TableColumn<TOMaintenanceTicket, String> dateRaisedColumn,
+            TableColumn<TOMaintenanceTicket, String> fixerColumn,
+            TableColumn<TOMaintenanceTicket, String> timeToResolveColumn,
+            TableColumn<TOMaintenanceTicket, String> priorityColumn,
+            TableColumn<TOMaintenanceTicket, String> approvalRequiredColumn
             ) {
         numberColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         issuerColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaisedByEmail()));
         statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
         dateRaisedColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaisedOnDate().toString()));
+        fixerColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getFixedByEmail() == null) {
+                return new SimpleStringProperty("");
+            }
+            return new SimpleStringProperty(cellData.getValue().getFixedByEmail());
+        });
+        timeToResolveColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getTimeToResolve() == null) {
+                return new SimpleStringProperty("");
+            }
+            return new SimpleStringProperty(cellData.getValue().getTimeToResolve());
+        });
+        priorityColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getPriority() == null) {
+                return new SimpleStringProperty("");
+            }
+            return new SimpleStringProperty(cellData.getValue().getPriority());
+        });
+        approvalRequiredColumn.setCellValueFactory(cellData -> {
+            return new SimpleStringProperty(cellData.getValue().getPriority());
+        });
 
         System.out.println("update count");
         ticketsTableView.getItems().clear();
@@ -135,6 +157,23 @@ public class ViewUtils {
         for (TOMaintenanceTicket ticket : tickets) {
             ticketsTableView.getItems().add(ticket);
         }
+        ticketsTableView.setRowFactory(tv -> new TableRow<TOMaintenanceTicket>() {
+            protected void updateItem(TOMaintenanceTicket ticket, boolean empty) {
+                super.updateItem(ticket, empty);
+
+                if (ticket == null || empty) {
+                    setStyle(""); // Default style for empty cells
+                } else {
+                    if (ticket.getStatus().equals("Open")) {
+                        setStyle("-fx-background-color: lightgreen;");
+                    } else if (ticket.getStatus().equals("Inactive")) {
+                        setStyle("-fx-background-color: lightcoral;");
+                    } else {
+                        setStyle(""); // Default style if the status doesn't match
+                    }
+                }
+            }
+        });
     }
 
     public static void returnToTicketStatusPage(Class currentClass, Stage currentStage) {
