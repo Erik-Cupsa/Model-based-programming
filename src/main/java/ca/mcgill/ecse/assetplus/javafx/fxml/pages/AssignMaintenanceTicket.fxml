@@ -52,7 +52,7 @@
             </HBox>
             <ButtonBar layoutX="293.0" layoutY="271.0" prefHeight="57.0" prefWidth="252.0">
               <buttons>
-                <Button fx:id="assignButton" defaultButton="true" mnemonicParsing="false" onAction="#updateClicked" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: green;" text="Assign" />
+                <Button fx:id="assignButton" defaultButton="true" mnemonicParsing="false" onAction="#assignClicked" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: green;" text="Assign" />
                   <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelClicked" prefHeight="34.0" prefWidth="164.0" style="-fx-background-color: red;" text="Cancel" />
               </buttons>
             </ButtonBar>
