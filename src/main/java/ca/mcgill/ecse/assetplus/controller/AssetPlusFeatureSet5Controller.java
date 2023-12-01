@@ -3,6 +3,7 @@ package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 import ca.mcgill.ecse.assetplus.model.TicketImage;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
+
 import java.util.List;
 
 public class AssetPlusFeatureSet5Controller {
@@ -43,9 +44,9 @@ public class AssetPlusFeatureSet5Controller {
         if (err.equals("")) {
             TicketImage ticketImage = new TicketImage(imageURL, ticket);
             ticket.addTicketImage(ticketImage);
-            try{
+            try {
                 AssetPlusPersistence.save();
-            }catch(RuntimeException e){
+            } catch (RuntimeException e) {
                 return e.getMessage();
             }
         }
@@ -72,10 +73,10 @@ public class AssetPlusFeatureSet5Controller {
 
         } catch (Exception e) {
         }
-        try{
+        try {
             AssetPlusPersistence.save();
-        }catch(RuntimeException e){
-             e.printStackTrace();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
         }
 
     }

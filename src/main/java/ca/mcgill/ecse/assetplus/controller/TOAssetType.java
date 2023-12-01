@@ -2,10 +2,9 @@ package ca.mcgill.ecse.assetplus.controller;
 
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
-public class TOAssetType
-{
+public class TOAssetType {
 
- 
+
     //------------------------
     // MEMBER VARIABLES
     //------------------------
@@ -15,57 +14,50 @@ public class TOAssetType
 
     private String name;
 
-    
+
     //------------------------
     // CONSTRUCTOR
     //------------------------
-    
 
-    public TOAssetType(int aExpectedLifeSpan, String aName){
+
+    public TOAssetType(int aExpectedLifeSpan, String aName) {
         expectedLifeSpan = aExpectedLifeSpan;
         name = aName;
-        try{
+        try {
             AssetPlusPersistence.save();
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
             e.printStackTrace();
         }
     }
 
-    
+
     //------------------------
 
     // INTERFACE
 
     //------------------------
 
-    
 
-    public int getExpectedLifeSpan()
+    public int getExpectedLifeSpan() {
 
-    {
-
-    return expectedLifeSpan;
+        return expectedLifeSpan;
 
     }
 
-    
 
-    public String getName()
+    public String getName() {
 
-    {
-
-    return name;
+        return name;
 
     }
 
-    public void delete()
-    {}
-    
-    public String toString()
-    {
-    return super.toString() + "["+
-    "expectedLifeSpan" + ":" + getExpectedLifeSpan()+ "," +
-    "name" + ":" + getName()+ "]";
+    public void delete() {
+    }
+
+    public String toString() {
+        return super.toString() + "[" +
+                "expectedLifeSpan" + ":" + getExpectedLifeSpan() + "," +
+                "name" + ":" + getName() + "]";
 
     }
 }

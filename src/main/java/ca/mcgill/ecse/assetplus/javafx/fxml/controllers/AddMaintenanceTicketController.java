@@ -1,11 +1,7 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
-import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Arrays;
-import java.util.List;
 
 public class AddMaintenanceTicketController {
     @FXML

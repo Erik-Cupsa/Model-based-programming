@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 
+import ca.mcgill.ecse.assetplus.controller.TOUser;
 import ca.mcgill.ecse.assetplus.controller.TOUserController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import javafx.beans.binding.Bindings;
@@ -10,13 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
-import ca.mcgill.ecse.assetplus.controller.TOUser;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,7 +29,7 @@ public class AssignMaintenanceTicketController {
     private Button cancelButton;
 
     @FXML
-    private TableColumn<TOUser,String> emailColumn;
+    private TableColumn<TOUser, String> emailColumn;
 
     @FXML
     private TableView<TOUser> employeeTable;
@@ -43,7 +38,7 @@ public class AssignMaintenanceTicketController {
     private CheckBox managerApprovalCheck;
 
     @FXML
-    private TableColumn<TOUser,String> nameColumn;
+    private TableColumn<TOUser, String> nameColumn;
 
     @FXML
     private ChoiceBox<String> priorityDropDown;
@@ -55,21 +50,22 @@ public class AssignMaintenanceTicketController {
     private Button assignButton;
 
 
-
     @FXML
-    public void initialize(){
+    public void initialize() {
         emailColumn.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getEmail()));
         nameColumn.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getName()));
-        priorityDropDown.getItems().addAll("Urgent","Normal","Low");
+        priorityDropDown.getItems().addAll("Urgent", "Normal", "Low");
         resolveDropDown.getItems().addAll("LessThanADay", "OneToThreeDays", "ThreeToSevenDays", "OneToThreeWeeks", "ThreeOrMoreWeeks");
         showAllEmployees();
     }
+
     @FXML
-    private void showAllEmployees(){
+    private void showAllEmployees() {
         ObservableList<TOUser> userList = FXCollections.observableArrayList(TOUserController.getUsers());
         employeeTable.setItems(userList);
         employeeTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> employeeTable.setItems(userList));
     }
+
     @FXML
     void cancelClicked(ActionEvent event) {
         try {
@@ -86,8 +82,8 @@ public class AssignMaintenanceTicketController {
     }
 
     @FXML
-    public void setTicketID(int id){
-        ticketID=id;
+    public void setTicketID(int id) {
+        ticketID = id;
     }
 
     @FXML
@@ -98,13 +94,12 @@ public class AssignMaintenanceTicketController {
 
         if (selectedUser == null) {
             showError("No Employee selected");
-        }
-        else if (timeEstimate == null)showError("No time estimate selected");
-        else if (priority == null)showError("No priority selected");
+        } else if (timeEstimate == null) showError("No time estimate selected");
+        else if (priority == null) showError("No priority selected");
         else {
             try {
                 String selectedEmail = selectedUser.getEmail();
-                if (!selectedUser.getEmail().contains("@ap.com") ){
+                if (!selectedUser.getEmail().contains("@ap.com")) {
                     showError("Cannot assign guest to ticket");
                 }
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
@@ -112,9 +107,8 @@ public class AssignMaintenanceTicketController {
                 String err = assignStaffToTicket(ticketID, selectedEmail, stringTimeEstimate(resolveDropDown.getValue()), stringPriority(priorityDropDown.getValue()), managerApprovalCheck.isSelected());
                 if (!err.isEmpty()) {
                     showError(err);
-                }
-                else makePopupWindow("Ticket Assignment Successful","Selected ticket is now assigned");
-                ViewStatusPageController viewStatusPageController =ViewStatusPageController.getInstance();
+                } else makePopupWindow("Ticket Assignment Successful", "Selected ticket is now assigned");
+                ViewStatusPageController viewStatusPageController = ViewStatusPageController.getInstance();
                 viewStatusPageController.showAllTickets();
                 Stage currentStage = (Stage) assignButton.getScene().getWindow();
                 currentStage.getScene().setRoot(newRoot);

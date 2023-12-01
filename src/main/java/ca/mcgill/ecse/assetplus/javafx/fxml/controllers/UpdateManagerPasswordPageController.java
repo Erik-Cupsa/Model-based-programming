@@ -1,7 +1,6 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,18 +23,18 @@ public class UpdateManagerPasswordPageController {
 
     @FXML
     void updatePasswordClicked(ActionEvent event) {
-      String password = managerPasswordTextField.getText();
-      if (!password.equals(managerPasswordConfirm.getText())){
-          ViewUtils.makePopupWindow(("Update Manager Password"), "Passwords must match");
-          return;
-      }
-      String err = AssetPlusFeatureSet1Controller.updateManager(password);
+        String password = managerPasswordTextField.getText();
+        if (!password.equals(managerPasswordConfirm.getText())) {
+            ViewUtils.makePopupWindow(("Update Manager Password"), "Passwords must match");
+            return;
+        }
+        String err = AssetPlusFeatureSet1Controller.updateManager(password);
 
-      if(!err.isEmpty()){
-        ViewUtils.showError(err);
-      }else{
-        ViewUtils.makePopupWindow(("Update Manager Password"), "Manager password updated succesfully");
-      }
+        if (!err.isEmpty()) {
+            ViewUtils.showError(err);
+        } else {
+            ViewUtils.makePopupWindow(("Update Manager Password"), "Manager password updated succesfully");
+        }
     }
 
 }

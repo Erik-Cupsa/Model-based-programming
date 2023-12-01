@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb49be0b-a76b-492e-88de-c896d1b20d70" name="Changes" comment="">
+    <list default="true" id="eb49be0b-a76b-492e-88de-c896d1b20d70" name="Changes" comment="Fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap.data" beforeDir="false" afterPath="$PROJECT_DIR$/ap.data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/MainPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AddUpdateDeleteAssetTypeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AssignMaintenanceTicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/AssignMaintenanceTicketController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/ViewStatusPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/ViewStatusPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/ViewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/controllers/ViewUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/AddUpdateDeleteAsset.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/AddUpdateDeleteAsset.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/AssignMaintenanceTicket.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/AssignMaintenanceTicket.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/ViewStatusPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse/assetplus/javafx/fxml/pages/ViewStatusPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,25 +93,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/david/Desktop/Uni/2023/Fall 2023/ecse 223/iteration4/ecse223-group-project-p15&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev3",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/david/Desktop/Uni/2023/Fall 2023/ecse 223/iteration4/ecse223-group-project-p15",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Gradle.ecse223-group-project-p15 [run]">
     <configuration name="AssetPlusApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ca.mcgill.ecse.assetplus.application.AssetPlusApplication" />
@@ -173,6 +164,7 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="ecse223-group-project-p15 [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -194,6 +186,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="ecse223-group-project-p15 [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -215,6 +208,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="ecse223-group-project-p15" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -234,6 +228,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -319,7 +314,31 @@
       <option name="project" value="LOCAL" />
       <updated>1701376581680</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed">
+      <option name="closed" value="true" />
+      <created>1701455999271</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701455999271</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fixed">
+      <option name="closed" value="true" />
+      <created>1701456139510</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701456139510</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Fixed">
+      <option name="closed" value="true" />
+      <created>1701456698480</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701456698480</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +357,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update assettype controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="update assettype controller" />
+    <MESSAGE value="Fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">

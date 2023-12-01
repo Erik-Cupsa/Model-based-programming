@@ -1,4 +1,5 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
+
 import ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import javafx.collections.FXCollections;
@@ -6,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import java.util.ArrayList;
@@ -53,8 +53,8 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
      */
     private void populateTickets() {
         ticketList = ViewUtils.getTickets();
-        ArrayList<String> ticketIds= new ArrayList<>();
-        for (TOMaintenanceTicket ticket:ticketList ) {
+        ArrayList<String> ticketIds = new ArrayList<>();
+        for (TOMaintenanceTicket ticket : ticketList) {
             ticketIds.add(String.valueOf(ticket.getId()));
         }
         ObservableList<String> observableList = FXCollections.observableArrayList(ticketIds);
@@ -70,8 +70,8 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
     private void updateTicketSelection(String selectedTicket) {
         populateTickets();
         textAreaFeedback.setText("Selected: " + selectedTicket);
-        for (TOMaintenanceTicket ticket:ticketList) {
-            if(ticket.getId()==Integer.parseInt(selectedTicket)){
+        for (TOMaintenanceTicket ticket : ticketList) {
+            if (ticket.getId() == Integer.parseInt(selectedTicket)) {
                 //labelWorkStatus.setText(ticket.getStatus());
                 break;
             }
@@ -88,13 +88,14 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
         Integer selectedTicket = ticket.getId();
         // Logic to start work on the selected ticket
         String msg = MaintenanceTicketWorkController.startWorkOnTicket(selectedTicket);
-        if (msg.equals("")){
-            ViewUtils.makePopupWindow("Start Work on ticket #"+ selectedTicket,"Work started successfully");
-        }else{
+        if (msg.equals("")) {
+            ViewUtils.makePopupWindow("Start Work on ticket #" + selectedTicket, "Work started successfully");
+        } else {
             ViewUtils.showError(msg);
         }
 
     }
+
     /**
      * Completes the work on the selected ticket
      *
@@ -104,10 +105,9 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
     public static void handleCompleteWork(TOMaintenanceTicket ticket) {
         Integer selectedTicket = ticket.getId();
         String msg = MaintenanceTicketWorkController.completeWorkOnTicket(selectedTicket);
-        if (msg.equals("")){
-            ViewUtils.makePopupWindow("Complete Work on ticket #"+ selectedTicket,"Work completed successfully");
-        }
-        else{
+        if (msg.equals("")) {
+            ViewUtils.makePopupWindow("Complete Work on ticket #" + selectedTicket, "Work completed successfully");
+        } else {
             ViewUtils.showError(msg);
         }
 

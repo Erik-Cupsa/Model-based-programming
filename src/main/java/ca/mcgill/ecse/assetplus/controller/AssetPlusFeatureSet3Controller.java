@@ -1,7 +1,10 @@
 package ca.mcgill.ecse.assetplus.controller;
 
-import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.model.AssetType;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
+import ca.mcgill.ecse.assetplus.model.SpecificAsset;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
+
 import java.sql.Date;
 
 /**
@@ -24,7 +27,7 @@ public class AssetPlusFeatureSet3Controller {
                                           Date purchaseDate, String assetTypeName) {
         //calling private helper method to validate inputs based on constraints
         String testing = inputValidation(assetNumber, floorNumber, roomNumber, assetTypeName);
-        if(!testing.equals("Correct")) { //if error found
+        if (!testing.equals("Correct")) { //if error found
             return testing; // return error
         }
 
@@ -34,10 +37,10 @@ public class AssetPlusFeatureSet3Controller {
             return "The asset type does not exist";
         } else {
             SpecificAsset newSpecificAsset = assetType.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType.getAssetPlus()); //
-            if (newSpecificAsset!=null) { //New Specific Asset successfully added
-                try{
+            if (newSpecificAsset != null) { //New Specific Asset successfully added
+                try {
                     AssetPlusPersistence.save();
-                }catch(RuntimeException e){
+                } catch (RuntimeException e) {
                     return e.getMessage();
                 }
                 return "";
@@ -63,7 +66,7 @@ public class AssetPlusFeatureSet3Controller {
                                              Date newPurchaseDate, String newAssetTypeName) {
         String testing = inputValidation(assetNumber, newFloorNumber, newRoomNumber, newAssetTypeName); //calling private helper method to validate inputs based on constraints
 
-        if(!testing.equals("Correct")) { // if error found
+        if (!testing.equals("Correct")) { // if error found
             return testing; //return String error
         }
 
@@ -89,9 +92,9 @@ public class AssetPlusFeatureSet3Controller {
                         assetType.addSpecificAsset(toUpdate);
                     }
 
-                    try{
+                    try {
                         AssetPlusPersistence.save();
-                    }catch(RuntimeException e){
+                    } catch (RuntimeException e) {
                         return e.getMessage();
                     }
                     return "";
@@ -115,7 +118,7 @@ public class AssetPlusFeatureSet3Controller {
             SpecificAsset toDelete = SpecificAsset.getWithAssetNumber(assetNumber); //getting the specific asset we want to delete
             if (toDelete != null) { //if the specific asset exists in the system
                 //deleting specific asset
-                for (MaintenanceTicket t: toDelete.getMaintenanceTickets()) {
+                for (MaintenanceTicket t : toDelete.getMaintenanceTickets()) {
                     t.delete();
                 }
                 AssetType assetType = toDelete.getAssetType();
@@ -123,36 +126,37 @@ public class AssetPlusFeatureSet3Controller {
                 toDelete.delete();
             }
         }
-        try{
+        try {
             AssetPlusPersistence.save();
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
             e.printStackTrace();
         }
     }
 
-  /**
-   * Validates all input parameters for adding or updating a specific asset.
-   * @author Erik Cupsa (@Erik-Cupsa)
-   * @param assetNumber The asset number.
-   * @param floorNumber The floor number. 
-   * @param roomNumber The room number. 
-   * @param assetTypeName The name of the asset type
-   * @return True if the input is valid and false otherwise
-   */
-  private static String inputValidation(int assetNumber, int floorNumber, int roomNumber, String assetTypeName){
-        if(assetTypeName == null || assetTypeName.length() == 0){ //invalid asset type name
-          return "The asset type does not exist";
+    /**
+     * Validates all input parameters for adding or updating a specific asset.
+     *
+     * @param assetNumber   The asset number.
+     * @param floorNumber   The floor number.
+     * @param roomNumber    The room number.
+     * @param assetTypeName The name of the asset type
+     * @return True if the input is valid and false otherwise
+     * @author Erik Cupsa (@Erik-Cupsa)
+     */
+    private static String inputValidation(int assetNumber, int floorNumber, int roomNumber, String assetTypeName) {
+        if (assetTypeName == null || assetTypeName.length() == 0) { //invalid asset type name
+            return "The asset type does not exist";
         }
-        if(assetNumber < 1){ // asset number must be >= 1
-          return "The asset number shall not be less than 1";
+        if (assetNumber < 1) { // asset number must be >= 1
+            return "The asset number shall not be less than 1";
         }
-        if(floorNumber < 0){ // floor number must be >= 0
-          return "The floor number shall not be less than 0";
+        if (floorNumber < 0) { // floor number must be >= 0
+            return "The floor number shall not be less than 0";
         }
-        if(roomNumber < -1){ // room number must be >= -1
-          return "The room number shall not be less than -1";
+        if (roomNumber < -1) { // room number must be >= -1
+            return "The room number shall not be less than -1";
         }
 
         return "Correct";
-      }
+    }
 }

@@ -1,16 +1,18 @@
 package ca.mcgill.ecse.assetplus.controller;
 
-import java.util.ArrayList;
-import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
+import ca.mcgill.ecse.assetplus.model.AssetPlus;
+import ca.mcgill.ecse.assetplus.model.AssetType;
 
-public class TOAssetTypeController{
-    
-    public static ArrayList<TOAssetType> getAssetTypes(){
+import java.util.ArrayList;
+
+public class TOAssetTypeController {
+
+    public static ArrayList<TOAssetType> getAssetTypes() {
         ArrayList<TOAssetType> assetTypes = new ArrayList<TOAssetType>();
         AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
-        for(AssetType assetType : assetPlus.getAssetTypes()){
+        for (AssetType assetType : assetPlus.getAssetTypes()) {
             String name = assetType.getName();
             int expectedLifeSpan = assetType.getExpectedLifeSpan();
             assetTypes.add(new TOAssetType(expectedLifeSpan, name));

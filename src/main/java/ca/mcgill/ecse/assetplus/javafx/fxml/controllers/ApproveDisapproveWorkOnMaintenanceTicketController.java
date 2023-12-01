@@ -2,18 +2,12 @@ package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-
 import java.sql.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 public class ApproveDisapproveWorkOnMaintenanceTicketController {
 
@@ -71,19 +65,20 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
         Integer selectedTicketId = selectedTicket.getId();
         if (selectedTicket != null) {
             String msg = MaintenanceTicketWorkController.approveWorkOnTicket(selectedTicketId);
-            if (msg.equals("")){
-                ViewUtils.makePopupWindow("Approve Work on ticket #"+ selectedTicketId,"Work approved successfully, ticket is now closed");
+            if (msg.equals("")) {
+                ViewUtils.makePopupWindow("Approve Work on ticket #" + selectedTicketId, "Work approved successfully, ticket is now closed");
                 ViewUtils.returnToTicketStatusPage(getClass(), (Stage) btnApproveWork.getScene().getWindow());
                 //labelWorkStatus.setText("Closed");
                 //textAreaFeedback.setText("Work on ticket#" + selectedTicket + " has been approved.");
-            }else{
+            } else {
                 ViewUtils.showError(msg);
             }
-        }else {
+        } else {
             ViewUtils.showError("Please choose a ticket first");
         }
 
     }
+
     /**
      * Completes the work on the selected ticket
      *
@@ -95,9 +90,9 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
         if (selectedTicket != null && disapprovalDatePicker.getValue() != null) {
             LocalDate disapprovalLocalDate = disapprovalDatePicker.getValue();
             Date date = Date.valueOf(disapprovalLocalDate);
-            String msg = MaintenanceTicketWorkController.disapproveWorkOnTicket(selectedTicketId, date,textAreaFeedback.getText());
-            if (msg.equals("")){
-                ViewUtils.makePopupWindow("Disapprove Work on ticket #"+ selectedTicketId,"Work disapproved successfully");
+            String msg = MaintenanceTicketWorkController.disapproveWorkOnTicket(selectedTicketId, date, textAreaFeedback.getText());
+            if (msg.equals("")) {
+                ViewUtils.makePopupWindow("Disapprove Work on ticket #" + selectedTicketId, "Work disapproved successfully");
                 ViewUtils.returnToTicketStatusPage(getClass(), (Stage) btnApproveWork.getScene().getWindow());
                 //labelWorkStatus.setText("InProgress");
 //                String reason = textAreaFeedback.getText();
@@ -105,10 +100,10 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
 //                    reason="no reason";
 //                }
                 //textAreaFeedback.setText("Work on ticket " + selectedTicket + " has been disapproved on " + date + "for "+reason);
-            }else{
+            } else {
                 ViewUtils.showError(msg);
             }
-        }else {
+        } else {
             ViewUtils.showError("Please choose a ticket and a feedback date first.");
         }
     }

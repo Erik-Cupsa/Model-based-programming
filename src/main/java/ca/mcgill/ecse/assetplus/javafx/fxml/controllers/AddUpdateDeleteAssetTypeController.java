@@ -1,24 +1,15 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
-import java.lang.ModuleLayer.Controller;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet2Controller;
-import ca.mcgill.ecse.assetplus.controller.TOAsset;
-import ca.mcgill.ecse.assetplus.controller.TOAssetController;
+import ca.mcgill.ecse.assetplus.controller.TOAssetType;
 import ca.mcgill.ecse.assetplus.controller.TOAssetTypeController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
-import ca.mcgill.ecse.assetplus.controller.TOAssetType;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.*;
 
 
 public class AddUpdateDeleteAssetTypeController {
@@ -54,21 +45,20 @@ public class AddUpdateDeleteAssetTypeController {
     private Button clearButton;
 
 
-
     @FXML
-    public void initialize(){
+    public void initialize() {
         expectedLifeSpanColumn.setCellValueFactory(data -> Bindings.createStringBinding(() -> Integer.toString(data.getValue().getExpectedLifeSpan())));
         assetTypeNameColumn.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getName()));
         showAllAssetTypes();
     }
 
-    private void showAllAssetTypes(){
+    private void showAllAssetTypes() {
         ObservableList<TOAssetType> assetTypeList = FXCollections.observableArrayList(TOAssetTypeController.getAssetTypes());
         assetTypeTable.setItems(assetTypeList);
         assetTypeTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> assetTypeTable.setItems(assetTypeList));
     }
 
-    private void clearData(){
+    private void clearData() {
         assetTypeExpectedLifeSpanTextField.clear();
         assetTypeNameTextField.clear();
     }
@@ -78,13 +68,12 @@ public class AddUpdateDeleteAssetTypeController {
     void addAssetTypeClicked(ActionEvent event) {
         String name = assetTypeNameTextField.getText();
         String expectedLifeSpan = assetTypeExpectedLifeSpanTextField.getText();
-        
+
         String err = AssetPlusFeatureSet2Controller.addAssetType(name, Integer.parseInt(expectedLifeSpan));
-        if(err.isEmpty()){
+        if (err.isEmpty()) {
             clearData();
             showAllAssetTypes();
-        }
-        else{
+        } else {
             ViewUtils.showError(err);
         }
     }
@@ -104,7 +93,7 @@ public class AddUpdateDeleteAssetTypeController {
 //        assetTypeTextField.setText(assetselected.getTypeName());
 //        assetNumberTextField.setText(String.valueOf(assetselected.getAssetNumber()));
 //    }
-    
+
     @FXML
     void updateAssetTypeClicked(ActionEvent event) {
         int newExpectedLifeSpan = Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText());
@@ -112,7 +101,7 @@ public class AddUpdateDeleteAssetTypeController {
 
         String err = AssetPlusFeatureSet2Controller.updateAssetType(assetTypeTable.getSelectionModel().getSelectedItem().getName(), newName, newExpectedLifeSpan);
 
-        if(!err.isEmpty()){
+        if (!err.isEmpty()) {
             ViewUtils.showError(err);
         }
 

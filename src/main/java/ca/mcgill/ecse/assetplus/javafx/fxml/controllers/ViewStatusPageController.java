@@ -1,41 +1,30 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
-import ca.mcgill.ecse.assetplus.controller.*;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
+import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
-import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
-import javafx.application.Application;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
-
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils.showError;
 
-public class ViewStatusPageController{
+public class ViewStatusPageController {
     @FXML
     private TableView<TOMaintenanceTicket> ticketsTableView;
     @FXML
@@ -161,12 +150,13 @@ public class ViewStatusPageController{
         refresh();
 
     }
+
     @FXML
     void assignClicked(ActionEvent event) {
         TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
         if (selectedTicket != null) {
             try {
-                int tickedID= selectedTicket.getId();
+                int tickedID = selectedTicket.getId();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../pages/AssignMaintenanceTicket.fxml"));
                 Parent newRoot = fxmlLoader.load();
                 AssignMaintenanceTicketController assignMaintenanceTicketController = fxmlLoader.getController();
@@ -176,14 +166,15 @@ public class ViewStatusPageController{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else showError("No ticket selected");
+        } else showError("No ticket selected");
     }
-    public void showAllTickets(){
+
+    public void showAllTickets() {
         ObservableList<TOMaintenanceTicket> ticketList = FXCollections.observableArrayList(AssetPlusFeatureSet6Controller.getTickets());
         ticketsTableView.setItems(ticketList);
         ticketsTableView.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> ticketsTableView.setItems(ticketList));
     }
+
     @FXML
     public void addImageClicked(ActionEvent event) {
         TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
@@ -192,11 +183,12 @@ public class ViewStatusPageController{
             return;
         }
         String text = AssetPlusFeatureSet5Controller.addImageToMaintenanceTicket(image.getText(), selectedTicket.getId());
-        if(!text.equals("")){
+        if (!text.equals("")) {
             ViewUtils.showError(text);
         }
         refresh();
     }
+
     @FXML
     public void deleteImageClicked(ActionEvent event) {
         TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
@@ -220,21 +212,23 @@ public class ViewStatusPageController{
 
         if (dateRaisedOnPicker.getValue() == null) {
             ViewUtils.showError("Please fill in the date raised field.");
-        }
-        else if (assetNumberTextField.getText().equals("")) {
+        } else if (assetNumberTextField.getText().equals("")) {
             ViewUtils.showError("Please fill in the asset number field.");
         }
         EditMaintenanceTicketController.doneEditClicked(idTextField, descriptionTextField, ticketRaiserTextField, assetNumberTextField, dateRaisedOnPicker);
         refresh();
     }
+
     private static ViewStatusPageController instance;
-    public ViewStatusPageController(){
-        instance=this;
+
+    public ViewStatusPageController() {
+        instance = this;
     }
 
-    public static ViewStatusPageController getInstance(){
-        return  instance;
+    public static ViewStatusPageController getInstance() {
+        return instance;
     }
+
     @FXML
     private void editNotesButtonClicked(ActionEvent event) {
         TOMaintenanceTicket ticket = ticketsTableView.getSelectionModel().getSelectedItem();
@@ -278,8 +272,7 @@ public class ViewStatusPageController{
         if (ticket != null) {
             StartCompleteWorkOnMaintenanceTicketPageController.handleStartWork(ticket);
             refresh();
-        }
-        else {
+        } else {
             ViewUtils.showError("Please choose a ticket first");
         }
     }
@@ -290,8 +283,7 @@ public class ViewStatusPageController{
         if (ticket != null) {
             StartCompleteWorkOnMaintenanceTicketPageController.handleCompleteWork(ticket);
             refresh();
-        }
-        else {
+        } else {
             ViewUtils.showError("Please choose a ticket first");
         }
     }
@@ -323,8 +315,9 @@ public class ViewStatusPageController{
     @FXML
     private void filterClicked() {
         String text = filterField.getText();
-        if (text.equals("")) {refresh();}
-        else {
+        if (text.equals("")) {
+            refresh();
+        } else {
             ticketsTableView.getItems().clear();
             String selectedOption = filterDropdown.getValue();
             if (selectedOption == null) {
@@ -339,8 +332,7 @@ public class ViewStatusPageController{
                     if (text.equals(ticket.getRaisedOnDate().toString())) {
                         filteredTickets.add(ticket);
                     }
-                }
-                else if (selectedOption.equals("Ticket Raiser")) {
+                } else if (selectedOption.equals("Ticket Raiser")) {
                     if (text.equals(ticket.getRaisedByEmail())) {
                         filteredTickets.add(ticket);
                     }
@@ -360,14 +352,14 @@ public class ViewStatusPageController{
     void clickOutsideOfView() {
         disableButtonsOption(true);
     }
+
     @FXML
     void updateView(MouseEvent event) {
 
         TOMaintenanceTicket selected = ticketsTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             disableButtonsOption(true);
-        }
-        else {
+        } else {
             disableButtonsOption(false);
         }
 
@@ -376,30 +368,30 @@ public class ViewStatusPageController{
         descriptionTextField.setText(selected.getDescription());
 
         assetName.setText(selected.getAssetName());
-        if (selected.getAssetName()==null || selected.getAssetName().equals("")){
+        if (selected.getAssetName() == null || selected.getAssetName().equals("")) {
             assetName.setText("N/A");
         }
         assetLifespan.setText(String.valueOf(selected.getExpectLifeSpanInDays()));
-        if (String.valueOf(selected.getExpectLifeSpanInDays()).equals("-1")){
+        if (String.valueOf(selected.getExpectLifeSpanInDays()).equals("-1")) {
             assetLifespan.setText("N/A");
         }
         try {
             assetPurchaseDate.setText(selected.getPurchaseDate().toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             assetPurchaseDate.setText("N/A");
         }
         assetFloorNumber.setText(String.valueOf(selected.getFloorNumber()));
-        if (String.valueOf(selected.getFloorNumber()).equals("-1")){
+        if (String.valueOf(selected.getFloorNumber()).equals("-1")) {
             assetFloorNumber.setText("N/A");
         }
 
         assetRoomNumber.setText(String.valueOf(selected.getRoomNumber()));
-        if (String.valueOf(selected.getRoomNumber()).equals("-1")){
+        if (String.valueOf(selected.getRoomNumber()).equals("-1")) {
             assetRoomNumber.setText("N/A");
         }
 
         imageListView.getItems().clear();
-        for (String path: selected.getImageURLs()) {
+        for (String path : selected.getImageURLs()) {
             imageListView.getItems().add(new ImageView(new Image(path, 80, 80, false, false)));
         }
         imageUrlListView.setItems(FXCollections.observableArrayList(selected.getImageURLs()));

@@ -4,65 +4,58 @@
 package ca.mcgill.ecse.assetplus.controller;
 
 // line 36 "../../../../../../AssetPlusTransferObjects.ump"
-public class TOUser
-{
+public class TOUser {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
+    //------------------------
+    // MEMBER VARIABLES
+    //------------------------
 
-  //TOUser Attributes
-  private String email;
-  private String name;
-  private String phoneNumber;
-  private String password;
+    //TOUser Attributes
+    private String email;
+    private String name;
+    private String phoneNumber;
+    private String password;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
+    //------------------------
+    // CONSTRUCTOR
+    //------------------------
 
-  public TOUser(String aEmail, String aName, String aPhoneNumber, String aPassword)
-  {
-    email = aEmail;
-    name = aName;
-    phoneNumber = aPhoneNumber;
-    password = aPassword;
-  }
+    public TOUser(String aEmail, String aName, String aPhoneNumber, String aPassword) {
+        email = aEmail;
+        name = aName;
+        phoneNumber = aPhoneNumber;
+        password = aPassword;
+    }
 
-  //------------------------
-  // INTERFACE
-  //------------------------
+    //------------------------
+    // INTERFACE
+    //------------------------
 
-  public String getEmail()
-  {
-    return email;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public String getName()
-  {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public String getPhoneNumber()
-  {
-    return phoneNumber;
-  }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-  public String getPassword()
-  {
-    return password;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public void delete()
-  {}
+    public void delete() {
+    }
 
 
-  public String toString()
-  {
-    return super.toString() + "["+
-            "email" + ":" + getEmail()+ "," +
-            "name" + ":" + getName()+ "," +
-            "phoneNumber" + ":" + getPhoneNumber()+ "," +
-            "password" + ":" + getPassword()+ "]";
-  }
+    public String toString() {
+        return super.toString() + "[" +
+                "email" + ":" + getEmail() + "," +
+                "name" + ":" + getName() + "," +
+                "phoneNumber" + ":" + getPhoneNumber() + "," +
+                "password" + ":" + getPassword() + "]";
+    }
 }

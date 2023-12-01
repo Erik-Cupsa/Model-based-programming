@@ -1,12 +1,8 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
-import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 import java.io.IOException;

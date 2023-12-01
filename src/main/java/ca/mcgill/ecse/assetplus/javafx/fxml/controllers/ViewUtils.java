@@ -1,15 +1,11 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import ca.mcgill.ecse.assetplus.controller.*;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
+import ca.mcgill.ecse.assetplus.controller.TOUser;
+import ca.mcgill.ecse.assetplus.controller.TOUserController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import ca.mcgill.ecse.assetplus.model.AssetType;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,15 +16,24 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ViewUtils {
 
-    /** Calls the controller and shows an error, if applicable. */
+    /**
+     * Calls the controller and shows an error, if applicable.
+     */
     public static boolean callController(String result) {
         if (result.isEmpty()) {
             AssetPlusFxmlView.getInstance().refresh();
@@ -38,7 +43,9 @@ public class ViewUtils {
         return false;
     }
 
-    /** Calls the controller and returns true on success. This method is included for readability. */
+    /**
+     * Calls the controller and returns true on success. This method is included for readability.
+     */
     public static boolean successful(String controllerResult) {
         return callController(controllerResult);
     }
@@ -46,7 +53,7 @@ public class ViewUtils {
     /**
      * Creates a popup window.
      *
-     * @param title: title of the popup window
+     * @param title:   title of the popup window
      * @param message: message to display
      */
     public static void makePopupWindow(String title, String message) {
@@ -109,7 +116,7 @@ public class ViewUtils {
     public static ObservableList<String> getUserEmails() {
         List<TOUser> users = TOUserController.getUsers();
         List<String> userEmails = new ArrayList<String>();
-        for (TOUser t: users){
+        for (TOUser t : users) {
             userEmails.add(t.getEmail());
         }
         return FXCollections.observableList(userEmails);
@@ -135,7 +142,7 @@ public class ViewUtils {
             TableColumn<TOMaintenanceTicket, String> priorityColumn,
             TableColumn<TOMaintenanceTicket, Boolean> approvalRequiredColumn
     ) {
-        loadTicketsIntoTableView(ticketsTableView,numberColumn,issuerColumn,statusColumn,dateRaisedColumn,fixerColumn,timeToResolveColumn,priorityColumn,approvalRequiredColumn, ViewUtils.getTickets());
+        loadTicketsIntoTableView(ticketsTableView, numberColumn, issuerColumn, statusColumn, dateRaisedColumn, fixerColumn, timeToResolveColumn, priorityColumn, approvalRequiredColumn, ViewUtils.getTickets());
     }
 
     public static void loadTicketsIntoTableView(

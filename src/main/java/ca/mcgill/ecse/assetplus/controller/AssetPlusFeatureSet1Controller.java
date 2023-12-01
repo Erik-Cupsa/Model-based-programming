@@ -13,9 +13,10 @@ public class AssetPlusFeatureSet1Controller {
 
     /**
      * Validates a given email address.
-     * @author Manuel Hanna
+     *
      * @param email Email to validate
      * @return String value, if non-empty then indicates an error in validation
+     * @author Manuel Hanna
      */
     private static String checkValidEmail(String email) {
         // email must not null
@@ -44,11 +45,12 @@ public class AssetPlusFeatureSet1Controller {
 
     /**
      * Validates a given password.
-     * @author Manuel Hanna
-     * @param password password to validate
+     *
+     * @param password  password to validate
      * @param isManager boolean indicating whether password should be validated
-     *  according to manager's password constraints
+     *                  according to manager's password constraints
      * @return String value, if non-empty then indicates an error in validation
+     * @author Manuel Hanna
      */
     private static String checkValidPassword(String password, boolean isManager) {
         boolean containsUpperCase = false;
@@ -74,8 +76,8 @@ public class AssetPlusFeatureSet1Controller {
         // for each Manager:
         else if (isManager) {
             // password must be at least four characters long
-         if (!(password.length() >= 4)) {
-            return "Password must be at least four characters long";
+            if (!(password.length() >= 4)) {
+                return "Password must be at least four characters long";
             }
             // password must contain a special character out of !#$
             if (!(
@@ -99,9 +101,10 @@ public class AssetPlusFeatureSet1Controller {
 
     /**
      * Checks whether an email is a valid employee email.
-     * @author Manuel Hanna
+     *
      * @param email Email to be validated as employee email
      * @return Boolean, true if email is valid employee email
+     * @author Manuel Hanna
      */
     private static boolean isValidEmployeeEmail(String email) {
         return email.substring(email.length() - 7).equals("@ap.com");
@@ -109,10 +112,11 @@ public class AssetPlusFeatureSet1Controller {
 
     /**
      * Validates a given name and phone number.
-     * @author Manuel Hanna
-     * @param name name to validate
+     *
+     * @param name        name to validate
      * @param phoneNumber phone number to validate
      * @return String value, if non-empty then indicates an error in validation
+     * @author Manuel Hanna
      */
     private static String checkValidIdentification(String name, String phoneNumber) {
         if (name == null) {
@@ -138,9 +142,9 @@ public class AssetPlusFeatureSet1Controller {
             return passCheck;
         }
         manager.setPassword(password);
-        try{
+        try {
             AssetPlusPersistence.save();
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
             return e.getMessage();
         }
         return "";
@@ -192,9 +196,9 @@ public class AssetPlusFeatureSet1Controller {
             }
             app.addGuest(email, name, password, phoneNumber);
         }
-        try{
+        try {
             AssetPlusPersistence.save();
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
             return e.getMessage();
         }
         return "";
@@ -226,9 +230,9 @@ public class AssetPlusFeatureSet1Controller {
         user.setPassword(newPassword);
         user.setName(newName);
         user.setPhoneNumber(newPhoneNumber);
-        try{
+        try {
             AssetPlusPersistence.save();
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
             return e.getMessage();
         }
         return "";
