@@ -94,6 +94,7 @@ public class AddUpdateDeleteAssetTypeController {
         AssetPlusFeatureSet2Controller.deleteAssetType(selected.getName());
         showAllAssetTypes();
         AddUpdateDeleteAssetController.getInstance().showAllAssets();
+
     }
 
     @FXML

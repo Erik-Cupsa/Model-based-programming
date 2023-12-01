@@ -232,6 +232,7 @@ public class ViewStatusPageController{
 
     @FXML
     void updateView(MouseEvent event) {
+
         TOMaintenanceTicket selected = ticketsTableView.getSelectionModel().getSelectedItem();
 
         idTextField.setText(String.valueOf(selected.getId()));
@@ -239,10 +240,27 @@ public class ViewStatusPageController{
         descriptionTextField.setText(selected.getDescription());
 
         assetName.setText(selected.getAssetName());
+        if (selected.getAssetName()==null || selected.getAssetName().equals("")){
+            assetName.setText("N/A");
+        }
         assetLifespan.setText(String.valueOf(selected.getExpectLifeSpanInDays()));
-        assetPurchaseDate.setText(selected.getPurchaseDate().toString());
+        if (String.valueOf(selected.getExpectLifeSpanInDays()).equals("-1")){
+            assetLifespan.setText("N/A");
+        }
+        try {
+            assetPurchaseDate.setText(selected.getPurchaseDate().toString());
+        }catch (Exception e){
+            assetPurchaseDate.setText("N/A");
+        }
         assetFloorNumber.setText(String.valueOf(selected.getFloorNumber()));
+        if (String.valueOf(selected.getFloorNumber()).equals("-1")){
+            assetFloorNumber.setText("N/A");
+        }
+
         assetRoomNumber.setText(String.valueOf(selected.getRoomNumber()));
+        if (String.valueOf(selected.getRoomNumber()).equals("-1")){
+            assetRoomNumber.setText("N/A");
+        }
         AssetPlusFxmlView.getInstance().refresh();
     }
 }
