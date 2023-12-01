@@ -104,6 +104,9 @@ public class AssignMaintenanceTicketController {
         else {
             try {
                 String selectedEmail = selectedUser.getEmail();
+                if (!selectedUser.getEmail().contains("@ap.com") ){
+                    showError("Cannot assign guest to ticket");
+                }
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
                 Parent newRoot = fxmlLoader.load();
                 String err = assignStaffToTicket(ticketID, selectedEmail, stringTimeEstimate(resolveDropDown.getValue()), stringPriority(priorityDropDown.getValue()), managerApprovalCheck.isSelected());
