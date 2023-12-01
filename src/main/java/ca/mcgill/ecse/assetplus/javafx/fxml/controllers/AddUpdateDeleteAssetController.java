@@ -62,6 +62,17 @@ public class AddUpdateDeleteAssetController {
 
     @FXML
     private Button updateButton;
+    
+    private static AddUpdateDeleteAssetController instance;
+
+    public AddUpdateDeleteAssetController(){
+        instance = this;
+    }
+
+    public static AddUpdateDeleteAssetController getInstance(){
+        return instance;
+    }
+
 
     @FXML
     public void initialize(){
@@ -74,7 +85,7 @@ public class AddUpdateDeleteAssetController {
         showAllAssets();
     }
 
-    private void showAllAssets(){
+    public void showAllAssets(){
         ObservableList<TOAsset> assetList = FXCollections.observableArrayList(TOAssetController.getAssets());
         assetTable.setItems(assetList);
         assetTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> assetTable.setItems(assetList));

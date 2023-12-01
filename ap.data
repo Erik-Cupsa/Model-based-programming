@@ -46,9 +46,9 @@
                     "ticketRaiser": {
                       "@class": "Employee",
                       "email": "smith@ap.com",
-                      "name": "Smith",
+                      "name": "Simpson",
                       "password": "pass2",
-                      "phoneNumber": "(555)555-5555",
+                      "phoneNumber": "(555)555-5523",
                       "raisedTickets": [
                         {
                           "MaintenanceTicket": {
@@ -81,7 +81,7 @@
                                       "noteTaker": {
                                         "@class": "Manager",
                                         "email": "manager@ap.com",
-                                        "password": "manager",
+                                        "password": "pas2!W",
                                         "raisedTickets": [
                                           {
                                             "MaintenanceTicket": [
@@ -179,68 +179,6 @@
                       "@class": "Employee",
                       "@reference": "../../../.."
                     },
-                    "asset": {
-                      "assetNumber": 1,
-                      "floorNumber": 9,
-                      "roomNumber": 23,
-                      "purchaseDate": "2022-03-20",
-                      "assetPlus": {
-                        "@reference": "../../../../../../.."
-                      },
-                      "maintenanceTickets": [
-                        {
-                          "MaintenanceTicket": {
-                            "@reference": "../../.."
-                          }
-                        }
-                      ],
-                      "assetType": {
-                        "name": "lamp",
-                        "expectedLifeSpan": 1800,
-                        "assetPlus": {
-                          "@reference": "../../../../../../../.."
-                        },
-                        "specificAssets": [
-                          {
-                            "SpecificAsset": [
-                              {
-                                "@reference": "../../.."
-                              },
-                              {
-                                "assetNumber": 3,
-                                "floorNumber": 2,
-                                "roomNumber": 10,
-                                "purchaseDate": "2023-11-15",
-                                "assetPlus": {
-                                  "@reference": "../../../../../../../../../.."
-                                },
-                                "maintenanceTickets": [
-                                  ""
-                                ],
-                                "assetType": {
-                                  "@reference": "../../.."
-                                }
-                              },
-                              {
-                                "assetNumber": 2,
-                                "floorNumber": 1,
-                                "roomNumber": 1,
-                                "purchaseDate": "2023-11-01",
-                                "assetPlus": {
-                                  "@reference": "../../../../../../../../../.."
-                                },
-                                "maintenanceTickets": [
-                                  ""
-                                ],
-                                "assetType": {
-                                  "@reference": "../../.."
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    },
                     "fixApprover": {
                       "@reference": "../ticketRaiser/maintenanceNotes/MaintenanceNote/ticket/ticketNotes/MaintenanceNote[2]/noteTaker"
                     }
@@ -291,38 +229,10 @@
       }
     ],
     "assetTypes": [
-      {
-        "AssetType": [
-          {
-            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType"
-          },
-          {
-            "name": "bed",
-            "expectedLifeSpan": 1200,
-            "assetPlus": {
-              "@reference": "../../.."
-            },
-            "specificAssets": [
-              ""
-            ]
-          }
-        ]
-      }
+      ""
     ],
     "specificAssets": [
-      {
-        "SpecificAsset": [
-          {
-            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset"
-          },
-          {
-            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType/specificAssets/SpecificAsset[2]"
-          },
-          {
-            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType/specificAssets/SpecificAsset[3]"
-          }
-        ]
-      }
+      ""
     ]
   }
 }
