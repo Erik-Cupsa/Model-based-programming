@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils.showError;
+
 public class ViewStatusPageController{
     @FXML
     private TableView<TOMaintenanceTicket> ticketsTableView;
@@ -49,7 +51,7 @@ public class ViewStatusPageController{
     @FXML
     private TableColumn<TOMaintenanceTicket, String> priorityColumn;
     @FXML
-    private TableColumn<TOMaintenanceTicket, String> approvalRequiredColumn;
+    private TableColumn<TOMaintenanceTicket, Boolean> approvalRequiredColumn;
     @FXML
     private Button addTicketButton;
     @FXML
@@ -57,13 +59,14 @@ public class ViewStatusPageController{
     @FXML
     private Button deleteTicketButton;
     @FXML
-    private Button assignTicketButton;
-    @FXML
     private Button solveTicketButton;
     @FXML
     private Button startWorkButton;
     @FXML
     private Button completeWorkButton;
+
+    @FXML
+    private Button assignButton;
     @FXML
     private GridPane assetGridPane;
     @FXML
@@ -96,12 +99,11 @@ public class ViewStatusPageController{
     private Label assetRoomNumber;
 
     @FXML
-    private Label imageURLs;
-
-    @FXML
     private ComboBox<String> filterDropdown;
     @FXML
     private TextField filterField;
+    @FXML
+    private ListView imageUrlListView;
 
     @FXML
     public void initialize() {
@@ -136,6 +138,24 @@ public class ViewStatusPageController{
         AddMaintenanceTicketController.doneAddClicked(idTextField, descriptionTextField, ticketRaiserTextField, assetNumberTextField, dateRaisedOnPicker);
         refresh();
 
+    }
+    @FXML
+    void assignClicked(ActionEvent event) {
+        TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
+        if (selectedTicket != null) {
+            try {
+                int tickedID= selectedTicket.getId();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../pages/AssignMaintenanceTicket.fxml"));
+                Parent newRoot = fxmlLoader.load();
+                AssignMaintenanceTicketController assignMaintenanceTicketController = fxmlLoader.getController();
+                assignMaintenanceTicketController.setTicketID(tickedID);
+                Stage currentStage = (Stage) assignButton.getScene().getWindow();
+                currentStage.getScene().setRoot(newRoot);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else showError("No ticket selected");
     }
     public void showAllTickets(){
         ObservableList<TOMaintenanceTicket> ticketList = FXCollections.observableArrayList(AssetPlusFeatureSet6Controller.getTickets());
@@ -215,7 +235,7 @@ public class ViewStatusPageController{
             System.out.println(e);
         }
     }
-    
+
     @FXML
     public void deleteTicketClicked(ActionEvent event) {
         TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
@@ -254,26 +274,6 @@ public class ViewStatusPageController{
         }
     }
 
-    @FXML public void assignWorkClicked(ActionEvent event){
-        TOMaintenanceTicket ticket = ticketsTableView.getSelectionModel().getSelectedItem();
-
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../pages/AssignMaintenanceTicket.fxml"));
-                Parent newRoot = fxmlLoader.load();
-
-//                AssignMaintenanceTicketController assignMaintenanceTicketController = fxmlLoader.getController();
-//                assignMaintenanceTicketController.updateTicketSelection(ticket);
-                // Access the current stage
-                Stage currentStage = (Stage) assignTicketButton.getScene().getWindow();
-
-                // Replace the content in the current scene with content loaded from the new FXML
-                currentStage.getScene().setRoot(newRoot);
-            } catch (IOException e) {
-                e.printStackTrace();
-                // Handle the exception as needed
-            }
-
-    }
     @FXML
     public void approveDisapproveWorkClicked(ActionEvent event) {
         TOMaintenanceTicket ticket = ticketsTableView.getSelectionModel().getSelectedItem();
@@ -370,9 +370,8 @@ public class ViewStatusPageController{
             string+=url;
             string+='\n';
         }
-        imageURLs.setText(selected.getImageURLs().toString());
+        //imageURLs.setText(selected.getImageURLs().toString());
+        imageUrlListView.setItems(FXCollections.observableArrayList(selected.getImageURLs()));
         AssetPlusFxmlView.getInstance().refresh();
     }
-
-
 }

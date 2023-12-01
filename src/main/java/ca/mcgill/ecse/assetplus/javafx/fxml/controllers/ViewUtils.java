@@ -10,6 +10,7 @@ import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import ca.mcgill.ecse.assetplus.model.AssetType;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -114,7 +115,7 @@ public class ViewUtils {
         return FXCollections.observableList(userEmails);
     }
 
-    
+
     public static ObservableList<AssetType> getAssetTypes() {
         //List<AssetType> assetTypes = AssetPlusFeatureSet2Controller.getAssetTypes();
         return FXCollections.observableList(new ArrayList<AssetType>());
@@ -132,7 +133,7 @@ public class ViewUtils {
             TableColumn<TOMaintenanceTicket, String> fixerColumn,
             TableColumn<TOMaintenanceTicket, String> timeToResolveColumn,
             TableColumn<TOMaintenanceTicket, String> priorityColumn,
-            TableColumn<TOMaintenanceTicket, String> approvalRequiredColumn
+            TableColumn<TOMaintenanceTicket, Boolean> approvalRequiredColumn
     ) {
         loadTicketsIntoTableView(ticketsTableView,numberColumn,issuerColumn,statusColumn,dateRaisedColumn,fixerColumn,timeToResolveColumn,priorityColumn,approvalRequiredColumn, ViewUtils.getTickets());
     }
@@ -146,9 +147,9 @@ public class ViewUtils {
             TableColumn<TOMaintenanceTicket, String> fixerColumn,
             TableColumn<TOMaintenanceTicket, String> timeToResolveColumn,
             TableColumn<TOMaintenanceTicket, String> priorityColumn,
-            TableColumn<TOMaintenanceTicket, String> approvalRequiredColumn,
+            TableColumn<TOMaintenanceTicket, Boolean> approvalRequiredColumn,
             ObservableList<TOMaintenanceTicket> tickets
-            ) {
+    ) {
         numberColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         issuerColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaisedByEmail()));
         statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
@@ -172,7 +173,7 @@ public class ViewUtils {
             return new SimpleStringProperty(cellData.getValue().getPriority());
         });
         approvalRequiredColumn.setCellValueFactory(cellData -> {
-            return new SimpleStringProperty(cellData.getValue().getPriority());
+            return new SimpleBooleanProperty(cellData.getValue().getApprovalRequired());
         });
 
         System.out.println("update count");
@@ -220,23 +221,5 @@ public class ViewUtils {
             e.printStackTrace();
         }
 
-    }
-    public static boolean endsWithApCom(String str) {
-        if (str == null) {
-            return false;
-        }
-        return str.endsWith("@ap.com");
-    }
-    public static List<TOUser> getEmployees() {
-        List<TOUser> users = TOUserController.getUsers();
-        List<TOUser> employees = new ArrayList<>();
-        for (TOUser user: users){
-            if (endsWithApCom(user.getEmail())){
-                employees.add(user);
-            }
-        }
-        // as javafx works with observable list, we need to convert the java.util.List to
-        // javafx.collections.observableList
-        return FXCollections.observableList(employees);
     }
 }

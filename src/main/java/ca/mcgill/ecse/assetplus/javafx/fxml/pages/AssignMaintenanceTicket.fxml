@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.AssignMaintenanceTicketController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.AssignMaintenanceTicketController">
     <top>
         <HBox prefHeight="50.0" prefWidth="602.0" BorderPane.alignment="CENTER">
             <children>
@@ -15,51 +23,39 @@
                 </Label>
             </children>
         </HBox>
-        <Label layoutX="50.0" layoutY="100.0" text="Select Ticket:" />
-
     </top>
     <center>
         <AnchorPane prefHeight="210.0" prefWidth="602.0" BorderPane.alignment="CENTER">
             <children>
-<!--                <TableView fx:id="employeeTable" layoutX="14.0" prefHeight="324.0" prefWidth="255.0">-->
-<!--                    <columns>-->
-<!--                        <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="122.0" text="Employee Name" />-->
-<!--                        <TableColumn fx:id="emailColumn" prefWidth="133.0" text="Employee email" />-->
-<!--                    </columns>-->
-<!--                </TableView>-->
-            <ButtonBar layoutX="280.0" layoutY="132.0" prefHeight="40.0" prefWidth="278.0" />
-                <HBox alignment="CENTER" layoutX="148.0" layoutY="30.0" prefHeight="40.0" prefWidth="307.0">
-                    <Label prefHeight="18.0" prefWidth="102.0" text="Assigned Ticket:" />
-                    <ComboBox fx:id="comboTicket" prefHeight="18.0" prefWidth="102.0" />
+                <TableView fx:id="employeeTable" layoutX="14.0" prefHeight="324.0" prefWidth="255.0">
+                    <columns>
+                        <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="122.0" text="Employee Name" />
+                        <TableColumn fx:id="emailColumn" prefWidth="133.0" text="Employee email" />
+                    </columns>
+                </TableView>
+                <ButtonBar layoutX="280.0" layoutY="132.0" prefHeight="40.0" prefWidth="278.0" />
+                <HBox alignment="CENTER_RIGHT" layoutX="280.0" layoutY="41.0" prefHeight="40.0" prefWidth="307.0">
+                    <Label prefHeight="18.0" prefWidth="102.0" text="Resolve time:" />
+                    <ChoiceBox fx:id="resolveDropDown" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                 </HBox>
-                <HBox alignment="CENTER" layoutX="140.0" layoutY="70.0" prefHeight="40.0" prefWidth="307.0">
-                    <Label minWidth="-Infinity" prefHeight="18.0" prefWidth="110.0" text="Assigned Employee:" />
-                    <ComboBox fx:id="comboEmployee" prefHeight="18.0" prefWidth="102.0" />
+                <HBox alignment="CENTER_RIGHT" layoutX="280.0" layoutY="152.0" prefHeight="40.0" prefWidth="307.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="104.0" text="Priority:" />
+                        <ChoiceBox fx:id="priorityDropDown" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                    </children>
                 </HBox>
-                  <HBox alignment="CENTER_RIGHT" layoutX="148.0" layoutY="112.0" prefHeight="40.0" prefWidth="307.0">
-                      <Label prefHeight="18.0" prefWidth="102.0" text="Resolve time:" />
-                      <ChoiceBox fx:id="resolveDropDown" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
-                  </HBox>
-
-
-            <HBox alignment="CENTER_RIGHT" layoutX="148.0" layoutY="152.0" prefHeight="40.0" prefWidth="307.0">
-               <children>
-                  <Label prefHeight="18.0" prefWidth="104.0" text="Priority:" />
-                  <ChoiceBox fx:id="priorityDropDown" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" layoutX="148.0" layoutY="203.0" prefHeight="40.0" prefWidth="307.0">
-               <children>
-                  <Label prefHeight="18.0" prefWidth="304.0" text="Requires Manager Approval:" />
-                  <CheckBox fx:id="managerApprovalCheck" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" />
-               </children>
-            </HBox>
-            <ButtonBar layoutX="168.0" layoutY="265.0" prefHeight="57.0" prefWidth="252.0">
-              <buttons>
-                <Button fx:id="assignButton" defaultButton="true" mnemonicParsing="false" onAction="#assignClicked" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: green;" text="Assign" />
-                  <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelClicked" prefHeight="34.0" prefWidth="164.0" style="-fx-background-color: red;" text="Cancel" />
-              </buttons>
-            </ButtonBar>
+                <HBox alignment="CENTER_RIGHT" layoutX="280.0" layoutY="205.0" prefHeight="40.0" prefWidth="307.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="304.0" text="Requires Manager Approval:" />
+                        <CheckBox fx:id="managerApprovalCheck" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" />
+                    </children>
+                </HBox>
+                <ButtonBar layoutX="293.0" layoutY="271.0" prefHeight="57.0" prefWidth="252.0">
+                    <buttons>
+                        <Button fx:id="assignButton" defaultButton="true" mnemonicParsing="false" onAction="#assignClicked" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: green;" text="Assign" />
+                        <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelClicked" prefHeight="34.0" prefWidth="164.0" style="-fx-background-color: red;" text="Cancel" />
+                    </buttons>
+                </ButtonBar>
             </children>
         </AnchorPane>
     </center>
