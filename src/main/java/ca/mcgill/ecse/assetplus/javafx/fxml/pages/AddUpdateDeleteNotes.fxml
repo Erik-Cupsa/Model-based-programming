@@ -1,4 +1,4 @@
-   <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.AddUpdateDeleteNotesController" stylesheets="/styles/style.css">
    <top>
       <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -68,7 +68,7 @@
                <children>
                   <Button fx:id="noteAdd" mnemonicParsing="false" onAction="#noteAddClicked" prefHeight="26.0" prefWidth="81.0" text="Add" />
                   <Button fx:id="noteUpdate" mnemonicParsing="false" onAction="#noteUpdateClicked" prefHeight="26.0" prefWidth="82.0" text="Update " />
-                  <Button fx:id="noteDelete" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Delete" />
+                  <Button fx:id="noteDelete" mnemonicParsing="false" onAction="#noteDeleteClicked" prefHeight="26.0" prefWidth="81.0" text="Delete" />
                </children>
             </HBox>
             <Label alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="102.0" text="Date:" textAlignment="RIGHT" GridPane.rowIndex="1" />
@@ -81,4 +81,4 @@
          </padding>
       </GridPane>
    </bottom>
-</fx:root>
+</BorderPane>

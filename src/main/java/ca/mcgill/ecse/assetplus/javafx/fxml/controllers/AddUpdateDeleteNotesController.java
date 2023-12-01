@@ -57,6 +57,7 @@ public class AddUpdateDeleteNotesController {
         noteDate.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, Date>("date"));
         noteText.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, String>("description"));
         noteTable.setItems(FXCollections.observableList(ticket.getNotes()));
+        noteTable.refresh();
     }
 
     private TOMaintenanceTicket findTicket(int id) {
@@ -65,7 +66,7 @@ public class AddUpdateDeleteNotesController {
                 return t;
             }
         }
-        return ticket;
+        return null;
     }
 
     @FXML
