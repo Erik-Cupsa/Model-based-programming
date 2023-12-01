@@ -97,6 +97,13 @@ public class AddUpdateDeleteAssetTypeController {
     }
 
     @FXML
+    public void assetInfoMouseClick(Event e){
+        TOAsset assetselected = assetTable.getSelectionModel().getSelectedItem();
+        assetTypeTextField.setText(assetselected.getTypeName());
+        assetNumberTextField.setText(String.valueOf(assetselected.getAssetNumber()));
+    }
+    
+    @FXML
     void updateAssetTypeClicked(ActionEvent event) {
         int newExpectedLifeSpan = Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText());
         String newName = assetTypeNameTextField.getText();
