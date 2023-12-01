@@ -109,13 +109,10 @@ public class AddUpdateDeleteAssetTypeController {
     void updateAssetTypeClicked(ActionEvent event) {
         int newExpectedLifeSpan = Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText());
         String newName = assetTypeNameTextField.getText();
-
-        String oldName = assetTypeTable.getSelectionModel().getSelectedItem().getName();
-
         String err = AssetPlusFeatureSet2Controller.updateAssetType(assetTypeTable.getSelectionModel().getSelectedItem().getName(), newName, newExpectedLifeSpan);
 
         if(!err.isEmpty()){
-            ViewUtils.makePopupWindow("Update An Asset Type" , "AssetType with name " + oldName + " updated unsuccessfully");
+            ViewUtils.showError(err);
         }
 
         showAllAssetTypes();

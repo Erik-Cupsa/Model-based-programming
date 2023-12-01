@@ -77,7 +77,8 @@ public class EditMaintenanceTicketController {
                 userEmail,
                 Integer.parseInt(assetNum)
         );
-        if (!ViewUtils.successful(result)) {
+
+        if (!result.isEmpty()) {
             ViewUtils.showError(result);
         }
     }

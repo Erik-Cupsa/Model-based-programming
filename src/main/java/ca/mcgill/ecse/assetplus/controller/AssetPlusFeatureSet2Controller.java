@@ -56,8 +56,10 @@ public class AssetPlusFeatureSet2Controller {
 		else if(!AssetType.hasWithName(oldName)) {//checks if the AssetPlus object with the name oldName exists
 
 			return "The asset type does not exist"; //if it doesnt exist return an error
+		} else if (newExpectedLifeSpanInDays<=0) {
+			return "The expected life span must be greater than 0 days";
 		}
-		
+
 		(AssetType.getWithName(oldName)).setName(newName);
 		(AssetType.getWithName(newName)).setExpectedLifeSpan(newExpectedLifeSpanInDays);
 		try{

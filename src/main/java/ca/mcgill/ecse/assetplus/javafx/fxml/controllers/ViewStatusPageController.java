@@ -345,6 +345,11 @@ public class ViewStatusPageController{
         if (String.valueOf(selected.getRoomNumber()).equals("-1")){
             assetRoomNumber.setText("N/A");
         }
+        String string = "";
+        for (String url:selected.getImageURLs()){
+            string+=url;
+            string+='\n';
+        }
         imageURLs.setText(selected.getImageURLs().toString());
         AssetPlusFxmlView.getInstance().refresh();
     }

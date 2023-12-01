@@ -117,16 +117,16 @@ public class AddUpdateDeleteEmployeePageController {
         String email = employeeEmailTextField.getText();
         ObservableList<TOUser> userList = FXCollections.observableArrayList(TOUserController.getUsers());
         for (TOUser user : userList){
-            if (user.getEmail() == email){
+            if (user.getEmail().equals(email) ){
                 AssetPlusFeatureSet6Controller.deleteEmployeeOrGuest(email);
                 ViewUtils.makePopupWindow("Delete An Employee" , "Employee with " + email + " deleted successfully");
                 showAllEmployees();
                 AssetPlusFxmlView.getInstance().refresh();
                 ViewStatusPageController.getInstance().showAllTickets();
-            }else{
-                ViewUtils.showError("user does not exist");
+                return;
             }
-        }    
+        }
+        ViewUtils.showError("user does not exist");
     }
 
     @FXML

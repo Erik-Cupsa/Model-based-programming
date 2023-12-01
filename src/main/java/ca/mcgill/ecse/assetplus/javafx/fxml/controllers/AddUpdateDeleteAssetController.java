@@ -107,7 +107,7 @@ public class AddUpdateDeleteAssetController {
         
         String err = AssetPlusFeatureSet3Controller.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, typeName);
         if(err.isEmpty()){
-            ViewUtils.makePopupWindow("Add An Asset" , "Asset " + assetNumber + " updated successfully");
+            ViewUtils.makePopupWindow("Add An Asset" , "Asset " + assetNumber + " added successfully");
             showAllAssets();
             AssetPlusFxmlView.getInstance().refresh();
         }
@@ -162,8 +162,10 @@ public class AddUpdateDeleteAssetController {
             ViewUtils.showError(err);
             showAllAssets();
             AssetPlusFxmlView.getInstance().refresh();
+        }else {
+            ViewUtils.makePopupWindow("Update An Asset" , "Asset " + oldAssetNumber + " updated successfully");
         }
-        ViewUtils.makePopupWindow("Update An Asset" , "Asset " + oldAssetNumber + " updated successfully");
+
         showAllAssets();
         AssetPlusFxmlView.getInstance().refresh();
     }
