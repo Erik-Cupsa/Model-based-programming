@@ -66,9 +66,11 @@ public class AssetPlusFeatureSet1Controller {
             return "Password cannot be empty";
         }
         // password must be at least four characters long
+        /*
         else if (!(password.length() >= 4)) {
             return "Password must be at least four characters long";
         }
+         */
         // for each Manager:
         else if (isManager) {
             // password must contain a special character out of !#$
