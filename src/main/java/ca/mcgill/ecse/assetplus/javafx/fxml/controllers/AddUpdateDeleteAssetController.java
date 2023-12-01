@@ -1,7 +1,10 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet3Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 import ca.mcgill.ecse.assetplus.controller.TOAssetController;
+import ca.mcgill.ecse.assetplus.controller.TOUser;
+import ca.mcgill.ecse.assetplus.controller.TOUserController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import ca.mcgill.ecse.assetplus.controller.TOAsset;
 import javafx.beans.binding.Bindings;
@@ -102,10 +105,14 @@ public class AddUpdateDeleteAssetController {
         
         String err = AssetPlusFeatureSet3Controller.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, typeName);
         if(err.isEmpty()){
+            ViewUtils.makePopupWindow("Add An Asset" , "Asset " + assetNumber + " updated successfully");
             showAllAssets();
+            AssetPlusFxmlView.getInstance().refresh();
         }
         else{
             ViewUtils.showError(err);
+            showAllAssets();
+            AssetPlusFxmlView.getInstance().refresh();
         }
     }
 
@@ -123,15 +130,18 @@ public class AddUpdateDeleteAssetController {
 
     @FXML
     void deleteClicked(ActionEvent event) {
-        TOAsset selected = assetTable.getSelectionModel().getSelectedItem();
-
-        int oldAssetNumber = assetTable.getSelectionModel().getSelectedItem().getAssetNumber();
-
-        AssetPlusFeatureSet3Controller.deleteSpecificAsset(selected.getAssetNumber());
-        selected.delete();
-        showAllAssets();
-        AssetPlusFxmlView.getInstance().refresh();
-        ViewUtils.makePopupWindow("Delete An Asset Type" , "AssetType with number " + oldAssetNumber + " deleted successfully");
+        String assetNumber = assetNumberTextField.getText();
+        ObservableList<TOAsset> assetList = FXCollections.observableArrayList(TOAssetController.getAssets());
+        for (TOAsset asset : assetList ){
+            if (asset.getAssetNumber() == Integer.parseInt(assetNumber)){
+                AssetPlusFeatureSet3Controller.deleteSpecificAsset(Integer.parseInt(assetNumber));
+                ViewUtils.makePopupWindow("Delete An Asset" , "Asset with " + assetNumber + " deleted successfully");
+                showAllAssets();
+                AssetPlusFxmlView.getInstance().refresh();
+                return;
+            }
+        }
+        ViewUtils.showError("asset does not exist");
     }
 
     @FXML
@@ -142,14 +152,16 @@ public class AddUpdateDeleteAssetController {
 
         Date newPurchaseDate = java.sql.Date.valueOf(purchaseDateField.getValue());
 
-        int oldAssetNumber = assetTable.getSelectionModel().getSelectedItem().getAssetNumber();
+        int oldAssetNumber = Integer.parseInt(assetNumberTextField.getText());
 
-        String err = AssetPlusFeatureSet3Controller.updateSpecificAsset(assetTable.getSelectionModel().getSelectedItem().getAssetNumber(), newAssetFloorNumber, newAssetRoomNumber, newPurchaseDate, newAssetTypeName);
+        String err = AssetPlusFeatureSet3Controller.updateSpecificAsset(oldAssetNumber, newAssetFloorNumber, newAssetRoomNumber, newPurchaseDate, newAssetTypeName);
 
         if(!err.isEmpty()){
-            ViewUtils.makePopupWindow("Update An Asset Type" , "AssetType with number " + oldAssetNumber + " updated unsuccessfully");
+            ViewUtils.showError(err);
+            showAllAssets();
+            AssetPlusFxmlView.getInstance().refresh();
         }
-
+        ViewUtils.makePopupWindow("Update An Asset" , "Asset " + oldAssetNumber + " updated successfully");
         showAllAssets();
         AssetPlusFxmlView.getInstance().refresh();
     }

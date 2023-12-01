@@ -37,7 +37,7 @@ public class AssetPlusFeatureSet2Controller {
    * @author David Marji.
 	 * @param oldName name of the old asset type
 	 * @param newName newName after updating
-	 * @param expectedLifeSpanInDays new expected life span of the type
+	 * @param newExpectedLifeSpanInDays new expected life span of the type
    */
 
 	public static String updateAssetType(String oldName, String newName, int newExpectedLifeSpanInDays) {
@@ -79,7 +79,7 @@ public class AssetPlusFeatureSet2Controller {
 		if(AssetType.hasWithName(name)) {
 			AssetPlusApplication.getAssetPlus().removeAssetType(AssetType.getWithName(name)); //removes from system
 			AssetType.getWithName(name).delete(); //deletes
-			AssetPlusFxmlView.getInstance().refresh();
+
 		}
 		try{
 			AssetPlusPersistence.save();
