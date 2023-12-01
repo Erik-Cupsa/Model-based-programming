@@ -24,6 +24,7 @@ import java.io.IOException;
 import static ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController.assignStaffToTicket;
 import static ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicketController.stringPriority;
 import static ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicketController.stringTimeEstimate;
+import static ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils.showError;
 
 public class AssignMaintenanceTicketController {
 
@@ -50,6 +51,8 @@ public class AssignMaintenanceTicketController {
 
     @FXML
     private Button assignButton;
+
+
 
     @FXML
     public void initialize(){
@@ -82,18 +85,23 @@ public class AssignMaintenanceTicketController {
 
     @FXML
     void assignClicked(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
-            Parent newRoot = fxmlLoader.load();
-//            assignStaffToTicket(,stringTimeEstimate(resolveDropDown.getValue()), stringPriority(priorityDropDown.getValue()),)
-            Stage currentStage = (Stage) assignButton.getScene().getWindow();
-            currentStage.getScene().setRoot(newRoot);
-        } catch (IOException e) {
-            e.printStackTrace();
+        TOUser selectedUser = employeeTable.getSelectionModel().getSelectedItem();
+
+        if (selectedUser != null) {
+            String selectedEmail = selectedUser.getEmail();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+                Parent newRoot = fxmlLoader.load();
+//                //String err= assignStaffToTicket(id, selectedEmail, stringTimeEstimate(resolveDropDown.getValue()), stringPriority(priorityDropDown.getValue()), managerApprovalCheck.isSelected());
+//                if ("" != err) {
+//                    showError(err);
+//                }
+                Stage currentStage = (Stage) assignButton.getScene().getWindow();
+                currentStage.getScene().setRoot(newRoot);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-    }
-
-    public void updateClicked(ActionEvent actionEvent) {
+        else showError("No Employee selected");
     }
 }
