@@ -122,6 +122,7 @@ public class AddUpdateDeleteEmployeePageController {
                 ViewUtils.makePopupWindow("Delete An Employee" , "Employee with " + email + " deleted successfully");
                 showAllEmployees();
                 AssetPlusFxmlView.getInstance().refresh();
+                ViewStatusPageController.getInstance().showAllTickets();
             }else{
                 ViewUtils.showError("user does not exist");
             }
