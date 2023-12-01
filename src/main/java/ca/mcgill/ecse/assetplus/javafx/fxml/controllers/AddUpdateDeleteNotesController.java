@@ -63,11 +63,9 @@ public class AddUpdateDeleteNotesController {
     private TOMaintenanceTicket findTicket(int id) {
         for (TOMaintenanceTicket t : ViewUtils.getTickets()) {
             if (t.getId() == id) {
-                System.out.println(t.getId());
                 return t;
             }
         }
-        System.out.println("ERROR");
         return null;
     }
 
@@ -91,12 +89,10 @@ public class AddUpdateDeleteNotesController {
         String email = userEmailText.getText();
         String error = AssetPlusFeatureSet7Controller.addMaintenanceNote(openDate, description, ticket.getId(),
                 email);
-        System.out.println(ticket.getNotes());
         if (!error.isEmpty()) {
             ViewUtils.makePopupWindow("Error", error);
         }
         filltable();
-        System.out.println(ticket.getNotes());
     }
 
 
