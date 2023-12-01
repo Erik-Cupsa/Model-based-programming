@@ -134,14 +134,14 @@ public class AddUpdateDeleteAssetController {
         ObservableList<TOAsset> assetList = FXCollections.observableArrayList(TOAssetController.getAssets());
         for (TOAsset asset : assetList ){
             if (asset.getAssetNumber() == Integer.parseInt(assetNumber)){
-                AssetPlusFeatureSet3Controller.deleteSpecificAsset(Integer.parseInt(assetNumber));;
+                AssetPlusFeatureSet3Controller.deleteSpecificAsset(Integer.parseInt(assetNumber));
                 ViewUtils.makePopupWindow("Delete An Asset" , "Asset with " + assetNumber + " deleted successfully");
                 showAllAssets();
                 AssetPlusFxmlView.getInstance().refresh();
-            }else{
-                ViewUtils.showError("asset does not exist");
+                return;
             }
-        }    
+        }
+        ViewUtils.showError("asset does not exist");
     }
 
     @FXML
@@ -160,8 +160,8 @@ public class AddUpdateDeleteAssetController {
             ViewUtils.showError(err);
             showAllAssets();
             AssetPlusFxmlView.getInstance().refresh();
-        } else {
-        ViewUtils.makePopupWindow("Update An Asset" , "Asset " + oldAssetNumber + " updated successfully"); }
+        }
+        ViewUtils.makePopupWindow("Update An Asset" , "Asset " + oldAssetNumber + " updated successfully");
         showAllAssets();
         AssetPlusFxmlView.getInstance().refresh();
     }
