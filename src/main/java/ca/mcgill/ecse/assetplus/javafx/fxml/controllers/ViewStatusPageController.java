@@ -172,6 +172,28 @@ public class ViewStatusPageController{
     }
 
     @FXML
+    private void editNotesButtonClicked(ActionEvent event) {
+        TOMaintenanceTicket ticket = ticketsTableView.getSelectionModel().getSelectedItem();
+        if (ticket == null) {
+            return;
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../pages/AddUpdateDeleteNotes.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 630, 400);
+            AddUpdateDeleteNotesController notescontroller = fxmlLoader.getController();
+            notescontroller.setTicket(ticket);
+
+            Stage stage = new Stage();
+            stage.setTitle("New Window");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    @FXML
     public void deleteTicketClicked(ActionEvent event) {
         TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
 
