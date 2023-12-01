@@ -1,6 +1,9 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
+import java.lang.ModuleLayer.Controller;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet2Controller;
+import ca.mcgill.ecse.assetplus.controller.TOAsset;
+import ca.mcgill.ecse.assetplus.controller.TOAssetController;
 import ca.mcgill.ecse.assetplus.controller.TOAssetTypeController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import ca.mcgill.ecse.assetplus.controller.TOAssetType;
@@ -9,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -47,6 +51,8 @@ public class AddUpdateDeleteAssetTypeController {
 
     @FXML
     private Button clearButton;
+
+
 
     @FXML
     public void initialize(){
@@ -87,6 +93,7 @@ public class AddUpdateDeleteAssetTypeController {
         TOAssetType selected = assetTypeTable.getSelectionModel().getSelectedItem();
         AssetPlusFeatureSet2Controller.deleteAssetType(selected.getName());
         showAllAssetTypes();
+        AddUpdateDeleteAssetController.getInstance().showAllAssets();
     }
 
     @FXML

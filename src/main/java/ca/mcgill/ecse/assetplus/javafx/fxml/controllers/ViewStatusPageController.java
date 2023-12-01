@@ -91,6 +91,9 @@ public class ViewStatusPageController{
     private Label assetRoomNumber;
 
     @FXML
+    private Label imageURLs;
+
+    @FXML
     public void initialize() {
         assetName.setText("");
         assetLifespan.setText("");
@@ -169,6 +172,28 @@ public class ViewStatusPageController{
     }
 
     @FXML
+    private void editNotesButtonClicked(ActionEvent event) {
+        TOMaintenanceTicket ticket = ticketsTableView.getSelectionModel().getSelectedItem();
+        if (ticket == null) {
+            return;
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../pages/AddUpdateDeleteNotes.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 630, 400);
+            AddUpdateDeleteNotesController notescontroller = fxmlLoader.getController();
+            notescontroller.setTicket(ticket);
+
+            Stage stage = new Stage();
+            stage.setTitle("New Window");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    @FXML
     public void deleteTicketClicked(ActionEvent event) {
         TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
 
@@ -232,6 +257,7 @@ public class ViewStatusPageController{
 
     @FXML
     void updateView(MouseEvent event) {
+
         TOMaintenanceTicket selected = ticketsTableView.getSelectionModel().getSelectedItem();
 
         idTextField.setText(String.valueOf(selected.getId()));
@@ -239,10 +265,28 @@ public class ViewStatusPageController{
         descriptionTextField.setText(selected.getDescription());
 
         assetName.setText(selected.getAssetName());
+        if (selected.getAssetName()==null || selected.getAssetName().equals("")){
+            assetName.setText("N/A");
+        }
         assetLifespan.setText(String.valueOf(selected.getExpectLifeSpanInDays()));
-        assetPurchaseDate.setText(selected.getPurchaseDate().toString());
+        if (String.valueOf(selected.getExpectLifeSpanInDays()).equals("-1")){
+            assetLifespan.setText("N/A");
+        }
+        try {
+            assetPurchaseDate.setText(selected.getPurchaseDate().toString());
+        }catch (Exception e){
+            assetPurchaseDate.setText("N/A");
+        }
         assetFloorNumber.setText(String.valueOf(selected.getFloorNumber()));
+        if (String.valueOf(selected.getFloorNumber()).equals("-1")){
+            assetFloorNumber.setText("N/A");
+        }
+
         assetRoomNumber.setText(String.valueOf(selected.getRoomNumber()));
+        if (String.valueOf(selected.getRoomNumber()).equals("-1")){
+            assetRoomNumber.setText("N/A");
+        }
+        imageURLs.setText(selected.getImageURLs().toString());
         AssetPlusFxmlView.getInstance().refresh();
     }
 }
