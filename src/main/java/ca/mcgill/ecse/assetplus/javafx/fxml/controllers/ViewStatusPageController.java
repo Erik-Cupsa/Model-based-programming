@@ -254,6 +254,26 @@ public class ViewStatusPageController{
         }
     }
 
+    @FXML public void assignWorkClicked(ActionEvent event){
+        TOMaintenanceTicket ticket = ticketsTableView.getSelectionModel().getSelectedItem();
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../pages/AssignMaintenanceTicket.fxml"));
+                Parent newRoot = fxmlLoader.load();
+
+//                AssignMaintenanceTicketController assignMaintenanceTicketController = fxmlLoader.getController();
+//                assignMaintenanceTicketController.updateTicketSelection(ticket);
+                // Access the current stage
+                Stage currentStage = (Stage) assignTicketButton.getScene().getWindow();
+
+                // Replace the content in the current scene with content loaded from the new FXML
+                currentStage.getScene().setRoot(newRoot);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception as needed
+            }
+
+    }
     @FXML
     public void approveDisapproveWorkClicked(ActionEvent event) {
         TOMaintenanceTicket ticket = ticketsTableView.getSelectionModel().getSelectedItem();
@@ -353,4 +373,6 @@ public class ViewStatusPageController{
         imageURLs.setText(selected.getImageURLs().toString());
         AssetPlusFxmlView.getInstance().refresh();
     }
+
+
 }

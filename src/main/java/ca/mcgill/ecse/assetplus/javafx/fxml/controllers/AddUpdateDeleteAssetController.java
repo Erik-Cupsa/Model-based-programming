@@ -1,12 +1,7 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet3Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
-import ca.mcgill.ecse.assetplus.controller.TOAssetController;
-import ca.mcgill.ecse.assetplus.controller.TOUser;
-import ca.mcgill.ecse.assetplus.controller.TOUserController;
+import ca.mcgill.ecse.assetplus.controller.*;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
-import ca.mcgill.ecse.assetplus.controller.TOAsset;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +15,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.chrono.Chronology;
 
 public class AddUpdateDeleteAssetController {
 
@@ -95,7 +93,32 @@ public class AddUpdateDeleteAssetController {
         assetTable.setItems(assetList);
         assetTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> assetTable.setItems(assetList));
     }
+    @FXML
+    void updateView(MouseEvent event) {
 
+        TOAsset selected = assetTable.getSelectionModel().getSelectedItem();
+
+        assetTypeTextField.setText(String.valueOf(selected.getTypeName()));
+        assetNumberTextField.setText(String.valueOf(selected.getAssetNumber()));
+        floorNumberTextField.setText(String.valueOf(selected.getFloorNumber()));
+        roomNumberTextField.setText(String.valueOf(selected.getRoomNumber()));
+        Date date = selected.getPurchaseDate();
+        purchaseDateField.setValue(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
+//        if (selected.getTypeName()==null || selected.getTypeName().equals("")){
+//            assetTypeTextField.setText("");
+//        }
+//        if (selected.getAssetNumber()==null || selected.getTypeName().equals("")){
+//            assetTypeTextField.setText("");
+//        }
+//        if (selected.getTypeName()==null || selected.getTypeName().equals("")){
+//            assetTypeTextField.setText("");
+//        }
+//        if (selected.getTypeName()==null || selected.getTypeName().equals("")){
+//            assetTypeTextField.setText("");
+//        }
+        AssetPlusFxmlView.getInstance().refresh();
+    }
     @FXML
     void addClicked(ActionEvent event) {
         String typeName = assetTypeTextField.getText();
@@ -135,7 +158,11 @@ public class AddUpdateDeleteAssetController {
         String assetNumber = assetNumberTextField.getText();
         ObservableList<TOAsset> assetList = FXCollections.observableArrayList(TOAssetController.getAssets());
         for (TOAsset asset : assetList ){
-            if (asset.getAssetNumber() == Integer.parseInt(assetNumber)){
+            int a = asset.getAssetNumber();
+
+
+            int b = Integer.parseInt(assetNumber);
+            if (a == b){
                 AssetPlusFeatureSet3Controller.deleteSpecificAsset(Integer.parseInt(assetNumber));
                 ViewUtils.makePopupWindow("Delete An Asset" , "Asset with " + assetNumber + " deleted successfully");
                 showAllAssets();
@@ -149,7 +176,13 @@ public class AddUpdateDeleteAssetController {
     @FXML
     void updateClicked(ActionEvent event) {
         String newAssetTypeName = assetTypeTextField.getText();
-        int newAssetRoomNumber = Integer.parseInt(roomNumberTextField.getText());
+        int newAssetRoomNumber;
+        if (roomNumberTextField.getText().equals("")){
+             newAssetRoomNumber = -1;
+        }else{
+             newAssetRoomNumber = Integer.parseInt(roomNumberTextField.getText());
+        }
+
         int newAssetFloorNumber = Integer.parseInt(floorNumberTextField.getText());
 
         Date newPurchaseDate = java.sql.Date.valueOf(purchaseDateField.getValue());
@@ -170,6 +203,5 @@ public class AddUpdateDeleteAssetController {
         AssetPlusFxmlView.getInstance().refresh();
     }
 
-    public void assetInfoMouseClick(MouseEvent mouseEvent) {
-    }
+
 }

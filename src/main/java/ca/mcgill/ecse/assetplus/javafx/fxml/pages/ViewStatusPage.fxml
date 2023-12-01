@@ -41,13 +41,14 @@
                   <TableColumn fx:id="approvalRequiredColumn" prefWidth="131.99993896484375" text="Approval Required" />
                </columns>
             </TableView>
-            <HBox layoutX="7.0" layoutY="259.0" prefHeight="40.0" prefWidth="590.0">
+            <HBox layoutX="7.0" layoutY="259.0" prefHeight="40.0" prefWidth="670.0">
                <children>
+                  <Button fx:id="assignTicketButton" mnemonicParsing="false" onAction="#assignWorkClicked" prefHeight="26.0" prefWidth="76.0" text="Assign" />
                   <Button fx:id="startWorkButton" mnemonicParsing="false" onAction="#startWorkClicked" prefHeight="26.0" prefWidth="81.0" text="Start Work" />
-                  <Button fx:id="completeWorkButton" mnemonicParsing="false" onAction="#completeWorkClicked" prefHeight="26.0" prefWidth="102.0" text="Complete Work" />
-                  <Button fx:id="approveDisapproveWorkButton" mnemonicParsing="false" onAction="#approveDisapproveWorkClicked" prefHeight="26.0" prefWidth="193.0" text="Approve/Disapprove Work" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="assignTicketButton" mnemonicParsing="false" onAction="#assign" prefHeight="26.0" prefWidth="81.0" text="Assign Staff" />
-                  <Button fx:id="editNotesButton" mnemonicParsing="false" onAction="#editNotesButtonClicked" prefHeight="26.0" prefWidth="81.0" text="Edit Notes" />
+                  <Button fx:id="completeWorkButton" mnemonicParsing="false" onAction="#completeWorkClicked" prefHeight="26.0" prefWidth="147.0" text="Complete Work" />
+                  <Button fx:id="approveDisapproveWorkButton" mnemonicParsing="false" onAction="#approveDisapproveWorkClicked" prefHeight="26.0" prefWidth="192.0" text="Approve/Disapprove Work" HBox.hgrow="ALWAYS" />
+<!--                  <Button fx:id="assignTicketButton" mnemonicParsing="false" onAction="#assign" prefHeight="26.0" prefWidth="81.0" text="Assign Staff" />-->
+                  <Button fx:id="editNotesButton" alignment="CENTER" mnemonicParsing="false" onAction="#editNotesButtonClicked" prefHeight="26.0" prefWidth="81.0" text="Edit Notes" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <AnchorPane layoutX="-1.0" layoutY="299.0" prefHeight="130.0" prefWidth="610.0">

@@ -30,7 +30,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="assetTable" onMouseClicked="#assetInfoMouseClick" prefHeight="200.0" prefWidth="600.0">
+            <TableView fx:id="assetTable" onMouseClicked="#updateView" prefHeight="200.0" prefWidth="600.0">
               <columns>
                 <TableColumn fx:id="assetTypeColumn" prefWidth="95.33331048488617" text="Asset Type" />
                 <TableColumn fx:id="assetNumberColumn" prefWidth="156.00006866455078" text="Asset Number" />

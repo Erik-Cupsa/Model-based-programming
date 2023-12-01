@@ -221,4 +221,22 @@ public class ViewUtils {
         }
 
     }
+    public static boolean endsWithApCom(String str) {
+        if (str == null) {
+            return false;
+        }
+        return str.endsWith("@ap.com");
+    }
+    public static List<TOUser> getEmployees() {
+        List<TOUser> users = TOUserController.getUsers();
+        List<TOUser> employees = new ArrayList<>();
+        for (TOUser user: users){
+            if (endsWithApCom(user.getEmail())){
+                employees.add(user);
+            }
+        }
+        // as javafx works with observable list, we need to convert the java.util.List to
+        // javafx.collections.observableList
+        return FXCollections.observableList(employees);
+    }
 }
