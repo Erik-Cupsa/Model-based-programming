@@ -92,4 +92,6 @@ public class AssignMaintenanceTicketController {
 
     }
 
+    public void updateClicked(ActionEvent actionEvent) {
+    }
 }

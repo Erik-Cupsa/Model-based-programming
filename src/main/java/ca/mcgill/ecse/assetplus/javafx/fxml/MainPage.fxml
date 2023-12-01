@@ -28,11 +28,11 @@
                             <fx:include source="pages/ViewStatusPage.fxml" />
                         </content>
                     </Tab>
-                    <Tab fx:id="assignTicketsTab" text="Assign Tickets">
-                        <content>
-                            <fx:include source="pages/AssignMaintenanceTicket.fxml" />
-                        </content>
-                    </Tab>
+<!--                    <Tab fx:id="assignTicketsTab" text="Assign Tickets">-->
+<!--                        <content>-->
+<!--                            <fx:include source="pages/AssignMaintenanceTicket.fxml" />-->
+<!--                        </content>-->
+<!--                    </Tab>-->
                     <Tab text="Manage Users">
                         <content>
                             <fx:include source="pages/AddUpdateDeleteEmployee.fxml"/>

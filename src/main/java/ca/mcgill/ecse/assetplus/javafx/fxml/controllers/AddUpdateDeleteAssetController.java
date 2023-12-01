@@ -17,6 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
+import javafx.scene.input.MouseEvent;
+
 import java.sql.Date;
 
 public class AddUpdateDeleteAssetController {
@@ -166,4 +168,6 @@ public class AddUpdateDeleteAssetController {
         AssetPlusFxmlView.getInstance().refresh();
     }
 
+    public void assetInfoMouseClick(MouseEvent mouseEvent) {
+    }
 }
