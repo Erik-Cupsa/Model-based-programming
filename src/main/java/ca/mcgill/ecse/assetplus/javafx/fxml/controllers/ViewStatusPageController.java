@@ -72,7 +72,11 @@ public class ViewStatusPageController{
     @FXML
     private Button addImageButton;
     @FXML
-    private Button deleteImageButton;
+    private Button deleteImage;
+    @FXML
+    private Button approveDisapproveWorkButton;
+    @FXML
+    private Button editNotesButton;
 
     @FXML
     private TextField idTextField;
@@ -115,7 +119,21 @@ public class ViewStatusPageController{
 
         filterDropdown.getItems().add("Ticket Date");
         filterDropdown.getItems().add("Assigned Hotel Staff");
+
+        disableButtonsOption(true);
         refresh();
+    }
+
+    private void disableButtonsOption(Boolean disabled) {
+        startWorkButton.setDisable(disabled);
+        completeWorkButton.setDisable(disabled);
+        approveDisapproveWorkButton.setDisable(disabled);
+        assignButton.setDisable(disabled);
+        editNotesButton.setDisable(disabled);
+        addImageButton.setDisable(disabled);
+        deleteImage.setDisable(disabled);
+        editTicketButton.setDisable(disabled);
+        deleteTicketButton.setDisable(disabled);
     }
 
     private void refresh() {
@@ -335,9 +353,19 @@ public class ViewStatusPageController{
     }
 
     @FXML
+    void clickOutsideOfView() {
+        disableButtonsOption(true);
+    }
+    @FXML
     void updateView(MouseEvent event) {
 
         TOMaintenanceTicket selected = ticketsTableView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            disableButtonsOption(true);
+        }
+        else {
+            disableButtonsOption(false);
+        }
 
         idTextField.setText(String.valueOf(selected.getId()));
         ticketRaiserTextField.setText(selected.getRaisedByEmail());
@@ -365,13 +393,8 @@ public class ViewStatusPageController{
         if (String.valueOf(selected.getRoomNumber()).equals("-1")){
             assetRoomNumber.setText("N/A");
         }
-        String string = "";
-        for (String url:selected.getImageURLs()){
-            string+=url;
-            string+='\n';
-        }
-        //imageURLs.setText(selected.getImageURLs().toString());
+
         imageUrlListView.setItems(FXCollections.observableArrayList(selected.getImageURLs()));
-        AssetPlusFxmlView.getInstance().refresh();
+        //AssetPlusFxmlView.getInstance().refresh();
     }
 }

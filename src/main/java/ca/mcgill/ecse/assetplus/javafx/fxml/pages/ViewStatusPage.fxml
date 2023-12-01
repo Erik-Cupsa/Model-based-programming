@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewStatusPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickOutsideOfView" prefHeight="556.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewStatusPageController">
    <top>
       <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -59,23 +59,23 @@
                   <TableColumn fx:id="approvalRequiredColumn" prefWidth="127.99993896484375" text="Approval Required" />
                </columns>
             </TableView>
-            <HBox layoutX="7.0" layoutY="259.0" prefHeight="40.0" prefWidth="590.0">
+            <HBox layoutX="24.0" layoutY="259.0" prefHeight="40.0" prefWidth="590.0">
                <children>
-                  <Button fx:id="startWorkButton" mnemonicParsing="false" onAction="#startWorkClicked" prefHeight="26.0" prefWidth="81.0" text="Start Work" />
-                  <Button fx:id="completeWorkButton" mnemonicParsing="false" onAction="#completeWorkClicked" prefHeight="26.0" prefWidth="102.0" text="Complete Work" />
+                  <Button fx:id="startWorkButton" mnemonicParsing="false" onAction="#startWorkClicked" prefHeight="26.0" prefWidth="96.0" text="Start Work" />
+                  <Button fx:id="completeWorkButton" mnemonicParsing="false" onAction="#completeWorkClicked" prefHeight="26.0" prefWidth="122.0" text="Complete Work" />
                   <Button fx:id="approveDisapproveWorkButton" mnemonicParsing="false" onAction="#approveDisapproveWorkClicked" prefHeight="26.0" prefWidth="193.0" text="Approve/Disapprove Work" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="assignButton" mnemonicParsing="false" onAction="#assignClicked" prefHeight="26.0" prefWidth="81.0" text="Assign Staff" />
-                  <Button fx:id="editNotesButton" mnemonicParsing="false" onAction="#editNotesButtonClicked" prefHeight="26.0" prefWidth="81.0" text="Edit Notes" />
+                  <Button fx:id="assignButton" mnemonicParsing="false" onAction="#assignClicked" prefHeight="26.0" prefWidth="107.0" text="Assign Staff" />
+                  <Button fx:id="editNotesButton" mnemonicParsing="false" onAction="#editNotesButtonClicked" prefHeight="26.0" prefWidth="84.0" text="Notes" />
                </children>
             </HBox>
             <AnchorPane layoutX="-1.0" layoutY="299.0" prefHeight="130.0" prefWidth="610.0">
                <children>
-                  <GridPane hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="610.0" vgap="5.0">
+                  <GridPane hgap="10.0" layoutX="24.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="163.0" prefWidth="659.0" vgap="5.0">
                      <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="88.9999755859375" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="228.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="99.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="153.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="112.79998168945312" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="223.00002441406252" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="106.4000244140625" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="127.19997558593752" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints maxHeight="46.4" minHeight="10.0" prefHeight="36.8000244140625" vgrow="SOMETIMES" />
@@ -86,7 +86,7 @@
                      <children>
                         <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="91.0" text="ID:" GridPane.hgrow="ALWAYS" />
                         <Label alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="102.0" text="Ticket Raiser:" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" />
-                        <Label alignment="CENTER_RIGHT" text="Asset Number:" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="87.0" text="Asset Number:" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
                         <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="105.0" text="Date Raised On:" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
                         <TextField fx:id="idTextField" prefHeight="20.0" prefWidth="180.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
                         <TextField fx:id="assetNumberTextField" prefHeight="26.0" prefWidth="177.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
@@ -122,8 +122,8 @@
             </AnchorPane>
             <GridPane layoutX="809.0" prefHeight="250.0" prefWidth="310.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.000048828125" minWidth="10.0" prefWidth="111.000048828125" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="100.59995117187502" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.399951171875" minWidth="10.0" prefWidth="122.399951171875" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="119.20004882812502" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -144,7 +144,7 @@
                   <Label fx:id="assetFloorNumber" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Room Number:" GridPane.rowIndex="4" />
                   <Label fx:id="assetRoomNumber" prefHeight="71.0" prefWidth="101.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="ImageURLs:" GridPane.rowIndex="5" />
+                  <Label text="Image URLs:" GridPane.rowIndex="5" />
                   <Label fx:id="imageURLs" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="160.0" prefWidth="130.0" text="" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
                   <ListView fx:id="imageUrlListView" prefHeight="104.0" prefWidth="158.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
