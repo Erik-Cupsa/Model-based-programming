@@ -110,10 +110,10 @@ public class AssignMaintenanceTicketController {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
                 Parent newRoot = fxmlLoader.load();
                 String err = assignStaffToTicket(ticketID, selectedEmail, stringTimeEstimate(resolveDropDown.getValue()), stringPriority(priorityDropDown.getValue()), managerApprovalCheck.isSelected());
-                if ("" != err) {
+                if (!err.isEmpty()) {
                     showError(err);
                 }
-                makePopupWindow("Ticket Assignment Successful","Selected ticket is now assigned");
+                else makePopupWindow("Ticket Assignment Successful","Selected ticket is now assigned");
                 ViewStatusPageController viewStatusPageController =ViewStatusPageController.getInstance();
                 viewStatusPageController.showAllTickets();
                 Stage currentStage = (Stage) assignButton.getScene().getWindow();
