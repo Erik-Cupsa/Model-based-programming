@@ -105,6 +105,16 @@ public class ViewUtils {
         return FXCollections.observableList(tickets);
     }
 
+    public static ObservableList<String> getUserEmails() {
+        List<TOUser> users = TOUserController.getUsers();
+        List<String> userEmails = new ArrayList<String>();
+        for (TOUser t: users){
+            userEmails.add(t.getEmail());
+        }
+        return FXCollections.observableList(userEmails);
+    }
+
+    
     public static ObservableList<AssetType> getAssetTypes() {
         //List<AssetType> assetTypes = AssetPlusFeatureSet2Controller.getAssetTypes();
         return FXCollections.observableList(new ArrayList<AssetType>());
