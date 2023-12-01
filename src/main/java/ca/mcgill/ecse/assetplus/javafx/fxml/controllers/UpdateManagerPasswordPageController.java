@@ -17,11 +17,18 @@ public class UpdateManagerPasswordPageController {
     private TextField managerPasswordTextField;
 
     @FXML
+    private TextField managerPasswordConfirm;
+
+    @FXML
     private Button updatePasswordButton;
 
     @FXML
     void updatePasswordClicked(ActionEvent event) {
       String password = managerPasswordTextField.getText();
+      if (!password.equals(managerPasswordConfirm.getText())){
+          ViewUtils.makePopupWindow(("Update Manager Password"), "Passwords must match");
+          return;
+      }
       String err = AssetPlusFeatureSet1Controller.updateManager(password);
 
       if(!err.isEmpty()){
