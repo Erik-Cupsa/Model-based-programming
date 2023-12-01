@@ -173,6 +173,10 @@ public class MaintenanceTicketWorkController {
     if (status.equals(Status.InProgress)) {
       return "Cannot disapprove a maintenance ticket which is in progress.";
     }
+    if (description.isEmpty()){
+      return "Description cannot to be empty";
+    }
+
 
     ticket.rejectFix(date, description);
     try{
