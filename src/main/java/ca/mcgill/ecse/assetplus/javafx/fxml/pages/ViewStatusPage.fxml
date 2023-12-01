@@ -46,7 +46,7 @@
                   <Button fx:id="startWorkButton" mnemonicParsing="false" onAction="#startWorkClicked" prefHeight="26.0" prefWidth="81.0" text="Start Work" />
                   <Button fx:id="completeWorkButton" mnemonicParsing="false" onAction="#completeWorkClicked" prefHeight="26.0" prefWidth="102.0" text="Complete Work" />
                   <Button fx:id="approveDisapproveWorkButton" mnemonicParsing="false" onAction="#approveDisapproveWorkClicked" prefHeight="26.0" prefWidth="193.0" text="Approve/Disapprove Work" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="deleteTicketButton41" mnemonicParsing="false" onAction="#ass" prefHeight="26.0" prefWidth="81.0" text="Assign Staff" />
+                  <Button fx:id="assignTicketButton" mnemonicParsing="false" onAction="#assign" prefHeight="26.0" prefWidth="81.0" text="Assign Staff" />
                   <Button fx:id="editNotesButton" mnemonicParsing="false" onAction="#editNotesButtonClicked" prefHeight="26.0" prefWidth="81.0" text="Edit Notes" />
                </children>
             </HBox>
