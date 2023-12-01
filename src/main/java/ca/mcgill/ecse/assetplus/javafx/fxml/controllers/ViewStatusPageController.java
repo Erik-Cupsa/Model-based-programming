@@ -118,7 +118,7 @@ public class ViewStatusPageController{
         assetRoomNumber.setText("");
 
         filterDropdown.getItems().add("Ticket Date");
-        filterDropdown.getItems().add("Assigned Hotel Staff");
+        filterDropdown.getItems().add("Ticket Raiser");
 
         disableButtonsOption(true);
         refresh();
@@ -336,8 +336,8 @@ public class ViewStatusPageController{
                         filteredTickets.add(ticket);
                     }
                 }
-                else if (selectedOption.equals("Assigned Hotel Staff")) {
-                    if (text.equals(ticket.getFixedByEmail())) {
+                else if (selectedOption.equals("Ticket Raiser")) {
+                    if (text.equals(ticket.getRaisedByEmail())) {
                         filteredTickets.add(ticket);
                     }
                 }
