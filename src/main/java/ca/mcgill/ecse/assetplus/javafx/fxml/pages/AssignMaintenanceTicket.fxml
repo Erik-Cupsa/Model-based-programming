@@ -27,33 +27,33 @@
     <center>
         <AnchorPane prefHeight="210.0" prefWidth="602.0" BorderPane.alignment="CENTER">
             <children>
-                <TableView fx:id="editTicketsTableView" prefHeight="324.0" prefWidth="255.0">
+                <TableView fx:id="employeeTable" layoutX="14.0" prefHeight="324.0" prefWidth="255.0">
                     <columns>
-                        <TableColumn fx:id="numberColumn" minWidth="0.0" prefWidth="115.5" text="Employee Name" />
-                        <TableColumn fx:id="issuerColumn" prefWidth="138.5" text="Employee email" />
+                        <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="122.0" text="Employee Name" />
+                        <TableColumn fx:id="emailColumn" prefWidth="133.0" text="Employee email" />
                     </columns>
                 </TableView>
             <ButtonBar layoutX="280.0" layoutY="132.0" prefHeight="40.0" prefWidth="278.0" />
                   <HBox alignment="CENTER_RIGHT" layoutX="280.0" layoutY="41.0" prefHeight="40.0" prefWidth="307.0">
                       <Label prefHeight="18.0" prefWidth="102.0" text="Resolve time:" />
-                      <ChoiceBox maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                      <ChoiceBox fx:id="resolveDropDown" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                   </HBox>
             <HBox alignment="CENTER_RIGHT" layoutX="280.0" layoutY="152.0" prefHeight="40.0" prefWidth="307.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="104.0" text="Priority:" />
-                  <ChoiceBox maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                  <ChoiceBox fx:id="priorityDropDown" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" layoutX="274.0" layoutY="207.0" prefHeight="40.0" prefWidth="307.0">
+            <HBox alignment="CENTER_RIGHT" layoutX="280.0" layoutY="205.0" prefHeight="40.0" prefWidth="307.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="190.0" text="Requires Manager Approval:" />
-                  <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" />
+                  <Label prefHeight="18.0" prefWidth="304.0" text="Requires Manager Approval:" />
+                  <CheckBox fx:id="managerApprovalCheck" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" />
                </children>
             </HBox>
             <ButtonBar layoutX="293.0" layoutY="271.0" prefHeight="57.0" prefWidth="252.0">
               <buttons>
-                <Button defaultButton="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: green;" text="Update" />
-                  <Button cancelButton="true" mnemonicParsing="false" prefHeight="34.0" prefWidth="164.0" style="-fx-background-color: red;" text="Cancel" />
+                <Button fx:id="assignButton" defaultButton="true" mnemonicParsing="false" onAction="#updateClicked" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: green;" text="Assign" />
+                  <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelClicked" prefHeight="34.0" prefWidth="164.0" style="-fx-background-color: red;" text="Cancel" />
               </buttons>
             </ButtonBar>
             </children>
