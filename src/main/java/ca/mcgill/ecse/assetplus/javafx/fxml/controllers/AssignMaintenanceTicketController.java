@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import static ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController.assignStaffToTicket;
+import static ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicketController.stringPriority;
+import static ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicketController.stringTimeEstimate;
 
 public class AssignMaintenanceTicketController {
 
@@ -80,15 +82,15 @@ public class AssignMaintenanceTicketController {
 
     @FXML
     void assignClicked(ActionEvent event) {
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
-//            Parent newRoot = fxmlLoader.load();
-//            //assignStaffToTicket()
-//            Stage currentStage = (Stage) assignButton.getScene().getWindow();
-//            currentStage.getScene().setRoot(newRoot);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+            Parent newRoot = fxmlLoader.load();
+//            assignStaffToTicket(,stringTimeEstimate(resolveDropDown.getValue()), stringPriority(priorityDropDown.getValue()),)
+            Stage currentStage = (Stage) assignButton.getScene().getWindow();
+            currentStage.getScene().setRoot(newRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
