@@ -160,8 +160,8 @@ public class AddUpdateDeleteAssetController {
             ViewUtils.showError(err);
             showAllAssets();
             AssetPlusFxmlView.getInstance().refresh();
-        }
-        ViewUtils.makePopupWindow("Update An Asset" , "Asset " + oldAssetNumber + " updated successfully");
+        } else {
+        ViewUtils.makePopupWindow("Update An Asset" , "Asset " + oldAssetNumber + " updated successfully"); }
         showAllAssets();
         AssetPlusFxmlView.getInstance().refresh();
     }
