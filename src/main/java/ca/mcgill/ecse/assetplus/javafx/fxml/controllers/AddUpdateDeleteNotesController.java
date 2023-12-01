@@ -49,6 +49,8 @@ public class AddUpdateDeleteNotesController {
     @FXML
     public void initialize() {
         noteTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        noteUpdate.setStyle("-fx-background-color: #A9A9A9;");
+        noteDelete.setStyle("-fx-background-color: #A9A9A9;");
     }
 
     private void filltable() {
