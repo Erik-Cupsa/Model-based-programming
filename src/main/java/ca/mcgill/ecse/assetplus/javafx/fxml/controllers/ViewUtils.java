@@ -133,6 +133,21 @@ public class ViewUtils {
             TableColumn<TOMaintenanceTicket, String> timeToResolveColumn,
             TableColumn<TOMaintenanceTicket, String> priorityColumn,
             TableColumn<TOMaintenanceTicket, String> approvalRequiredColumn
+    ) {
+        loadTicketsIntoTableView(ticketsTableView,numberColumn,issuerColumn,statusColumn,dateRaisedColumn,fixerColumn,timeToResolveColumn,priorityColumn,approvalRequiredColumn, ViewUtils.getTickets());
+    }
+
+    public static void loadTicketsIntoTableView(
+            TableView<TOMaintenanceTicket> ticketsTableView,
+            TableColumn<TOMaintenanceTicket, Integer> numberColumn,
+            TableColumn<TOMaintenanceTicket, String> issuerColumn,
+            TableColumn<TOMaintenanceTicket, String> statusColumn,
+            TableColumn<TOMaintenanceTicket, String> dateRaisedColumn,
+            TableColumn<TOMaintenanceTicket, String> fixerColumn,
+            TableColumn<TOMaintenanceTicket, String> timeToResolveColumn,
+            TableColumn<TOMaintenanceTicket, String> priorityColumn,
+            TableColumn<TOMaintenanceTicket, String> approvalRequiredColumn,
+            ObservableList<TOMaintenanceTicket> tickets
             ) {
         numberColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         issuerColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaisedByEmail()));
@@ -140,19 +155,19 @@ public class ViewUtils {
         dateRaisedColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaisedOnDate().toString()));
         fixerColumn.setCellValueFactory(cellData -> {
             if (cellData.getValue().getFixedByEmail() == null) {
-                return new SimpleStringProperty("");
+                return new SimpleStringProperty("N/A");
             }
             return new SimpleStringProperty(cellData.getValue().getFixedByEmail());
         });
         timeToResolveColumn.setCellValueFactory(cellData -> {
             if (cellData.getValue().getTimeToResolve() == null) {
-                return new SimpleStringProperty("");
+                return new SimpleStringProperty("N/A");
             }
             return new SimpleStringProperty(cellData.getValue().getTimeToResolve());
         });
         priorityColumn.setCellValueFactory(cellData -> {
             if (cellData.getValue().getPriority() == null) {
-                return new SimpleStringProperty("");
+                return new SimpleStringProperty("N/A");
             }
             return new SimpleStringProperty(cellData.getValue().getPriority());
         });
@@ -163,7 +178,6 @@ public class ViewUtils {
         System.out.println("update count");
         ticketsTableView.getItems().clear();
         // load tickets into TableView.
-        ObservableList<TOMaintenanceTicket> tickets = ViewUtils.getTickets();
         for (TOMaintenanceTicket ticket : tickets) {
             ticketsTableView.getItems().add(ticket);
         }

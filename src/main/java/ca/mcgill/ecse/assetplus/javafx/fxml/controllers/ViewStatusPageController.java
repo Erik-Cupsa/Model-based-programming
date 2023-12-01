@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,10 +18,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 import java.sql.Date;
@@ -62,6 +65,8 @@ public class ViewStatusPageController{
     @FXML
     private Button completeWorkButton;
     @FXML
+    private GridPane assetGridPane;
+    @FXML
     private Button addImageButton;
     @FXML
     private Button deleteImageButton;
@@ -94,12 +99,20 @@ public class ViewStatusPageController{
     private Label imageURLs;
 
     @FXML
+    private ComboBox<String> filterDropdown;
+    @FXML
+    private TextField filterField;
+
+    @FXML
     public void initialize() {
         assetName.setText("");
         assetLifespan.setText("");
         assetPurchaseDate.setText("");
         assetFloorNumber.setText("");
         assetRoomNumber.setText("");
+
+        filterDropdown.getItems().add("Ticket Date");
+        filterDropdown.getItems().add("Assigned Hotel Staff");
         refresh();
     }
 
@@ -137,10 +150,9 @@ public class ViewStatusPageController{
             return;
         }
         String text = AssetPlusFeatureSet5Controller.addImageToMaintenanceTicket(image.getText(), selectedTicket.getId());
-        if(text.equals("")){
-            text = "Image successfully added";
+        if(!text.equals("")){
+            ViewUtils.showError(text);
         }
-        ViewUtils.showError(text);
         refresh();
     }
     @FXML
@@ -152,7 +164,6 @@ public class ViewStatusPageController{
         }
 
         AssetPlusFeatureSet5Controller.deleteImageFromMaintenanceTicket(image.getText(), selectedTicket.getId());
-        ViewUtils.showError("Image deleted successfully");
         refresh();
     }
 
@@ -186,6 +197,7 @@ public class ViewStatusPageController{
     private void editNotesButtonClicked(ActionEvent event) {
         TOMaintenanceTicket ticket = ticketsTableView.getSelectionModel().getSelectedItem();
         if (ticket == null) {
+            ViewUtils.showError("Please choose a ticket first");
             return;
         }
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -264,6 +276,42 @@ public class ViewStatusPageController{
         } else {
             ViewUtils.showError("Please choose a ticket first");
         }
+    }
+
+    @FXML
+    private void filterClicked() {
+        String text = filterField.getText();
+        if (text.equals("")) {refresh();}
+        else {
+            ticketsTableView.getItems().clear();
+            String selectedOption = filterDropdown.getValue();
+            if (selectedOption == null) {
+                ViewUtils.showError("Please select a filter option first");
+            }
+            ObservableList<TOMaintenanceTicket> ticketsToFilter = ViewUtils.getTickets();
+            ObservableList<TOMaintenanceTicket> filteredTickets = FXCollections.observableList(new ArrayList<TOMaintenanceTicket>());
+            for (TOMaintenanceTicket ticket : ticketsToFilter) {
+                if (selectedOption.equals("Ticket Date")) {
+                    System.out.println("check:" + text);
+                    System.out.println("in list:" + ticket.getRaisedOnDate().toString());
+                    if (text.equals(ticket.getRaisedOnDate().toString())) {
+                        filteredTickets.add(ticket);
+                    }
+                }
+                else if (selectedOption.equals("Assigned Hotel Staff")) {
+                    if (text.equals(ticket.getFixedByEmail())) {
+                        filteredTickets.add(ticket);
+                    }
+                }
+            }
+            ViewUtils.loadTicketsIntoTableView(ticketsTableView, numberColumn, issuerColumn, statusColumn, dateRaisedColumn, fixerColumn, timeToResolveColumn, priorityColumn, approvalRequiredColumn, filteredTickets);
+        }
+    }
+
+    @FXML
+    private void clearFilterClicked() {
+        filterField.clear();
+        refresh();
     }
 
     @FXML

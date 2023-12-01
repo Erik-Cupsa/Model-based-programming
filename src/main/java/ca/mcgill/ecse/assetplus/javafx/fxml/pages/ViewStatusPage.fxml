@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewStatusPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewStatusPageController">
    <top>
       <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -24,13 +25,22 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+            <AnchorPane prefHeight="50.0" prefWidth="656.0">
+               <children>
+                  <ComboBox fx:id="filterDropdown" layoutX="187.0" layoutY="12.0" prefWidth="150.0" />
+                  <Label layoutX="133.0" layoutY="16.0" text="Filter By:" />
+                  <TextField fx:id="filterField" layoutX="352.0" layoutY="13.0" />
+                  <Button layoutX="512.0" layoutY="13.0" mnemonicParsing="false" onAction="#filterClicked" text="Filter" />
+                  <Button layoutX="561.0" layoutY="13.0" mnemonicParsing="false" onAction="#clearFilterClicked" text="Clear" />
+               </children>
+            </AnchorPane>
          </children>
       </HBox>
    </top>
    <center>
       <AnchorPane prefHeight="481.0" prefWidth="610.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="ticketsTableView" onMouseClicked="#updateView" prefHeight="250.0" prefWidth="782.0">
+            <TableView fx:id="ticketsTableView" onMouseClicked="#updateView" prefHeight="250.0" prefWidth="788.0">
                <columns>
                   <TableColumn fx:id="numberColumn" prefWidth="105.60000610351562" text="Ticket ID" />
                   <TableColumn fx:id="issuerColumn" prefWidth="95.20001220703125" text="Ticket Raiser" />
@@ -103,7 +113,7 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <GridPane layoutX="782.0" prefHeight="298.0" prefWidth="200.0">
+            <GridPane layoutX="790.0" prefHeight="298.0" prefWidth="200.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -127,7 +137,6 @@
                   <Label fx:id="assetFloorNumber" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Room Number:" GridPane.rowIndex="4" />
                   <Label fx:id="assetRoomNumber" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label  text="Image URLs:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                   <Label fx:id="imageURLs" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
