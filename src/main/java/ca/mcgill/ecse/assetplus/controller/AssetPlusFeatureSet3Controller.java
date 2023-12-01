@@ -115,6 +115,9 @@ public class AssetPlusFeatureSet3Controller {
             SpecificAsset toDelete = SpecificAsset.getWithAssetNumber(assetNumber); //getting the specific asset we want to delete
             if (toDelete != null) { //if the specific asset exists in the system
                 //deleting specific asset
+                for (MaintenanceTicket t: toDelete.getMaintenanceTickets()) {
+                    t.delete();
+                }
                 AssetType assetType = toDelete.getAssetType();
                 assetType.removeSpecificAsset(toDelete);
                 toDelete.delete();
