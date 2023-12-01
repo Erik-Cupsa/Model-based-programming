@@ -102,7 +102,6 @@ public class AddUpdateDeleteAssetController {
         
         String err = AssetPlusFeatureSet3Controller.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, typeName);
         if(err.isEmpty()){
-            clearData();
             showAllAssets();
         }
         else{
@@ -125,9 +124,14 @@ public class AddUpdateDeleteAssetController {
     @FXML
     void deleteClicked(ActionEvent event) {
         TOAsset selected = assetTable.getSelectionModel().getSelectedItem();
+
+        int oldAssetNumber = assetTable.getSelectionModel().getSelectedItem().getAssetNumber();
+
         AssetPlusFeatureSet3Controller.deleteSpecificAsset(selected.getAssetNumber());
         selected.delete();
         showAllAssets();
+        AssetPlusFxmlView.getInstance().refresh();
+        ViewUtils.makePopupWindow("Delete An Asset Type" , "AssetType with number " + oldAssetNumber + " deleted successfully");
     }
 
     @FXML
@@ -143,7 +147,7 @@ public class AddUpdateDeleteAssetController {
         String err = AssetPlusFeatureSet3Controller.updateSpecificAsset(assetTable.getSelectionModel().getSelectedItem().getAssetNumber(), newAssetFloorNumber, newAssetRoomNumber, newPurchaseDate, newAssetTypeName);
 
         if(!err.isEmpty()){
-            ViewUtils.makePopupWindow("Update An Asset Type" , "AssetType with name " + oldAssetNumber + " updated unsuccessfully");
+            ViewUtils.makePopupWindow("Update An Asset Type" , "AssetType with number " + oldAssetNumber + " updated unsuccessfully");
         }
 
         showAllAssets();

@@ -1,7 +1,11 @@
 package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
+
+import java.util.List;
+
 import ca.mcgill.ecse.assetplus.application.*;
+import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 
 public class AssetPlusFeatureSet2Controller {
 
@@ -75,6 +79,7 @@ public class AssetPlusFeatureSet2Controller {
 		if(AssetType.hasWithName(name)) {
 			AssetPlusApplication.getAssetPlus().removeAssetType(AssetType.getWithName(name)); //removes from system
 			AssetType.getWithName(name).delete(); //deletes
+			AssetPlusFxmlView.getInstance().refresh();
 		}
 		try{
 			AssetPlusPersistence.save();
