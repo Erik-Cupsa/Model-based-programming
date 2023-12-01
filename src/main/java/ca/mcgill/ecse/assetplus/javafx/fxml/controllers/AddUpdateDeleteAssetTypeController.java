@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 
 public class AddUpdateDeleteAssetTypeController {
@@ -94,6 +95,7 @@ public class AddUpdateDeleteAssetTypeController {
         AssetPlusFeatureSet2Controller.deleteAssetType(selected.getName());
         showAllAssetTypes();
         AddUpdateDeleteAssetController.getInstance().showAllAssets();
+        ViewStatusPageController.getInstance().showAllTickets();
     }
 
     @FXML
