@@ -98,12 +98,12 @@ public class AddUpdateDeleteAssetTypeController {
         ViewStatusPageController.getInstance().showAllTickets();
     }
 
-    @FXML
-    public void assetInfoMouseClick(Event e){
-        TOAsset assetselected = assetTable.getSelectionModel().getSelectedItem();
-        assetTypeTextField.setText(assetselected.getTypeName());
-        assetNumberTextField.setText(String.valueOf(assetselected.getAssetNumber()));
-    }
+//    @FXML
+//    public void assetInfoMouseClick(Event e){
+//        TOAsset assetselected = assetTable.getSelectionModel().getSelectedItem();
+//        assetTypeTextField.setText(assetselected.getTypeName());
+//        assetNumberTextField.setText(String.valueOf(assetselected.getAssetNumber()));
+//    }
     
     @FXML
     void updateAssetTypeClicked(ActionEvent event) {
