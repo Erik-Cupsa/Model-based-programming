@@ -48,6 +48,7 @@
                   <Button fx:id="completeWorkButton" mnemonicParsing="false" onAction="#completeWorkClicked" prefHeight="26.0" prefWidth="102.0" text="Complete Work" />
                   <Button fx:id="approveDisapproveWorkButton" mnemonicParsing="false" onAction="#approveDisapproveWorkClicked" prefHeight="26.0" prefWidth="157.0" text="Approve/Disapprove Work" />
                   <Button fx:id="deleteTicketButton41" mnemonicParsing="false" onAction="#deleteTicketClicked" prefHeight="26.0" prefWidth="81.0" text="Assign Staff" />
+                  <Button fx:id="editNotesButton" mnemonicParsing="false" onAction="#editNotesButtonClicked" prefHeight="26.0" prefWidth="81.0" text="Edit Notes" />
                </children>
             </HBox>
             <AnchorPane layoutX="-1.0" layoutY="299.0" prefHeight="130.0" prefWidth="610.0">
@@ -126,8 +127,7 @@
                   <Label fx:id="assetFloorNumber" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Room Number:" GridPane.rowIndex="4" />
                   <Label fx:id="assetRoomNumber" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label  text="Image URLs:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                  <Label fx:id="imageURLs" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label text="Image URLs:" GridPane.rowIndex="5" />
                </children>
             </GridPane>
          </children>
