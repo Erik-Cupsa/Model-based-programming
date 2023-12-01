@@ -127,7 +127,8 @@
                   <Label fx:id="assetFloorNumber" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Room Number:" GridPane.rowIndex="4" />
                   <Label fx:id="assetRoomNumber" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Image URLs:" GridPane.rowIndex="5" />
+                  <Label  text="Image URLs:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                  <Label fx:id="imageURLs" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
          </children>
