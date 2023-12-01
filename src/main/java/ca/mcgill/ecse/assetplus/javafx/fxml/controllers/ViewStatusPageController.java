@@ -91,6 +91,9 @@ public class ViewStatusPageController{
     private Label assetRoomNumber;
 
     @FXML
+    private Label imageURLs;
+
+    @FXML
     public void initialize() {
         assetName.setText("");
         assetLifespan.setText("");
@@ -261,6 +264,7 @@ public class ViewStatusPageController{
         if (String.valueOf(selected.getRoomNumber()).equals("-1")){
             assetRoomNumber.setText("N/A");
         }
+        imageURLs.setText(selected.getImageURLs().toString());
         AssetPlusFxmlView.getInstance().refresh();
     }
 }
