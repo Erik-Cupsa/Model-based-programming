@@ -46,9 +46,9 @@
                     "ticketRaiser": {
                       "@class": "Employee",
                       "email": "smith@ap.com",
-                      "name": "Simpson",
+                      "name": "Smith",
                       "password": "pass2",
-                      "phoneNumber": "(555)555-5523",
+                      "phoneNumber": "(555)555-5555",
                       "raisedTickets": [
                         {
                           "MaintenanceTicket": {
@@ -81,7 +81,7 @@
                                       "noteTaker": {
                                         "@class": "Manager",
                                         "email": "manager@ap.com",
-                                        "password": "pas2!W",
+                                        "password": "manager",
                                         "raisedTickets": [
                                           {
                                             "MaintenanceTicket": [
@@ -229,7 +229,18 @@
       }
     ],
     "assetTypes": [
-      ""
+      {
+        "AssetType": {
+          "name": "bed",
+          "expectedLifeSpan": 1200,
+          "assetPlus": {
+            "@reference": "../../.."
+          },
+          "specificAssets": [
+            ""
+          ]
+        }
+      }
     ],
     "specificAssets": [
       ""
