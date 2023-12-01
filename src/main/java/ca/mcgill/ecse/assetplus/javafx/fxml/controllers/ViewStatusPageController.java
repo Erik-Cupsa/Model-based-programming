@@ -17,6 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -108,6 +110,8 @@ public class ViewStatusPageController{
     private TextField filterField;
     @FXML
     private ListView imageUrlListView;
+    @FXML
+    private ListView imageListView;
 
     @FXML
     public void initialize() {
@@ -394,6 +398,10 @@ public class ViewStatusPageController{
             assetRoomNumber.setText("N/A");
         }
 
+        imageListView.getItems().clear();
+        for (String path: selected.getImageURLs()) {
+            imageListView.getItems().add(new ImageView(new Image(path, 80, 80, false, false)));
+        }
         imageUrlListView.setItems(FXCollections.observableArrayList(selected.getImageURLs()));
         //AssetPlusFxmlView.getInstance().refresh();
     }
