@@ -142,9 +142,9 @@ public class AddUpdateDeleteAssetController {
 
         Date newPurchaseDate = java.sql.Date.valueOf(purchaseDateField.getValue());
 
-        int oldAssetNumber = assetTable.getSelectionModel().getSelectedItem().getAssetNumber();
+        int oldAssetNumber = Integer.parseInt(assetNumberTextField.getText());
 
-        String err = AssetPlusFeatureSet3Controller.updateSpecificAsset(assetTable.getSelectionModel().getSelectedItem().getAssetNumber(), newAssetFloorNumber, newAssetRoomNumber, newPurchaseDate, newAssetTypeName);
+        String err = AssetPlusFeatureSet3Controller.updateSpecificAsset(oldAssetNumber, newAssetFloorNumber, newAssetRoomNumber, newPurchaseDate, newAssetTypeName);
 
         if(!err.isEmpty()){
             ViewUtils.makePopupWindow("Update An Asset Type" , "AssetType with number " + oldAssetNumber + " updated unsuccessfully");
