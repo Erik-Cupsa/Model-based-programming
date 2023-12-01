@@ -52,7 +52,7 @@ public class AssetPlusFeatureSet6Controller {
             String raisedByEmail = ticket.getTicketRaiser().getEmail();
             List<TicketImage> ticketImages = ticket.getTicketImages();
             List<String> imageURLs = new ArrayList<String>();
-            TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.getTicketImages().size()];
+            TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.getTicketNotes().size()];
             String assetname = null;
             int expectedLifeSpanInDays = -1;
             int floorNumber = -1;
@@ -72,7 +72,7 @@ public class AssetPlusFeatureSet6Controller {
             }
 
             if (!ticket.getTicketNotes().isEmpty()){            // hasMaintenanceNotes/not
-                for (int i = 0; i <ticket.getTicketImages().size(); i++){
+                for (int i = 0; i <ticket.getTicketNotes().size(); i++){
                     notes[i] = new TOMaintenanceNote(ticket.getTicketNote(i).getDate(), ticket.getTicketNote(i).getDescription(), ticket.getTicketNote(i).getNoteTaker().getEmail());
                 } // create TOMaintenanceNote then add to an array
             }
