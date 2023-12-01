@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 
 public class AddUpdateDeleteAssetTypeController {
@@ -94,8 +95,16 @@ public class AddUpdateDeleteAssetTypeController {
         AssetPlusFeatureSet2Controller.deleteAssetType(selected.getName());
         showAllAssetTypes();
         AddUpdateDeleteAssetController.getInstance().showAllAssets();
+        ViewStatusPageController.getInstance().showAllTickets();
     }
 
+//    @FXML
+//    public void assetInfoMouseClick(Event e){
+//        TOAsset assetselected = assetTable.getSelectionModel().getSelectedItem();
+//        assetTypeTextField.setText(assetselected.getTypeName());
+//        assetNumberTextField.setText(String.valueOf(assetselected.getAssetNumber()));
+//    }
+    
     @FXML
     void updateAssetTypeClicked(ActionEvent event) {
         int newExpectedLifeSpan = Integer.parseInt(assetTypeExpectedLifeSpanTextField.getText());

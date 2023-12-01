@@ -79,7 +79,6 @@ public class AssetPlusFeatureSet2Controller {
 		if(AssetType.hasWithName(name)) {
 			AssetPlusApplication.getAssetPlus().removeAssetType(AssetType.getWithName(name)); //removes from system
 			AssetType.getWithName(name).delete(); //deletes
-
 		}
 		try{
 			AssetPlusPersistence.save();

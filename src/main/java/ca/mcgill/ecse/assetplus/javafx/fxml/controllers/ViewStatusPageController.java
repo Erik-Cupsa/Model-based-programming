@@ -124,7 +124,11 @@ public class ViewStatusPageController{
         refresh();
 
     }
-
+    public void showAllTickets(){
+        ObservableList<TOMaintenanceTicket> ticketList = FXCollections.observableArrayList(AssetPlusFeatureSet6Controller.getTickets());
+        ticketsTableView.setItems(ticketList);
+        ticketsTableView.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> ticketsTableView.setItems(ticketList));
+    }
     @FXML
     public void addImageClicked(ActionEvent event) {
         TOMaintenanceTicket selectedTicket = ticketsTableView.getSelectionModel().getSelectedItem();
@@ -170,7 +174,14 @@ public class ViewStatusPageController{
         EditMaintenanceTicketController.doneEditClicked(idTextField, descriptionTextField, ticketRaiserTextField, assetNumberTextField, dateRaisedOnPicker);
         refresh();
     }
+    private static ViewStatusPageController instance;
+    public ViewStatusPageController(){
+        instance=this;
+    }
 
+    public static ViewStatusPageController getInstance(){
+        return  instance;
+    }
     @FXML
     private void editNotesButtonClicked(ActionEvent event) {
         TOMaintenanceTicket ticket = ticketsTableView.getSelectionModel().getSelectedItem();
