@@ -20,7 +20,7 @@ public class AddUpdateDeleteNotesController {
     @FXML
     private DatePicker noteDatePicker;
     @FXML
-    private TextField userEmailText;
+    private ComboBox<String> userEmailDropdown;
     @FXML
     private TableView<TOMaintenanceNote> noteTable;
     @FXML
@@ -60,6 +60,9 @@ public class AddUpdateDeleteNotesController {
         noteText.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, String>("description"));
         noteTable.setItems(FXCollections.observableList(ticket.getNotes()));
         noteTable.refresh();
+
+        userEmailDropdown.getItems().clear();
+        userEmailDropdown.getItems().addAll(ViewUtils.getUserEmails());
     }
 
     private TOMaintenanceTicket findTicket(int id) {
@@ -88,7 +91,7 @@ public class AddUpdateDeleteNotesController {
     public void noteAddClicked(ActionEvent event) {
         String description = addNoteText.getText();
         Date openDate = Date.valueOf(noteDatePicker.getValue());
-        String email = userEmailText.getText();
+        String email = userEmailDropdown.getValue();
         String error = AssetPlusFeatureSet7Controller.addMaintenanceNote(openDate, description, ticket.getId(),
                 email);
         if (!error.isEmpty()) {
@@ -109,7 +112,7 @@ public class AddUpdateDeleteNotesController {
         }
         String description = addNoteText.getText();
         Date openDate = Date.valueOf(noteDatePicker.getValue());
-        String email = userEmailText.getText();
+        String email = userEmailDropdown.getValue();
         int index = ticket.getNotes().indexOf(noteTable.getSelectionModel().getSelectedItem());
         String error = AssetPlusFeatureSet7Controller.updateMaintenanceNote(ticket.getId(), index, openDate, description,
                 email);
