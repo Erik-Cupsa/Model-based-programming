@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ApproveDisapproveWorkOnMaintenanceTicketController">
-    <Label layoutX="50.0" layoutY="50.0" text="Maintenance Ticket Management" />
+<?import javafx.scene.layout.HBox?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ApproveDisapproveWorkOnMaintenanceTicketController" stylesheets="/styles/style.css">
 
-    <Label layoutX="50.0" layoutY="100.0" text="Selected Ticket:" />
+    <VBox spacing="20" layoutX="50" layoutY="20">
+        <Label text="Maintenance Ticket Management" styleClass="title-label" />
 
-    <Button fx:id="btnApproveWork" layoutX="50.0" layoutY="400.0" onAction="#handleApproveWork" text="Approve Work" />
-    <Button fx:id="btnDisapproveWork" layoutX="200.0" layoutY="400.0" onAction="#handleDisapproveWork" text="Disapprove Work" />
+        <HBox spacing="10">
+            <Label text="Selected Ticket:" styleClass="label" />
+            <Label fx:id="selectedTicketLabel" text="Label" styleClass="value-label" />
+        </HBox>
 
-<!--    <Label layoutX="50.0" layoutY="150.0" text="Work Status:" />-->
-<!--    <Label fx:id="labelWorkStatus" layoutX="200.0" layoutY="150.0"  />-->
+        <HBox spacing="10">
+            <Label text="Disapproval Reason:" styleClass="label" />
+            <TextArea fx:id="textAreaFeedback" prefHeight="100.0" prefWidth="350.0" styleClass="text-area" />
+        </HBox>
 
-    <Label layoutX="50.0" layoutY="200.0" text="Disapproval Reason:" />
-    <TextArea fx:id="textAreaFeedback" layoutX="200.0" layoutY="200.0" prefHeight="100.0" prefWidth="350.0" />
+        <HBox spacing="10">
+            <Label text="Disapproval Date:" styleClass="label" />
+            <DatePicker fx:id="disapprovalDatePicker" styleClass="date-picker" />
+        </HBox>
 
-    <Label layoutX="50.0" layoutY="350.0" text="Disapproval Date:" />
-    <DatePicker fx:id="disapprovalDatePicker" layoutX="200.0" layoutY="350.0" />
-   <Label fx:id="selectedTicketLabel" layoutX="200.0" layoutY="100.0" text="Label" />
-   <Button fx:id="cancelButton" layoutX="375.0" layoutY="399.0" onAction="#handleCancel" prefHeight="26.0" prefWidth="94.0" text="Cancel" />
-
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <Button fx:id="btnApproveWork" onAction="#handleApproveWork" text="Approve Work" styleClass="button" />
+            <Button fx:id="btnDisapproveWork" onAction="#handleDisapproveWork" text="Disapprove Work" styleClass="button" />
+            <Button fx:id="cancelButton" onAction="#handleCancel" text="Cancel" styleClass="button" />
+        </HBox>
+    </VBox>
 </AnchorPane>

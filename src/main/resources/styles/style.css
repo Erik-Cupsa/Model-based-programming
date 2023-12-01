@@ -1,0 +1,53 @@
+.title-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e3b55;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #464646;
+}
+
+.value-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.button {
+    -fx-background-color: #5a9bd4;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.text-area {
+    -fx-control-inner-background: #f4f4f4;
+    -fx-font-size: 12px;
+}
+
+.date-picker {
+    -fx-background-color: #e1e1e1;
+}
+
+.anchor-pane {
+    -fx-background-color: #f8f8f8;
+}
+.main-tab-pane .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.main-tab-pane .tab {
+    -fx-background-color: #E0E0E0;
+    -fx-padding: 5 10 5 10;
+}
+
+.main-tab-pane .tab:selected {
+    -fx-background-color: #C0C0C0;
+}
+
+.main-tab-pane .tab:hover {
+    -fx-background-color: #B0B0B0;
+}
+

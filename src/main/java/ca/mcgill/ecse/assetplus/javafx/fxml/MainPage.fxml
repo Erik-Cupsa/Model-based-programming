@@ -4,34 +4,53 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="518.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.MainPageController">
-    <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-        <tabs>
-            <Tab fx:id="viewTicketsTab" text="View Tickets">
-                <content>
-                    <fx:include source="pages/ViewStatusPage.fxml" />
-                </content>
-            </Tab>
-            <Tab text="Manage Users">
-                <content>
-                    <fx:include source="pages/AddUpdateDeleteEmployee.fxml"/>
-                </content>
-            </Tab>
-            <Tab text="Manager Profile">
-                <content>
-                    <fx:include source="pages/UpdateManagerPassword.fxml"/>
-                </content>
-            </Tab>
-            <Tab text="View Asset Types">
-                <content>
-                    <fx:include source="pages/AddUpdateDeleteAssetType.fxml" />
-                </content>
-            </Tab>
-            <Tab text="View Assets">
-                <content>
-                    <fx:include source="pages/AddUpdateDeleteAsset.fxml" />
-                </content>
-            </Tab>
-        </tabs>
-    </TabPane>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import java.lang.String?>
+<VBox prefHeight="518.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.MainPageController" stylesheets="/styles/style.css">
+
+    <StackPane VBox.vgrow="NEVER">
+        <HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 10;">
+            <ImageView fitWidth="100" fitHeight="100">
+                <image>
+                    <Image url="/images/assetPlusLogo.png" />
+                </image>
+            </ImageView>
+            <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                <tabs>
+                    <Tab fx:id="viewTicketsTab" text="View Tickets">
+                        <content>
+                            <fx:include source="pages/ViewStatusPage.fxml" />
+                        </content>
+                    </Tab>
+                    <Tab text="Manage Users">
+                        <content>
+                            <fx:include source="pages/AddUpdateDeleteEmployee.fxml"/>
+                        </content>
+                    </Tab>
+                    <Tab text="Manager Profile">
+                        <content>
+                            <fx:include source="pages/UpdateManagerPassword.fxml"/>
+                        </content>
+                    </Tab>
+                    <Tab text="View Asset Types">
+                        <content>
+                            <fx:include source="pages/AddUpdateDeleteAssetType.fxml" />
+                        </content>
+                    </Tab>
+                    <Tab text="View Assets">
+                        <content>
+                            <fx:include source="pages/AddUpdateDeleteAsset.fxml" />
+                        </content>
+                    </Tab>
+                </tabs>
+            </TabPane>
+        </HBox>
+    </StackPane>
+
 </VBox>

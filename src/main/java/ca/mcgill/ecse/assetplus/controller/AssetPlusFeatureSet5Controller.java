@@ -29,9 +29,6 @@ public class AssetPlusFeatureSet5Controller {
                 err = "Image URL must start with http:// or https://";
             }
         }
-        if (ticketID == 3) {
-            System.out.println("here");
-        }
         MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
         if (ticket == null) {
             err = "Ticket does not exist";
