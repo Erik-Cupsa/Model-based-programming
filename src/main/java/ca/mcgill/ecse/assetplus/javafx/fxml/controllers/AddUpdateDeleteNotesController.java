@@ -57,15 +57,18 @@ public class AddUpdateDeleteNotesController {
         noteDate.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, Date>("date"));
         noteText.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, String>("description"));
         noteTable.setItems(FXCollections.observableList(ticket.getNotes()));
+        noteTable.refresh();
     }
 
     private TOMaintenanceTicket findTicket(int id) {
         for (TOMaintenanceTicket t : ViewUtils.getTickets()) {
             if (t.getId() == id) {
+                System.out.println(t.getId());
                 return t;
             }
         }
-        return ticket;
+        System.out.println("ERROR");
+        return null;
     }
 
     @FXML
@@ -88,10 +91,12 @@ public class AddUpdateDeleteNotesController {
         String email = userEmailText.getText();
         String error = AssetPlusFeatureSet7Controller.addMaintenanceNote(openDate, description, ticket.getId(),
                 email);
+        System.out.println(ticket.getNotes());
         if (!error.isEmpty()) {
             ViewUtils.makePopupWindow("Error", error);
         }
         filltable();
+        System.out.println(ticket.getNotes());
     }
 
 
