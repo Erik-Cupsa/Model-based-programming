@@ -1,13 +1,9 @@
 package ca.mcgill.ecse.assetplus.application;
 
-import ca.mcgill.ecse.assetplus.controller.MaintenanceTicketWorkController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
-import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.model.AssetPlus;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import javafx.application.Application;
-
-import java.sql.Date;
-import java.util.Calendar;
 
 
 public class AssetPlusApplication {
@@ -16,7 +12,7 @@ public class AssetPlusApplication {
 
     public static void main(String[] args) {
         // TODO Start the application user interface here
-        assetPlus=getAssetPlus();
+        assetPlus = getAssetPlus();
 
         Application.launch(AssetPlusFxmlView.class, args);
     }
