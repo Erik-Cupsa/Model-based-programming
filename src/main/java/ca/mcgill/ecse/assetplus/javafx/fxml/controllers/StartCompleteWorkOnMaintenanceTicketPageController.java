@@ -23,9 +23,6 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
     @FXML
     private Button btnCompleteWork;
 
-//    @FXML
-//    private Label labelWorkStatus;
-
     @FXML
     private TextArea textAreaFeedback;
 
@@ -81,6 +78,7 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
     /**
      * Starts the work on the selected ticket
      *
+     * @param ticket
      * @author Philippe Aprahamian
      */
     @FXML
@@ -99,6 +97,7 @@ public class StartCompleteWorkOnMaintenanceTicketPageController {
     /**
      * Completes the work on the selected ticket
      *
+     * @param ticket
      * @author Philippe Aprahamian
      */
     @FXML

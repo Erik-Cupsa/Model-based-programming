@@ -108,6 +108,11 @@ public class ApproveDisapproveWorkOnMaintenanceTicketController {
         }
     }
 
+    /**
+     * returns the UI to ticket status view page after the cancel button is clicked
+     *
+     * @author Philippe Aprahamian
+     */
     @FXML
     private void handleCancel() {
         ViewUtils.returnToTicketStatusPage(getClass(), (Stage) btnApproveWork.getScene().getWindow());
