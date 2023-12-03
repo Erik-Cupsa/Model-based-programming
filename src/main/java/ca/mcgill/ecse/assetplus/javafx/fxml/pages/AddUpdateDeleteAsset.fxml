@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.AddUpdateDeleteAssetController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.AddUpdateDeleteAssetController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -30,24 +30,23 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="assetTable" onMouseClicked="#updateView" prefHeight="200.0" prefWidth="600.0">
+            <TableView fx:id="assetTable" onMouseClicked="#updateView" prefHeight="320.0" prefWidth="948.0">
               <columns>
-                <TableColumn fx:id="assetTypeColumn" prefWidth="95.33331048488617" text="Asset Type" />
-                <TableColumn fx:id="assetNumberColumn" prefWidth="156.00006866455078" text="Asset Number" />
-                  <TableColumn fx:id="floorNumberColumn" prefWidth="105.33323669433594" text="Floor Number" />
-                  <TableColumn fx:id="roomNumberColumn" prefWidth="102.0" text="Room Number" />
-                  <TableColumn fx:id="purchaseDateColumn" prefWidth="139.33334350585938" text="Purchase Date" />
+                <TableColumn fx:id="assetTypeColumn" prefWidth="187.0" text="Asset Type" />
+                <TableColumn fx:id="assetNumberColumn" prefWidth="187.0" text="Asset Number" />
+                  <TableColumn fx:id="floorNumberColumn" prefWidth="187.0" text="Floor Number" />
+                  <TableColumn fx:id="roomNumberColumn" prefWidth="187.0" text="Room Number" />
+                  <TableColumn fx:id="purchaseDateColumn" prefWidth="194.4000244140625" text="Purchase Date" />
               </columns>
             </TableView>
-            <Button fx:id="clearButton" layoutY="220.0" mnemonicParsing="false" onAction="#clearButtonClicked" text="Clear" />
          </children>
       </AnchorPane>
    </center>
    <bottom>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane hgap="10.0" vgap="5.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="463.33331298828125" minWidth="10.0" prefWidth="311.99997965494794" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.33331298828125" minWidth="10.0" prefWidth="288.6666870117188" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="467.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="467.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -57,6 +56,7 @@
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
+                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearButtonClicked" text="Clear" />
                   <Button fx:id="addButton" mnemonicParsing="false" onAction="#addClicked" prefHeight="25.0" prefWidth="43.0" text="Add" />
                   <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateClicked" text="Update" />
                   <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
@@ -67,35 +67,38 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="417.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <children>
-                  <Label prefHeight="17.0" prefWidth="107.0" text="Asset Type:" />
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="107.0" text="      Asset Type:" />
                   <TextField fx:id="assetTypeTextField" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Label prefHeight="17.0" prefWidth="108.0" text="Asset Number:" />
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="108.0" text="Asset Number:" />
                   <TextField fx:id="assetNumberTextField" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Label prefHeight="17.0" prefWidth="108.0" text="Floor Number:" />
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="108.0" text="Floor Number:" />
                   <TextField fx:id="floorNumberTextField" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="274.0" GridPane.columnIndex="1">
                <children>
-                  <Label prefHeight="17.0" prefWidth="99.0" text="Room Number:" />
-                  <TextField fx:id="roomNumberTextField" prefHeight="25.0" prefWidth="153.0" HBox.hgrow="ALWAYS" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="102.0" text="Room Number:" />
+                  <TextField fx:id="roomNumberTextField" prefHeight="26.0" prefWidth="3.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label prefHeight="17.0" prefWidth="115.0" text="Purchase Date" />
-                  <DatePicker fx:id="purchaseDateField" HBox.hgrow="ALWAYS" />
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="102.0" text="Purchase Date:" />
+                  <DatePicker fx:id="purchaseDateField" prefHeight="26.0" prefWidth="262.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </GridPane>
    </bottom>
 </BorderPane>

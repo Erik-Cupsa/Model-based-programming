@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TOUserController {
+    /**
+     * return a list that can be used to fill the table showing all users in GUI
+     * 
+     * @return a list of TOUser that contains information of all guests, employees and the manager
+     * @author Ming Xuan Yue
+     */
     public static List<TOUser> getUsers() {
         AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
         List<TOUser> users = new ArrayList<TOUser>();

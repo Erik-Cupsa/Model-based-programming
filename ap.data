@@ -2,189 +2,177 @@
   "AssetPlus": {
     "employees": [
       {
-        "Employee": {
-          "email": "e@ap.com",
-          "name": "Mi",
-          "password": "p",
-          "phoneNumber": "514-444-5588",
-          "raisedTickets": [
-            ""
-          ],
-          "maintenanceNotes": [
-            {
-              "MaintenanceNote": {
-                "date": "2023-11-10",
-                "description": "yes",
-                "ticket": {
-                  "id": 3,
-                  "raisedOnDate": "2023-11-07",
-                  "description": "very noisy after 10pm",
-                  "status": "Open",
-                  "ticketNotes": [
-                    {
-                      "MaintenanceNote": [
-                        {
-                          "date": "2023-11-07",
-                          "description": "cannot do much about it",
-                          "ticket": {
-                            "@reference": "../../.."
-                          },
-                          "noteTaker": {
-                            "@class": "Manager",
-                            "email": "manager@ap.com",
-                            "name": "Jane",
-                            "password": "Pass#d",
-                            "phoneNumber": "514-444-5555",
-                            "raisedTickets": [
-                              {
-                                "MaintenanceTicket": {
-                                  "id": 5,
-                                  "raisedOnDate": "2023-11-09",
-                                  "description": "carpet is stained",
-                                  "status": "Open",
-                                  "ticketNotes": [
-                                    ""
-                                  ],
-                                  "ticketImages": [
-                                    {
-                                      "TicketImage": {
-                                        "imageURL": "https://img.freepik.com.jpg",
-                                        "ticket": {
-                                          "@reference": "../../.."
-                                        }
-                                      }
-                                    }
-                                  ],
-                                  "assetPlus": {
-                                    "@reference": "../../../../../../../../../../.."
-                                  },
-                                  "ticketRaiser": {
-                                    "@class": "Manager",
-                                    "@reference": "../../.."
-                                  },
-                                  "asset": {
-                                    "assetNumber": 3,
-                                    "floorNumber": 5,
-                                    "roomNumber": -1,
-                                    "purchaseDate": "2023-08-05",
-                                    "assetPlus": {
-                                      "@reference": "../../../../../../../../../../../.."
-                                    },
-                                    "maintenanceTickets": [
-                                      {
-                                        "MaintenanceTicket": {
-                                          "@reference": "../../.."
-                                        }
-                                      }
-                                    ],
-                                    "assetType": {
-                                      "name": "carpet",
-                                      "expectedLifeSpan": 6000,
-                                      "assetPlus": {
-                                        "@reference": "../../../../../../../../../../../../.."
-                                      },
-                                      "specificAssets": [
-                                        {
-                                          "SpecificAsset": [
-                                            {
-                                              "@reference": "../../.."
-                                            },
-                                            {
-                                              "assetNumber": 6,
-                                              "floorNumber": 3,
-                                              "roomNumber": -1,
-                                              "purchaseDate": "2023-01-28",
-                                              "assetPlus": {
-                                                "@reference": "../../../../../../../../../../../../../../.."
-                                              },
-                                              "maintenanceTickets": [
-                                                ""
-                                              ],
-                                              "assetType": {
-                                                "@reference": "../../.."
-                                              }
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  }
-                                }
-                              }
-                            ],
-                            "maintenanceNotes": [
-                              {
-                                "MaintenanceNote": {
-                                  "@reference": "../../.."
-                                }
-                              }
-                            ],
-                            "maintenanceTasks": [
-                              ""
-                            ],
-                            "assetPlus": {
-                              "@reference": "../../../../../../../../.."
-                            },
-                            "ticketsForApproval": [
-                              ""
-                            ]
-                          }
-                        },
-                        {
-                          "@reference": "../../.."
-                        }
-                      ]
-                    }
-                  ],
-                  "ticketImages": [
-                    ""
-                  ],
-                  "assetPlus": {
-                    "@reference": "../../../../../.."
-                  },
-                  "ticketRaiser": {
-                    "@class": "Guest",
-                    "email": "g@google.com",
-                    "name": "George",
-                    "password": "secret",
-                    "phoneNumber": "514-888-9000",
-                    "raisedTickets": [
+        "Employee": [
+          {
+            "email": "jeff@ap.com",
+            "name": "Jeff",
+            "password": "pass1",
+            "phoneNumber": "(555)555-5555",
+            "raisedTickets": [
+              ""
+            ],
+            "maintenanceNotes": [
+              {
+                "MaintenanceNote": {
+                  "date": "2023-09-01",
+                  "description": "This is a dummy note 1 for a ticket",
+                  "ticket": {
+                    "id": 2,
+                    "raisedOnDate": "2023-07-10",
+                    "description": "This is a dummy description 2",
+                    "status": "Open",
+                    "ticketNotes": [
                       {
-                        "MaintenanceTicket": {
+                        "MaintenanceNote": {
                           "@reference": "../../.."
                         }
                       }
                     ],
+                    "ticketImages": [
+                      {
+                        "TicketImage": {
+                          "imageURL": "http://thisimage.com/2.png",
+                          "ticket": {
+                            "@reference": "../../.."
+                          }
+                        }
+                      }
+                    ],
                     "assetPlus": {
-                      "@reference": "../../../../../../.."
+                      "@reference": "../../../../../.."
+                    },
+                    "ticketRaiser": {
+                      "@class": "Employee",
+                      "email": "smith@ap.com",
+                      "name": "Smith1",
+                      "password": "pass2",
+                      "phoneNumber": "(555)555-5555",
+                      "raisedTickets": [
+                        {
+                          "MaintenanceTicket": {
+                            "@reference": "../../.."
+                          }
+                        }
+                      ],
+                      "maintenanceNotes": [
+                        ""
+                      ],
+                      "maintenanceTasks": [
+                        ""
+                      ],
+                      "assetPlus": {
+                        "@reference": "../../../../../../.."
+                      }
+                    },
+                    "asset": {
+                      "assetNumber": 1,
+                      "floorNumber": 9,
+                      "roomNumber": 23,
+                      "purchaseDate": "2023-12-05",
+                      "assetPlus": {
+                        "@reference": "../../../../../../.."
+                      },
+                      "maintenanceTickets": [
+                        {
+                          "MaintenanceTicket": {
+                            "@reference": "../../.."
+                          }
+                        }
+                      ],
+                      "assetType": {
+                        "name": "lamp",
+                        "expectedLifeSpan": 1800,
+                        "assetPlus": {
+                          "@reference": "../../../../../../../.."
+                        },
+                        "specificAssets": [
+                          {
+                            "SpecificAsset": [
+                              {
+                                "@reference": "../../.."
+                              },
+                              {
+                                "assetNumber": 2,
+                                "floorNumber": 9,
+                                "roomNumber": 19,
+                                "purchaseDate": "2023-12-05",
+                                "assetPlus": {
+                                  "@reference": "../../../../../../../../../.."
+                                },
+                                "maintenanceTickets": [
+                                  ""
+                                ],
+                                "assetType": {
+                                  "@reference": "../../.."
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
                     }
+                  },
+                  "noteTaker": {
+                    "@class": "Employee",
+                    "@reference": "../../.."
                   }
-                },
-                "noteTaker": {
-                  "@class": "Employee",
-                  "@reference": "../../.."
                 }
               }
+            ],
+            "maintenanceTasks": [
+              ""
+            ],
+            "assetPlus": {
+              "@reference": "../../.."
             }
-          ],
-          "maintenanceTasks": [
-            ""
-          ],
-          "assetPlus": {
-            "@reference": "../../.."
+          },
+          {
+            "@reference": "../Employee/maintenanceNotes/MaintenanceNote/ticket/ticketRaiser"
           }
-        }
+        ]
       }
     ],
     "guests": [
-      {
-        "Guest": {
-          "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketRaiser"
-        }
-      }
+      ""
     ],
     "manager": {
-      "@reference": "../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketNotes/MaintenanceNote/noteTaker"
+      "email": "manager@ap.com",
+      "password": "manager",
+      "raisedTickets": [
+        {
+          "MaintenanceTicket": {
+            "id": 3,
+            "raisedOnDate": "2023-07-20",
+            "description": "It is noisy",
+            "status": "Open",
+            "ticketNotes": [
+              ""
+            ],
+            "ticketImages": [
+              ""
+            ],
+            "assetPlus": {
+              "@reference": "../../../.."
+            },
+            "ticketRaiser": {
+              "@class": "Manager",
+              "@reference": "../../.."
+            }
+          }
+        }
+      ],
+      "maintenanceNotes": [
+        ""
+      ],
+      "maintenanceTasks": [
+        ""
+      ],
+      "assetPlus": {
+        "@reference": "../.."
+      },
+      "ticketsForApproval": [
+        ""
+      ]
     },
     "maintenanceTickets": [
       {
@@ -193,7 +181,7 @@
             "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket"
           },
           {
-            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketNotes/MaintenanceNote/noteTaker/raisedTickets/MaintenanceTicket"
+            "@reference": "../../manager/raisedTickets/MaintenanceTicket"
           }
         ]
       }
@@ -202,75 +190,16 @@
       {
         "AssetType": [
           {
-            "name": "desk",
-            "expectedLifeSpan": 4500,
-            "assetPlus": {
-              "@reference": "../../.."
-            },
-            "specificAssets": [
-              {
-                "SpecificAsset": [
-                  {
-                    "assetNumber": 2,
-                    "floorNumber": 5,
-                    "roomNumber": 501,
-                    "purchaseDate": "2023-07-10",
-                    "assetPlus": {
-                      "@reference": "../../../../.."
-                    },
-                    "maintenanceTickets": [
-                      ""
-                    ],
-                    "assetType": {
-                      "@reference": "../../.."
-                    }
-                  },
-                  {
-                    "assetNumber": 5,
-                    "floorNumber": 5,
-                    "roomNumber": 502,
-                    "purchaseDate": "2023-07-10",
-                    "assetPlus": {
-                      "@reference": "../../../../.."
-                    },
-                    "maintenanceTickets": [
-                      ""
-                    ],
-                    "assetType": {
-                      "@reference": "../../.."
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketNotes/MaintenanceNote/noteTaker/raisedTickets/MaintenanceTicket/asset/assetType"
+            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType"
           },
           {
             "name": "bed",
-            "expectedLifeSpan": 8000,
+            "expectedLifeSpan": 5000,
             "assetPlus": {
               "@reference": "../../.."
             },
             "specificAssets": [
-              {
-                "SpecificAsset": {
-                  "assetNumber": 7,
-                  "floorNumber": 4,
-                  "roomNumber": 401,
-                  "purchaseDate": "2023-02-28",
-                  "assetPlus": {
-                    "@reference": "../../../../.."
-                  },
-                  "maintenanceTickets": [
-                    ""
-                  ],
-                  "assetType": {
-                    "@reference": "../../.."
-                  }
-                }
-              }
+              ""
             ]
           }
         ]
@@ -280,19 +209,10 @@
       {
         "SpecificAsset": [
           {
-            "@reference": "../../assetTypes/AssetType/specificAssets/SpecificAsset"
+            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset"
           },
           {
-            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketNotes/MaintenanceNote/noteTaker/raisedTickets/MaintenanceTicket/asset"
-          },
-          {
-            "@reference": "../../assetTypes/AssetType/specificAssets/SpecificAsset[2]"
-          },
-          {
-            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketNotes/MaintenanceNote/noteTaker/raisedTickets/MaintenanceTicket/asset/assetType/specificAssets/SpecificAsset[2]"
-          },
-          {
-            "@reference": "../../assetTypes/AssetType[3]/specificAssets/SpecificAsset"
+            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/asset/assetType/specificAssets/SpecificAsset[2]"
           }
         ]
       }

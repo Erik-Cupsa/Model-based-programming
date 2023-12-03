@@ -54,19 +54,38 @@ public class AddUpdateDeleteEmployeePageController {
     @FXML
     private TableColumn<TOUser, String> phone;
 
+    /**
+     * initializes UI components
+     *
+     * @author Ming Xuan Yue
+     */
+
     @FXML
     public void initialize() {
         email.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getEmail()));
         name.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getName()));
         phone.setCellValueFactory(data -> Bindings.createStringBinding(() -> data.getValue().getPhoneNumber()));
-        showAllEmployees();
+        showAllUsers();
     }
 
-    private void showAllEmployees() {
+    /**
+     * updates the table showing all users (employees, manager, users)
+     *
+     * @author Ming Xuan Yue
+     */
+    private void showAllUsers() {
         ObservableList<TOUser> userList = FXCollections.observableArrayList(TOUserController.getUsers());
         employeeTable.setItems(userList);
         employeeTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> employeeTable.setItems(userList));
     }
+
+   
+    /**
+     * add new guest in the system with provided name, email, phoneNumber and password
+     * 
+     * @param an event click on addGuest button
+     * @author Ming Xuan Yue
+     */
 
     @FXML
     void addGuestClicked(ActionEvent event) {
@@ -83,13 +102,19 @@ public class AddUpdateDeleteEmployeePageController {
             employeeEmailTextField.setText("");
             employeePhoneTextField.setText("");
             employeePasswordTextField.setText("");
-            showAllEmployees();
+            showAllUsers();
             AssetPlusFxmlView.getInstance().refresh();
         } else {
             ViewUtils.showError(err);
         }
     }
 
+    /**
+     * add new employee in the system with provided name, email, phoneNumber and password
+     * 
+     * @param an event click on addEmployee button
+     * @author Ming Xuan Yue
+     */
     @FXML
     public void AddEmployeeClicked(ActionEvent event) {
         String name = employeeNameTextField.getText();
@@ -105,13 +130,19 @@ public class AddUpdateDeleteEmployeePageController {
             employeeEmailTextField.setText("");
             employeePhoneTextField.setText("");
             employeePasswordTextField.setText("");
-            showAllEmployees();
+            showAllUsers();
             AssetPlusFxmlView.getInstance().refresh();
         } else {
             ViewUtils.showError(err);
         }
     }
 
+    /**
+     * delete existing employee or guest in the system with provided name, email, phoneNumber and password
+     * 
+     * @param an event click on delete button
+     * @author Ming Xuan Yue
+     */
     @FXML
     public void DeleteEmployeeClicked(ActionEvent event) {
         String email = employeeEmailTextField.getText();
@@ -120,7 +151,7 @@ public class AddUpdateDeleteEmployeePageController {
             if (user.getEmail().equals(email)) {
                 AssetPlusFeatureSet6Controller.deleteEmployeeOrGuest(email);
                 ViewUtils.makePopupWindow("Delete An Employee", "Employee with " + email + " deleted successfully");
-                showAllEmployees();
+                showAllUsers();
                 AssetPlusFxmlView.getInstance().refresh();
                 ViewStatusPageController.getInstance().showAllTickets();
                 return;
@@ -129,6 +160,12 @@ public class AddUpdateDeleteEmployeePageController {
         ViewUtils.showError("user does not exist");
     }
 
+    /**
+     * update an existing emploee or guest in the system with provided name, email, phoneNumber and password
+     * 
+     * @param an event click on update button
+     * @author Ming Xuan Yue
+     */
     @FXML
     public void UpdateEmployeeClicked(ActionEvent event) {
 
@@ -141,14 +178,21 @@ public class AddUpdateDeleteEmployeePageController {
 
         if (!err.isEmpty()) {
             ViewUtils.showError(err);
-            showAllEmployees();
+            showAllUsers();
             AssetPlusFxmlView.getInstance().refresh();
         } else {
             ViewUtils.makePopupWindow("Update An Employee", "Employee with " + email + " updated successfully");
-            showAllEmployees();
+            showAllUsers();
             AssetPlusFxmlView.getInstance().refresh();
         }
     }
+
+    /**
+     * when a row in the table is selected, fill the corresponding textField with the appropriate information for the guest or employee
+     * 
+     * @param an event click on an existing row in the table
+     * @author 
+     */
 
     @FXML
     void updateView(MouseEvent event) {

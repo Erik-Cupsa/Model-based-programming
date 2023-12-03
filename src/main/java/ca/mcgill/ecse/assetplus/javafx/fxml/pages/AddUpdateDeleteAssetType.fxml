@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.AddUpdateDeleteAssetTypeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.AddUpdateDeleteAssetTypeController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -29,10 +29,10 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="assetTypeTable" prefHeight="200.0" prefWidth="600.0">
+            <TableView fx:id="assetTypeTable" prefHeight="320.0" prefWidth="948.0">
               <columns>
-                  <TableColumn fx:id="assetTypeNameColumn" prefWidth="300.0" text="Asset Type Name" />
-                  <TableColumn fx:id="expectedLifeSpanColumn" prefWidth="300.0" text="Expected Life Span" />
+                  <TableColumn fx:id="assetTypeNameColumn" prefWidth="474.0" text="Asset Type Name" />
+                  <TableColumn fx:id="expectedLifeSpanColumn" prefWidth="474.0" text="Expected Life Span" />
               </columns>
             </TableView>
          </children>
@@ -41,8 +41,8 @@
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="463.33331298828125" minWidth="10.0" prefWidth="311.99997965494794" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.33331298828125" minWidth="10.0" prefWidth="288.6666870117188" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="474.0" minWidth="10.0" prefWidth="474.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="474.0" minWidth="10.0" prefWidth="474.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -52,6 +52,7 @@
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="273.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
+                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearClicked" text="Clear" />
                   <Button fx:id="addAssetTypeButton" mnemonicParsing="false" onAction="#addAssetTypeClicked" prefHeight="25.0" prefWidth="43.0" text="Add" />
                   <Button fx:id="updateAssetTypeButton" mnemonicParsing="false" onAction="#updateAssetTypeClicked" text="Update" />
                   <Button fx:id="deleteAssetTypeButton" mnemonicParsing="false" onAction="#deleteAssetTypeClicked" text="Delete" />
@@ -62,17 +63,16 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="417.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="107.0" text="Asset Type Name:" />
-                  <TextField fx:id="assetTypeNameTextField" HBox.hgrow="ALWAYS" />
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="107.0" text="Asset Type Name:" />
+                  <TextField fx:id="assetTypeNameTextField" prefHeight="26.0" prefWidth="363.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="265.0" GridPane.columnIndex="1">
                <children>
-                  <Label prefHeight="17.0" prefWidth="104.0" text="Expected Life Span:" />
-                  <TextField fx:id="assetTypeExpectedLifeSpanTextField" HBox.hgrow="ALWAYS" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="124.0" text="Expected Life Span:" />
+                  <TextField fx:id="assetTypeExpectedLifeSpanTextField" prefHeight="26.0" prefWidth="137.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearClicked" text="Clear" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </bottom>

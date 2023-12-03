@@ -21,6 +21,13 @@ public class UpdateManagerPasswordPageController {
     @FXML
     private Button updatePasswordButton;
 
+    /**
+     * update the password of the manager
+     * 
+     * @param an event click on update button
+     * @author Ming Xuan Yue
+     */
+
     @FXML
     void updatePasswordClicked(ActionEvent event) {
         String password = managerPasswordTextField.getText();
