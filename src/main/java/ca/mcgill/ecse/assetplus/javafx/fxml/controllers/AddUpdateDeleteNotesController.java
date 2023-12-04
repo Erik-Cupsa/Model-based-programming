@@ -38,7 +38,12 @@ public class AddUpdateDeleteNotesController {
     @FXML
     private Label noteName;
 
-
+    /**
+     * Sets a maintenance ticket as the one being referenced in this page
+     *
+     * @param TOMaintenanceTicket ticket that will be set as the ticket to be referenced
+     * @author Anders Woodruff
+     */
     public void setTicket(TOMaintenanceTicket ticket) {
         this.ticket = ticket;
         int id = ticket.getId();
@@ -46,6 +51,11 @@ public class AddUpdateDeleteNotesController {
         filltable();
     }
 
+    /**
+     * initializes the page
+     *
+     * @author Anders Woodruff
+     */
     @FXML
     public void initialize() {
         noteTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -53,6 +63,11 @@ public class AddUpdateDeleteNotesController {
         noteDelete.setStyle("-fx-background-color: #A9A9A9;");
     }
 
+    /**
+     * Fills the table with the notes in the selected ticket and makes the dropdown menu the list of users' emails
+     *
+     * @author Anders Woodruff
+     */
     private void filltable() {
         ticket = findTicket(ticket.getId());
         noteWriter.setCellValueFactory(new PropertyValueFactory<TOMaintenanceNote, String>("noteTakerEmail"));
@@ -65,6 +80,13 @@ public class AddUpdateDeleteNotesController {
         userEmailDropdown.getItems().addAll(ViewUtils.getUserEmails());
     }
 
+    /**
+     * Finds the MaintenanceTicket with a specific ID.
+     *
+     * @param int the id of the ticket to find
+     * @return TOMaintenanceTicket the ticket found
+     * @author Anders Woodruff
+     */
     private TOMaintenanceTicket findTicket(int id) {
         for (TOMaintenanceTicket t : ViewUtils.getTickets()) {
             if (t.getId() == id) {
@@ -74,6 +96,12 @@ public class AddUpdateDeleteNotesController {
         return null;
     }
 
+    /**
+     * updates buttons and sets note description when a note is selected
+     *
+     * @param Event the event that triggered the call
+     * @author Anders Woodruff
+     */
     @FXML
     public void tableClicked(Event event) {
         TOMaintenanceNote note = noteTable.getSelectionModel().getSelectedItem();
@@ -87,6 +115,12 @@ public class AddUpdateDeleteNotesController {
         }
     }
 
+    /**
+     * Adds a maintence note to the selected maintenance ticket
+     *
+     * @param ActionEvent the button click effect triggered the function
+     * @author Anders Woodruff
+     */
     @FXML
     public void noteAddClicked(ActionEvent event) {
         String description = addNoteText.getText();
@@ -100,7 +134,12 @@ public class AddUpdateDeleteNotesController {
         filltable();
     }
 
-
+    /**
+     * Updates the selected maintenance note
+     *
+     * @param ActionEvent the button click effect triggered the function
+     * @author Anders Woodruff
+     */
     @FXML
     public void noteUpdateClicked(ActionEvent event) {
         if (noteTable.getSelectionModel().getSelectedItem() == null) {
@@ -122,6 +161,12 @@ public class AddUpdateDeleteNotesController {
         filltable();
     }
 
+    /**
+     * deletes the selected maintenance
+     *
+     * @param ActionEvent the button click effect triggered the function
+     * @author Anders Woodruff
+     */
     @FXML
     public void noteDeleteClicked(ActionEvent event) {
         if (noteTable.getSelectionModel().getSelectedItem() == null) {
