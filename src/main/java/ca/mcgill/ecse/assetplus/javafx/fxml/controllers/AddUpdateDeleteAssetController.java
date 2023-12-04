@@ -110,7 +110,6 @@ public class AddUpdateDeleteAssetController {
     @FXML
     /**
     * fills in the text fields with the values of the selected asset from the table
-    *  @param an event click on the row of a table
    * @author David Marji.
    */
     void updateView(MouseEvent event) {
@@ -142,7 +141,6 @@ public class AddUpdateDeleteAssetController {
     @FXML
     /**
     * adds an asset to the list of assets stored if the information filled in is of a proper format
-    *  @param an event click on the add button
    * @author David Marji.
    */
     void addClicked(ActionEvent event) {
@@ -168,7 +166,6 @@ public class AddUpdateDeleteAssetController {
     @FXML
     /**
     * clears all the textfields of their information
-    *  @param an event click on the clear button
    * @author David Marji.
    */
     void clearButtonClicked(ActionEvent event) {
@@ -189,7 +186,6 @@ public class AddUpdateDeleteAssetController {
     @FXML
     /**
     * deletes an asset based on the number inputted to the textfield
-    *  @param an event click on the delete button
    * @author David Marji.
    */
     void deleteClicked(ActionEvent event) {
@@ -214,7 +210,6 @@ public class AddUpdateDeleteAssetController {
     @FXML
     /**
     * updates a chosen asset's values to the values in the textfield (if they are proper)
-    *  @param an event click on the  update button
    * @author David Marji.
    */
     void updateClicked(ActionEvent event) {

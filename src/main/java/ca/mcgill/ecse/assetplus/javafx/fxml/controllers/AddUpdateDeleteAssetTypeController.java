@@ -79,7 +79,6 @@ public class AddUpdateDeleteAssetTypeController {
     @FXML
     /**
     * add's the chosen asset type to the list of asset types stored
-    *  @param an event click on the add button
    * @author David Marji.
    */
     void addAssetTypeClicked(ActionEvent event) {
@@ -98,7 +97,6 @@ public class AddUpdateDeleteAssetTypeController {
     @FXML
     /**
     * deletes the chosen (clicked on) asset type from the table
-    *  @param an event click on the delete button
    * @author David Marji.
    */
     void deleteAssetTypeClicked(ActionEvent event) {
@@ -112,7 +110,6 @@ public class AddUpdateDeleteAssetTypeController {
     @FXML
     /**
     * updates the chosen (clicked on) asset type from the table with the information from the textfields if it is proper
-    *  @param an event click on the update button
    * @author David Marji.
    */
     void updateAssetTypeClicked(ActionEvent event) {
