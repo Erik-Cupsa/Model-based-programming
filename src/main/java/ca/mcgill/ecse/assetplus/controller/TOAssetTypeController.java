@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 public class TOAssetTypeController {
 
+    /**
+    * gets a list of all the assets types from the assetplus object and returns them as transfer objects
+   * @return assetTypes (list of TO asset types)
+   * @author David Marji.
+   */
     public static ArrayList<TOAssetType> getAssetTypes() {
         ArrayList<TOAssetType> assetTypes = new ArrayList<TOAssetType>();
         AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
